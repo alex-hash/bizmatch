@@ -2,8 +2,12 @@
 
 const express = require('express');
 
+const accountRouter = require('./routes/account-router');
+
 const app = express();
 
+app.use(express.json());
+app.use('/api', accountRouter);
 
 let server = null;
 async function listen(port){
