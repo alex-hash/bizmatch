@@ -4,7 +4,7 @@ require('dotenv').config();
 const mysqlPool = require('./app/database/mysql-pool');
 const webServer = require('./app/webserver');
 
-const port = 8000;
+const port = process.env.PORT;
 
 async function initApp(){
     try{
