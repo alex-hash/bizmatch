@@ -47,11 +47,13 @@ async function validateAccount(data){
 async function createAccount(req, res, next){
     const accountData = { ...req.body };
 
+    /* 
     try {
         await validateAccount(accountData);
-      } catch (e) {
+    } catch (e) {
         return res.status(400).send(e);
-      }
+    }
+    */
     
 
     const now = new Date();
