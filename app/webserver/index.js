@@ -3,11 +3,13 @@
 const express = require('express');
 
 const accountRouter = require('./routes/account-router');
+const authRouter = require('./routes/auth-router');
 
 const app = express();
 
 app.use(express.json());
 app.use('/api', accountRouter);
+app.use('/api', authRouter);
 
 let server = null;
 async function listen(port){
