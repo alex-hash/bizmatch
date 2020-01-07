@@ -24,11 +24,11 @@ async function login(req, res, next){
 
     const sqlQuery = `SELECT id, email, password, avatar_url
     FROM user
-    WHERE email = '${accountData.email}'`;
+    WHERE email = ?`;
 
     try {
         const connection = await mysqlPool.getConnection();
-        const [rows] = await connection.query(sqlQuery);
+        const [rows] = await connection.execute(sqlQuery, [accountData.email]);
         connection.release();
 
         if(rows.length !== 1){
@@ -38,6 +38,7 @@ async function login(req, res, next){
         const user = rows[0];
 
         try{
+            
             const passwordOk = await bcrypt.compare(accountData.password, user.password);
             if(!passwordOk){
                 return res.status(401).send();

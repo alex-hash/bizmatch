@@ -27,18 +27,18 @@ async function sendWelcomeEmail(email) {
 
 async function validateAccount(data){
     const schema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+        email: Joi.string().email({ minDomainSegments: 2, tlds: false }).required(),
+        password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
         name: Joi.string().max(45).required(),
         first_name: Joi.string().max(45).required(),
         last_name: Joi.string().max(45).required(),
-        birthday: Joi.date().required(),
+        birthday: Joi.required(), //Echarle un vistazo, buscar una manera en el frontend de parsear el dato de la manera correcta para introducirla a la BD
         country: Joi.string().max(20).required(),
         city: Joi.string().max(30).required(),
         company_name: Joi.string().max(255),
         company_role: Joi.string().max(255),
         page_url: Joi.string().max(512),
-        type: Joi.string.max(1).required(),
+        type: Joi.string().max(1),
     });
 
     Joi.assert(data, schema);
@@ -47,13 +47,13 @@ async function validateAccount(data){
 async function createAccount(req, res, next){
     const accountData = { ...req.body };
 
-    /* 
+    
     try {
         await validateAccount(accountData);
     } catch (e) {
+        console.error(e);
         return res.status(400).send(e);
     }
-    */
     
 
     const now = new Date();
