@@ -3,16 +3,6 @@
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 
-async function validate(payload){
-    const schema = Joi.object({
-        userId: Joi.string().guid({
-            version: ['uuidv4'],
-        }).required(),
-    });
-
-    Joi.assert(payload, schema);
-}
-
 async function getUser(req, res, next){
     const { userId } = req.claims;
 
