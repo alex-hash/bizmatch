@@ -7,7 +7,9 @@ const uuidV4 = require('uuid/v4');
 async function validateMessage(data){
     const schema = Joi.object({
         content: Joi.string().required(),
-        destination_id: Joi.string().required(),
+        destination_id: Joi.string().guid({
+            version: ['uuidv4'],
+          }).required(),
     });
 
     Joi.assert(data, schema);
