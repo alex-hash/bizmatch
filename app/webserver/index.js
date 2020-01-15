@@ -5,7 +5,7 @@ const express = require("express");
 const accountRouter = require("./routes/account-router");
 const authRouter = require("./routes/auth-router");
 const messageRouter = require("./routes/message-router");
-const projectRouter = require(",/routes/project-router");
+const projectRouter = require("./routes/project-router");
 
 const app = express();
 
