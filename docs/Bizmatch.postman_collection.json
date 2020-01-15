@@ -112,7 +112,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/auth",
+							"raw": "http://localhost:8000/api/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -120,7 +120,7 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"auth"
+								"login"
 							]
 						}
 					},
@@ -132,7 +132,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/auth",
+							"raw": "http://localhost:8000/api/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -140,7 +140,7 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"auth"
+								"logout"
 							]
 						}
 					},
