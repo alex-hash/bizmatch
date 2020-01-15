@@ -1,14 +1,43 @@
 "use strict";
-
+const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 
+async function validate(payload) {
+  const schema = Joi.object({
+    projectId: Joi.string()
+      .guid({
+        version: ["uuidv4"]
+      })
+      .required(),
+    userId: Joi.string()
+      .guid({
+        version: ["uuidv4"]
+      })
+      .required()
+  });
+
+  Joi.assert(payload, schema);
+}
+
 async function getProject(req, res, next) {
+  const { projectId } = req.params;
   const { userId } = req.claims;
-  let connection;
+
+  const payload = {
+    projectId,
+    userId
+  };
 
   try {
+    await validate(payload);
+  } catch (e) {
+    return res.status(400).send(e);
+  }
+
+  let connection;
+  try {
     const sqlQuery = `SELECT *
-      FROM tags
+      FROM project
       WHERE user_id = ?`;
 
     connection = await mysqlPool.getConnection();
