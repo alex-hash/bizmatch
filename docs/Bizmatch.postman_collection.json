@@ -30,13 +30,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/account",
+							"raw": "http://localhost:8000/api/account",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"account"
 							]
 						}
@@ -49,13 +50,14 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/account",
+							"raw": "http://localhost:8000/api/account",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"account"
 							]
 						}
@@ -68,13 +70,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/account",
+							"raw": "http://localhost:8000/api/account",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"account"
 							]
 						}
@@ -109,14 +112,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/auth",
+							"raw": "http://localhost:8000/api/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"auth"
+								"api",
+								"login"
 							]
 						}
 					},
@@ -128,14 +132,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/auth",
+							"raw": "http://localhost:8000/api/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"auth"
+								"api",
+								"logout"
 							]
 						}
 					},
@@ -174,13 +179,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/project",
+							"raw": "http://localhost:8000/api/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"project"
 							]
 						}
@@ -217,13 +223,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/project",
+							"raw": "http://localhost:8000/api/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"project"
 							]
 						}
@@ -257,13 +264,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/project",
+							"raw": "http://localhost:8000/api/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"project"
 							]
 						}
@@ -297,13 +305,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/project",
+							"raw": "http://localhost:8000/api/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"project"
 							]
 						}
@@ -322,13 +331,34 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/message",
+							"raw": "http://localhost:8000/api/message",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
 								"message"
 							]
 						}
@@ -368,13 +398,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/assesment",
+							"raw": "http://localhost:8000/api/assesment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"assesment"
 							]
 						}
@@ -408,13 +439,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/assesment",
+							"raw": "http://localhost:8000/api/assesment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"assesment"
 							]
 						}
@@ -448,13 +480,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/assesment",
+							"raw": "http://localhost:8000/api/assesment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"assesment"
 							]
 						}
@@ -505,13 +538,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/users/avatar",
+							"raw": "http://localhost:8000/api/users/avatar",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"users",
 								"avatar"
 							]
@@ -552,13 +586,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/comment",
+							"raw": "http://localhost:8000/api/comment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"comment"
 							]
 						}
@@ -592,13 +627,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/comment",
+							"raw": "http://localhost:8000/api/comment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"comment"
 							]
 						}
@@ -632,7 +668,16 @@
 							}
 						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8000/api/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comment"
+							]
 						}
 					},
 					"response": []
