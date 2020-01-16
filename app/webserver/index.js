@@ -6,6 +6,7 @@ const accountRouter = require("./routes/account-router");
 const authRouter = require("./routes/auth-router");
 const messageRouter = require("./routes/message-router");
 const projectRouter = require("./routes/project-router");
+const userRouter = require("./routes/user-router");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use("/api", accountRouter);
 app.use("/api", authRouter);
 app.use("/api", messageRouter);
 app.use("/api", projectRouter);
+app.use("/api", userRouter);
 
 let server = null;
 async function listen(port) {

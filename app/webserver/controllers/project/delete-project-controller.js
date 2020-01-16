@@ -17,7 +17,6 @@ async function validate(payload) {
 
 async function deleteProject(req, res, next) {
   const { projectId } = req.params;
-  const { userId } = req.claims;
 
   try {
     await validate({ projectId });
@@ -28,24 +27,12 @@ async function deleteProject(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    const sqlQuery = `UPDATE project
-      SET deleted_at = ?
-      WHERE id = ?
-        AND user_id = ?
-        AND deleted_at IS NULL`;
+    const sqlQuery = `DELETE FROM project
+      WHERE id = ?`;
 
-    const now = new Date()
-      .toISOString()
-      .substring(0, 19)
-      .replace("T", " ");
-    const [deletedStatus] = await connection.execute(sqlQuery, [
-      now,
-      projectId,
-      userId
-    ]);
+    const [deletedStatus] = await connection.execute(sqlQuery, [projectId]);
     connection.release();
-
-    if (deletedStatus.changedRows !== 1) {
+    if (deletedStatus.affectedRows !== 1) {
       return res.status(404).send();
     }
 

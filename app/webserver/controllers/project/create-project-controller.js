@@ -25,14 +25,9 @@ async function validateProject(data) {
     prize: Joi.number()
       .max(20)
       .required(),
-    duration: Joi.string().required(),
+    duration: Joi.number().required(),
     text: Joi.string()
       .max(65536)
-      .required(),
-    user_id: Joi.string()
-      .guid({
-        version: ["uuidv4"]
-      })
       .required()
   });
 
@@ -44,8 +39,7 @@ async function createProject(req, res, next) {
   const { userId } = req.claims;
   try {
     const data = {
-      ...projectData,
-      userId
+      ...projectData
     };
     await validateProject(data);
   } catch (e) {

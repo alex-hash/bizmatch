@@ -38,10 +38,10 @@ async function getProject(req, res, next) {
   try {
     const sqlQuery = `SELECT *
       FROM project
-      WHERE user_id = ?`;
+      WHERE id = ?`;
 
     connection = await mysqlPool.getConnection();
-    const [rows] = await connection.execute(sqlQuery, [userId]);
+    const [rows] = await connection.execute(sqlQuery, [projectId]);
     connection.release();
 
     return res.send({
