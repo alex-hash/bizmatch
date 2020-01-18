@@ -22,16 +22,45 @@ async function validateProject(data) {
       .required(),
     image_url: Joi.string().max(512),
     video_url: Joi.string().max(512),
-    prize: Joi.number()
-      .max(20)
-      .required(),
+    prize: Joi.number().required(),
     duration: Joi.number().required(),
     text: Joi.string()
       .max(65536)
-      .required()
+      .required(),
+    rewards: Joi.array().items(Joi.object({
+        prize: Joi.number().required(),
+        title: Joi.string().max(60).required(),
+        month: Joi.string().max(20).required(),
+        year: Joi.number().required(),
+        subtitle: Joi.string().max(135).required(),
+    }))
   });
 
   Joi.assert(data, schema);
+}
+
+async function insertReward(project_id, {prize, title, month, year, subtitle}){
+  const reward_id = uuidV4();
+  let connection;
+  try {
+    connection = await mysqlPool.getConnection();
+    await connection.query("INSERT INTO reward SET ?", {
+      id: reward_id,
+      project_id: project_id,
+      prize: prize,
+      title: title,
+      month: month,
+      year: year,
+      subtitle: subtitle,
+    });
+    connection.release();
+  } catch (e) {
+    if (connection) {
+      connection.release();
+    }
+    console.error(e);
+    res.status(500).send(e);
+  }
 }
 
 async function createProject(req, res, next) {
@@ -43,6 +72,7 @@ async function createProject(req, res, next) {
     };
     await validateProject(data);
   } catch (e) {
+    console.error(e);
     return res.status(400).send(e);
   }
 
@@ -51,6 +81,7 @@ async function createProject(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
   const projectId = uuidV4();
+  const rewards = projectData.rewards;
 
   let connection;
   try {
@@ -70,6 +101,10 @@ async function createProject(req, res, next) {
       user_id: userId
     });
     connection.release();
+    rewards.map((reward) => {
+      insertReward(projectId, {...reward});
+    });
+
     res.status(201).send();
   } catch (e) {
     if (connection) {
