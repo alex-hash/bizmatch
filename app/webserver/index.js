@@ -11,8 +11,11 @@ const themeRouter = require('./routes/theme-router');
 const assesmentRouter = require('./routes/assesment-router');
 const commentRouter = require('./routes/comment-router');
 
+const cors = require('cors');
 const app = express();
 
+
+app.use(cors());
 app.use(express.json());
 app.use('/api', accountRouter);
 app.use('/api', authRouter);

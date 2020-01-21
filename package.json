@@ -25,6 +25,7 @@
     "@sendgrid/mail": "^6.4.0",
     "bcrypt": "^3.0.7",
     "cloudinary": "^1.18.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
