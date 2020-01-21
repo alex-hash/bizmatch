@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19b7beb1-30cc-42a1-9d06-166914db07a2",
+		"_postman_id": "ed3bee97-ac14-4d0d-b9da-21be1d826f4b",
 		"name": "Bizmatch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"alexf@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"country\": \"Spain\",\n    \"city\": \"Ourense\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}",
+							"raw": "{\n    \"email\": \"jiji@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"country\": \"Spain\",\n    \"city\": \"Ourense\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -581,14 +581,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -621,14 +621,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -669,14 +669,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -707,7 +707,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"text\": \"holas\"\n}",
+							"raw": "{\n\t\"text\": \"holss\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -715,14 +715,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/comment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"comment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -747,7 +747,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"text\": \"holassssss\"\n}",
+							"raw": "{\n\t\"id\": \"5acc0f5b-bf17-46f1-a524-74ae7bf4ab7a\",\n\t\"text\": \"helllo my name is GG\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -755,14 +755,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/comment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"comment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -771,7 +771,7 @@
 				{
 					"name": "/comment",
 					"request": {
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -787,7 +787,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n\t\"id\": \"88d95ac6-2107-4e79-9067-0696331f44f1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -795,12 +795,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/comment",
+							"raw": "{{baseUrl}}/comment/delete",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"comment"
+								"comment",
+								"delete"
 							]
 						}
 					},
@@ -841,14 +842,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/comment/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"comment",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
