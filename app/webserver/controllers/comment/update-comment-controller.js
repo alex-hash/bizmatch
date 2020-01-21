@@ -5,6 +5,11 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validateUpdate(data) {
   const schema = Joi.object({
+    id: Joi.string()
+    .guid({
+      version: ['uuidv4']
+    })
+    .required(),
     text: Joi.string().required(),
     userId: Joi.string()
       .guid({
@@ -45,11 +50,9 @@ async function updateComment(req, res, next) {
       .replace('T', ' ');
     const sqlUpdateComment = `Update comment
     SET text = ?, updated_at = ?
-    WHERE id = ?
-    AND user_id = ?`;
-    const [updatedStatus] = await connection.query(sqlUpdateComment, [commentData.text, updatedAt, projectId, userId]);
+    WHERE id = ?`;
+    const [updatedStatus] = await connection.query(sqlUpdateComment, [commentData.text, updatedAt, commentData.id]);
     connection.release();
-    console.log(updatedStatus);
     if (updatedStatus.affectedRows !== 1) {
       return res.status(404).send();
     }

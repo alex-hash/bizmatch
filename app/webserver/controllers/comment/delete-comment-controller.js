@@ -3,7 +3,7 @@
 const mysqlPool = require('../../../database/mysql-pool');
 
 async function deleteComment(req, res, next) {
-  const { commentId } = req.params;
+  const commentData  = { ...req.body };
   const { userId } = req.claims;
 
   let connection;
@@ -18,7 +18,7 @@ async function deleteComment(req, res, next) {
       .toISOString()
       .substring(0, 19)
       .replace('T', ' ');
-    const [deletedStatus] = await connection.execute(sqlQuery, [now, commentId, userId]);
+    const [deletedStatus] = await connection.execute(sqlQuery, [now, commentData.id, userId]);
     connection.release();
     if (deletedStatus.affectedRows !== 1) {
       return res.status(404).send();

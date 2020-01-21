@@ -44,8 +44,8 @@ async function updateAssesment(req, res, next) {
       .substring(0, 19)
       .replace('T', ' ');
     const sqlUpdateAssesment = `Update assesment
-    SET type = ?, modified_at = ?
-    WHERE id = ?
+    SET type = ?, updated_at = ?
+    WHERE project_id = ?
     AND user_id = ?`;
     const [updatedStatus] = await connection.query(sqlUpdateAssesment, [
       assesmentData.type,
