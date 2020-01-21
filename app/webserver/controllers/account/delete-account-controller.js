@@ -11,6 +11,8 @@ async function validate(data){
       })
       .required()
     })
+
+    Joi.assert(data, schema);
 }
 
 async function deleteAccount(req, res, next){

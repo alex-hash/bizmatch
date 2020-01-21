@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19b7beb1-30cc-42a1-9d06-166914db07a2",
+		"_postman_id": "ed3bee97-ac14-4d0d-b9da-21be1d826f4b",
 		"name": "Bizmatch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"@yopmail.com\",\n\t\"password\": \"YourPassword\"\n}",
+							"raw": "{\n    \"email\": \"jiji@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"country\": \"Spain\",\n    \"city\": \"Ourense\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -30,14 +30,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/account",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/account",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"account"
 							]
 						}
@@ -50,14 +47,11 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/account",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/account",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"account"
 							]
 						}
@@ -70,14 +64,28 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/account",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/account",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
 								"account"
 							]
 						}
@@ -104,7 +112,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"@yopmail.com\",\n\t\"password\": \"YourPassword\"\n}",
+							"raw": "{\n\t \"email\": \"alexf@yopmail.com\",\n    \"password\": \"123456aA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,14 +120,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/login",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/login",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"login"
 							]
 						}
@@ -132,14 +137,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/logout",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/logout",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"logout"
 							]
 						}
@@ -155,6 +157,16 @@
 				{
 					"name": "/project",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -171,7 +183,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\n}",
+							"raw": "{\n\"title\": \"Tupu\",\n\"subtitle\": \"Tutt\",\n\"category\": \"Tupu\",\n\"ubication\": \"Coruña\",\n\"prize\": \"15000\",\n\"duration\": \"900\",\n\"text\": \"Nada\",\n\"rewards\": [{ \"prize\":\"50\", \"title\":\"Recompensa Bronce\", \"month\":\"12\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\n{ \"prize\":\"150\", \"title\":\"Recompensa Plata\", \"month\":\"09\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\n{ \"prize\":\"250\", \"title\":\"Recompensa Oro\", \"month\":\"04\", \"year\":\"2022\", \"subtitle\":\"nothing\" }]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,15 +191,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/project",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"project"
+								"project",
+								""
 							]
 						}
 					},
@@ -223,15 +233,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/project",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"project"
+								"project",
+								""
 							]
 						}
 					},
@@ -256,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\n}",
+							"raw": "{\n    \"title\": \"Proyecto1\",\n    \"subtitle\": \"subtitle1\",\n    \"category\": \"Robótica\",\n    \"ubication\": \"rusia\",\n    \"image_url\": \"www.google.com\",\n    \"video_url\": \"www.google.com\",\n    \"prize\": \"10.000\",\n    \"duration\": \"30\",\n    \"text\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -264,15 +272,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/project",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/d781bc27-b409-4497-aaf4-ddbea5dd6c0a",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"project"
+								"project",
+								"d781bc27-b409-4497-aaf4-ddbea5dd6c0a"
 							]
 						}
 					},
@@ -305,15 +311,41 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/project",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/1296738f-1d22-414e-a1ea-99f57f133f5a",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"project"
+								"project",
+								"1296738f-1d22-414e-a1ea-99f57f133f5a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/project//{{projectId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/project/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"project",
+								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
 							]
 						}
 					},
@@ -326,19 +358,45 @@
 			"name": "message",
 			"item": [
 				{
-					"name": "/message",
+					"name": "get-message-conversations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/message",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/message",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"message"
 							]
 						}
@@ -346,20 +404,145 @@
 					"response": []
 				},
 				{
-					"name": "/message",
+					"name": "create-message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"hola\",\n  \"destination_id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/message",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-conversations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/conversation",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"conversation"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/user/avatar",
 					"request": {
 						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/message",
-							"protocol": "http",
-							"host": [
-								"localhost"
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/david/Escritorio/Proyecto/prueba2.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Gazpacho",
+									"type": "text"
+								}
 							],
-							"port": "8000",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/avatar",
+							"host": [
+								"{{baseUrl}}"
+							],
 							"path": [
-								"api",
-								"message"
+								"user",
+								"avatar"
 							]
 						}
 					},
@@ -390,7 +573,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\n}",
+							"raw": "{\n\t\"type\": \"4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,15 +581,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/assesment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"assesment"
+								"project",
+								"assesment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -431,7 +613,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\n}",
+							"raw": "{\n\t\"type\": \"2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -439,34 +621,41 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/assesment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"assesment"
+								"project",
+								"assesment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/assesment",
+					"name": "get-assesment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
 								"type": "text"
 							}
 						],
@@ -480,74 +669,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/assesment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"assesment"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "users",
-			"item": [
-				{
-					"name": "/users/avatar",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "avatar",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "title",
-									"type": "file",
-									"src": []
-								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8000/api/users/avatar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"avatar"
+								"project",
+								"assesment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -578,7 +707,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\n}",
+							"raw": "{\n\t\"text\": \"holss\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -586,15 +715,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/comment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"comment"
+								"project",
+								"comment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -619,7 +747,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\n}",
+							"raw": "{\n\t\"id\": \"5acc0f5b-bf17-46f1-a524-74ae7bf4ab7a\",\n\t\"text\": \"helllo my name is GG\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,15 +755,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/comment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"comment"
+								"project",
+								"comment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
@@ -644,7 +771,7 @@
 				{
 					"name": "/comment",
 					"request": {
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -660,6 +787,53 @@
 						],
 						"body": {
 							"mode": "raw",
+							"raw": "{\n\t\"id\": \"88d95ac6-2107-4e79-9067-0696331f44f1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comment/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-comment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
 							"raw": "",
 							"options": {
 								"raw": {
@@ -668,21 +842,25 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/comment",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"comment"
+								"project",
+								"comment",
+								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
 							]
 						}
 					},
 					"response": []
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "bizmatch",
+			"item": [],
 			"protocolProfileBehavior": {}
 		}
 	],
