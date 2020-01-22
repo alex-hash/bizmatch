@@ -44,6 +44,10 @@ async function getProject(req, res, next) {
     const [rows] = await connection.execute(sqlQuery, [projectId]);
     connection.release();
 
+    if(rows.length !== 1){
+      return res.status(404).send();
+    }
+
     return res.send({
       data: rows
     });
