@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "18e04409-d0d7-47c5-98fa-bfcd4d09690d",
+		"_postman_id": "b0cf6a04-9200-4e2a-9cfe-bc1d8483df3c",
 		"name": "Bizmatch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -835,6 +835,16 @@
 				{
 					"name": "delete-comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -924,7 +934,297 @@
 		},
 		{
 			"name": "bizmatch",
-			"item": [],
+			"item": [
+				{
+					"name": "create-bizmatch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bizmatch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bizmatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-bizmatch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bizmatch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bizmatch"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "theme",
+			"item": [
+				{
+					"name": "create-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"title\": \"Tupu2\",\r\n\"category\": \"Tupu\",\r\n\"content\": \"Coruña,Lugo,Ourense y Pontevedra\",\r\n\"project_name\": \"bizmatch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-theme",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/814a8ae0-ed1c-410e-9653-fdc2619a3c11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"814a8ae0-ed1c-410e-9653-fdc2619a3c11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-themes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/theme/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/ff296823-44ae-4636-8949-240a7ba2a03b",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"ff296823-44ae-4636-8949-240a7ba2a03b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"title\": \"Tupu\",\r\n\"category\": \"Tupu\",\r\n\"content\": \"Coruña\",\r\n\"project_name\": \"bizmatch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/ff296823-44ae-4636-8949-240a7ba2a03b",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"ff296823-44ae-4636-8949-240a7ba2a03b"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
