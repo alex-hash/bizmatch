@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ed3bee97-ac14-4d0d-b9da-21be1d826f4b",
+		"_postman_id": "18e04409-d0d7-47c5-98fa-bfcd4d09690d",
 		"name": "Bizmatch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,8 +9,18 @@
 			"name": "account",
 			"item": [
 				{
-					"name": "/account",
+					"name": "create-account",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -42,10 +52,30 @@
 					"response": []
 				},
 				{
-					"name": "/account",
+					"name": "update-account",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jiji@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"country\": \"Marruecos\",\n    \"city\": \"Ourense\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}"
+						},
 						"url": {
 							"raw": "{{baseUrl}}/account",
 							"host": [
@@ -59,8 +89,18 @@
 					"response": []
 				},
 				{
-					"name": "/account",
+					"name": "delete-account",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -76,8 +116,18 @@
 					"response": []
 				},
 				{
-					"name": "/account",
+					"name": "get-account",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -99,7 +149,7 @@
 			"name": "auth",
 			"item": [
 				{
-					"name": "/auth",
+					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -112,7 +162,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t \"email\": \"alexf@yopmail.com\",\n    \"password\": \"123456aA\"\n}",
+							"raw": "{\n\t \"email\": \"jojo@yopmail.com\",\n    \"password\": \"123456aA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,23 +180,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "/auth",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/logout",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"logout"
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -155,7 +188,7 @@
 			"name": "project",
 			"item": [
 				{
-					"name": "/project",
+					"name": "create-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -174,16 +207,11 @@
 								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"title\": \"Tupu\",\n\"subtitle\": \"Tutt\",\n\"category\": \"Tupu\",\n\"ubication\": \"Coruña\",\n\"prize\": \"15000\",\n\"duration\": \"900\",\n\"text\": \"Nada\",\n\"rewards\": [{ \"prize\":\"50\", \"title\":\"Recompensa Bronce\", \"month\":\"12\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\n{ \"prize\":\"150\", \"title\":\"Recompensa Plata\", \"month\":\"09\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\n{ \"prize\":\"250\", \"title\":\"Recompensa Oro\", \"month\":\"04\", \"year\":\"2022\", \"subtitle\":\"nothing\" }]\n}",
+							"raw": "{\r\n\"title\": \"Tupu\",\r\n\"subtitle\": \"Tutt\",\r\n\"category\": \"Tupu\",\r\n\"ubication\": \"Coruña\",\r\n\"prize\": \"15000\",\r\n\"duration\": \"900\",\r\n\"text\": \"Nada\",\r\n\"rewards\": [{ \"prize\":\"50\", \"title\":\"Recompensa Bronce\", \"month\":\"12\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\r\n{ \"prize\":\"150\", \"title\":\"Recompensa Plata\", \"month\":\"09\", \"year\":\"2022\", \"subtitle\":\"nothing\" },\r\n{ \"prize\":\"250\", \"title\":\"Recompensa Oro\", \"month\":\"04\", \"year\":\"2022\", \"subtitle\":\"nothing\" }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,23 +232,28 @@
 					"response": []
 				},
 				{
-					"name": "/project",
+					"name": "get-projects",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -246,8 +279,18 @@
 					"response": []
 				},
 				{
-					"name": "/project",
+					"name": "update-project",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -264,7 +307,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Proyecto1\",\n    \"subtitle\": \"subtitle1\",\n    \"category\": \"Robótica\",\n    \"ubication\": \"rusia\",\n    \"image_url\": \"www.google.com\",\n    \"video_url\": \"www.google.com\",\n    \"prize\": \"10.000\",\n    \"duration\": \"30\",\n    \"text\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n    \n}",
+							"raw": "{\n    \"title\": \"Proyecto1\",\n    \"subtitle\": \"subtitle1\",\n    \"category\": \"Robótica\",\n    \"ubication\": \"Eslovaquia\",\n    \"image_url\": \"www.google.com\",\n    \"video_url\": \"www.google.com\",\n    \"prize\": \"10.000\",\n    \"duration\": \"30\",\n    \"text\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -272,32 +315,37 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/d781bc27-b409-4497-aaf4-ddbea5dd6c0a",
+							"raw": "{{baseUrl}}/project/c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
-								"d781bc27-b409-4497-aaf4-ddbea5dd6c0a"
+								"c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/project",
+					"name": "delete-project",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
 								"type": "text"
 							}
 						],
@@ -311,20 +359,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/1296738f-1d22-414e-a1ea-99f57f133f5a",
+							"raw": "{{baseUrl}}/project/c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
-								"1296738f-1d22-414e-a1ea-99f57f133f5a"
+								"c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/project//{{projectId}}",
+					"name": "get-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -339,13 +387,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/project/b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6",
+							"raw": "{{baseUrl}}/project/c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
-								"b3f4c1eb-4d1c-4d3b-9440-bd19a94a52f6"
+								"c2d4fe2f-0e6c-4adc-9f2d-f7d3e1503757"
 							]
 						}
 					},
@@ -427,7 +475,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"content\": \"hola\",\n  \"destination_id\": \"\"\n}",
+							"raw": "{\n  \"content\": \"hola q tal\",\n  \"destination_id\": \"924f5586-bc9d-400f-9f01-a418a923bf9a\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -473,7 +521,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n\t\"conversation\":\"8cfced39-f9d6-4aee-9c22-83dad3a0780c924f5586-bc9d-400f-9f01-a418a923bf9a\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -481,12 +529,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/conversation",
+							"raw": "{{baseUrl}}/conversation/",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"conversation"
+								"conversation",
+								""
 							]
 						}
 					},
@@ -499,7 +548,7 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "/user/avatar",
+					"name": "create-avatar",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -555,19 +604,24 @@
 			"name": "assesment",
 			"item": [
 				{
-					"name": "/assesment",
+					"name": "create-assesment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
 								"type": "text"
 							}
 						],
@@ -581,33 +635,38 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
+							"raw": "{{baseUrl}}/project/assesment/30cd76d5-1cef-460f-958b-036c69c5c672",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
+								"30cd76d5-1cef-460f-958b-036c69c5c672"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/assesment",
+					"name": "update-assesment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
 								"type": "text"
 							}
 						],
@@ -621,14 +680,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
+							"raw": "{{baseUrl}}/project/assesment/30cd76d5-1cef-460f-958b-036c69c5c672",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
+								"30cd76d5-1cef-460f-958b-036c69c5c672"
 							]
 						}
 					},
@@ -669,14 +728,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/assesment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
+							"raw": "{{baseUrl}}/project/assesment/30cd76d5-1cef-460f-958b-036c69c5c672",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"assesment",
-								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
+								"30cd76d5-1cef-460f-958b-036c69c5c672"
 							]
 						}
 					},
@@ -689,7 +748,7 @@
 			"name": "comment",
 			"item": [
 				{
-					"name": "/comment",
+					"name": "create-comment",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -715,22 +774,32 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
+							"raw": "{{baseUrl}}/project/comment/30cd76d5-1cef-460f-958b-036c69c5c672",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"comment",
-								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
+								"30cd76d5-1cef-460f-958b-036c69c5c672"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/comment",
+					"name": "update-comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -738,16 +807,11 @@
 								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": \"5acc0f5b-bf17-46f1-a524-74ae7bf4ab7a\",\n\t\"text\": \"helllo my name is GG\"\n}",
+							"raw": "{\n\t\"id\": \"a4a6e553-f277-4b9c-b73a-24d70111aa88\",\n\t\"text\": \"helllo my name is GG\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -755,21 +819,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/project/comment/fd36c38e-9162-4ad3-a989-13d7dfcceb0e",
+							"raw": "{{baseUrl}}/project/comment/30cd76d5-1cef-460f-958b-036c69c5c672",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"project",
 								"comment",
-								"fd36c38e-9162-4ad3-a989-13d7dfcceb0e"
+								"30cd76d5-1cef-460f-958b-036c69c5c672"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/comment",
+					"name": "delete-comment",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -787,7 +851,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": \"88d95ac6-2107-4e79-9067-0696331f44f1\"\n}",
+							"raw": "{\n\t\"id\": \"a4a6e553-f277-4b9c-b73a-24d70111aa88\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

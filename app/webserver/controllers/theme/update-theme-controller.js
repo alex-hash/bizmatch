@@ -2,10 +2,14 @@
 
 const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
-const uuidV4 = require('uuid/v4');
 
 async function validate(data) {
   const schema = Joi.object({
+    themeId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required(),
     title: Joi.string()
       .trim()
       .min(1)
@@ -32,49 +36,57 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function createTheme(req, res, next) {
+async function updateTheme(req, res, next) {
+  const { themeId } = req.params;
   const themeData = { ...req.body };
   const { userId } = req.claims;
-
   try {
     const data = {
+      themeId,
       ...themeData,
       userId
     };
     await validate(data);
   } catch (e) {
-    console.error(e);
     return res.status(400).send(e);
   }
-
-  const createdAt = new Date()
-    .toISOString()
-    .substring(0, 19)
-    .replace('T', ' ');
-  const themeId = uuidV4();
 
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    await connection.query('INSERT INTO theme SET ?', {
-      id: themeId,
-      title: themeData.title,
-      category: themeData.category,
-      content: themeData.content,
-      project_name: themeData.project_name,
-      created_at: createdAt,
-      user_id: userId
-    });
+    const updatedAt = new Date()
+      .toISOString()
+      .substring(0, 19)
+      .replace('T', ' ');
+    const sqlUpdateProject = `Update theme
+    SET title = ?, category = ?, content = ?, project_name = ?, updated_at = ?
+    WHERE id = ?
+    AND user_id = ?`;
+    const [updatedStatus] = await connection.query(sqlUpdateProject, [
+      themeData.title,
+      themeData.category,
+      themeData.content,
+      themeData.project_name,
+      updatedAt,
+      themeId,
+      userId
+    ]);
     connection.release();
+    if (updatedStatus.affectedRows !== 1) {
+      return res.status(404).send();
+    }
 
-    res.status(201).send();
+    return res.status(204).send();
   } catch (e) {
     if (connection) {
       connection.release();
     }
+
     console.error(e);
-    res.status(500).send(e);
+    return res.status(500).send({
+      message: e.message
+    });
   }
 }
 
-module.exports = createTheme;
+module.exports = updateTheme;
