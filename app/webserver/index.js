@@ -10,6 +10,7 @@ const userRouter = require('./routes/user-router');
 const themeRouter = require('./routes/theme-router');
 const assesmentRouter = require('./routes/assesment-router');
 const commentRouter = require('./routes/comment-router');
+const commentThemeRouter = require('./routes/comment-theme-router');
 
 const cors = require('cors');
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api', userRouter);
 app.use('/api', themeRouter);
 app.use('/api', assesmentRouter);
 app.use('/api', commentRouter);
+app.use('/api', commentThemeRouter);
 
 let server = null;
 async function listen(port) {
