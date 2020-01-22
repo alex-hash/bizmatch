@@ -9,7 +9,6 @@ async function validate(data) {
         version: ['uuidv4']
       })
       .required(),
-    text: Joi.string().required(),
     userId: Joi.string()
       .guid({
         version: ['uuidv4']

@@ -4,7 +4,7 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validate(data) {
   const schema = Joi.object({
-    user_id: Joi.string()
+    userId: Joi.string()
       .guid({
         version: ['uuidv4']
       })
