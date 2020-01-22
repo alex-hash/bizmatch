@@ -10,10 +10,10 @@ const userRouter = require('./routes/user-router');
 const themeRouter = require('./routes/theme-router');
 const assesmentRouter = require('./routes/assesment-router');
 const commentRouter = require('./routes/comment-router');
+const bizmatchRouter = require('./routes/bizmatch-router');
 
 const cors = require('cors');
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +25,7 @@ app.use('/api', userRouter);
 app.use('/api', themeRouter);
 app.use('/api', assesmentRouter);
 app.use('/api', commentRouter);
+app.use('/api', bizmatchRouter);
 
 let server = null;
 async function listen(port) {

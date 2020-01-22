@@ -7,6 +7,7 @@ const projectRouter = require('./project-router');
 const userRouter = require('./user-router');
 const assesmentRouter = require('./assesment-router');
 const commentRouter = require('./comment-router');
+const bizmatchRouter = require('./bizmatch-router');
 
 module.exports = {
   accountRouter,
@@ -15,5 +16,6 @@ module.exports = {
   projectRouter,
   userRouter,
   assesmentRouter,
-  commentRouter
+  commentRouter,
+  bizmatchRouter
 };
