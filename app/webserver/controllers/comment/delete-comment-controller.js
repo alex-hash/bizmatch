@@ -1,10 +1,38 @@
 'use strict';
-
+const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 
+async function validate(data) {
+  const schema = Joi.object({
+    id: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required(),
+    userId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required()
+  });
+
+  Joi.assert(data, schema);
+}
+
 async function deleteComment(req, res, next) {
-  const commentData  = { ...req.body };
+  const commentData = { ...req.body };
   const { userId } = req.claims;
+
+  try {
+    const data = {
+      ...commentData,
+      userId
+    };
+    await validate(data);
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send(e);
+  }
 
   let connection;
   try {

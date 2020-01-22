@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const Joi = require("@hapi/joi");
-const mysqlPool = require("../../../database/mysql-pool");
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
 
-async function validateUpdate(data) {
+async function validate(data) {
   const schema = Joi.object({
     title: Joi.string()
       .trim()
@@ -21,21 +21,34 @@ async function validateUpdate(data) {
       .required(),
     image_url: Joi.string().max(512),
     video_url: Joi.string().max(512),
-    prize: Joi.number()
-      .max(20)
-      .required(),
+    prize: Joi.number().required(),
     duration: Joi.number().required(),
     text: Joi.string()
       .max(65536)
       .required(),
+    rewards: Joi.array().items(
+      Joi.object({
+        prize: Joi.number().required(),
+        title: Joi.string()
+          .max(60)
+          .required(),
+        month: Joi.string()
+          .max(20)
+          .required(),
+        year: Joi.number().required(),
+        subtitle: Joi.string()
+          .max(135)
+          .required()
+      })
+    ),
     userId: Joi.string()
       .guid({
-        version: ["uuidv4"]
+        version: ['uuidv4']
       })
       .required(),
     projectId: Joi.string()
       .guid({
-        version: ["uuidv4"]
+        version: ['uuidv4']
       })
       .required()
   });
@@ -45,15 +58,15 @@ async function validateUpdate(data) {
 
 async function updateProject(req, res, next) {
   const projectData = { ...req.body };
-  const { projectId } = req.params;
   const { userId } = req.claims;
+  const { projectId } = req.params;
   try {
     const data = {
       ...projectData,
-      projectId,
-      userId
+      userId,
+      projectId
     };
-    await validateUpdate(data);
+    await validate(data);
   } catch (e) {
     return res.status(400).send(e);
   }
@@ -64,7 +77,7 @@ async function updateProject(req, res, next) {
     const updatedAt = new Date()
       .toISOString()
       .substring(0, 19)
-      .replace("T", " ");
+      .replace('T', ' ');
     const sqlUpdateProject = `Update project
     SET title = ?, subtitle = ?, category = ?, ubication = ?, image_url = ?, video_url = ?, prize = ?, duration = ?, text = ?, updated_at = ?
     WHERE id = ?

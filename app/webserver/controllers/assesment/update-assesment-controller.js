@@ -3,7 +3,7 @@
 const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 
-async function validateUpdate(data) {
+async function validate(data) {
   const schema = Joi.object({
     type: Joi.number().required(),
     userId: Joi.string()
@@ -23,15 +23,16 @@ async function validateUpdate(data) {
 
 async function updateAssesment(req, res, next) {
   const assesmentData = { ...req.body };
-  const { projectId } = req.params;
   const { userId } = req.claims;
+  const { projectId } = req.params;
+
   try {
     const data = {
       ...assesmentData,
-      projectId,
-      userId
+      userId,
+      projectId
     };
-    await validateUpdate(data);
+    await validate(data);
   } catch (e) {
     return res.status(400).send(e);
   }

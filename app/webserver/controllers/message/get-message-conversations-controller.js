@@ -1,9 +1,29 @@
-"use strict";
+'use strict';
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
 
-const mysqlPool = require("../../../database/mysql-pool");
+async function validate(data) {
+  const schema = Joi.object({
+    userId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required()
+  });
+
+  Joi.assert(data, schema);
+}
 
 async function getMessagesUser(req, res, next) {
   const { userId } = req.claims;
+  const messageData = { userId };
+
+  try {
+    await validate(messageData);
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send(e);
+  }
 
   let connection;
   try {

@@ -3,13 +3,13 @@
 const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 
-async function validateUpdate(data) {
+async function validate(data) {
   const schema = Joi.object({
     id: Joi.string()
-    .guid({
-      version: ['uuidv4']
-    })
-    .required(),
+      .guid({
+        version: ['uuidv4']
+      })
+      .required(),
     text: Joi.string().required(),
     userId: Joi.string()
       .guid({
@@ -28,15 +28,16 @@ async function validateUpdate(data) {
 
 async function updateComment(req, res, next) {
   const commentData = { ...req.body };
-  const { projectId } = req.params;
   const { userId } = req.claims;
+  const { projectId } = req.params;
+
   try {
     const data = {
       ...commentData,
-      projectId,
-      userId
+      userId,
+      projectId
     };
-    await validateUpdate(data);
+    await validate(data);
   } catch (e) {
     return res.status(400).send(e);
   }

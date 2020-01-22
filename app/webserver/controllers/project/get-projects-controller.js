@@ -1,9 +1,29 @@
-"use strict";
+'use strict';
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
 
-const mysqlPool = require("../../../database/mysql-pool");
+async function validate(data) {
+  const schema = Joi.object({
+    userId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required()
+  });
+
+  Joi.assert(data, schema);
+}
 
 async function getProjects(req, res, next) {
   const { userId } = req.claims;
+  const projectData = { userId };
+
+  try {
+    await validate(projectData);
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send(e);
+  }
 
   let connection;
   try {
@@ -14,7 +34,7 @@ async function getProjects(req, res, next) {
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
 
-    const projects = rows.map(project => {
+    const projects = rows.map((project) => {
       return {
         ...project,
         createdAt: project.created_at,

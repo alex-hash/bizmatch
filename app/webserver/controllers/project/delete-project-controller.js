@@ -1,18 +1,18 @@
-"use strict";
+'use strict';
 
-const Joi = require("@hapi/joi");
-const mysqlPool = require("../../../database/mysql-pool");
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
 
-async function validate(payload) {
+async function validate(data) {
   const schema = Joi.object({
     projectId: Joi.string()
       .guid({
-        version: ["uuidv4"]
+        version: ['uuidv4']
       })
       .required()
   });
 
-  Joi.assert(payload, schema);
+  Joi.assert(data, schema);
 }
 
 async function deleteProject(req, res, next) {
