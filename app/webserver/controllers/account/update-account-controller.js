@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-const Joi = require("@hapi/joi");
-const mysqlPool = require("../../../database/mysql-pool");
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
 
-async function validateUpdate(payload) {
+async function validate(data) {
   const schema = Joi.object({
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: false })
       .required(),
-    password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
-    newPassword: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    newPassword: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
     name: Joi.string()
       .max(45)
       .required(),
@@ -34,12 +34,12 @@ async function validateUpdate(payload) {
       .required(),
     userId: Joi.string()
       .guid({
-        version: ["uuidv4"]
+        version: ['uuidv4']
       })
       .required()
   });
 
-  Joi.assert(payload, schema);
+  Joi.assert(data, schema);
 }
 
 async function updateUser(req, res, next) {
@@ -50,7 +50,7 @@ async function updateUser(req, res, next) {
   };
 
   try {
-    await validateUpdate(userData);
+    await validate(userData);
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -82,14 +82,11 @@ async function updateUser(req, res, next) {
     connection = await mysqlPool.getConnection();
     const now = new Date()
       .toISOString()
-      .replace("T", " ")
+      .replace('T', ' ')
       .substring(0, 19);
 
     if (userData.newPassword !== undefined) {
-      const isPasswordOk = await bcrypt.compare(
-        userData.password,
-        actualPassword
-      );
+      const isPasswordOk = await bcrypt.compare(userData.password, actualPassword);
       if (!isPasswordOk) {
         return res.status(401).send();
       }

@@ -1,7 +1,8 @@
-"use strict";
+'use strict';
 
-const cloudinary = require("cloudinary").v2;
-const mysqlPool = require("../../../database/mysql-pool");
+const Joi = require('@hapi/joi');
+const cloudinary = require('cloudinary').v2;
+const mysqlPool = require('../../../database/mysql-pool');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,25 +10,46 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+async function validate(data) {
+  const schema = Joi.object({
+    user_id: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required()
+  });
+
+  Joi.assert(data, schema);
+}
+
 async function uploadAvatar(req, res, next) {
   const { userId } = req.claims;
+  const data = { userId };
+
+  try {
+    await validate(data);
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send(e);
+  }
+
   const { file } = req;
 
   if (!file || !file.buffer) {
     return res.status(400).send({
-      message: "invalid image"
+      message: 'invalid image'
     });
   }
 
   cloudinary.uploader
     .upload_stream(
       {
-        resource_type: "image",
+        resource_type: 'image',
         public_id: userId,
         width: 200,
         height: 200,
-        format: "jpg",
-        crop: "limit"
+        format: 'jpg',
+        crop: 'limit'
       },
       async (err, result) => {
         if (err) {
@@ -46,7 +68,7 @@ async function uploadAvatar(req, res, next) {
           connection.execute(sqlQuery, [secureUrl, userId]);
           connection.release();
 
-          res.header("Location", secureUrl);
+          res.header('Location', secureUrl);
           return res.status(201).send();
         } catch (e) {
           if (connection) {

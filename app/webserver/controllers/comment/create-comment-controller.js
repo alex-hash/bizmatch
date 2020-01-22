@@ -4,9 +4,19 @@ const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 const uuidV4 = require('uuid/v4');
 
-async function validateComment(data) {
+async function validate(data) {
   const schema = Joi.object({
-    text: Joi.string().required()
+    text: Joi.string().required(),
+    userId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required(),
+    projectId: Joi.string()
+      .guid({
+        version: ['uuidv4']
+      })
+      .required()
   });
 
   Joi.assert(data, schema);
@@ -18,7 +28,12 @@ async function createComment(req, res, next) {
   const { projectId } = req.params;
 
   try {
-    await validateComment(commentData);
+    const data = {
+      ...commentData,
+      userId,
+      projectId
+    };
+    await validate(data);
   } catch (e) {
     console.error(e);
     res.status(400).send(e);
