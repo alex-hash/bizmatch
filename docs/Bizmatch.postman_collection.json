@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b0cf6a04-9200-4e2a-9cfe-bc1d8483df3c",
+		"_postman_id": "d85a202e-3a03-4486-aada-1687e2a41cd4",
 		"name": "Bizmatch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1220,6 +1220,136 @@
 								"theme",
 								"ff296823-44ae-4636-8949-240a7ba2a03b"
 							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "comment-theme",
+			"item": [
+				{
+					"name": "create-comment-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\": \"holss\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/comment/93522ce0-5891-4b30-8615-4649bf600412",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"comment",
+								"93522ce0-5891-4b30-8615-4649bf600412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-comment-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/theme/comment/93522ce0-5891-4b30-8615-4649bf600412",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"comment",
+								"93522ce0-5891-4b30-8615-4649bf600412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-comment-theme",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"50c83015-b5de-4b2b-b9a6-53ca9fb56798\",\n\t\"text\": \"helllo my name is GG\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theme/comment/93522ce0-5891-4b30-8615-4649bf600412",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theme",
+								"comment",
+								"93522ce0-5891-4b30-8615-4649bf600412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-comment-theme",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []

@@ -10,9 +10,9 @@ const deleteCommentTheme = require('../controllers/comment-theme/delete-comment-
 
 const router = express.Router();
 
-router.post('/project/comment/:themeId', checkAccountSession, createCommentTheme);
-router.get('/project/comment/:themeId', checkAccountSession, getCommentTheme);
-router.put('/project/comment/:themeId', checkAccountSession, updateCommentTheme);
-router.put('/comment/delete', checkAccountSession, deleteCommentTheme);
+router.post('/theme/comment/:themeId', checkAccountSession, createCommentTheme);
+router.get('/theme/comment/:themeId', checkAccountSession, getCommentTheme);
+router.put('/theme/comment/:themeId', checkAccountSession, updateCommentTheme);
+router.put('/comment-theme/delete', checkAccountSession, deleteCommentTheme);
 
 module.exports = router;
