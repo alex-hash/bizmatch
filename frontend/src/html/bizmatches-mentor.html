@@ -1,0 +1,137 @@
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Bienvenidos a Bizmatch</title>
+		<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</head>
+	<body class="bg-comun">
+			<nav style="margin-bottom: 0px !important;" class="navbar navbar-inverse sidebar" role="navigation">
+			    <div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a style="margin-left: 8%;" class="navbar-brand navbar-nombre" href="#">
+							<h4 class="text-center">Bizmatches y chats</h4>
+						</a>
+						<a class="navbar-brand pull-right" href="#">
+							<img class="img-responsive" src="image/logo_movil.png" />
+						</a>
+
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li ><a href="#">Proyectos</a></li>							
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle text-bold" data-toggle="dropdown">Consultas <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+								<ul class="dropdown-menu forAnimate" role="menu">
+									<li><a href="#">Start-ups</a></li>
+									<li><a href="#">Diseño UX</a></li>
+									<li><a href="#">Redes móviles</a></li>
+									<li><a href="#" class="active">Robótica</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+								<ul class="dropdown-menu forAnimate" role="menu">
+									<li><a href="#">Foto de perfil</a></li>
+									<li><a href="#">Información personal</a></li>
+									<li><a href="#">Estadísticas</a></li>
+									<li><a href="#">Ajustes</a></li>
+									<li><a href="#">Cerrar sesión</a></li>
+								</ul>
+							</li>	
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div class="container container-form">
+
+				<div class="row mt-5">
+					<div class="col-xs-12">
+						<h2 class="text-black text-center text-bold">
+							!Ponte en contacto con los emprendedores o dona ahora a tus proyectos favoritos¡
+						</h2>
+					</div>
+				</div>
+
+				<div class="row container mt-10 mb-10">
+					<div class="col-xs-12 container-text-description mb-10">
+						
+						<div class="row mt-5  margin-container-bizmatches-chats">
+							<div class="col-xs-6 image-bizmatches-chats">
+								<center>
+									<img class="img-responsive image" src="image/logo_bizmachts_chats.png">
+								</center>
+								<a style="text-decoration: none;" href="tus-bizmatches.html">
+									<h5 class="text-black text-uppercase text-center mt-5 text-bold color-texto-login">
+										Tus bizmatches
+									</h5>
+								
+							</div>
+							<div class="col-xs-6 image-bizmatches-chats">
+								<center>
+									<img class="img-responsive image" src="image/logo_chats.png">
+								</center>
+								<a style="text-decoration: none;" href="tus-chats.html">
+									<h5 class="text-black text-uppercase text-center mt-5 text-bold color-texto-login">
+										Tus Chats
+									</h5>
+								</a>	
+							</div>
+								
+							</div>
+
+						</div>
+					</div>
+
+				<div class="row mt-10"></div>		
+
+			</div>
+
+			</div>
+
+     		
+	        <script>
+	            function htmlbodyHeightUpdate(){
+	                var height3 = $( window ).height()
+	                var height1 = $('.nav').height()+50
+	                height2 = $('.main').height()
+	                if(height2 > height3){
+	                    $('html').height(Math.max(height1,height3,height2)+10);
+	                    $('body').height(Math.max(height1,height3,height2)+10);
+	                }
+	                else
+	                {
+	                    $('html').height(Math.max(height1,height3,height2));
+	                    $('body').height(Math.max(height1,height3,height2));
+	                }
+	                
+	            }
+	            $(document).ready(function () {
+	                htmlbodyHeightUpdate()
+	                $( window ).resize(function() {
+	                    htmlbodyHeightUpdate()
+	                });
+	                $( window ).scroll(function() {
+	                    height2 = $('.main').height()
+	                    htmlbodyHeightUpdate()
+	                });
+	            });
+	        </script>
+     
+
+		</body>
+</html>
