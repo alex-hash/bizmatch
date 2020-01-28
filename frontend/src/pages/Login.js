@@ -71,6 +71,9 @@ export function Login() {
             <div className="m-t-lg">
               <Link to="/register">Don't have an account, please sign up</Link>
             </div>
+            <div className="">
+              <Link to="/">Forgot password?</Link>
+            </div>
           </div>
         </form>
       </main>
