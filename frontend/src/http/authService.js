@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    if (error.response.status === 401 && error.config.url.includes('/login')) {
+    if (error.response.status === 401 && !error.config.url.includes('/login')) {
       localStorage.removeItem('currentUser');
       window.location.href = '/login';
     }
@@ -36,7 +36,6 @@ axios.interceptors.response.use(
 );
 
 export function signIn({ email, password }) {
-  console.log(email, password);
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
     email: email,
     password: password

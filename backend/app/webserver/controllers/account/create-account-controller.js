@@ -48,9 +48,9 @@ async function validate(data) {
     city: Joi.string()
       .max(30)
       .required(),
-    company_name: Joi.string().max(255),
-    company_role: Joi.string().max(255),
-    page_url: Joi.string().max(512),
+    company_name: Joi.string().max(255).allow(''),
+    company_role: Joi.string().max(255).allow(''),
+    page_url: Joi.string().max(512).allow(''),
     type: Joi.string().max(1)
   });
 
