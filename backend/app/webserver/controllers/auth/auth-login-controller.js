@@ -11,7 +11,7 @@ async function validate(data) {
       .email()
       .required(),
     password: Joi.string()
-      .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$'))
+      .pattern(new RegExp('^[a-zA-Z0-9@#$*]{3,30}$'))
       .required()
   });
 

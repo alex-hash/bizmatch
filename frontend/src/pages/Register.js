@@ -29,9 +29,7 @@ export function Register() {
         history.push("/login");
       })
       .catch(error => {
-        console.log(response);
         if(error.response.status === 409){
-          setBackendErrorMessage('The credentials are invalid');
           setValue('email', '');
           setError('email', 'conflict', 'The email you entered already exists');
         }
@@ -137,10 +135,6 @@ export function Register() {
               minLength: {
                 message: 'Password length should be greater than 8',
                 value: 8
-              },
-              pattern: {
-                message: 'La contraseña tiene que tener al menos un caracter en mayuscula, minuscula, un número y un simbolo',
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
               }
             })}
             name="password"
