@@ -54,6 +54,10 @@ async function validate(data) {
 
 async function insertReward(project_id, { prize, title, month, year, subtitle }) {
   const reward_id = uuidV4();
+  const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
   let connection;
   try {
     connection = await mysqlPool.getConnection();
@@ -61,10 +65,10 @@ async function insertReward(project_id, { prize, title, month, year, subtitle })
       id: reward_id,
       project_id: project_id,
       prize: prize,
-      title: title,
+      title: capitalize(title),
       month: month,
       year: year,
-      subtitle: subtitle
+      subtitle: capitalize(subtitle)
     });
     connection.release();
   } catch (e) {
@@ -97,21 +101,25 @@ async function createProject(req, res, next) {
     .replace('T', ' ');
   const projectId = uuidV4();
   const rewards = projectData.rewards;
+  const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
 
   let connection;
   try {
     connection = await mysqlPool.getConnection();
     await connection.query('INSERT INTO project SET ?', {
       id: projectId,
-      title: projectData.title,
-      subtitle: projectData.subtitle,
+      title: capitalize(projectData.title),
+      subtitle: capitalize(projectData.subtitle),
       category: projectData.category,
       ubication: projectData.ubication,
       image_url: projectData.image_url,
       video_url: projectData.video_url,
       prize: projectData.prize,
       duration: projectData.duration,
-      text: projectData.text,
+      text: capitalize(projectData.text),
       created_at: createdAt,
       user_id: userId
     });

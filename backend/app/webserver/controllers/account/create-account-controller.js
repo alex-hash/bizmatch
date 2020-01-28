@@ -74,6 +74,10 @@ async function createAccount(req, res, next) {
     .substring(0, 19);
   const userId = uuidV4();
   const cryptpassword = await bcrypt.hash(accountData.password, 10);
+  const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
 
   let connection;
   try {
@@ -82,14 +86,14 @@ async function createAccount(req, res, next) {
       id: userId,
       email: accountData.email,
       password: cryptpassword,
-      name: accountData.name,
-      first_name: accountData.first_name,
-      last_name: accountData.last_name,
+      name: capitalize(accountData.name),
+      first_name: capitalize(accountData.first_name),
+      last_name: capitalize(accountData.last_name),
       birthday: accountData.birthday,
-      country: accountData.country,
-      city: accountData.city,
-      company_name: accountData.company_name,
-      company_role: accountData.company_role,
+      country: capitalize(accountData.country),
+      city: capitalize(accountData.city),
+      company_name: capitalize(accountData.company_name),
+      company_role: capitalize(accountData.company_role),
       page_url: accountData.page_url,
       type: accountData.type,
       created_at: createdAtNow
