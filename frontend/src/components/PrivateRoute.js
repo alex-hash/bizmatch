@@ -4,5 +4,12 @@ import { useAuth } from '../context/auth-context';
 
 export function PrivateRoute({ children, allowedRoles, ...others }) {
   const { role } = useAuth();
-  return <Route {...others}>{allowedRoles.includes(role) ? children : <Redirect to="/login" />}</Route>;
+  return (
+    <React.Fragment>
+      {allowedRoles.includes(role.role) ? (<Route {...others}>{children}</Route>
+      ) : (
+        <Redirect to="/login" />
+      )}
+    </React.Fragment>
+);
 }

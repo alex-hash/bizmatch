@@ -36,7 +36,6 @@ axios.interceptors.response.use(
 );
 
 export function signIn({ email, password }) {
-  console.log(email, password);
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
     email: email,
     password: password
