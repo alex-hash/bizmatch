@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { signUp } from '../http/authService';
 import { useAuth } from '../context/auth-context';
 import { Link, useHistory } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 
 export function Register() {
   const {
@@ -23,9 +22,8 @@ export function Register() {
 
   const handleRegister = formData => {
     return signUp(formData)
-      .then(response => {
-        setRole(jwt_decode(response.data.accessToken));
-        setCurrentUser(response.data);
+      .then(() => {
+        window.alert("El usuario ha sido creado con exito");
         history.push("/login");
       })
       .catch(error => {

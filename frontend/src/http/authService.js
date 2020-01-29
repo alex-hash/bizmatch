@@ -43,5 +43,6 @@ export function signIn({ email, password }) {
 }
 
 export function signUp(accountData) {
+  console.log(accountData);
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/account`, accountData);
 }

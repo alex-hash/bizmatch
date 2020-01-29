@@ -6,7 +6,7 @@ export function PrivateRoute({ children, allowedRoles, ...others }) {
   const { role } = useAuth();
   return (
     <React.Fragment>
-      {allowedRoles.includes(role.role) ? (<Route {...others}>{children}</Route>
+      {(role !== null ? allowedRoles.includes(role.role) : false) ? (<Route {...others}>{children}</Route>
       ) : (
         <Redirect to="/login" />
       )}
