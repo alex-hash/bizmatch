@@ -25,7 +25,7 @@ export function Register() {
       });
   };
 
-  return (
+  return(
     <div className="container">
       <div class="container bg-form margin-top-20">
         <div className="row">
@@ -41,83 +41,99 @@ export function Register() {
         <form onSubmit={handleSubmit(handleRegister)} noValidate>
           <div className="row mt-3">
             <div className="col-md-12">
-              <input
-                ref={register({
-                  required: 'The name is mandatory',
-                  maxLength: {
-                    message: 'Name length should be less than 45',
-                    value: 45
-                  }
-                })}
-                name="name"
-                type="text"
-                className="input-login"
-                placeholder="Name"
+              <input ref={register({
+                required: 'The name is mandatory',
+                maxLength: {
+                  message: "Name length should be less than 45",
+                  value: 45
+                },
+              })}
+              name="name"
+              type="text"
+              className="input-login"
+              placeholder="Name"
               ></input>
             </div>
           </div>
           <div className="row mt-3">
             <div className="col-md-12">
-              <input
-                ref={register({
-                  required: 'The first name is mandatory',
-                  maxLength: {
-                    message: 'First name length should be less than 45',
-                    value: 45
-                  }
-                })}
-                name="first_name"
-                type="text"
-                className="input-login"
-                placeholder="First Name"
+              <input ref={register({
+                required: 'The first name is mandatory',
+                maxLength: {
+                  message: "First name length should be less than 45",
+                  value: 45
+                },
+              })}
+              name="first_name"
+              type="text"
+              className="input-login"
+              placeholder="First Name"
               ></input>
             </div>
           </div>
           <div className="row mt-3">
             <div className="col-md-12">
-              <input
-                ref={register({
-                  required: 'The last name is mandatory',
-                  maxLength: {
-                    message: 'Last name length should be less than 45',
-                    value: 45
-                  }
-                })}
-                name="last_name"
-                type="text"
-                className="input-login"
-                placeholder="Last Name"
+              <input ref={register({
+                required: 'The last name is mandatory',
+                maxLength: {
+                  message: "Last name length should be less than 45",
+                  value: 45
+                },
+              })}
+              name="last_name"
+              type="text"
+              className="input-login"
+              placeholder="Last Name"
               ></input>
             </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12"></div>
+            <div className="col-md-12">
+                
+            </div>
           </div>
-          <div className="row mt-4"></div>
+          <div className="row mt-4">
+          </div>
         </form>
       </div>
     </div>
@@ -354,5 +370,5 @@ export function Register() {
         </div>
       </form>
     </main>*/
-  );
+  )
 }
