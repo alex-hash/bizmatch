@@ -6,29 +6,20 @@ import { Link, useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 
 export function Register() {
-  const {
-    handleSubmit,
-    register,
-    errors,
-    watch,
-    formState,
-    setError,
-    setValue,
-    reset
-  } = useForm({
+  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   const [startDate, setStartDate] = useState(null);
   const history = useHistory();
 
-  const handleRegister = formData => {
+  const handleRegister = (formData) => {
     return signUp(formData)
       .then(() => {
-        window.alert("El usuario ha sido creado con exito");
-        history.push("/login");
+        window.alert('El usuario ha sido creado con exito');
+        history.push('/login');
       })
-      .catch(error => {
-        if(error.response.status === 409){
+      .catch((error) => {
+        if (error.response.status === 409) {
           setValue('email', '');
           setError('email', 'conflict', 'The email you entered already exists');
         }
