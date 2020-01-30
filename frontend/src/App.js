@@ -14,6 +14,9 @@ function App() {
           <PrivateRoute exact path="/" allowedRoles={['admin', 'E', 'M']}>
             <Dashboard />
           </PrivateRoute>
+          <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
+            <Dashboard />
+          </PrivateRoute>
           <Route path="/login">
             <Login />
           </Route>
