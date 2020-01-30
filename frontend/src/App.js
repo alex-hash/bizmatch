@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard';
+import { Initial } from './pages/Initial';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { AuthProvider } from './context/auth-context';
@@ -12,6 +13,9 @@ function App() {
       <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/" allowedRoles={['admin', 'E', 'M']}>
+            <Initial />
+          </PrivateRoute>
+          <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
             <Dashboard />
           </PrivateRoute>
           <Route path="/login">

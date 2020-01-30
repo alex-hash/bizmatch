@@ -5,37 +5,124 @@ import { useAuth } from '../context/auth-context';
 import { Link, useHistory } from 'react-router-dom';
 
 export function Register() {
-  const {
-    handleSubmit,
-    register,
-    errors,
-    watch,
-    formState,
-    setError,
-    setValue,
-    reset
-  } = useForm({
+  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   const { setRole, setCurrentUser } = useAuth();
   const history = useHistory();
 
-  const handleRegister = formData => {
+  const handleRegister = (formData) => {
     return signUp(formData)
       .then(() => {
-        window.alert("El usuario ha sido creado con exito");
-        history.push("/login");
+        window.alert('El usuario ha sido creado con exito');
+        history.push('/login');
       })
-      .catch(error => {
-        if(error.response.status === 409){
+      .catch((error) => {
+        if (error.response.status === 409) {
           setValue('email', '');
           setError('email', 'conflict', 'The email you entered already exists');
         }
       });
   };
 
-  return(
-    <main className="">
+  return (
+    <div className="container">
+      <div class="container bg-form margin-top-20">
+        <div className="row">
+          <div className="col-8 mt-3">
+            <a href="#" className="btn btn-xl-siguiente btn-xl-form-perfil">
+              Ayúdanos a conocerte más
+            </a>
+          </div>
+          <div className="col-4">
+            <img className="img-fluid image-logo-form" src="/image/logo_form.png" />
+          </div>
+        </div>
+        <form onSubmit={handleSubmit(handleRegister)} noValidate>
+          <div className="row mt-3">
+            <div className="col-md-12">
+              <input
+                ref={register({
+                  required: 'The name is mandatory',
+                  maxLength: {
+                    message: 'Name length should be less than 45',
+                    value: 45
+                  }
+                })}
+                name="name"
+                type="text"
+                className="input-login"
+                placeholder="Name"
+              ></input>
+            </div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12">
+              <input
+                ref={register({
+                  required: 'The first name is mandatory',
+                  maxLength: {
+                    message: 'First name length should be less than 45',
+                    value: 45
+                  }
+                })}
+                name="first_name"
+                type="text"
+                className="input-login"
+                placeholder="First Name"
+              ></input>
+            </div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12">
+              <input
+                ref={register({
+                  required: 'The last name is mandatory',
+                  maxLength: {
+                    message: 'Last name length should be less than 45',
+                    value: 45
+                  }
+                })}
+                name="last_name"
+                type="text"
+                className="input-login"
+                placeholder="Last Name"
+              ></input>
+            </div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12"></div>
+          </div>
+          <div className="row mt-4"></div>
+        </form>
+      </div>
+    </div>
+
+    /*<main className="">
       <h3>Please Register</h3>
       <form onSubmit={handleSubmit(handleRegister)} noValidate>
         <div className={`form-control ${
@@ -266,6 +353,6 @@ export function Register() {
           </div>
         </div>
       </form>
-    </main>
-  )
+    </main>*/
+  );
 }
