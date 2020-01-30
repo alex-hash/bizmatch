@@ -146,10 +146,16 @@ p {
 
 /*Página del formulario de Longin y Registro*/
 
-.container-form {
-  margin-bottom: 10%;
-  padding-top: 1%;
-  background-color: white;
+.error-validate{
+	color: red;
+	font-weight: bold;
+	font-size: 0.75rem;
+}
+
+.container-form{
+	margin-bottom: 10%;
+	padding-top: 1%;
+	background-color: white;
 }
 
 .pull-right {
@@ -692,7 +698,7 @@ p {
   .mt-center-percent {
     margin-top: 80%;
   }
-
+  
   .image-second {
     margin-top: -35%;
   }
@@ -745,7 +751,11 @@ p {
     font-size: 12px !important;
   }
 
-  .margin-top-20 {
-    margin-top: 20%;
-  }
+	.margin-top-20{
+		margin-top: 20%;
+	}
+	
+	.padding-top-20{
+		padding-top: 20%;
+	}
 }
