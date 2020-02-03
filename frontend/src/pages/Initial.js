@@ -1,17 +1,9 @@
 import React from 'react';
+import Navabar from '../components/Navbar';
+import Navbar from '../components/Navbar';
 
 export function Initial() {
   return (
-    <body>
-      <div class="container body-container">
-        <div class="row">
-          <div class="col-md-12 mx-auto d-flex justify-content-center mt-center-percent">
-            <a href="login">
-              <img class="img-fluid" src="../image/logo.png" alt="logo-bizmatch"/>
-            </a>
-          </div>
-        </div>
-      </div>
-    </body>
+    <Navbar /> 
   );
 }
