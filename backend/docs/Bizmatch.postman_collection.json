@@ -32,7 +32,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"jiji@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"country\": \"Spain\",\n    \"city\": \"Ourense\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}",
+							"raw": "{\n    \"email\": \"jiji@yopmail.com\",\n    \"password\": \"123456aA\",\n    \"name\": \"Alex\",\n    \"first_name\": \"Bash\",\n    \"last_name\": \"Bish\",\n    \"birthday\": \"1992-01-02\",\n    \"company_name\": \"HackABoss\",\n    \"type\": \"E\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -162,7 +162,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t \"email\": \"jojo@yopmail.com\",\n    \"password\": \"123456aA\"\n}",
+							"raw": "{\n\t\"email\": \"jojo@yopmail.com\",\n    \"password\": \"123456aA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

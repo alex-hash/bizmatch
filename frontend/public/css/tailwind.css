@@ -8352,6 +8352,24 @@ video {
   font-size: 0.75rem;
 }
 
+.viewport100 {
+  height: calc(100vh + 52px);
+}
+
+hr.style1{
+  border-top: 1px solid #8c8b8b;
+}
+
+@media (max-width: 1280px) {
+  .backimage { background-image: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .backimage { background-image: url('../buscas_invertir.png');
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

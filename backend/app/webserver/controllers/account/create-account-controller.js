@@ -42,12 +42,6 @@ async function validate(data) {
       .max(45)
       .required(),
     birthday: Joi.required(), //Echarle un vistazo, buscar una manera en el frontend de parsear el dato de la manera correcta para introducirla a la BD
-    country: Joi.string()
-      .max(20)
-      .required(),
-    city: Joi.string()
-      .max(30)
-      .required(),
     company_name: Joi.string().max(255).allow(''),
     company_role: Joi.string().max(255).allow(''),
     page_url: Joi.string().max(512).allow(''),

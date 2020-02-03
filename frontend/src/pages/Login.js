@@ -28,7 +28,7 @@ export function Login() {
   };
 
   return (
-<div className="flex items-center justify-center h-screen bg-green-400">
+<div className="flex items-center justify-center h-screen" >
   <div className="w-full max-w-md">
     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleLogin)} noValidate>
       <div className="mb-4">
