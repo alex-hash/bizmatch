@@ -7,7 +7,7 @@ export function Initial() {
         <div class="row">
           <div class="col-md-12 mx-auto d-flex justify-content-center mt-center-percent">
             <a href="login">
-              <img class="img-fluid" src="../image/logo.png" />
+              <img class="img-fluid" src="../image/logo.png" alt="logo-bizmatch"/>
             </a>
           </div>
         </div>

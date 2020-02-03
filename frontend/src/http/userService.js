@@ -35,13 +35,6 @@ axios.interceptors.response.use(
   }
 );
 
-export function signIn({ email, password }) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-    email: email,
-    password: password
-  });
-}
-
-export function signUp(accountData) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/account`, accountData);
-}
+export function getProfile() {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`).then(res => { return res.data});
+  }

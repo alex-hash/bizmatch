@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import "bootstrap/dist/css/bootstrap.css"
-import "./css/style.css"
+import './css/tailwind.css';
 
-ReactDOM.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('root'));

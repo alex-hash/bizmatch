@@ -18,7 +18,7 @@ export function Login() {
       .then((response) => {
         setRole(jwt_decode(response.data.accessToken));
         setCurrentUser(response.data);
-        history.push('/dashboard');
+        history.push('/account');
       })
       .catch((error) => {
         setBackendErrorMessage('The credentials are invalid');
@@ -28,100 +28,63 @@ export function Login() {
   };
 
   return (
-    <React.Fragment>
-      <body class="bg-comun">
-        <form class="container-fluid container-form" onSubmit={handleSubmit(handleLogin)} noValidate>
-          <div class="row mt-10">
-            <div class="col-12 d-flex justify-content-center">
-              <img class="img-fluid witdh" src="/image/logo_color.png" />
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="text-center col-12 d-flex justify-content-center">
-              <p class="font-20">
-                ¡Adéntrate ahora en el <br></br>mundo de las empresas!
-              </p>
-            </div>
-          </div>
-
-          <div class="row mt-3">
-            <div class="col-12">
-              <input
-                ref={register({
-                  required: 'The email is mandatory',
-                  pattern: {
-                    value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: 'The email is not valid'
-                  }
-                })}
-                name="email"
-                type="email"
-                class="input-login"
-                placeholder="Correo electrónico"
-              ></input>
-            </div>
-            {errors.email && <span className="errorMessage">{errors.email.message}</span>}
-          </div>
-          <div class="row mt-2">
-            <div class="col-12">
-              <input
-                ref={register({
-                  required: 'The password is mandatory',
-                  minLength: {
-                    value: 6,
-                    message: 'You should enter a password with at least 6 characters'
-                  }
-                })}
-                name="password"
-                type="password"
-                class="input-login"
-                placeholder="Contraseña"
-              ></input>
-            </div>
-            {errors.password && <span className="errorMessage">{errors.password.message}</span>}
-          </div>
-          <div class="row mt-3">
-            <div class="col-6">
-              <Link class="text-uppercase font-12 color-texto-login" to="/register">
-                ¿AÚN NO ESTAS REGISTRADO?
-              </Link>
-            </div>
-            <div class="col-6">
-              <Link class="text-uppercase font-12 pull-right color-texto-login" to="/">
-                RECORDAR CONTRASEÑA
-              </Link>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12 mx-auto text-center">
-              <button type="submit" className="btn btn-xl-siguiente btn-xl" disabled={formState.isSubmitting}>
-                ENTRAR
-              </button>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12 mx-auto text-center">
-              <p class="text-inicio-sesion-login">Si lo prefieres puedes iniciar sesión con:</p>
-            </div>
-          </div>
-
-          <div class="row mt-2">
-            <div class="col-6">
-              <button class="btn btn-redes-sociales-login btn-xl btn-facebook">Facebook</button>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-redes-sociales-login btn-xl btn-google">Google</button>
-            </div>
-          </div>
-          <div class="row mt-5">
-            <div class="col-12 mx-auto text-center">
-              <p class="text-condiciones-login mt-5 mb-10">
-                Para continuar, por favor, debes aceptar nuestros <br></br>Términos y condiciones
-              </p>
-            </div>
-          </div>
-        </form>
-      </body>
-    </React.Fragment>
-  );
+<div class="flex items-center justify-center h-screen bg-green-400">
+  <div class="w-full max-w-md">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleLogin)} noValidate>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Email
+        </label>
+        <input 
+          ref={register({
+            required: 'El email es necesario',
+            pattern: {
+              value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              message: 'El email no es válido'
+            }
+          })}
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          id="email" 
+          type="text" 
+          name="email"
+          placeholder="Email" />
+          {errors.email && <span className="error-validate">{errors.email.message}</span>}
+      </div>
+      <div class="mb-6">
+        <div class="flex justify-between">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+            Contraseña
+          </label>
+          <a class="inline-block align-baseline font-bold text-xs text-blue-500 hover:text-blue-800" href="#">
+            Olvidaste contraseña?
+          </a>
+        </div>
+        <input 
+          ref={register({
+            required: 'La contraseña es necesaria',
+            minLength: {
+              value: 6,
+              message: 'Su contraseña tiene más de 6 caracteres'
+            }
+          })}
+          class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          id="password"
+          type="password"
+          name="password"
+          placeholder="******************" />
+          {errors.password && <span className="error-validate">{errors.password.message}</span>}
+      </div>
+    <div class="flex items-center justify-center">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
+        Iniciar sesión
+      </button>
+    </div>
+    </form>
+    <p class="text-center text-white text-xs">
+      &copy;2020 Bizmatch. Todos los derechos reservados.
+    </p>
+  </div>
+</div>
+    
+);
 }

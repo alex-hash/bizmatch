@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signUp } from '../http/authService';
-import { useAuth } from '../context/auth-context';
 import { Link, useHistory } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
 
 export function Register() {
-  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
+  const { handleSubmit, register, errors, formState, setError, setValue } = useForm({
     mode: 'onBlur'
   });
-  const [startDate, setStartDate] = useState(null);
   const history = useHistory();
 
   const handleRegister = (formData) => {

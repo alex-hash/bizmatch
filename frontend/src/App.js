@@ -1,32 +1,30 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Dashboard } from './pages/Dashboard';
 import { Initial } from './pages/Initial';
 import { Login } from './pages/Login';
+import { User } from './pages/User';
 import { Register } from './pages/Register';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
+
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Switch>
-          <PrivateRoute exact path="/" allowedRoles={['admin', 'E', 'M']}>
+          <Route exact path="/">
             <Initial />
-          </PrivateRoute>
-          <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
-            <Dashboard />
-          </PrivateRoute>
-          <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
-            <Dashboard />
-          </PrivateRoute>
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/register">
             <Register />
           </Route>
+          <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
+            <User />
+          </PrivateRoute>
         </Switch>
       </AuthProvider>
     </BrowserRouter>
