@@ -28,59 +28,59 @@ export function Login() {
   };
 
   return (
-<div class="flex items-center justify-center h-screen bg-green-400">
-  <div class="w-full max-w-md">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleLogin)} noValidate>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+<div className="flex items-center justify-center h-screen bg-green-400">
+  <div className="w-full max-w-md">
+    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleLogin)} noValidate>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
           Email
         </label>
         <input 
           ref={register({
-            required: 'El email es necesario',
+            required: '*El email es necesario',
             pattern: {
               value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: 'El email no es válido'
+              message: '*El email no es válido'
             }
           })}
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
           id="email" 
           type="text" 
           name="email"
           placeholder="Email" />
           {errors.email && <span className="error-validate">{errors.email.message}</span>}
       </div>
-      <div class="mb-6">
-        <div class="flex justify-between">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+      <div className="mb-6">
+        <div className="flex justify-between">
+          <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
             Contraseña
           </label>
-          <a class="inline-block align-baseline font-bold text-xs text-blue-500 hover:text-blue-800" href="#">
-            Olvidaste contraseña?
-          </a>
+          <Link className="inline-block align-baseline font-bold text-xs text-blue-500 hover:text-blue-800" href="#">
+            Olvidaste tú contraseña?
+          </Link>
         </div>
         <input 
           ref={register({
-            required: 'La contraseña es necesaria',
+            required: '*La contraseña es necesaria',
             minLength: {
               value: 6,
-              message: 'Su contraseña tiene más de 6 caracteres'
+              message: '*Su contraseña tiene más de 6 caracteres'
             }
           })}
-          class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
           id="password"
           type="password"
           name="password"
           placeholder="******************" />
           {errors.password && <span className="error-validate">{errors.password.message}</span>}
       </div>
-    <div class="flex items-center justify-center">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
+    <div className="flex items-center justify-center">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
         Iniciar sesión
       </button>
     </div>
     </form>
-    <p class="text-center text-white text-xs">
+    <p className="text-center text-white text-xs">
       &copy;2020 Bizmatch. Todos los derechos reservados.
     </p>
   </div>
