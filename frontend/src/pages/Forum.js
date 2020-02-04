@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
-export function Initial() {
+export function Forum() {
   return (
     <div>
       <div>
