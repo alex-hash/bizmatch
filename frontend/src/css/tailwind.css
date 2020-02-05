@@ -22,6 +22,12 @@ hr.style1{
 	background-color: #b5e7a0;
 }
 
+.wrapper{
+	width:200px;
+	padding:20px;
+	height: 150px;
+}
+
 @media (min-width: 1024px) {
 	.ml-200p{
 		margin-left: 200px;

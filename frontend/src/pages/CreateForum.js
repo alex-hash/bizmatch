@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
@@ -7,19 +7,20 @@ export function CreateForum() {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
+
   const history = useHistory();
   return (
     <div>
       <div>
         <Navbar /> 
       </div>
-      <div className="ml-200p flex flex-wrap justify-center items-center h-screen">
-          <form className="w-5/6 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit()} noValidate>
-            <h1></h1>
+      <div className="ml-200p mt-nav bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
+          <form className="mt-4 lg:w-5/6 bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4" onSubmit={handleSubmit()} noValidate>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" for="title">
+              <label className="block text-gray-700 text-sm font-bold" for="title">
                 Título de la consulta
               </label>
+              <p className="text-sm text-gray-700 mb-2">Se específico, imagina que estás preguntando a otra persona</p>
               <input 
                 ref={register({
                   required: '*El título es necesario',
@@ -36,9 +37,10 @@ export function CreateForum() {
                 {errors.title && <span className="error-validate">{errors.title.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" for="content">
+              <label className="block text-gray-700 text-sm font-bold" for="content">
                 Contenido de la consulta
               </label>
+              <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria para que una persona pueda contestar a tú pregunta</p>
               <textarea 
                 ref={register({
                   required: '*El contenido es necesario',
@@ -59,15 +61,53 @@ export function CreateForum() {
                 ref={register({
                   required: '*La categoría es necesaria',
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                className=" relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                 id="category" 
                 type="text" 
                 name="category"
                 placeholder="">
-                  <option value="E">Emprendedor</option>
-                  <option value="M">Mentor</option>
+                  <option value="Arte">Arte</option>
+                  <option value="Artesanías">Artesanías</option>
+                  <option value="Cine">Cine y vídeo</option>
+                  <option value="Comida">Comida</option>
+                  <option value="Cómics">Cómics</option>
+                  <option value="Danza">Danza</option>
+                  <option value="Diseño">Diseño</option>
+                  <option value="Fotografía">Fotografía</option>
+                  <option value="Juegos">Juegos</option>
+                  <option value="Moda">Moda</option>
+                  <option value="Música">Música</option>
+                  <option value="Periodismo">Periodismo</option>
+                  <option value="Publicaciones">Publicaciones</option>
+                  <option value="Teatro">Teatro</option>
+                  <option value="Tecnología">Tecnología</option>
                 </select>
                 {errors.category && <span className="error-validate">{errors.category.message}</span>}
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold" for="project">
+                Título del proyecto
+              </label>
+              <p className="text-sm text-gray-700 mb-2">Proyecto que está relacionado con la duda</p>
+              <input 
+                ref={register({
+                  required: '*El proyecto es necesario',
+                  maxLength: {
+                    message: "*El proyecto no debe exceder los 60 caracteres",
+                    value: 60
+                  },
+                })}
+                className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                id="project" 
+                type="text" 
+                name="project"
+                placeholder=""/>
+                {errors.project && <span className="error-validate">{errors.project.message}</span>}
+            </div>
+            <div className="flex items-center justify-center">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
+                Crear consulta
+              </button>
             </div>
           </form>
       </div>
