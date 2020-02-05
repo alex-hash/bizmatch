@@ -28,6 +28,10 @@ hr.style1{
 	height: 150px;
 }
 
+.mt-nav-forum{
+	margin-top: 62px;
+}
+
 @media (min-width: 1024px) {
 	.ml-200p{
 		margin-left: 200px;

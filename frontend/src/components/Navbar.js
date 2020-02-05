@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "react-sidebar";
  
 const mql = window.matchMedia(`(min-width: 1024px)`);
+
+window.onload = () => document.getElementById('sidebar').style.position = "fixed" 
  
 class App extends React.Component {
   constructor(props) {
@@ -35,6 +37,10 @@ class App extends React.Component {
     }
     
   }
+  
+  enableScrolling(){
+    document.getElementById("sidebar").style.position = "fixed";
+  }
 
   componentWillUnmount() {
     this.state.mql.removeListener(this.mediaQueryChanged);
@@ -42,6 +48,7 @@ class App extends React.Component {
  
   onSetSidebarOpen(open) {
     this.setState({ sidebarOpen: open });
+    this.enableScrolling();
   }
  
   mediaQueryChanged() {
@@ -61,15 +68,15 @@ class App extends React.Component {
                 <button href="#" class="w-full px-4 py-2 text-center text-white hover:bg-orange-800">Proyectos</button>
                 <hr className="style1"/>
                 <button onClick={() => this.changeStyle('forum')} class="forum w-full px-4 py-2 text-white hover:bg-orange-800">Foro ▼
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Start-ups</a>
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Diseño Ux</a>
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Redes móviles</a>
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Robótica</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Start-ups</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Diseño Ux</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Redes móviles</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Robótica</a>
                 </button>
                 <hr className="style1"/>
                 <button onClick={() => this.changeStyle('configuration')} class="configuration w-full px-4 py-2 text-white hover:bg-orange-800">Configuración ▼
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Perfil</a>
-                  <a href="#" class="hidden absolute identifier block px-4 py-2 text-center text-white hover:text-black ">Cerrar sesión</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Perfil</a>
+                  <a href="#" class="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Cerrar sesión</a>
                 </button>
                 <hr className="style1"/>
               </div>
@@ -77,11 +84,12 @@ class App extends React.Component {
           </div>
         }
         open={this.state.sidebarOpen}
+        sidebarId="sidebar"
         docked={this.state.sidebarDocked}
         onSetOpen={this.onSetSidebarOpen}
         styles={{ sidebar: { background: "#276749", width: '200px' } }}
       >
-      <nav class="lg:hidden xl:hidden flex items-center justify-between flex-wrap bg-green-800 p-4" >
+      <nav onClick={() => this.enableScrolling()} class="lg:hidden xl:hidden flex items-center justify-between flex-wrap bg-green-800 p-4" >
         <div class="block lg:hidden">
           <button onClick={() => this.onSetSidebarOpen(true)} class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
             <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>

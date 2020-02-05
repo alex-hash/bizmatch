@@ -4,8 +4,10 @@ import { Login } from './pages/Login';
 import { User } from './pages/User';
 import { CreateForum } from './pages/CreateForum'
 import { Register } from './pages/Register';
+import { GetForum } from './pages/GetForum';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
+
 
 
 function App() {
@@ -26,6 +28,9 @@ function App() {
           </PrivateRoute>
           <Route path="/create-forum">
             <CreateForum />
+          </Route>
+          <Route path="/forum">
+            <GetForum />
           </Route>
         </Switch>
       </AuthProvider>
