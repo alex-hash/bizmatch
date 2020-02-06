@@ -38,6 +38,7 @@ export function CreateForum() {
         dispatch({ type: 'CREATE_FORUM', forum: data });
       }
     });
+    history.push('/');
   };
 
   return (

@@ -6,11 +6,9 @@ import { CreateForum } from './pages/CreateForum'
 import { EditeForum } from './pages/EditeForum'
 import { Register } from './pages/Register';
 import { GetForum } from './pages/GetForum';
-import { Forum } from './pages/Forum';
+import { ForumDashboard } from './pages/Forum';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
-
-
 
 function App() {
   return (
@@ -18,7 +16,7 @@ function App() {
       <AuthProvider>
         <Switch>
           <Route exact path="/">
-            <Forum />
+            <ForumDashboard />
           </Route>
           <Route exact path="/edite-forum">
             <EditeForum />
