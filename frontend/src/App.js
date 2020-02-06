@@ -5,6 +5,7 @@ import { User } from './pages/User';
 import { CreateForum } from './pages/CreateForum'
 import { Register } from './pages/Register';
 import { GetForum } from './pages/GetForum';
+import { Forum } from './pages/Forum';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
 
@@ -16,6 +17,7 @@ function App() {
       <AuthProvider>
         <Switch>
           <Route exact path="/">
+            <Forum />
           </Route>
           <Route path="/login">
             <Login />
