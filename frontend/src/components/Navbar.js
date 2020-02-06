@@ -2,8 +2,12 @@ import React from "react";
 import Sidebar from "react-sidebar";
  
 const mql = window.matchMedia(`(min-width: 1024px)`);
+const _isMounted  = false;
 
-window.onload = () => document.getElementById('sidebar').style.position = "fixed" 
+if(document.getElementById('sidebar') !== null){
+  window.onload = () => document.getElementById('sidebar').style.position = "fixed" 
+}
+
  
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +21,10 @@ class App extends React.Component {
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
  
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
+  componentDidMount() {
+    if(_isMounted === false){
+      mql.addListener(this.mediaQueryChanged);
+    }
   }
  
   changeStyle(button) {
@@ -43,7 +49,9 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
+    if(this._isMounted === true){
+      this.state.mql.removeListener(this.mediaQueryChanged);
+    }
   }
  
   onSetSidebarOpen(open) {
@@ -87,7 +95,7 @@ class App extends React.Component {
         sidebarId="sidebar"
         docked={this.state.sidebarDocked}
         onSetOpen={this.onSetSidebarOpen}
-        styles={{ sidebar: { background: "#276749", width: '200px' } }}
+        styles={{ sidebar: { background: "#276749", width: '200px', position: "fixed"} }}
       >
       <nav onClick={() => this.enableScrolling()} class="lg:hidden xl:hidden flex items-center justify-between flex-wrap bg-green-800 p-4" >
         <div class="block lg:hidden">

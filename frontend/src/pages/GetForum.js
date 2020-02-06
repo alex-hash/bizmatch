@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+
 
 export function GetForum() {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
 
-  const history = useHistory();
+  window.onload = function() {
+    this.document.body.classList.replace("bg-white", "bg-green-400")
+  };
+  
   return (
     <div>
       <div>

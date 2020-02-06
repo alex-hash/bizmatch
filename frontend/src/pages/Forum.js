@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getForums } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
@@ -19,14 +18,15 @@ export function ForumDashboard() {
     mode: 'onBlur'
   });
   const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
-  const history = useHistory();
   const [state, dispatch] = useReducer(forumsReducer, {
     forums: [],
     selectedForum: null
   });
 
   useEffect(() => {
-    getForums().then((response) => dispatch({ type: 'GET_FORUMS_SUCCESS', initialForums: response.data }));
+    let mounted = true;
+    getForums().then((response) => 
+    dispatch({ type: 'GET_FORUMS_SUCCESS', initialForums: response.data }));
   }, []);
 
   return (

@@ -10,7 +10,7 @@ export function Login() {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
-  const history = useHistory();
+  let history = useHistory();
   const { setRole, setCurrentUser } = useAuth();
 
   const handleLogin = (formData) => {
@@ -18,7 +18,7 @@ export function Login() {
       .then((response) => {
         setRole(jwt_decode(response.data.accessToken));
         setCurrentUser(response.data);
-        history.push('/account');
+        history.push('/');
       })
       .catch((error) => {
         setBackendErrorMessage('The credentials are invalid');
