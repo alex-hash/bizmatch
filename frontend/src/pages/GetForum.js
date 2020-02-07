@@ -10,7 +10,7 @@ export function GetForum({ match }) {
   function forumReducer(state, action) {
     switch (action.type) {
       case 'GET_FORUM_SUCCESS':
-        return { ...state, forum: action.forum };
+        return { ...state, forum: action.forum, comments: action.comments };
       default:
         return state;
     }
@@ -18,14 +18,19 @@ export function GetForum({ match }) {
 
   const [state, dispatch] = useReducer(forumReducer, {
     forum: [],
+    comments: [],
   });
 
+  let promiseforum = getForum(match.params.forumId);
+  let promisecomments = getCommentsForum(match.params.forumId);
+  
+
   useEffect(() => {
-    getForum(match.params.forumId).then( (response) => {dispatch({ type: 'GET_FORUM_SUCCESS', forum: response.data.data })});
+    Promise.all([promiseforum, promisecomments]).then((response) => dispatch({ type: 'GET_FORUM_SUCCESS', forum: response[0].data.data, comments: response[1].data.data }));
   }, []);
 
 
   return (
-    <Forum forum={state.forum} />
+    <Forum forum={state.forum} comments={state.comments}/>
   );
 }
