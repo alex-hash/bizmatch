@@ -32,7 +32,7 @@ hr.style1{
 	background-color:#68d391;
 }
 
-@media (min-width: 768px){
+@media (max-width: 768px){
 	.bg-color{
 		background-color: white;
 	}
