@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { getForums } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
 import { ForumList } from '../components/ForumList';
-import { GetForum } from '../pages/GetForum';
 
 function forumsReducer(state, action) {
   switch (action.type) {
@@ -17,7 +16,7 @@ function forumsReducer(state, action) {
   }
 }
 
-export function ForumDashboard() {
+export function GetForums() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -35,19 +34,6 @@ export function ForumDashboard() {
   return (
     <ForumList
       forums={state.forums}
-      selectedIndex={state.selectedForum}
-      onSelectForum={(index) => {
-        dispatch({ type: 'SELECT_FORUM', index });
-      }}
     />
   );
 }
-/* quiero pasarle esto a la función GetForum de la página get forum, en plan al seleccionar algo pasarle los datos
-si nó se hace así descarta la rama y pregunto y vuelvo a empezar de cero.
-{
-state.selectedForum !== null && (
-  GetForum()
-    defaultForum={state.forums[state.selectedForum]}
-    
-)
-}*/

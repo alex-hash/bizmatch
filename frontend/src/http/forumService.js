@@ -40,11 +40,11 @@ export function getForums() {
 }
 
 export function getForum(theme) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/${theme.id}`);
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/${theme}`);
 }
 
 export function getCommentsForum(theme) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme.id}`);
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme}`);
 }
 
 export function addForum(theme) {
