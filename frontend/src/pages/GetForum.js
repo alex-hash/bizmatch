@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 
-export function GetForum() {
+export function GetForum({ defaultForum = {} }) {
+  const [forum, setForum] = useState(defaultForum);
+  console.log(defaultForum);
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -18,17 +20,9 @@ export function GetForum() {
         <div className="md:bg-green-400 flex flex-wrap justify-center md:items-center">
           <div className="md:w-2/3 rounded bg-white md:mx-8 md:mt-20">
             <div className="px-6 py-4">
-              <div className="font-bold text-xl tracking-wide">Título de la consulta</div>
+              <div className="font-bold text-xl tracking-wide">(Título de la consulta)</div>
               <div className="text-gray-500 text-sm mb-3">Categoría</div>
-              <p className="text-gray-700 text-base">
-                loresadddddddddddddddddddddddjkljlk kasjk ajksj ksjklfjkl jaksjkl ajk kjjas jkfjklasjkl skjlad jk ajkd
-                jkasjk jkas kjljkla jklajkl kjldasjkl jkljkla jkljkl aljkds ajkkld asjkl djskal jdksaj ksaj dklsaj klasj
-                daksl djskla jklsajd asdjsajkl sajkl jdklsajkl jskla jkls kajljkd jksal ldjsklaklds d adkjl ajkl jk
-                kjajk ljkl jkla d adjklsadjk jklajkl jklajkl jklaljkd jklsak jljkls jkldajks jklsa dsajd jksad kjsa
-                kjlklasj dljksaklj kjld jklaskjl dkjlsak jljk ldajkl djkls kajljkl jklajlk dksaj kdks ajdk laj dksj kdj
-                kaj dk jakldjsad adsadsa jidosa jiodjioasji odji osajio ijosaij jioas jiojio jiao jiosji ajid jisajio
-                joisajoi dojisa joidsjio aijod jiosijoa oijjios ji jiaji jia jiji aijsdj iajiod
-              </p>
+              <p className="text-gray-700 text-base">{forum.content}</p>
             </div>
             <div class="text-xs flex flex-wrap justify-end p-3">
               <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">

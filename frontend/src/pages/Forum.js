@@ -4,11 +4,14 @@ import { useForm } from 'react-hook-form';
 import { getForums } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
 import { ForumList } from '../components/ForumList';
+import { GetForum } from '../pages/GetForum';
 
 function forumsReducer(state, action) {
   switch (action.type) {
     case 'GET_FORUMS_SUCCESS':
       return { ...state, forums: action.initialForums };
+    case 'SELECT_FORUM':
+      return { ...state, selectedForum: action.index };
     default:
       return state;
   }
@@ -39,3 +42,11 @@ export function ForumDashboard() {
     />
   );
 }
+/*
+{
+state.selectedForum !== null && (
+  GetForum
+    defaultForum={state.forums[state.selectedForum]}
+    
+)
+}*/

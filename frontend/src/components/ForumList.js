@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
-export function ForumList({ forums }) {
+export function ForumList({ forums, onSelectForum }) {
   return (
     <div>
       <div>
@@ -17,11 +17,11 @@ export function ForumList({ forums }) {
               Crear nuevo tema
             </a>
           </div>
-          {forums.map((forum) => (
+          {forums.map((forum, index) => (
             <div className="md:w-2/3 break-all w-full">
               <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div class="mb-4">
-                  <a href="#" class="relative text-gray-900 font-bold text-xl mb-2">
+                  <a onClick={() => onSelectForum(index)} class="relative text-gray-900 font-bold text-xl mb-2">
                     {forum.title}
                   </a>
                   <p class="text-gray-700 text-base">{forum.content}</p>
