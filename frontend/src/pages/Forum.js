@@ -42,10 +42,11 @@ export function ForumDashboard() {
     />
   );
 }
-/*
+/* quiero pasarle esto a la función GetForum de la página get forum, en plan al seleccionar algo pasarle los datos
+si nó se hace así descarta la rama y pregunto y vuelvo a empezar de cero.
 {
 state.selectedForum !== null && (
-  GetForum
+  GetForum()
     defaultForum={state.forums[state.selectedForum]}
     
 )
