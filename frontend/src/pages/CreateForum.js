@@ -36,7 +36,7 @@ export function CreateForum() {
       if (response.status === 201) {
         dispatch({ type: 'CREATE_FORUM', forum: data });
       }
-      history.push('/');
+      history.push('/forums');
     });
   };
 

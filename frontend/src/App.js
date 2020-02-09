@@ -35,6 +35,9 @@ function App() {
           </Route>
           <Route path="/forums/:forumId" component={GetForum}>
           </Route>
+          <Route path="/user">
+            <User />
+          </Route>
         </Switch>
       </AuthProvider>
     </BrowserRouter>
