@@ -27,15 +27,20 @@ async function deleteTheme(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
+    const sqlQueryC = `DELETE FROM comment_theme WHERE theme_id = ?`;
+
+    const [deletedStatusC] = await connection.execute(sqlQueryC, [themeId]);
+    
     const sqlQuery = `DELETE FROM theme
       WHERE id = ?`;
 
     const [deletedStatus] = await connection.execute(sqlQuery, [themeId]);
     connection.release();
-    if (deletedStatus.affectedRows !== 1) {
+
+    if (deletedStatus.affectedRows == 0) {
       return res.status(404).send();
     }
-
+    
     return res.status(204).send();
   } catch (e) {
     if (connection) {
