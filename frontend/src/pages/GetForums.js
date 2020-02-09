@@ -9,12 +9,14 @@ function forumsReducer(state, action) {
   switch (action.type) {
     case 'GET_FORUMS_SUCCESS':
       return { ...state, forums: action.initialForums };
+    case 'SELECT_FORUM':
+      return { ...state, selectedForum: action.index };
     default:
       return state;
   }
 }
 
-export function ForumDashboard() {
+export function GetForums() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -32,10 +34,6 @@ export function ForumDashboard() {
   return (
     <ForumList
       forums={state.forums}
-      selectedIndex={state.selectedForum}
-      onSelectForum={(index) => {
-        dispatch({ type: 'SELECT_FORUM', index });
-      }}
     />
   );
 }

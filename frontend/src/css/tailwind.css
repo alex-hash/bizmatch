@@ -18,10 +18,6 @@ hr.style1{
 	border-top: 1px solid #8c8b8b;
 }
 
-.body-background{
-	background-color: #b5e7a0;
-}
-
 .wrapper{
 	width:200px;
 	padding:20px;
@@ -30,6 +26,16 @@ hr.style1{
 
 .mt-nav-forum{
 	margin-top: 62px;
+}
+
+.bg-color{
+	background-color:#68d391;
+}
+
+@media (max-width: 768px){
+	.bg-color{
+		background-color: white;
+	}
 }
 
 @media (min-width: 1024px) {

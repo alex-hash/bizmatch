@@ -1,9 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
 import { addForum } from '../http/forumService';
-import { useAuth } from '../context/auth-context';
+import { useHistory } from "react-router-dom";
 
 function forumsReducer(state, action) {
   switch (action.type) {
@@ -19,12 +18,12 @@ export function CreateForum() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
-  const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
-  const history = useHistory();
   const [state, dispatch] = useReducer(forumsReducer, {
     forums: [],
     selectedForum: null
   });
+
+  let history = useHistory();
 
   const handleCreateForum = (formdata) => {
     const data = {
@@ -37,8 +36,8 @@ export function CreateForum() {
       if (response.status === 201) {
         dispatch({ type: 'CREATE_FORUM', forum: data });
       }
+      history.push('/forums');
     });
-    history.push('/');
   };
 
   return (
@@ -46,7 +45,6 @@ export function CreateForum() {
       <div>
         <Navbar />
       </div>
-
       <div className="ml-200p mt-nav bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
         <form
           className="mt-4 lg:w-5/6 bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
