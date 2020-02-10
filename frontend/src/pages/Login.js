@@ -18,7 +18,7 @@ export function Login() {
       .then((response) => {
         setRole(jwt_decode(response.data.accessToken));
         setCurrentUser(response.data);
-        history.push('/');
+        history.push('/forums');
       })
       .catch((error) => {
         setBackendErrorMessage('The credentials are invalid');

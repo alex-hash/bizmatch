@@ -15,7 +15,6 @@ async function validate(data) {
     content: Joi.string()
       .trim()
       .min(1)
-      .max(135)
       .required(),
     project_name: Joi.string()
       .required()
