@@ -2,16 +2,49 @@ import React, { useEffect, useReducer } from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { addForum } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
+import { updateForum } from '../http/forumService';
+import { Forum } from '../components/Forum';
+
+function forumsReducer(state, action) {
+  switch (action.type) {
+    case 'UPDATE_FORUM':
+      return {
+        ...state,
+        forums: state.forums.map((n) => {
+          if (n.id === action.forum.id) {
+            return action.forum;
+          }
+          return n;
+        })
+      };
+
+    default:
+      return state;
+  }
+}
+
+/*tengo que importar aquí desde forum el forum.id seleccionado*/
 
 export function EditeForum() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
-  const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
-  const history = useHistory();
+  const [state, dispatch] = useReducer(forumsReducer, {
+    forums: [],
+    selectedForum: null
+  });
 
+  let history = useHistory();
+  const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
+
+  const handleSaveForum = (forum) => {
+    updateForum(forum).then((response) => {
+      dispatch({ type: 'SAVE_FORUM', forum: response.data });
+
+      history.push('/forums');
+    });
+  };
   return (
     <div>
       <div>
@@ -21,7 +54,7 @@ export function EditeForum() {
       <div className="ml-200p mt-nav bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
         <form
           className="mt-4 lg:w-5/6 bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
-          onSubmit={handleSubmit()}
+          onSubmit={handleSubmit(handleSaveForum)}
           noValidate
         >
           <div className="mb-4">
@@ -30,6 +63,8 @@ export function EditeForum() {
             </label>
             <p className="text-sm text-gray-700 mb-2">Se específico, imagina que estás preguntando a otra persona</p>
             <input
+              /*precargar datos*/
+              /*value={forum.title}*/
               ref={register({
                 required: '*El título es necesario',
                 maxLength: {
@@ -53,6 +88,7 @@ export function EditeForum() {
               Incluye todo la información necesaria para que una persona pueda contestar a tú pregunta
             </p>
             <textarea
+              /*value={forum.content}*/
               ref={register({
                 required: '*El contenido es necesario'
               })}
@@ -103,6 +139,7 @@ export function EditeForum() {
             </label>
             <p className="text-sm text-gray-700 mb-2">Proyecto que está relacionado con la duda</p>
             <input
+              /*value={forum.project_name}*/
               ref={register({
                 required: '*El proyecto es necesario',
                 maxLength: {
