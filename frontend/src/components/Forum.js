@@ -2,8 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 
-export function Forum({ forum, comments}) {
-
+export function Forum({ forum, comments, onDeleteForum }) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -19,16 +18,26 @@ export function Forum({ forum, comments}) {
             <div className="md:w-2/3 break-all w-full rounded bg-white md:mx-8 md:mt-20">
               <div className="px-6 py-4">
                 <div className="font-bold text-xl tracking-wide">{forum.title}</div>
-          <div className="text-gray-500 text-sm mb-3">{forum.category}</div>
+                <div className="text-gray-500 text-sm mb-3">{forum.category}</div>
                 <p className="text-gray-700 text-base">{forum.content}</p>
               </div>
               <div class="text-xs flex flex-wrap justify-end p-3">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">
+                <a
+                  href="/edite-forum"
+                  class="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+                >
                   Editar
-                </button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
+                </a>
+
+                <a
+                  class="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onDeleteForum(forum.id);
+                  }}
+                >
                   Borrar
-                </button>
+                </a>
               </div>
             </div>
           ))}
@@ -39,9 +48,7 @@ export function Forum({ forum, comments}) {
               <React.Fragment>
                 <hr className="style1 mb-2" />
                 <div className="break-all w-full">
-                  <p className="mb-2 text-xs lg:text-sm px-2">
-                    {comment.text}
-                  </p>
+                  <p className="mb-2 text-xs lg:text-sm px-2">{comment.text}</p>
                   <div class="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                     <div className="flex flex-wrap align-bottom">
                       <img
@@ -55,9 +62,12 @@ export function Forum({ forum, comments}) {
                       </div>
                     </div>
                     <div class="text-xs self-end">
-                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">
+                      <a
+                        href="/edite-forum"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+                      >
                         Editar
-                      </button>
+                      </a>
                       <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
                         Borrar
                       </button>

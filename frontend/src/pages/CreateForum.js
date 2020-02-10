@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from 'react';
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addForum } from '../http/forumService';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function forumsReducer(state, action) {
   switch (action.type) {
@@ -36,7 +36,7 @@ export function CreateForum() {
       if (response.status === 201) {
         dispatch({ type: 'CREATE_FORUM', forum: data });
       }
-      history.push('/');
+      history.push('/forums');
     });
   };
 
