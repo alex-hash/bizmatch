@@ -39,6 +39,10 @@ export function getForums() {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme`);
 }
 
+export function getForumsFilter(category) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/filter/${category}`);
+}
+
 export function getForum(theme) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/theme/${theme}`);
 }
@@ -51,8 +55,8 @@ export function addForum(theme) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/theme`, theme);
 }
 
-export function addCommentForum(theme) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme.id}`);
+export function addCommentForum(theme_id, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme_id}`, data);
 }
 
 export function deleteForum(theme) {
@@ -66,4 +70,8 @@ export function updateForum(theme) {
 
 export function updateCommentForum(theme) {
   return axios.put(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme.id}`);
+}
+
+export function deleteCommentForum(commentId) {
+  return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/comment-theme/delete/${commentId}`);
 }

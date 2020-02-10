@@ -27,20 +27,19 @@ async function getThemes(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `SELECT *
-      FROM theme
-      WHERE user_id = ?`;
-    const connection = await mysqlPool.getConnection();
+    const sqlQuery = `SELECT t.id, t.title, t.content, t.created_at, t.updated_at, t.category, u.name, u.first_name, u.id AS user
+      FROM theme t JOIN user u ON t.user_id = u.id ORDER BY t.created_at DESC`;
+    connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
 
-    const projects = rows.map((project) => {
+    const themes = rows.map((theme) => {
       return {
-        ...project
+        ...theme
       };
     });
 
-    return res.status(200).send(projects);
+    return res.status(200).send(themes);
   } catch (e) {
     console.error(e);
     return res.status(500).send();

@@ -25,9 +25,10 @@ export function ForumList({ forums }) {
               <div key={forum.id} className="md:w-2/3 break-all w-full">
                 <div className="border-r border-b border-t border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                   <div className="mb-4">
-                    <a href="#" className="relative text-gray-900 font-bold text-xl mb-2">
+                    <a href={"/forum/"+forum.id} className="relative text-gray-900 font-bold text-xl mb-2">
                       {forum.title}
                     </a>
+                    <div className="text-gray-500 text-sm mb-3">{forum.category}</div>
                     <p className="text-gray-700 text-base">{forum.content}</p>
                   </div>
                   <div className="flex items-center">
@@ -39,8 +40,8 @@ export function ForumList({ forums }) {
                       />
                     </button>
                     <div className="text-sm ml-4">
-                      <p className="text-gray-900 leading-none">Jonathan Reinink</p>
-                      <p className="text-gray-600">Aug 18</p>
+                      <p className="text-gray-900 leading-none">{forum.name + " " + forum.first_name}</p>
+                      <p className="text-gray-600">{forum.updated_at === null ? forum.created_at.replace('T', ' ').substring(0, 16) : forum.updated_at.replace('T', ' ').substring(0, 16)}</p>
                     </div>
                   </div>
                 </div>
