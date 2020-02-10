@@ -59,13 +59,12 @@ export function addCommentForum(theme_id, data) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/theme/comment/${theme_id}`, data);
 }
 
-export function deleteForum(theme) {
-  console.log(theme);
-  return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/theme/${theme}`);
+export function deleteForum(themeId) {
+  return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/theme/${themeId}`);
 }
 
-export function updateForum(theme) {
-  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/theme/${theme.id}`);
+export function updateForum(themeId, forum) {
+  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/theme/${themeId}`, forum);
 }
 
 export function updateCommentForum(theme) {

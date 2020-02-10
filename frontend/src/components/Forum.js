@@ -4,8 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addCommentForum, deleteCommentForum } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
+import { EditeForum } from '../pages/EditeForum';
 
-export function Forum({ forum, comments, forumId, onDeleteForum}) {
+export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -58,24 +59,26 @@ export function Forum({ forum, comments, forumId, onDeleteForum}) {
                 <div className="text-gray-500 text-sm mb-3">{forum.category}</div>
                 <p className="text-gray-700 text-base">{forum.content}</p>
               </div>
-              <div class="text-xs flex flex-wrap justify-end p-3">
-                <a
-                  href="/edite-forum"
-                  class="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+              <div className="text-xs flex flex-wrap justify-end p-3">
+                <Link to={{
+                  pathname: '/edite-forum',
+                  query: {
+                    id: forum.id,
+                    title: forum.title,
+                    category: forum.category,
+                    content: forum.content,
+                    project: forum.project_name
+                  }
+                  }}
+                  className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
                 >
                   Editar
-                </a>
-
-                <a
-                  class="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onDeleteForum(forum.id);
-                  }}
-                >
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
+                </Link>
+                <button onClick={() => {
+                  onDeleteForum(forum.id);
+                }} className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
                   Borrar
-                </a>
+                </button>
               </div>
             </div>
           ))}

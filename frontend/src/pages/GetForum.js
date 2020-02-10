@@ -8,16 +8,12 @@ export function GetForum({ match }) {
     switch (action.type) {
       case 'GET_FORUM_SUCCESS':
         return { ...state, forum: action.forum, comments: action.comments };
-      case 'DELETE_FORUM':
-        const filteredForums = state.forums.filter((n) => n.id !== action.forum);
-        return {
-          selectedForum: null,
-          forums: [...filteredForums]
-        };
       default:
         return state;
     }
   }
+
+  const history = useHistory();
 
   const [state, dispatch] = useReducer(forumReducer, {
     forum: [],
@@ -33,8 +29,7 @@ export function GetForum({ match }) {
     );
   }, []);
   const handleDeleteForum = (forum) => {
-    deleteForum(forum).then(() => {
-      dispatch({ type: 'DELETE_FORUM', forum });
+    deleteForum(forum).then(() => { history.push("/");
     });
   };
   
