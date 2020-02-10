@@ -13,6 +13,6 @@ const router = express.Router();
 router.post('/theme/comment/:themeId', checkAccountSession, createCommentTheme);
 router.get('/theme/comment/:themeId', checkAccountSession, getCommentTheme);
 router.put('/theme/comment/:themeId', checkAccountSession, updateCommentTheme);
-router.put('/comment-theme/delete', checkAccountSession, deleteCommentTheme);
+router.delete('/comment-theme/delete/:commentId', checkAccountSession, deleteCommentTheme);
 
 module.exports = router;

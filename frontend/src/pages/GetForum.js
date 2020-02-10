@@ -37,6 +37,7 @@ export function GetForum({ match }) {
       dispatch({ type: 'DELETE_FORUM', forum });
     });
   };
-
-  return <Forum forum={state.forum} comments={state.comments} onDeleteForum={(forum) => handleDeleteForum(forum)} />;
-}
+  
+  return (
+    <Forum forum={state.forum} comments={state.comments} forumId={match.params.forumId} onDeleteForum={(forum) => handleDeleteForum(forum)}/>
+  );

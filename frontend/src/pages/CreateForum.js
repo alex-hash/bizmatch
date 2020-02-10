@@ -36,7 +36,7 @@ export function CreateForum() {
       if (response.status === 201) {
         dispatch({ type: 'CREATE_FORUM', forum: data });
       }
-      history.push('/forums');
+      history.push('/');
     });
   };
 
@@ -108,7 +108,7 @@ export function CreateForum() {
             >
               <option value="Arte">Arte</option>
               <option value="Artesanías">Artesanías</option>
-              <option value="Cine">Cine y vídeo</option>
+              <option value="Cine">Cine</option>
               <option value="Comida">Comida</option>
               <option value="Cómics">Cómics</option>
               <option value="Danza">Danza</option>

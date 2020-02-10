@@ -7,6 +7,7 @@ import { EditeForum } from './pages/EditeForum'
 import { Register } from './pages/Register';
 import { GetForum } from './pages/GetForum';
 import { GetForums } from './pages/GetForums';
+import { GetForumsFilter} from './pages/GetForumsFilter';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
 
@@ -15,7 +16,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Switch>
-          <Route exact path="/forums">
+          <Route exact path="/">
             <GetForums />
           </Route>
           <Route exact path="/edite-forum">
@@ -33,7 +34,9 @@ function App() {
           <Route path="/create-forum">
             <CreateForum />
           </Route>
-          <Route path="/forums/:forumId" component={GetForum}>
+          <Route path="/forum/:forumId" component={GetForum}>
+          </Route>
+          <Route path="/forums/:category" component={GetForumsFilter}>
           </Route>
           <Route path="/user">
             <User />
