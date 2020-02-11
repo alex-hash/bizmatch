@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { getForumsFilter } from '../http/forumService';
-import { useAuth } from '../context/auth-context';
-import { ForumList } from '../components/ForumList';
+import { getForumsFilter } from '../../http/forumService';
+import { useAuth } from '../../context/auth-context';
+import { ForumList } from '../../components/ForumList';
 
 function forumsReducer(state, action) {
   switch (action.type) {
@@ -16,7 +16,7 @@ function forumsReducer(state, action) {
   }
 }
 
-export function GetForumsFilter({match}) {
+export function GetForumsFilter({ match }) {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -28,12 +28,10 @@ export function GetForumsFilter({match}) {
   });
 
   useEffect(() => {
-    getForumsFilter(match.params.category).then((response) => dispatch({ type: 'GET_FORUMS_SUCCESS', initialForums: response.data }));
+    getForumsFilter(match.params.category).then((response) =>
+      dispatch({ type: 'GET_FORUMS_SUCCESS', initialForums: response.data })
+    );
   }, []);
 
-  return (
-    <ForumList
-      forums={state.forums}
-    />
-  );
+  return <ForumList forums={state.forums} />;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
-import { addForum } from '../http/forumService';
+import { addForum } from '../../http/forumService';
 import { useHistory } from 'react-router-dom';
 
 function forumsReducer(state, action) {

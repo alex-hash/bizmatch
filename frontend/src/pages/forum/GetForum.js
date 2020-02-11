@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getForum, getCommentsForum, deleteForum } from '../http/forumService';
-import { Forum } from '../components/Forum';
+import { getForum, getCommentsForum, deleteForum } from '../../http/forumService';
+import { Forum } from '../../components/Forum';
 
 export function GetForum({ match }) {
   function forumReducer(state, action) {
@@ -29,11 +29,17 @@ export function GetForum({ match }) {
     );
   }, []);
   const handleDeleteForum = (forum) => {
-    deleteForum(forum).then(() => { history.push("/");
+    deleteForum(forum).then(() => {
+      history.push('/');
     });
   };
-  
+
   return (
-    <Forum forum={state.forum} comments={state.comments} forumId={match.params.forumId} onDeleteForum={(forum) => handleDeleteForum(forum)}/>
+    <Forum
+      forum={state.forum}
+      comments={state.comments}
+      forumId={match.params.forumId}
+      onDeleteForum={(forum) => handleDeleteForum(forum)}
+    />
   );
 }

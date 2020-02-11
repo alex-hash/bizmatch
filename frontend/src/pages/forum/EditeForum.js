@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../context/auth-context';
-import { updateForum } from '../http/forumService';
-import { Forum } from '../components/Forum';
+import { useAuth } from '../../context/auth-context';
+import { updateForum } from '../../http/forumService';
+import { Forum } from '../../components/Forum';
 
 /*tengo que importar aquí desde forum el forum.id seleccionado*/
 
@@ -13,7 +13,6 @@ export function EditeForum(props) {
     mode: 'onBlur'
   });
 
-  
   let history = useHistory();
   const forum = history.location.query;
   const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
@@ -26,7 +25,7 @@ export function EditeForum(props) {
       project_name: formData.project_name
     };
     updateForum(forum.id, data).then((response) => {
-      history.push("/forum/"+forum.id)
+      history.push('/forum/' + forum.id);
     });
   };
   return (
