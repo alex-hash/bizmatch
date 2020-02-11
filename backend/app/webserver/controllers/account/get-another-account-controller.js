@@ -15,8 +15,8 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function getUser(req, res, next) {
-  const { userId } = req.claims;
+async function getAnotherUser(req, res, next) {
+  const { userId } = req.params;
   const accountData = { userId };
 
   try {
@@ -53,4 +53,4 @@ async function getUser(req, res, next) {
   }
 }
 
-module.exports = getUser;
+module.exports = getAnotherUser;

@@ -71,15 +71,21 @@ export function Login() {
           id="password"
           type="password"
           name="password"
-          placeholder="******************" />
+          placeholder="***********" />
           {errors.password && <span className="error-validate">{errors.password.message}</span>}
       </div>
-    <div className="flex items-center justify-center">
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
-        Iniciar sesión
-      </button>
-    </div>
-    </form>
+      <div className="flex items-center justify-center">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={formState.isSubmitting}>
+          Iniciar sesión
+        </button>
+        
+      </div>
+      <div className="flex flex-wrap justify-center mt-2">
+        <Link className="relative inline-block align-baseline font-bold text-xs text-blue-500 hover:text-blue-800 text-center" to="/register">
+          Todavía no estás registrado?
+        </Link>
+      </div>
+    </form> 
     <p className="text-center text-white text-xs">
       &copy;2020 Bizmatch. Todos los derechos reservados.
     </p>

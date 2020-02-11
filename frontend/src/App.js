@@ -27,9 +27,6 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/user">
-            <User />
-          </Route>
           <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
             <User />
           </PrivateRoute>
@@ -54,6 +51,10 @@ function App() {
           <Route path="/projects/:category" component={GetProjectsFilter}></Route>
           <Route exact path="/edite-project">
             <EditeProject />
+          </Route>
+          <Route path="/user/:userId" component={User}></Route>
+          <Route path="/user">
+            <User />
           </Route>
         </Switch>
       </AuthProvider>
