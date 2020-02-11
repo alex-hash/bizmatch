@@ -22,24 +22,18 @@ async function validate(data) {
       .required(),
     image_url: Joi.string().max(512),
     video_url: Joi.string().max(512),
-    prize: Joi.number().required(),
-    duration: Joi.number().required(),
+    prize: Joi.number(),
+    duration: Joi.number(),
     text: Joi.string()
       .max(65536)
       .required(),
     rewards: Joi.array().items(
       Joi.object({
-        prize: Joi.number().required(),
-        title: Joi.string()
-          .max(60)
-          .required(),
-        month: Joi.string()
-          .max(20)
-          .required(),
-        year: Joi.number().required(),
-        subtitle: Joi.string()
-          .max(135)
-          .required()
+        prize: Joi.number(),
+        title: Joi.string().max(60),
+        month: Joi.string().max(20),
+        year: Joi.number(),
+        subtitle: Joi.string().max(135)
       })
     ),
     userId: Joi.string()
@@ -55,9 +49,9 @@ async function validate(data) {
 async function insertReward(project_id, { prize, title, month, year, subtitle }) {
   const reward_id = uuidV4();
   const capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
   let connection;
   try {
     connection = await mysqlPool.getConnection();
@@ -102,9 +96,9 @@ async function createProject(req, res, next) {
   const projectId = uuidV4();
   const rewards = projectData.rewards;
   const capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
 
   let connection;
   try {
@@ -124,10 +118,9 @@ async function createProject(req, res, next) {
       user_id: userId
     });
     connection.release();
-    rewards.map((reward) => {
+    /*rewards.map((reward) => {
       insertReward(projectId, { ...reward });
-    });
-
+    });*/
     res.status(201).send();
   } catch (e) {
     if (connection) {
