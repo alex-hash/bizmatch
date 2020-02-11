@@ -10,7 +10,7 @@ export function ProjectList({ projects }) {
       <div>
         <Navbar />
       </div>
-      <div className="ml-200p mt-nav bg-white md:bg-green-400 md:h-full mb-8 mt-nav-forum">
+      <div className="ml-200p mt-nav bg-white md:bg-green-400 md:h-full mb-8 mt-nav-project">
         <div className="flex flex-wrap justify-center">
           <div className="md:w-2/3 flex flex-wrap justify-end">
             <a
@@ -38,6 +38,14 @@ export function ProjectList({ projects }) {
                       alt="Your avatar"
                     />
                   </button>
+                  <div className="text-sm ml-4">
+                    <p className="text-gray-900 leading-none">{project.name + ' ' + project.first_name}</p>
+                    <p className="text-gray-600">
+                      {project.updated_at === null
+                        ? project.created_at.replace('T', ' ').substring(0, 16)
+                        : project.updated_at.replace('T', ' ').substring(0, 16)}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

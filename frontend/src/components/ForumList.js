@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 
 export function ForumList({ forums }) {
-  console.log(forums);
   window.onload = function() {
     this.document.body.classList.replace('bg-white', 'bg-green-400');
   };

@@ -38,10 +38,21 @@ axios.interceptors.response.use(
 export function addProject(project) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, project);
 }
+export function getProject(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/${project}`);
+}
 
 export function getProjects() {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
 }
 export function getProjectsFilter(category) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/filter/${category}`);
+}
+
+export function deleteProject(projectId) {
+  return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`);
+}
+
+export function updateProject(projectId, project) {
+  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/theme/${projectId}`, project);
 }
