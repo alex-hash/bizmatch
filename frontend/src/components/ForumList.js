@@ -11,7 +11,7 @@ export function ForumList({ forums }) {
       <div>
         <Navbar />
       </div>
-      <div className="ml-200p mt-nav bg-white md:bg-green-400 md:h-full mb-8">
+      <div className="ml-200p mt-nav bg-white md:bg-green-400 md:h-full mb-8 mt-nav-forum">
         <div className="flex flex-wrap justify-center">
           <div className="md:w-2/3 flex flex-wrap justify-end">
             <a
