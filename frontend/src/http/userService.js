@@ -36,5 +36,9 @@ axios.interceptors.response.use(
 );
 
 export function getProfile() {
-    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`).then(res => { return res.data});
-  }
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`).then(res => { return res.data});
+}
+
+export function getProfileOther(userId) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/${userId}`).then(res => { return res.data});
+}

@@ -8366,12 +8366,18 @@ hr.style1{
   height: 150px;
 }
 
-.mt-nav-forum{
-  margin-top: 62px;
-}
-
 .bg-color{
   background-color:#68d391;
+}
+
+@media (max-width: 1024px) {
+  .mt-nav-user{
+    margin-top: 62px;
+  }
+
+  .mt-nav-forum{
+    margin-top: 62px;
+  }
 }
 
 @media (max-width: 768px){

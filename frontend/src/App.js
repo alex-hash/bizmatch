@@ -38,6 +38,8 @@ function App() {
           </Route>
           <Route path="/forums/:category" component={GetForumsFilter}>
           </Route>
+          <Route path="/user/:userId" component={User}>
+          </Route>
           <Route path="/user">
             <User />
           </Route>
