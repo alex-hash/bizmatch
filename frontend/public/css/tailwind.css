@@ -8366,36 +8366,17 @@ hr.style1{
   height: 150px;
 }
 
-.bg-color{
-  background-color:#68d391;
+.mt-nav{
+  margin-top: 62px;
 }
 
-@media (max-width: 1024px) {
-  .mt-nav-user{
-    margin-top: 62px;
-  }
-
-  .mt-nav-forum{
-    margin-top: 62px;
-  }
+.link:hover, .link:active{
+  border-bottom-width: 4px;
 }
 
-@media (max-width: 768px){
-  .bg-color{
-    background-color: white;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ml-200p{
-    margin-left: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .mt-nav{
-    margin-top: 62px;
-  }
+.bg-button{
+  background-image: radial-gradient(circle at center, #FF385C 0%, #E61E4D 27.5%, #E31C5F 40%, #D70466 57.5%, #BD1E59 75%, #BD1E59 100% ) !important;
+  background-size: 200% 200% !important;
 }
 
 @media (max-width: 1280px) {
