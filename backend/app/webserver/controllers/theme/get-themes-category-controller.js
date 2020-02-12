@@ -18,12 +18,12 @@ async function validate(data) {
 async function getThemesFilter(req, res, next) {
   const { category } = req.params;
   const { userId } = req.claims;
-  const themeData = { 
-    category, 
-    userId 
+  const themeData = {
+    category,
+    userId
   };
 
-  const categoryCap = category.charAt(0).toUpperCase() + category.slice(1)
+  const categoryCap = category.charAt(0).toUpperCase() + category.slice(1);
 
   try {
     await validate(themeData);

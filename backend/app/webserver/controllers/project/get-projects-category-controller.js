@@ -4,6 +4,7 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validate(data) {
   const schema = Joi.object({
+    category: Joi.string(),
     userId: Joi.string()
       .guid({
         version: ['uuidv4']
@@ -14,9 +15,15 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function getProjects(req, res, next) {
+async function getProjectsFilter(req, res, next) {
+  const { category } = req.params;
   const { userId } = req.claims;
-  const projectData = { userId };
+  const projectData = {
+    category,
+    userId
+  };
+
+  const categoryCap = category.charAt(0).toUpperCase() + category.slice(1);
 
   try {
     await validate(projectData);
@@ -27,10 +34,10 @@ async function getProjects(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `SELECT t.id, t.title, t.subtitle, t.created_at, t.updated_at, t.category, t.text, t.ubication, u.name, u.first_name, u.id AS user
-      FROM project t JOIN user u ON t.user_id = u.id ORDER BY t.created_at DESC`;
-    const connection = await mysqlPool.getConnection();
-    const [rows] = await connection.execute(sqlQuery, [userId]);
+    const sqlQuery = `SELECT t.id, t.title, t.subtitle, t.ubication, t.text, t.created_at, t.updated_at, t.category, u.name, u.first_name, u.id AS user
+    FROM project t JOIN user u ON t.user_id = u.id WHERE category = ? ORDER BY t.created_at DESC`;
+    connection = await mysqlPool.getConnection();
+    const [rows] = await connection.execute(sqlQuery, [categoryCap]);
     connection.release();
 
     const projects = rows.map((project) => {
@@ -46,4 +53,4 @@ async function getProjects(req, res, next) {
   }
 }
 
-module.exports = getProjects;
+module.exports = getProjectsFilter;

@@ -13,6 +13,6 @@ const router = express.Router();
 router.post('/project/comment/:projectId', checkAccountSession, createComment);
 router.get('/project/comment/:projectId', checkAccountSession, getComment);
 router.put('/project/comment/:projectId', checkAccountSession, updateComment);
-router.put('/comment/delete', checkAccountSession, deleteComment);
+router.delete('/comment/delete/:commentId', checkAccountSession, deleteComment);
 
 module.exports = router;

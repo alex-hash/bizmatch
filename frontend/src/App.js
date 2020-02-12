@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { PrivateRoute } from './components/PrivateRoute';
+import { AuthProvider } from './context/auth-context';
 import { Login } from './pages/Login';
-import { User } from './pages/User';
-import { CreateForum } from './pages/CreateForum'
-import { EditeForum } from './pages/EditeForum'
 import { Register } from './pages/Register';
-import { GetForum } from './pages/GetForum';
-import { GetForums } from './pages/GetForums';
+import { User } from './pages/User';
+import { CreateProject } from './pages/project/CreateProject';
+import { GetProjects } from './pages/project/GetProjects';
+import { GetProject } from './pages/project/GetProject';
+import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
+import { EditeProject } from './pages/project/EditeProject';
 import { Init } from './pages/Init';
-import { GetForumsFilter} from './pages/GetForumsFilter';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
 
@@ -32,15 +34,18 @@ function App() {
           <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
             <User />
           </PrivateRoute>
-          <Route path="/create-forum">
-            <CreateForum />
+          <Route path="/create-project">
+            <CreateProject />
           </Route>
-          <Route path="/forum/:forumId" component={GetForum}>
+          <Route exact path="/projects">
+            <GetProjects />
           </Route>
-          <Route path="/forums/:category" component={GetForumsFilter}>
+          <Route path="/project/:projectId" component={GetProject}></Route>
+          <Route path="/projects/:category" component={GetProjectsFilter}></Route>
+          <Route exact path="/edite-project">
+            <EditeProject />
           </Route>
-          <Route path="/user/:userId" component={User}>
-          </Route>
+          <Route path="/user/:userId" component={User}></Route>
           <Route path="/user">
             <User />
           </Route>

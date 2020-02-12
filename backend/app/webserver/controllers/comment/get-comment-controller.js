@@ -27,7 +27,7 @@ async function getComment(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `select c.text, c.created_at, c.updated_at, c.deleted_at, c.project_id, u.first_name, u.last_name, u.avatar_url
+    const sqlQuery = `select c.id, c.text, c.created_at, c.updated_at, c.deleted_at, c.project_id, u.id AS user, u.name, u.first_name, u.last_name, u.avatar_url
 from comment c JOIN user u ON c.user_id = u.id
       AND c.project_id = ? AND c.deleted_at IS NULL`;
     const connection = await mysqlPool.getConnection();

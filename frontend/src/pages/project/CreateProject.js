@@ -1,42 +1,43 @@
 import React, { useEffect, useReducer } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
-import { addForum } from '../http/forumService';
+import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
 
-function forumsReducer(state, action) {
+function projectsReducer(state, action) {
   switch (action.type) {
-    case 'CREATE_FORUM':
-      return { ...state, forums: [action.forum, ...state.forums] };
+    case 'CREATE_PROJECT':
+      return { ...state, projects: [action.project, ...state.projects] };
 
     default:
       return state;
   }
 }
 
-export function CreateForum() {
+export function CreateProject() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
-  const [state, dispatch] = useReducer(forumsReducer, {
-    forums: [],
-    selectedForum: null
+  const [state, dispatch] = useReducer(projectsReducer, {
+    projects: [],
+    selectedProject: null
   });
 
   let history = useHistory();
 
-  const handleCreateForum = (formdata) => {
+  const handleCreateProject = (formdata) => {
     const data = {
       title: formdata.title,
-      content: formdata.content,
-      project_name: formdata.project_name,
-      category: formdata.category
+      subtitle: formdata.subtitle,
+      category: formdata.category,
+      ubication: formdata.ubication,
+      text: formdata.text
     };
-    addForum(data).then((response) => {
+    addProject(data).then((response) => {
       if (response.status === 201) {
-        dispatch({ type: 'CREATE_FORUM', forum: data });
+        dispatch({ type: 'CREATE_PROJECT', project: data });
       }
-      history.push('/');
+      history.push('/projects');
     });
   };
 
@@ -48,14 +49,14 @@ export function CreateForum() {
       <div className="mt-nav bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
         <form
           className="mt-4 lg:w-5/6 bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
-          onSubmit={handleSubmit(handleCreateForum)}
+          onSubmit={handleSubmit(handleCreateProject)}
           noValidate
         >
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold" for="title">
-              Título de la consulta
+              Título del Proyecto
             </label>
-            <p className="text-sm text-gray-700 mb-2">Se específico, imagina que estás preguntando a otra persona</p>
+            <p className="text-sm text-gray-700 mb-2"></p>
             <input
               ref={register({
                 required: '*El título es necesario',
@@ -73,28 +74,29 @@ export function CreateForum() {
             {errors.title && <span className="error-validate">{errors.title.message}</span>}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold" for="content">
-              Contenido de la consulta
+            <label className="block text-gray-700 text-sm font-bold" for="title">
+              Subtítulo del Proyecto
             </label>
-            <p className="text-sm text-gray-700 mb-2">
-              Incluye todo la información necesaria para que una persona pueda contestar a tú pregunta
-            </p>
-            <textarea
+            <p className="text-sm text-gray-700 mb-2"></p>
+            <input
               ref={register({
-                required: '*El contenido es necesario'
+                required: '*El subtítulo es necesario',
+                maxLength: {
+                  message: '*El subtítulo no debe exceder los 135 caracteres',
+                  value: 135
+                }
               })}
-              className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="content"
-              rows="6"
+              className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="subtitle"
               type="text"
-              name="content"
+              name="subtitle"
               placeholder=""
-            ></textarea>
-            {errors.content && <span className="error-validate">{errors.content.message}</span>}
+            />
+            {errors.subtitle && <span className="error-validate">{errors.subtitle.message}</span>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" for="category">
-              Categoría
+              Categoría del proyecto
             </label>
             <select
               ref={register({
@@ -124,34 +126,53 @@ export function CreateForum() {
             </select>
             {errors.category && <span className="error-validate">{errors.category.message}</span>}
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold" for="project">
-              Título del proyecto
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold" for="title">
+              Ubicación
             </label>
-            <p className="text-sm text-gray-700 mb-2">Proyecto que está relacionado con la duda</p>
+            <p className="text-sm text-gray-700 mb-2"></p>
             <input
               ref={register({
-                required: '*El proyecto es necesario',
+                required: '*La ubicación es necesaria',
                 maxLength: {
-                  message: '*El proyecto no debe exceder los 60 caracteres',
+                  message: '*La ubicación no debe exceder los 60 caracteres',
                   value: 60
                 }
               })}
-              className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="project_name"
+              className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="ubication"
               type="text"
-              name="project_name"
+              name="ubication"
               placeholder=""
             />
-            {errors.project && <span className="error-validate">{errors.project.message}</span>}
+            {errors.ubication && <span className="error-validate">{errors.ubication.message}</span>}
           </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold" for="content">
+              Contenido del Proyecto
+            </label>
+            <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
+            <textarea
+              ref={register({
+                required: '*El contenido es necesario'
+              })}
+              className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="text"
+              rows="6"
+              type="text"
+              name="text"
+              placeholder=""
+            ></textarea>
+            {errors.text && <span className="error-validate">{errors.text.message}</span>}
+          </div>
+
           <div className="flex items-center justify-center">
             <button
               className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={formState.isSubmitting}
             >
-              Crear consulta
+              Crear proyecto
             </button>
           </div>
         </form>

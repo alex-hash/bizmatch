@@ -2,11 +2,10 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { addCommentForum, deleteCommentForum } from '../http/forumService';
 import { useAuth } from '../context/auth-context';
-import { EditeForum } from '../pages/EditeForum';
+import { addCommentProject, deleteCommentProject } from '../http/projectService';
 
-export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) {
+export function Project({ project, comments, projectId, onDeleteProject }) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -21,13 +20,19 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
 
   function renderButtons(comment, index) {
     const actual_user = role.userId;
-    if(comment.user === actual_user){
-      return(
+    if (comment.user === actual_user) {
+      return (
         <div className="text-xs self-end mt-2">
-          <button onClick={() => renderEditHtml(index) } className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">
+          <button
+            onClick={() => renderEditHtml(index)}
+            className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+          >
             Editar
           </button>
-          <button onClick={() => deleteCommentForum(comment.id).then(refreshPage)} className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
+          <button
+            onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
+            className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+          >
             Borrar
           </button>
         </div>
@@ -35,14 +40,13 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
     }
   }
 
-  function renderEditHtml(index){
+  function renderEditHtml(index) {
     const div = document.getElementById(index);
-    const p = document.getElementById(index+"p");
-
+    const p = document.getElementById(index + 'p');
   }
 
   const handleSend = (formData) => {
-    return addCommentForum(forumId, formData);
+    return addCommentProject(projectId, formData);
   };
 
   return (
@@ -52,31 +56,38 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
       </div>
       <div className="ml-200p mt-nav bg-white md:bg-green-400 md:h-screen">
         <div className="md:bg-green-400 flex flex-wrap justify-center md:items-center">
-          {forum.map((forum, index) => (
-            <div key={forum.id} className="md:w-2/3 break-all w-full rounded bg-white md:mx-8 md:mt-20">
+          {project.map((project, index) => (
+            <div key={project.id} className="md:w-2/3 break-all w-full rounded bg-white md:mx-8 md:mt-20">
               <div className="px-6 py-4">
-                <div className="font-bold text-xl tracking-wide">{forum.title}</div>
-                <div className="text-gray-500 text-sm mb-3">{forum.category}</div>
-                <p className="text-gray-700 text-base">{forum.content}</p>
+                <div className="font-bold text-xl tracking-wide">{project.title}</div>
+                <div className="font-bold text tracking-wide">{project.subtitle}</div>
+                <div className="text-gray-500 text-sm mb-3">{project.category}</div>
+                <p className="text-gray-700 text-base">{project.text}</p>
+                <div className="text-gray-500 text-sm mb-3">{project.ubication}</div>
               </div>
               <div className="text-xs flex flex-wrap justify-end p-3">
-                <Link to={{
-                  pathname: '/edite-forum',
-                  query: {
-                    id: forum.id,
-                    title: forum.title,
-                    category: forum.category,
-                    content: forum.content,
-                    project: forum.project_name
-                  }
+                <Link
+                  to={{
+                    pathname: '/edite-project',
+                    query: {
+                      id: project.id,
+                      title: project.title,
+                      subtitle: project.subtitle,
+                      category: project.category,
+                      ubication: project.ubication,
+                      text: project.text
+                    }
                   }}
                   className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
                 >
                   Editar
                 </Link>
-                <button onClick={() => {
-                  onDeleteForum(forum.id);
-                }} className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded">
+                <button
+                  onClick={() => {
+                    onDeleteProject(project.id);
+                  }}
+                  className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+                >
                   Borrar
                 </button>
               </div>
@@ -89,7 +100,7 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
               <React.Fragment key={comment.id}>
                 <hr className="style1 mb-2" />
                 <div className="break-all w-full" id={index}>
-                  <p className="mb-2 text-xs lg:text-sm px-2" id={index+"p"}>
+                  <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
                     {comment.text}
                   </p>
                   <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
@@ -100,8 +111,12 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
                         alt="Avatar of Jonathan Reinink"
                       />
                       <div className="text-xs lg:text-sm self-center">
-                        <p className="text-black leading-none w-full">{comment.name + " " + comment.first_name}</p>
-                        <p className="text-grey-dark">{comment.updated_at === null ? comment.created_at.replace('T', ' ').substring(0, 16) : comment.updated_at.replace('T', ' ').substring(0, 16)}</p>
+                        <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
+                        <p className="text-grey-dark">
+                          {comment.updated_at === null
+                            ? comment.created_at.replace('T', ' ').substring(0, 16)
+                            : comment.updated_at.replace('T', ' ').substring(0, 16)}
+                        </p>
                       </div>
                     </div>
                     {renderButtons(comment, index)}
@@ -144,7 +159,10 @@ export function Forum({ forum, comments, forumId, onDeleteForum, onEditeForum}) 
                     </div>
                   </div>
                   <div className="text-xs self-end mt-2">
-                    <button onClick={refreshPage} className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded mr-2">
+                    <button
+                      onClick={refreshPage}
+                      className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded mr-2"
+                    >
                       Enviar
                     </button>
                   </div>

@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `bizmatchapp`.`project` (
   `image_url` VARCHAR(255) NULL DEFAULT NULL,
   `video_url` VARCHAR(255) NULL DEFAULT NULL,
   `prize` VARCHAR(20) NULL DEFAULT NULL,
-  `duration` CHAR(3) NOT NULL,
+  `duration` CHAR(3) NULL DEFAULT NULL,
   `text` TEXT NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NULL DEFAULT NULL,

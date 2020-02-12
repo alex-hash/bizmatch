@@ -4,7 +4,7 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validate(data) {
   const schema = Joi.object({
-    id: Joi.string()
+    commentId: Joi.string()
       .guid({
         version: ['uuidv4']
       })
@@ -20,12 +20,12 @@ async function validate(data) {
 }
 
 async function deleteComment(req, res, next) {
-  const commentData = { ...req.body };
+  const { commentId } = req.params;
   const { userId } = req.claims;
 
   try {
     const data = {
-      ...commentData,
+      commentId,
       userId
     };
     await validate(data);
@@ -37,16 +37,12 @@ async function deleteComment(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    const sqlQuery = `UPDATE comment
-    SET deleted_at = ?
-      WHERE id = ?
-      AND user_id = ?
-      AND deleted_at IS NULL`;
+    const sqlQuery = `DELETE FROM comment WHERE id = ?`;
     const now = new Date()
       .toISOString()
       .substring(0, 19)
       .replace('T', ' ');
-    const [deletedStatus] = await connection.execute(sqlQuery, [now, commentData.id, userId]);
+    const [deletedStatus] = await connection.execute(sqlQuery, [commentId]);
     connection.release();
     if (deletedStatus.affectedRows !== 1) {
       return res.status(404).send();
