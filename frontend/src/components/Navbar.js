@@ -86,12 +86,12 @@ class App extends React.Component {
                 <hr className="style1" />
                 <button
                   onClick={() => this.changeStyle('project')}
-                  className="project w-full px-4 py-2 text-white hover:bg-orange-800"
+                  className="project w-full px-4 py-2 text-black"
                 >
                   Projectos ▼
                   <a
                     href="/projects"
-                    className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black "
+                    className="hidden relative identifier block px-4 py-2 text-center text-black hover:text-black "
                   >
                     Todos los temas
                   </a>
@@ -175,15 +175,15 @@ class App extends React.Component {
                   </a>
                   <a
                     href="/projects/tecnología"
-                    className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black "
+                    className="hidden relative identifier block px-4 py-2 text-center text-black hover:text-black "
                   >
                     Tecnología
                   </a>
                 </button>
                 <hr className="style1"/>
-                <button onClick={() => this.changeStyle('configuration')} className="configuration w-full px-4 py-2 text-white hover:bg-orange-800">Configuración ▼
-                  <a href="/user" className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Perfil</a>
-                  <Link to="/login" onClick={() => logout()} className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Cerrar sesión</Link>
+                <button onClick={() => this.changeStyle('configuration')} className="configuration w-full px-4 py-2 text-black ">Configuración ▼
+                  <a href="/user" className="hidden relative identifier block px-4 py-2 text-center text-black ">Perfil</a>
+                  <Link to="/login" onClick={() => logout()} className="hidden relative identifier block px-4 py-2 text-center text-black">Cerrar sesión</Link>
                 </button>
                 <hr className="style1" />
               </div>
@@ -194,7 +194,7 @@ class App extends React.Component {
         sidebarId="sidebar"
         docked={this.state.sidebarDocked}
         onSetOpen={this.onSetSidebarOpen}
-        styles={{ sidebar: { background: '#276749', width: '200px', position: 'fixed' } }}
+        styles={{ sidebar: { background: '#FFFFFF', width: '200px', position: 'fixed' } }}
       >
       <nav onClick={() => this.enableScrolling()} className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex items-center justify-between flex-wrap p-4 h-16" >
         <div className="block xl:hidden lg:hidden md:hidden">
