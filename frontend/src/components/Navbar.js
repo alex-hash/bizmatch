@@ -1,14 +1,18 @@
 import React from "react";
 import Sidebar from "react-sidebar";
 import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../context/auth-context';
  
-const mql = window.matchMedia(`(min-width: 1024px)`);
+const mql = window.matchMedia(`(min-width: 8000px)`);
 const _isMounted  = false;
 
 if(document.getElementById('sidebar') !== null){
   window.onload = () => document.getElementById('sidebar').style.position = "fixed" 
 }
 
+function logout(){
+  window.localStorage.clear();
+}
  
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +21,7 @@ class App extends React.Component {
       sidebarDocked: mql.matches,
       sidebarOpen: false
     };
- 
+
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
@@ -96,8 +100,8 @@ class App extends React.Component {
                 </button>
                 <hr className="style1"/>
                 <button onClick={() => this.changeStyle('configuration')} className="configuration w-full px-4 py-2 text-white hover:bg-orange-800">Configuración ▼
-                  <a href="#" className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Perfil</a>
-                  <a href="#" className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Cerrar sesión</a>
+                  <a href="/user" className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Perfil</a>
+                  <Link to="/login" onClick={() => logout()} className="hidden relative identifier block px-4 py-2 text-center text-white hover:text-black ">Cerrar sesión</Link>
                 </button>
                 <hr className="style1"/>
               </div>
@@ -110,12 +114,22 @@ class App extends React.Component {
         onSetOpen={this.onSetSidebarOpen}
         styles={{ sidebar: { background: "#276749", width: '200px', position: "fixed"} }}
       >
-      <nav onClick={() => this.enableScrolling()} className="lg:hidden xl:hidden flex items-center justify-between flex-wrap bg-green-800 p-4" >
-        <div className="block lg:hidden">
-          <button onClick={() => this.onSetSidebarOpen(true)} className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-            <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      <nav onClick={() => this.enableScrolling()} className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex items-center justify-between flex-wrap p-4 h-16" >
+        <div className="block xl:hidden lg:hidden md:hidden">
+          <button onClick={() => this.onSetSidebarOpen(true)}>
+          <img className src="https://img.icons8.com/ios/40/000000/business-network.png"/>
           </button>
         </div>
+        <div className="block hidden xl:inline lg:inline md:inline">
+          <button>
+          <img className src="https://img.icons8.com/ios/40/000000/business-network.png"/>
+          </button>
+        </div>
+        <div>
+          <Link to="/login" className="relative mr-4 text-black font-bold py-2 px-4 border-b-0 rounded link">Login</Link>
+          <Link to="/register" className="relative text-black font-bold py-2 px-4 border-b-0 rounded link">Registro</Link>
+        </div>
+       
       </nav>
       </Sidebar>
     );

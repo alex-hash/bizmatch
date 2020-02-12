@@ -12,7 +12,6 @@ export function EditeForum(props) {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
-
   
   let history = useHistory();
   const forum = history.location.query;
@@ -46,7 +45,7 @@ export function EditeForum(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2">Se específico, imagina que estás preguntando a otra persona</p>
             <input
-              value={forum.title}
+              defaultValue={forum.title}
               ref={register({
                 required: '*El título es necesario',
                 maxLength: {
@@ -70,7 +69,7 @@ export function EditeForum(props) {
               Incluye todo la información necesaria para que una persona pueda contestar a tú pregunta
             </p>
             <textarea
-              value={forum.content}
+              defaultValue={forum.content}
               ref={register({
                 required: '*El contenido es necesario'
               })}
@@ -88,6 +87,7 @@ export function EditeForum(props) {
               Categoría
             </label>
             <select
+              defaultValue={forum.category}
               ref={register({
                 required: '*La categoría es necesaria'
               })}
@@ -121,7 +121,7 @@ export function EditeForum(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2">Proyecto que está relacionado con la duda</p>
             <input
-              value={forum.project}
+              defaultValue={forum.project}
               ref={register({
                 required: '*El proyecto es necesario',
                 maxLength: {
@@ -143,7 +143,7 @@ export function EditeForum(props) {
               type="submit"
               disabled={formState.isSubmitting}
             >
-              Crear consulta
+              Editar Consulta
             </button>
           </div>
         </form>

@@ -34,15 +34,16 @@ export function User({ match }){
         		<Navbar />
       		</div>
 			<div className="ml-200p mt-nav-user bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
-				<div class="bg-white rounded  md:w-2/3 overflow-hidden break-all w-full">
-					<div class="text-center p-6 border-b">
-						<img class="h-24 w-24 rounded-full mx-auto border-2 border-red-800" src="https://randomuser.me/api/portraits/men/24.jpg" alt="Randy Robertson" />
+				<div className="bg-white rounded  md:w-2/3 overflow-hidden break-all w-full">
+					<div className="text-center p-6 border-b">
+						<img className="h-24 w-24 rounded-full mx-auto border-2 border-red-800" src="https://randomuser.me/api/portraits/men/24.jpg" alt="Randy Robertson" />
 						<p class="pt-2 text-lg font-semibold">
 							{currentUser.name+" "+currentUser.first_name} 
 						</p>
 						<p className="text-sm mb-2">
 							{currentUser.company_role}
 						</p>
+						
                         <div className="flex flex-wrap justify-center">
                             <img className="self-center" src="https://img.icons8.com/metro/26/000000/linkedin.png"/>
                             <p className="text-sm mb-2 ml-2 mt-2">
@@ -87,6 +88,41 @@ export function User({ match }){
 									<b>Página web</b>: {currentUser.page_url}
 								</p>
 							</div>
+					</div>
+					<div className="flex flex-wrap justify-center mb-2 border-b">
+						<div className="p-2 flex flex-wrap justify-center">
+							<p className="text-xl text-center font-bold w-full">
+								0
+							</p>
+							<div align="center" className="w-full">
+								<img src="https://img.icons8.com/material-rounded/24/000000/comment-discussion.png"/>
+							</div>
+							<p className="text-xl font-bold">
+								Mensajes
+							</p>
+						</div>
+						<div className="p-2">
+							<p className="text-xl text-center font-bold w-full">
+								0
+							</p>
+							<div align="center" className="w-full">
+								<img src="https://img.icons8.com/material-rounded/24/000000/comment-discussion.png"/>
+							</div>
+							<p className="text-xl font-bold">
+								Proyectos
+							</p>
+						</div>
+						<div className="p-2">
+							<p className="text-xl text-center font-bold w-full">
+								0
+							</p>
+							<div align="center" className="w-full">
+								<img src="https://img.icons8.com/material-rounded/24/000000/comment-discussion.png"/>
+							</div>
+							<p className="text-xl font-bold">
+								Consultas
+							</p>
+						</div>
 					</div>
 					<div class="border-b">
 						<div class="px-6 py-4 text-center">

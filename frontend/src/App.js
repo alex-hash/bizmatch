@@ -7,6 +7,7 @@ import { EditeForum } from './pages/EditeForum'
 import { Register } from './pages/Register';
 import { GetForum } from './pages/GetForum';
 import { GetForums } from './pages/GetForums';
+import { Init } from './pages/Init';
 import { GetForumsFilter} from './pages/GetForumsFilter';
 import { AuthProvider } from './context/auth-context';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -17,7 +18,7 @@ function App() {
       <AuthProvider>
         <Switch>
           <Route exact path="/">
-            <GetForums />
+            <Init />
           </Route>
           <Route exact path="/edite-forum">
             <EditeForum />
