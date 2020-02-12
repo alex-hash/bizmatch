@@ -10,12 +10,21 @@ import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
 import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
 import { EditeProject } from './pages/project/EditeProject';
+import { Init } from './pages/Init';
+import { AuthProvider } from './context/auth-context';
+import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Switch>
+          <Route exact path="/">
+            <Init />
+          </Route>
+          <Route exact path="/edite-forum">
+            <EditeForum />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
