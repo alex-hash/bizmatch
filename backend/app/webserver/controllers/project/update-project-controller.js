@@ -21,24 +21,18 @@ async function validate(data) {
       .required(),
     image_url: Joi.string().max(512),
     video_url: Joi.string().max(512),
-    prize: Joi.number().required(),
-    duration: Joi.number().required(),
+    prize: Joi.number(),
+    duration: Joi.number(),
     text: Joi.string()
       .max(65536)
       .required(),
     rewards: Joi.array().items(
       Joi.object({
-        prize: Joi.number().required(),
-        title: Joi.string()
-          .max(60)
-          .required(),
-        month: Joi.string()
-          .max(20)
-          .required(),
-        year: Joi.number().required(),
-        subtitle: Joi.string()
-          .max(135)
-          .required()
+        prize: Joi.number(),
+        title: Joi.string().max(60),
+        month: Joi.string().max(20),
+        year: Joi.number(),
+        subtitle: Joi.string().max(135)
       })
     ),
     userId: Joi.string()

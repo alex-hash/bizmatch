@@ -5,11 +5,6 @@ import { AuthProvider } from './context/auth-context';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { User } from './pages/User';
-import { CreateForum } from './pages/forum/CreateForum';
-import { GetForums } from './pages/forum/GetForums';
-import { GetForum } from './pages/forum/GetForum';
-import { GetForumsFilter } from './pages/forum/GetForumsFilter';
-import { EditeForum } from './pages/forum/EditeForum';
 import { CreateProject } from './pages/project/CreateProject';
 import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
@@ -30,17 +25,6 @@ function App() {
           <PrivateRoute exact path="/account" allowedRoles={['admin', 'E', 'M']}>
             <User />
           </PrivateRoute>
-          <Route path="/create-forum">
-            <CreateForum />
-          </Route>
-          <Route exact path="/">
-            <GetForums />
-          </Route>
-          <Route path="/forum/:forumId" component={GetForum}></Route>
-          <Route path="/forums/:category" component={GetForumsFilter}></Route>
-          <Route exact path="/edite-forum">
-            <EditeForum />
-          </Route>
           <Route path="/create-project">
             <CreateProject />
           </Route>

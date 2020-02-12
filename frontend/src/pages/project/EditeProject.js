@@ -43,7 +43,7 @@ export function EditeProject(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2"></p>
             <input
-              /*value={project.title}*/
+              defaultValue={project.title}
               ref={register({
                 required: '*El título es necesario',
                 maxLength: {
@@ -65,7 +65,7 @@ export function EditeProject(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2"></p>
             <input
-              /*value={project.subtitle}*/
+              defaultValue={project.subtitle}
               ref={register({
                 required: '*El subtítulo es necesario',
                 maxLength: {
@@ -86,6 +86,7 @@ export function EditeProject(props) {
               Categoría del proyecto
             </label>
             <select
+              defaultValue={project.category}
               ref={register({
                 required: '*La categoría es necesaria'
               })}
@@ -119,7 +120,7 @@ export function EditeProject(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2"></p>
             <input
-              /*value={project.ubication}*/
+              defaultValue={project.ubication}
               ref={register({
                 required: '*La ubicación es necesaria',
                 maxLength: {
@@ -141,7 +142,7 @@ export function EditeProject(props) {
             </label>
             <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
             <textarea
-              /* value={project.text}*/
+              defaultValue={project.text}
               ref={register({
                 required: '*El contenido es necesario'
               })}
@@ -161,7 +162,7 @@ export function EditeProject(props) {
               type="submit"
               disabled={formState.isSubmitting}
             >
-              Crear consulta
+              Modificar proyecto
             </button>
           </div>
         </form>

@@ -38,6 +38,7 @@ axios.interceptors.response.use(
 export function addProject(project) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, project);
 }
+
 export function getProject(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/${project}`);
 }
@@ -54,5 +55,20 @@ export function deleteProject(projectId) {
 }
 
 export function updateProject(projectId, project) {
-  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/theme/${projectId}`, project);
+  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`, project);
+}
+
+export function updateCommentProject(project) {
+  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/project/comment/${project.id}`);
+}
+
+export function deleteCommentProject(commentId) {
+  console.log(commentId);
+  return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/comment/delete/${commentId}`);
+}
+export function addCommentProject(project_id, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/comment/${project_id}`, data);
+}
+export function getCommentsProject(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/comment/${project}`);
 }

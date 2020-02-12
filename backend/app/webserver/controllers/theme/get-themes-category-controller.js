@@ -35,7 +35,7 @@ async function getThemesFilter(req, res, next) {
   let connection;
   try {
     const sqlQuery = `SELECT t.id, t.title, t.content, t.created_at, t.updated_at, t.category, u.name, u.first_name, u.id AS user
-    FROM theme t JOIN user u ON t.user_id = u.id ORDER BY t.created_at DESC`;
+    FROM theme t JOIN user u ON t.user_id = u.id WHERE category = ? ORDER BY t.created_at DESC`;
     connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [categoryCap]);
     connection.release();

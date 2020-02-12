@@ -27,11 +27,16 @@ async function deleteProject(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
+    const sqlQueryC = `DELETE FROM comment WHERE project_id = ?`;
+
+    const [deletedStatusC] = await connection.execute(sqlQueryC, [projectId]);
+    connection = await mysqlPool.getConnection();
     const sqlQuery = `DELETE FROM project
       WHERE id = ?`;
 
     const [deletedStatus] = await connection.execute(sqlQuery, [projectId]);
     connection.release();
+
     if (deletedStatus.affectedRows !== 1) {
       return res.status(404).send();
     }
