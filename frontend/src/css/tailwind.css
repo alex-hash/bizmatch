@@ -18,14 +18,15 @@ hr.style1 {
   border-top: 1px solid #8c8b8b;
 }
 
-.wrapper {
-  width: 200px;
-  padding: 20px;
-  height: 150px;
+
+.wrapper{
+	width:200px;
+	padding:20px;
+	height: 150px;
 }
 
-.mt-nav {
-  margin-top: 62px;
+.mt-nav{
+	padding-top: 62px !important;
 }
 
 .link:hover,
@@ -62,4 +63,33 @@ hr.style1 {
 
 .backimageinit {
   background-image: url('../image/536.jpg');
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.top-perfil{
+		position: absolute;
+		top: 120px;
+		right: 10rem;
+	}
+}
+
+@media (min-width: 550px) and (max-width: 767px) {
+	.top-perfil{
+		position: absolute;
+		top: 120px;
+		right: 2rem;
+	}
+}
+
+@media (max-width: 549px) {
+	.top-perfil{
+		position: absolute;
+		top: 90px;
+		left: 0;
+		right: 0;
+	}
+
+	.mt-pefil{
+		margin-top: 9rem;
+	}
 }
