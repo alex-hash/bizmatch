@@ -8346,7 +8346,7 @@ video {
   z-index: auto;
 }
 
-.error-validate{
+.error-validate {
   color: red;
   font-weight: bold;
   font-size: 0.75rem;
@@ -8356,37 +8356,54 @@ video {
   height: calc(100vh + 52px);
 }
 
-hr.style1{
+hr.style1 {
   border-top: 1px solid #8c8b8b;
 }
 
-.wrapper{
-  width:200px;
-  padding:20px;
+.wrapper {
+  width: 200px;
+  padding: 20px;
   height: 150px;
 }
 
-.mt-nav{
+.mt-nav {
   margin-top: 62px;
 }
 
-.link:hover, .link:active{
+.link:hover,
+.link:active {
   border-bottom-width: 4px;
 }
 
-.bg-button{
-  background-image: radial-gradient(circle at center, #FF385C 0%, #E61E4D 27.5%, #E31C5F 40%, #D70466 57.5%, #BD1E59 75%, #BD1E59 100% ) !important;
+.bg-button {
+  background-image: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+  ) !important;
   background-size: 200% 200% !important;
 }
 
 @media (max-width: 1280px) {
-  .backimage { background-image: none;
+  .backimage {
+    background-image: none;
   }
 }
 
 @media (min-width: 1280px) {
-  .backimage { background-image: url('../image/buscas_invertir.png');
+  .backimage {
+    background-image: url('../image/buscas_invertir.png');
   }
+}
+
+/*init page*/
+
+.backimageinit {
+  background-image: url('../image/536.jpg');
 }
 
 @media (min-width: 640px) {
