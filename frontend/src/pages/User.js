@@ -45,7 +45,7 @@ export function User({ match }){
 	}
 
 	function roleE(role){
-		if(role !== undefined){
+		if(role !== null){
 			return(
 				<div className="flex flex-wrap">     
 					<img className="self-center" src="https://img.icons8.com/small/25/000000/reviewer-female.png"/>
@@ -58,7 +58,7 @@ export function User({ match }){
 	}
 
 	function companyWork(work){
-		if(work !== undefined){
+		if(work !== null){
 			return(
 				<div className="flex flex-wrap">     
 					<img className="self-center" src="https://img.icons8.com/officel/25/000000/travel-card.png"/>
@@ -71,7 +71,7 @@ export function User({ match }){
 	}
 
 	function urlDefinided(url){
-		if(url !== undefined){
+		if(url !== null){
 			return(
 				<div className="flex flex-no-wrap">     
 					<img className="self-center" src="https://img.icons8.com/ios-filled/25/000000/link.png"/>
