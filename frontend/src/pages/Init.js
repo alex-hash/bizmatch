@@ -11,17 +11,23 @@ export function Init() {
     mode: 'onBlur'
   });
   let history = useHistory();
-  const { setRole, setCurrentUser } = useAuth();
+  const { setRole, setCurrentUser, currentUser } = useAuth();
 
   return (
     <div>
       <div>
-        <Navbar />
+        <Navbar currentUser={currentUser}/>
       </div>
-
-      <div class="bg-cover bg-center min-h-screen backimageinit">
-        <div>
-          
+      <div class="bg-cover mt-20 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
+          <div className="w-full md:w-2/5 bg-white rounded px-10 py-8 self-center md:ml-32">
+            <h1 className="font-bold text-xl md:text-3xl pb-1">¿A quién se dirige Bizmatch?</h1>
+            <p className="text-gray-700 pb-2 md:pb-4 md:text-xl">En Bizmatch tenemos dos tipos de perfiles:</p>
+            <p className="font-semibold">Emprendedor</p>
+            <p className="pb-2 md:pb-4">Crea tú proyecto, exponlo ante nuestra comunidad de mentores y recibe feedback sobre tu proyecto.</p>
+            <p className="font-semibold">Mentor</p>
+            <p className="pb-4 md:pb-6">Da feedback sobre los proyectos de los mentores, recibe valoraciones del resto de usuarios y alzate como uno de los mejores profesionales de tu sector.</p>
+            <Link to="/register" className="text-right relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">Comenzar</Link>
+          </div>
       </div>
 
       <div class="mt-10">
