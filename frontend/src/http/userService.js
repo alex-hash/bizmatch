@@ -42,3 +42,7 @@ export function getProfile() {
 export function getProfileOther(userId) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/${userId}`).then(res => { return res.data});
 }
+
+export function updateProfile(data) {
+  return axios.put(`${process.env.REACT_APP_BACKEND_URL}/account`, data);
+}

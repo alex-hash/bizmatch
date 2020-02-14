@@ -11,14 +11,14 @@ export function Init() {
     mode: 'onBlur'
   });
   let history = useHistory();
-  const { setRole, setCurrentUser, currentUser } = useAuth();
+  const { role, setRole, setCurrentUser } = useAuth();
 
   return (
     <div>
       <div>
-        <Navbar currentUser={currentUser}/>
+        <Navbar role={role}/>
       </div>
-      <div class="bg-cover mt-20 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
+      <div class="bg-cover mt-4 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
           <div className="w-full md:w-2/5 bg-white rounded px-10 py-8 self-center md:ml-32">
             <h1 className="font-bold text-xl md:text-3xl pb-1">¿A quién se dirige Bizmatch?</h1>
             <p className="text-gray-700 pb-2 md:pb-4 md:text-xl">En Bizmatch tenemos dos tipos de perfiles:</p>

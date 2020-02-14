@@ -84,8 +84,6 @@ async function createAccount(req, res, next) {
       first_name: capitalize(accountData.first_name),
       last_name: capitalize(accountData.last_name),
       birthday: accountData.birthday,
-      country: capitalize(accountData.country),
-      city: capitalize(accountData.city),
       company_name: capitalize(accountData.company_name),
       company_role: capitalize(accountData.company_role),
       page_url: accountData.page_url,

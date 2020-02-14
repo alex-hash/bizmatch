@@ -59,6 +59,12 @@ hr.style1 {
   }
 }
 
+.top-edit{
+  position: absolute;
+  top: 225px;
+  left: 33rem;
+}
+
 /*init page*/
 
 .backimageinit {
@@ -70,7 +76,13 @@ hr.style1 {
 		position: absolute;
 		top: 120px;
 		right: 10rem;
-	}
+  }
+  
+  .top-edit{
+    position: absolute;
+		top: 120px;
+		right: 10rem;
+  }
 }
 
 @media (min-width: 550px) and (max-width: 767px) {
