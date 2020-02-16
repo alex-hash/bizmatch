@@ -20,8 +20,7 @@ export function Init() {
       </div>
 
       <div class="bg-cover bg-center min-h-screen backimageinit">
-        <div>
-          
+        <div></div>
       </div>
 
       <div class="mt-10">
@@ -46,7 +45,6 @@ export function Init() {
                     Officia amet perspiciatis ad quibusdam incidunt eaque, nobis, eveniet neque porro id commodi
                     quisquam debitis!
                   </div>
-                  <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                 </div>
               </div>
             </div>
