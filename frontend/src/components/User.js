@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/auth-context';
-import { updateProfile } from '../http/userService';
+import { updateProfile, updateAvatar } from '../http/userService';
 import jwt_decode from 'jwt-decode';
 
 
@@ -13,7 +13,8 @@ export default class UserRender extends React.Component {
 			edit: this.props.edit,
 			company_role: '',
 			company_name: '',
-			page_url: ''
+			page_url: '',
+			avatar: '',
 		}
     }
 
@@ -81,16 +82,22 @@ export default class UserRender extends React.Component {
 	onChange = (e) => {
     	this.setState({ [e.target.name]: e.target.value });
 	}
+
+	onChangeHandler = (e) =>{
+		this.setState({ [e.target.name]: e.target.files[0] })
+	}
 	
 	onSubmit = (e) => {
 		e.preventDefault();
-		const { company_role, company_name, page_url } = this.state;
+		const { company_role, company_name, page_url, avatar } = this.state;
 		const { email, name, first_name, last_name, type} = this.props.user;
 		let {birthday} = this.props.user;
 		birthday = birthday.substring(0,10);
 		let country = "Tupu";
 		let city = "sadsad";
-		updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type}).then(() => window.location.href='/user');
+		let promise1 = updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type});
+		let promise2 = updateAvatar({avatar});
+		Promise.all([promise1, promise2]).then(() => window.location.href='/user');
 		
 	}
 
@@ -99,6 +106,7 @@ export default class UserRender extends React.Component {
 			this.state.company_name = this.props.user.company_name;
 			this.state.company_role = this.props.user.company_role;
 			this.state.page_url = this.props.user.page_url;
+			this.state.avatar = this.props.user.avatar_url;
             return(
             <div>
 				<div>
@@ -153,6 +161,7 @@ export default class UserRender extends React.Component {
 						<div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
 							<div>
 								<img className="h-24 w-24 rounded-full mx-auto border-2 border-red-800 top-perfil" src="https://randomuser.me/api/portraits/men/24.jpg" alt="Randy Robertson" />
+								<input type="file" name="avatar" className="relative shadow appearance-none border rounded py-2 px-3 mb-2 mt-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline" onChange={this.onChangeHandler}/>
 							</div>
 							{this.eOrM(this.props.user.type)}   
 							<p className="text-left text-sm mb-2 ml-2 mt-2">

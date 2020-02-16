@@ -32,7 +32,6 @@ async function uploadAvatar(req, res, next) {
     console.error(e);
     return res.status(400).send(e);
   }
-
   const { file } = req;
 
   if (!file || !file.buffer) {
