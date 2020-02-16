@@ -21,11 +21,9 @@ async function validate(data) {
       .required(),
     birthday: Joi.required(), //Echarle un vistazo, buscar una manera en el frontend de parsear el dato de la manera correcta para introducirla a la BD
     country: Joi.string()
-      .max(20)
-      .required(),
+      .max(20),
     city: Joi.string()
-      .max(30)
-      .required(),
+      .max(30),
     company_name: Joi.string().max(255),
     company_role: Joi.string().max(255),
     page_url: Joi.string().max(512),
@@ -91,7 +89,7 @@ async function updateUser(req, res, next) {
         return res.status(401).send();
       }
       const queryUpdateUser = `UPDATE user
-            SET email = ?, password = ?, name = ?, first_name = ?, last_name = ?, birthday = ?, country = ?, city = ?, company_name = ?, page_url = ?, type = ?, updated_at = ?
+            SET email = ?, password = ?, name = ?, first_name = ?, last_name = ?, birthday = ?, description = ?, company_role = ?, company_name = ?, page_url = ?, type = ?, updated_at = ?
             WHERE id = ?`;
 
       const bcryptPassword = await bcrypt.hash(userData.password, 10);
@@ -103,8 +101,8 @@ async function updateUser(req, res, next) {
         userData.first_name,
         userData.last_name,
         userData.birthday,
-        userData.country,
-        userData.city,
+        userData.description,
+        userData.company_role,
         userData.company_name,
         userData.page_url,
         userData.type,
@@ -115,7 +113,7 @@ async function updateUser(req, res, next) {
       return res.status(204).send();
     } else {
       const queryUpdateUser = `UPDATE user
-            SET email = ?, name = ?, first_name = ?, last_name = ?, birthday = ?, country = ?, city = ?, company_name = ?, page_url = ?, type = ?, updated_at = ?
+            SET email = ?, name = ?, first_name = ?, last_name = ?, birthday = ?, description = ?, company_role = ?, company_name = ?, page_url = ?, type = ?, updated_at = ?
             WHERE id = ?`;
       await connection.query(queryUpdateUser, [
         userData.email,
@@ -123,8 +121,10 @@ async function updateUser(req, res, next) {
         userData.first_name,
         userData.last_name,
         userData.birthday,
+        userData.description,
         userData.country,
         userData.city,
+        userData.company_role,
         userData.company_name,
         userData.page_url,
         userData.type,

@@ -34,7 +34,7 @@ export function Register() {
       <div>
         <Navbar />
       </div>
-      <div className="mt-nav flex items-center justify-center min-h-screen bg-no-repeat bg-left backimage">
+      <div className="flex items-center justify-center min-h-screen bg-no-repeat bg-left backimage">
         <div className="w-full max-w-md mt-2">
           <form className="bg-white border-gray-200 border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleRegister)} noValidate>
             <h3 className="font-bold">Datos personales</h3>
@@ -181,8 +181,8 @@ export function Register() {
                 className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                 placeholder="Web url de la empresa"
                 ></input>
-                {errors.company_role && (
-                  <span className="error-validate">{errors.company_role.message}</span>
+                {errors.page_url && (
+                  <span className="error-validate">{errors.page_url.message}</span>
                 )}     
             </div>
             <div className="mb-6">

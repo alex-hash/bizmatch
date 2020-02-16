@@ -52,6 +52,7 @@ async function login(req, res, next) {
 
     const payloadJwt = {
       userId: user.id,
+      email: user.email,
       role: user.type
     };
 

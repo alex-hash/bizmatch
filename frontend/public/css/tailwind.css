@@ -8360,14 +8360,14 @@ hr.style1 {
   border-top: 1px solid #8c8b8b;
 }
 
-.wrapper {
-  width: 200px;
-  padding: 20px;
+.wrapper{
+  width:200px;
+  padding:20px;
   height: 150px;
 }
 
-.mt-nav {
-  margin-top: 62px;
+.mt-nav{
+  padding-top: 62px !important;
 }
 
 .link:hover,
@@ -8400,12 +8400,59 @@ hr.style1 {
   }
 }
 
+<<<<<<< HEAD
+=======
+.top-edit{
+  position: absolute;
+  top: 225px;
+  left: 33rem;
+}
+
+>>>>>>> e05bdf36130b0d0befcf9272a038d5c812a8c943
 /*init page*/
 
 .backimageinit {
   background-image: url('../image/536.jpg');
 }
 
+<<<<<<< HEAD
+=======
+@media (min-width: 768px) and (max-width: 1023px) {
+  .top-perfil{
+    position: absolute;
+    top: 120px;
+    right: 10rem;
+  }
+
+  .top-edit{
+    position: absolute;
+    top: 120px;
+    right: 10rem;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 767px) {
+  .top-perfil{
+    position: absolute;
+    top: 120px;
+    right: 2rem;
+  }
+}
+
+@media (max-width: 549px) {
+  .top-perfil{
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+  }
+
+  .mt-pefil{
+    margin-top: 9rem;
+  }
+}
+
+>>>>>>> e05bdf36130b0d0befcf9272a038d5c812a8c943
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;
