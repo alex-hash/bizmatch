@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signUp } from '../http/authService';
 import { Link, useHistory } from 'react-router-dom';
+import Navbar from '../components/Navbar'
 import Swal from 'sweetalert2';
 
 export function Register() {
@@ -9,6 +10,7 @@ export function Register() {
     mode: 'onBlur'
   });
   const history = useHistory();
+  
 
   const handleRegister = (formData) => {
     return signUp(formData)
@@ -26,6 +28,9 @@ export function Register() {
 
   return (
     <div>
+      <div>
+        <Navbar role={role}></Navbar>
+      </div>
       <div className="flex items-center justify-center min-h-screen bg-no-repeat bg-left backimage">
         <div className="w-full max-w-md mt-2">
           <form

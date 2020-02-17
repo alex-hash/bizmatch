@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { signIn } from '../http/authService';
 import { useAuth } from '../context/auth-context';
+import Navbar from '../components/Navbar'
 import jwt_decode from 'jwt-decode';
 
 export function Login() {
@@ -27,6 +28,9 @@ export function Login() {
 
   return (
     <div>
+      <div>
+        <Navbar role={role}></Navbar>
+      </div>
       <div className="-mt-20 flex flex-wrap items-center justify-center min-h-screen">
         <div className="w-full max-w-md">
           <form

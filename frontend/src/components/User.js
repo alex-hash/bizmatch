@@ -321,7 +321,7 @@ export default class UserRender extends React.Component {
 							onChange={this.onChange}
 							></textarea>
 							<div className="mt-2">
-								<button className="bg-blue-500 text-white font-bold py-2 mr-2 px-2 rounded focus:outline-none focus:shadow-outline" type="submit" to="/user">
+								<button className="bg-blue-500 text-white font-bold py-2 mr-2 px-2 rounded focus:outline-none focus:shadow-outline" type="submit">
 									Guardar
 								</button>
 								<button className="text-blue-500 font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline" onClick={() => this.setState({edit: 0})}>
