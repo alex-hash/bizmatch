@@ -11,6 +11,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
   });
 
   const { role } = useAuth();
+
   const history = useHistory();
 
   function refreshPage() {
@@ -118,7 +119,11 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               </p>
               <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                 <div className="flex flex-wrap align-bottom">
-                  <img className="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
+                  <img
+                    className="w-10 h-10 rounded-full mr-4"
+                    src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg"
+                    alt="Avatar of Jonathan Reinink"
+                  />
                   <div className="text-xs lg:text-sm self-center">
                     <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
                     <p className="text-grey-dark">
@@ -158,9 +163,13 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
             ></textarea>
             <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
               <div className="flex flex-wrap align-bottom">
-                <img class="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
+                <img
+                  class="w-10 h-10 rounded-full mr-4"
+                  src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg"
+                  alt="Avatar of Jonathan Reinink"
+                />
                 <div className="text-xs lg:text-sm flex flex-wrap items-center">
-                  <p className="text-black leading-none">{role.email}</p>
+                  <p className="text-black leading-none">Jonathan Reinink</p>
                 </div>
               </div>
               <div className="text-xs self-end mt-2">

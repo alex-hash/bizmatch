@@ -46,11 +46,6 @@ export function getProject(project) {
 export function getProjects() {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
 }
-
-export function getProjectsInit() {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projectsInit`);
-}
-
 export function getProjectsFilter(category) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/filter/${category}`);
 }
