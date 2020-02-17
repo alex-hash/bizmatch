@@ -52,23 +52,44 @@ class App extends React.Component {
         </div>
       );
     }else{
-      return(
-        <div className="relative">
-          <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600">
-            <img
-              className="h-full w-full object-cover"
-              src={this.state.user.avatar_url}
-              alt="Your avatar"
-            />
-          </button>
-          {this.renderButtonDrop()}
-          <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
-            <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
+      if(this.state.user.role = "E"){
+        return(
+          <div className="relative">
+            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden">
+              <img
+                className="h-full w-full object-cover"
+                src={this.state.user.avatar_url}
+                alt="Your avatar"
+              />
+            </button>
+            {this.renderButtonDrop()}
+            <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
+              <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }else{
+        return(
+          <div className="relative">
+            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gol">
+              <img
+                className="h-full w-full object-cover"
+                src={this.state.user.avatar_url}
+                alt="Your avatar"
+              />
+            </button>
+            {this.renderButtonDrop()}
+            <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
+              <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
+            </div>
+          </div>
+        );
+      }
+      
     }
   }
 

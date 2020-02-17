@@ -26,7 +26,7 @@ export function Init() {
             <p className="pb-2 md:pb-4">Crea tú proyecto, exponlo ante nuestra comunidad de mentores y recibe feedback sobre tu proyecto.</p>
             <p className="font-semibold">Mentor</p>
             <p className="pb-4 md:pb-6">Da feedback sobre los proyectos de los mentores, recibe valoraciones del resto de usuarios y alzate como uno de los mejores profesionales de tu sector.</p>
-            <Link to="/register" className="text-right relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">Comenzar</Link>
+            <Link to="/register" className="text-right bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">Comenzar</Link>
           </div>
       </div>
 
@@ -34,7 +34,7 @@ export function Init() {
         <div class="px-10">
           <div class="block md:flex justify-between md:-mx-2">
             <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
-              <div class="bg-white rounded-lg overflow-hidden shadow relative">
+              <div class="bg-white rounded-lg overflow-hidden shadow">
                 <img
                   class="h-56 w-full object-cover object-center"
                   src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
@@ -52,12 +52,12 @@ export function Init() {
                     Officia amet perspiciatis ad quibusdam incidunt eaque, nobis, eveniet neque porro id commodi
                     quisquam debitis!
                   </div>
-                  <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+                  <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                 </div>
               </div>
             </div>
             <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
-              <div class="bg-white rounded-lg overflow-hidden shadow relative">
+              <div class="bg-white rounded-lg overflow-hidden shadow">
                 <img
                   class="h-56 w-full object-cover object-center"
                   src="https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -74,12 +74,12 @@ export function Init() {
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure aut quia alias ullam eveniet sunt!
                     Ipsa, sunt. Inventore ipsum sit quasi. Alias quasi officiis blanditiis!
                   </div>
-                  <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+                  <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                 </div>
               </div>
             </div>
             <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
-              <div class="bg-white rounded-lg overflow-hidden shadow relative">
+              <div class="bg-white rounded-lg overflow-hidden shadow">
                 <img
                   class="h-56 w-full object-cover object-center"
                   src="https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -96,7 +96,7 @@ export function Init() {
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi nemo magni saepe cumque error quia
                     quae sint ducimus, maiores doloremque.
                   </div>
-                  <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+                  <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                 </div>
               </div>
             </div>

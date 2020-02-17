@@ -5,7 +5,6 @@ const AuthContext = React.createContext();
 
 const storedUser = JSON.parse(localStorage.getItem('currentUser'));
 
-
 export function AuthProvider({ children }) {
   const [role, setRole] = useState(storedUser !== null ? jwt_decode(storedUser.accessToken): null);
   const [currentUser, setCurrentUser] = useState(storedUser);
