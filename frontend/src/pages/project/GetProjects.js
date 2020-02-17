@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
 import { ProjectList } from '../../components/ProjectList';
-import { Init } from '../Init';
 
 function projectsReducer(state, action) {
   switch (action.type) {

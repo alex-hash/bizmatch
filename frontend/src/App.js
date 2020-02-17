@@ -7,11 +7,11 @@ import { Register } from './pages/Register';
 import { User } from './pages/User';
 import { ResetPassword } from './pages/ResetPassword';
 import { CreateProject } from './pages/project/CreateProject';
-import { GetProjects } from './pages/project/GetProjects';
+import { GetProjectsInit } from './pages/project/getProjectsInit';
 import { GetProject } from './pages/project/GetProject';
+import { GetProjects } from './pages/project/GetProjects';
 import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
 import { EditeProject } from './pages/project/EditeProject';
-import { GetProjectsInit } from './pages/project/GetProjectsInit';
 
 function App() {
   return (
