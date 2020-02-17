@@ -1,7 +1,7 @@
-import { getProjectsInit } from '../../http/projectService';
 import React, { useEffect, useReducer } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
 import { Init } from '../Init';
 
@@ -28,7 +28,7 @@ export function GetProjectsInit() {
   });
 
   useEffect(() => {
-    getProjectsInit().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
+    getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
   }, []);
-  return <Init projectsInit={state.projects} />;
+  return <Init projects={state.projects} />;
 }
