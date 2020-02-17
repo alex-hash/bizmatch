@@ -45,11 +45,3 @@ export function signIn({ email, password }) {
 export function signUp(accountData) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/account`, accountData);
 }
-
-export function lostPassword() {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/lostPassword`);
-}
-
-export function restorePassword() {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/lostPassword`);
-}
