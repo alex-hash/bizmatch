@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signUp } from '../http/authService';
 import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../context/auth-context';
 import Navbar from '../components/Navbar'
 import Swal from 'sweetalert2';
 
@@ -10,6 +11,7 @@ export function Register() {
     mode: 'onBlur'
   });
   const history = useHistory();
+  const { role, setRole, setCurrentUser } = useAuth();
   
 
   const handleRegister = (formData) => {

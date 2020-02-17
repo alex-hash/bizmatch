@@ -47,7 +47,7 @@ export function CreateProject() {
       <div>
         <Navbar role={role} />
       </div>
-      <div className="mt-nav w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center  ">
+      <div className="w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center">
         <form
           className="w-screen mt-2 h-full bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 mx-4"
           onSubmit={handleSubmit(handleCreateProject)}
