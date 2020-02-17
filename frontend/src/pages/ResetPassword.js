@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../context/auth-context';
+import Navbar from '../components/Navbar';
+import Swal from 'sweetalert2';
+import { lostPassword } from '../http/authService';
+import { restorePassword } from '../http/authService';
 
 export function ResetPassword() {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
+  const { role, setRole, setCurrentUser } = useAuth();
 
   return (
     <div>
+      <div>
+        <Navbar role={role}></Navbar>
+      </div>
       <div className="-mt-20 flex flex-wrap items-center justify-center min-h-screen">
         <div className="w-full max-w-md">
           <form
