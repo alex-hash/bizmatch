@@ -17,7 +17,7 @@ router.post('/project', checkAccountSession, createProject);
 router.get('/project/filter/:category', checkAccountSession, getProjectsFilter);
 router.get('/project/:projectId', checkAccountSession, getProject);
 router.get('/project', checkAccountSession, getProjects);
-router.get('/projectInit', checkAccountSession, getProjectsInit);
+router.get('/projectsInit', checkAccountSession, getProjectsInit);
 router.delete('/project/:projectId', checkAccountSession, deleteProject);
 router.put('/project/:projectId', checkAccountSession, updateProject);
 
