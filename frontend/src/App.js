@@ -5,7 +5,7 @@ import { AuthProvider } from './context/auth-context';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { User } from './pages/User';
-import { Password } from './pages/Password';
+import { ResetPassword } from './pages/ResetPassword';
 import { CreateProject } from './pages/project/CreateProject';
 import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
@@ -28,7 +28,7 @@ function App() {
             <Register />
           </Route>
           <Route path="/password">
-            <Password />
+            <ResetPassword />
           </Route>
           <PrivateRoute exact path="/user" allowedRoles={['admin', 'E', 'M']}>
             <User />
