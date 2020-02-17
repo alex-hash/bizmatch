@@ -9,7 +9,7 @@ const getProjects = require('../controllers/project/get-projects-controller');
 const deleteProject = require('../controllers/project/delete-project-controller');
 const updateProject = require('../controllers/project/update-project-controller');
 const getProjectsFilter = require('../controllers/project/get-projects-category-controller');
-const getProjectsInit = require('../controllers/project/get-projects-init-AbortController.js');
+const getProjectsInit = require('../controllers/project/get-projects-init-Controller.js');
 
 const router = express.Router();
 
