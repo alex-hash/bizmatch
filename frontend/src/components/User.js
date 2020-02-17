@@ -22,20 +22,30 @@ export default class UserRender extends React.Component {
     eOrM(type){
 		if(type === "M"){
 			return (
-				<div className="mt-2 flex flex-wrap">     
-					<img className="self-center" src="https://img.icons8.com/ios/25/000000/crowdfunding.png"/>
-					<p className="text-sm mb-2 ml-2 mt-2">
-						Mentor
-					</p>
+				<div>
+					<div>
+						<img className="h-24 w-24 rounded-full mx-auto border-4 border-gold top-perfil" src={this.props.user.avatar_url} alt={this.props.user.name+" "+this.props.user.first_name} />
+					</div>
+					<div className="mt-2 flex flex-wrap">     
+						<img className="self-center" src="https://img.icons8.com/ios/25/000000/crowdfunding.png"/>
+						<p className="text-sm mb-2 ml-2 mt-2">
+							Mentor
+						</p>
+					</div>
 				</div>
 			);
 		}else{
 			return (
-				<div className="mt-2 flex flex-wrap">     
-					<img className="self-center" src="https://img.icons8.com/ios/25/000000/light-on.png"/>
-					<p className="text-sm mb-2 ml-2 mt-2">
-						Emprendedor
-					</p>
+				<div>
+					<div>
+						<img className="h-24 w-24 rounded-full mx-auto top-perfil" src={this.props.user.avatar_url} alt={this.props.user.name+" "+this.props.user.first_name} />
+					</div>
+					<div className="mt-2 flex flex-wrap">     
+						<img className="self-center" src="https://img.icons8.com/ios/25/000000/light-on.png"/>
+						<p className="text-sm mb-2 ml-2 mt-2">
+							Emprendedor
+						</p>
+					</div>
 				</div>
 			);
 		}
@@ -135,9 +145,6 @@ export default class UserRender extends React.Component {
 					<div className="xl:w-1/5 lg:w-1/5">
 					</div>
 					<div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
-						<div>
-							<img className="h-24 w-24 rounded-full mx-auto border-2 border-red-800 top-perfil" src={this.props.user.avatar_url} alt={this.props.user.name+" "+this.props.user.first_name} />
-						</div>
 						{this.eOrM(this.props.user.type)}   
 						<p className="text-left text-sm mb-2 ml-2 mt-2">
 							Valoración media
@@ -156,9 +163,78 @@ export default class UserRender extends React.Component {
 						</div>
 					</div>
 					<div className="px-6 md:p-0 md:w-2/3 xl:w-2/5 lg:w-2/5 xl:pl-20 lg:pl-20 w-full">
-						<h1 class="font-bold text-5xl ">{this.props.user.name+" "+this.props.user.first_name}</h1>
+						<h1 class="font-bold text-5xl">{this.props.user.name+" "+this.props.user.first_name}</h1>
 						<p className="text-gray-700">Se registró en {this.props.user.created_at !== undefined ? this.props.user.created_at.substring(0, 4): ""} - <button className="text-blue-500" onClick={() => this.setState({edit: 1})}>Editar Perfil</button></p>
 						{this.descriptionNote(this.props.user.description)}
+						<h1 class="font-semibold text-xl mt-4 mb-2 ">Proyectos destacados - <a className="text-blue-500 text-base font-normal">Ver todos los proyectos</a></h1> 
+						<div className="flex flex-wrap self-end">
+							<div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
+								<div class="bg-white h-full rounded-lg overflow-hidden shadow">
+									<img
+									class="h-32 w-full object-cover object-center"
+									src="https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+									alt=""
+									/>
+									<div class="p-4 h-full">
+									<a
+										href="#"
+										class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
+									>
+										Walking through a forest in the afternoon
+									</a>
+									<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
+										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi nemo magni saepe cumque error quia
+										quae sint ducimus, maiores doloremque.
+									</div>
+									<div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+									</div>
+								</div>
+							</div>
+							<div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
+								<div class="bg-white h-full rounded-lg overflow-hidden shadow">
+									<img
+									class="h-32 w-full object-cover object-center"
+									src="https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+									alt=""
+									/>
+									<div class="p-4 h-full">
+									<a
+										href="#"
+										class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
+									>
+										Walking through a forest in the afternoon
+									</a>
+									<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
+										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi nemo magni saepe cumque error quia
+										quae sint ducimus, maiores doloremque.
+									</div>
+									<div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+									</div>
+								</div>
+							</div>
+							<div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:hidden">
+								<div class="bg-white h-full rounded-lg overflow-hidden shadow">
+									<img
+									class="h-32 w-full object-cover object-center"
+									src="https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+									alt=""
+									/>
+									<div class="p-4 h-full">
+									<a
+										href="#"
+										class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
+									>
+										Walking through a forest in the afternoon
+									</a>
+									<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
+										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi nemo magni saepe cumque error quia
+										quae sint ducimus, maiores doloremque.
+									</div>
+									<div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="xl:w-1/5 lg:w-1/5">
 
