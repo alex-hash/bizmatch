@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
 import { ProjectList } from '../../components/ProjectList';
+import { Init } from '../Init';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -30,6 +31,10 @@ export function GetProjects() {
   useEffect(() => {
     getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
   }, []);
-
-  return <ProjectList projects={state.projects} />;
+  return (
+    <div>
+      <ProjectList projects={state.projects} />
+      <Init projects={state.projects} />
+    </div>
+  );
 }

@@ -8400,23 +8400,18 @@ hr.style1 {
   }
 }
 
-<<<<<<< HEAD
-=======
 .top-edit{
   position: absolute;
   top: 225px;
   left: 33rem;
 }
 
->>>>>>> e05bdf36130b0d0befcf9272a038d5c812a8c943
 /*init page*/
 
 .backimageinit {
   background-image: url('../image/536.jpg');
 }
 
-<<<<<<< HEAD
-=======
 @media (min-width: 768px) and (max-width: 1023px) {
   .top-perfil{
     position: absolute;
@@ -8452,7 +8447,6 @@ hr.style1 {
   }
 }
 
->>>>>>> e05bdf36130b0d0befcf9272a038d5c812a8c943
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

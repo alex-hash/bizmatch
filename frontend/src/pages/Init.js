@@ -5,14 +5,14 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 import jwt_decode from 'jwt-decode';
 
-export function Init() {
+export function Init({ projects }) {
+  console.log(projects);
   const [backendErrorMessage, setBackendErrorMessage] = useState('');
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   let history = useHistory();
   const { role, setRole, setCurrentUser } = useAuth();
-
   return (
     <div>
       <div>
@@ -28,8 +28,8 @@ export function Init() {
           </p>
           <p className="font-semibold">Mentor</p>
           <p className="pb-4 md:pb-6">
-            Da feedback sobre los proyectos de los mentores, recibe valoraciones del resto de usuarios y alzate como uno
-            de los mejores profesionales de tu sector.
+            Da feedback sobre los proyectos de los emprendedores, recibe valoraciones del resto de usuarios y alzate
+            como uno de los mejores profesionales de tu sector.
           </p>
           <Link
             to="/register"
@@ -55,7 +55,7 @@ export function Init() {
                     href="#"
                     class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
                   >
-                    Woman standing under blue sky
+                    Importar Título aquí
                   </a>
                   <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quidem blanditiis unde asperiores?
@@ -65,6 +65,7 @@ export function Init() {
                 </div>
               </div>
             </div>
+
             <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
               <div class="bg-white rounded-lg overflow-hidden shadow relative">
                 <img
