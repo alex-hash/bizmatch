@@ -13,12 +13,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: (this.props.role === undefined ? null : this.props.role)
+      user: (this.props.role === undefined ? null : this.props.role),
+      navOpen: false,
     };
   }
 
   enableScrolling() {
     document.getElementById('sidebar').style.position = 'fixed';
+  }
+
+  enableDrop(param){
+    if(param){
+      document.getElementById("dropdown").classList.remove('hidden');
+      document.getElementById("dropdown").classList.add('block');
+      this.setState({navOpen: true});
+    }else{
+      document.getElementById("dropdown").classList.remove('block');
+      document.getElementById("dropdown").classList.add('hidden');
+      this.setState({navOpen: false});
+    }
+  }
+
+  renderButtonDrop(){
+    if(this.state.navOpen === true){
+      return(
+        <button onClick={() => this.enableDrop(false)} tabIndex="-1" className="fixed inset-0 w-full h-full bg-black opacity-50 cursor-default"></button>
+      )
+    }
   }
 
 
@@ -32,16 +53,20 @@ class App extends React.Component {
       );
     }else{
       return(
-        <div>
-          <Link to="/user">
-            <button className="block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600">
-              <img
-                className="h-full w-full object-cover"
-                src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&q=80"
-                alt="Your avatar"
-              />
-            </button>
-          </Link>
+        <div className="relative">
+          <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600">
+            <img
+              className="h-full w-full object-cover"
+              src={this.state.user.avatar_url}
+              alt="Your avatar"
+            />
+          </button>
+          {this.renderButtonDrop()}
+          <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
+            <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
+            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
+            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
+          </div>
         </div>
       );
     }
@@ -49,7 +74,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <nav className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex flex-wrap justify-between items-center p-4 h-16" >
+      <nav className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex flex-wrap justify-between items-center p-4 h-16 md:h-20">
         <div className="block xl:hidden lg:hidden md:hidden">
           <Link to="/" className="relative">
             <button>
@@ -65,7 +90,6 @@ class App extends React.Component {
           </Link>
         </div>
         {this.renderButtons()}
-       
       </nav>
     );
   }

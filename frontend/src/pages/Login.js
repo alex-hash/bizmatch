@@ -7,7 +7,6 @@ import { useAuth } from '../context/auth-context';
   import jwt_decode from 'jwt-decode';
 
 export function Login() {
-  const [backendErrorMessage, setBackendErrorMessage] = useState('');
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -22,7 +21,6 @@ export function Login() {
         history.push('/');
       })
       .catch((error) => {
-        setBackendErrorMessage('The credentials are invalid');
         setValue('password', '');
         setError('password', 'credentials', 'The credentials are invalid');
       });
@@ -33,7 +31,7 @@ export function Login() {
       <div>
         <Navbar Role={role}/>
       </div>
-      <div className="-mt-16 flex flex-wrap items-center justify-center min-h-screen" >
+      <div className="-mt-20 flex flex-wrap items-center justify-center min-h-screen" >
         <div className="w-full max-w-md">
           <form className="bg-white border-gray-200 border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4" onSubmit={handleSubmit(handleLogin)} noValidate>
             <h1 className="text-center font-bold text-gray-700 text-lg mb-2">Iniciar sesión</h1>

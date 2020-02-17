@@ -48,6 +48,5 @@ export function updateProfile(data) {
 }
 
 export function updateAvatar(data){
-  console.log(data);
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/avatar`, data);
 }
