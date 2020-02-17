@@ -57,24 +57,26 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
       <div className="">
         {project.map((project, index) => (
           <div key={project.id} className=" break-all rounded  md:mx-18 lg:mx-24  mt-nav">
-            <div className=" p-4 text-center font-bold text-xl tracking-wide">{project.title}</div>
-            <div className="p-2  text-center font-bold text tracking-wide">{project.subtitle}</div>
-            <div className="flex flex-wrap">
-              <div className="mt-6 lg:w-1/2">
-                <div class="bg-white rounded-lg overflow-hidden shadow relative">
+            <div className=" p-4 text-center font-serif font-bold text-4xl tracking-wide ">{project.title}</div>
+            <div className="p-2  text-center font-serif font-bold text-xl tracking-wide ">{project.subtitle}</div>
+            <div className="flex flex-wrap mt-nav">
+              <div className="lg:w-1/2">
+                <div class="bg-white rounded-lg overflow-hidden relative">
                   <img
-                    class=" w-full object-cover object-center"
+                    class=" p-2 lg:p-0 w-full object-cover object-center"
                     src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
                     alt=""
                   />
                 </div>
-                <div className="lg:mt-4 text-gray-500 text-sm mb-3">Ubicación: {project.ubication}</div>
+                <div className="lg:mt-4 text-gray-500 text-base mb-3">Ubicación: {project.ubication}</div>
 
-                <div className="text-gray-500 text-sm mb-3">Categoría: {project.category}</div>
+                <div className="text-gray-500 text-base mb-3">Categoría: {project.category}</div>
               </div>
-              <div classNmae="lg:w-1/2"></div>
+              <div className="lg:w-1/2">
+                <div className="flex justify-center p-32">cosas varias</div>
+              </div>
             </div>
-            <p className="mx-2 lg:mt-12 text-gray-700 text-base">{project.text}</p>
+            <p className="mx-2 lg:mt-12 text-gray-700 text-lg">{project.text}</p>
 
             <div className="text-xs flex flex-wrap justify-end p-3">
               <Link
