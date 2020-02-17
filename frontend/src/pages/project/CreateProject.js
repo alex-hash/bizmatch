@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../context/auth-context';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -40,11 +41,11 @@ export function CreateProject() {
       history.push('/projects');
     });
   };
-
+  const { role, setRole, setCurrentUser } = useAuth();
   return (
     <div>
       <div>
-        <Navbar />
+        <Navbar role={role} />
       </div>
       <div className="mt-nav w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center  ">
         <form

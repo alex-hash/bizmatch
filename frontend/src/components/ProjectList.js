@@ -1,13 +1,15 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { Link, useHistory } from 'react-router-dom';
+import { useAuth } from '../context/auth-context';
 
 export function ProjectList({ projects }) {
   console.log(projects);
+  const { role, setRole, setCurrentUser } = useAuth();
   return (
     <div>
       <div>
-        <Navbar />
+        <Navbar role={role} />
       </div>
       <div className="flex flex-wrap">
         <div class="w-screen sm:min-w-0 m-2 sm:m-0 order-1 sm:order-0 mt-nav sm:w-1/2 flex justify-center">

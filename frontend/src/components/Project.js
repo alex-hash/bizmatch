@@ -52,7 +52,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
   return (
     <div>
       <div>
-        <Navbar />
+        <Navbar role={role} />
       </div>
       <div className="">
         {project.map((project, index) => (
