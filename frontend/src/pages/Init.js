@@ -5,7 +5,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 import jwt_decode from 'jwt-decode';
 
-export function Init(projectsInit) {
+export function Init({ projects }) {
+  console.log(projects);
   const [backendErrorMessage, setBackendErrorMessage] = useState('');
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
@@ -42,8 +43,8 @@ export function Init(projectsInit) {
       <div class="mt-10">
         <div class="px-10">
           <div class="block md:flex justify-between md:-mx-2">
-            {projectsInit.map((project) => (
-              <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0" key={project.id}>
+            {projects.map((project) => (
+              <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
                 <div class="bg-white rounded-lg overflow-hidden shadow">
                   <img
                     class="h-56 w-full object-cover object-center"
