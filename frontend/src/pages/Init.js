@@ -5,18 +5,18 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 import jwt_decode from 'jwt-decode';
 
-export function Init() {
+export function Init({ projects }) {
+  console.log(projects);
   const [backendErrorMessage, setBackendErrorMessage] = useState('');
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   let history = useHistory();
   const { role, setRole, setCurrentUser } = useAuth();
-
   return (
     <div>
       <div>
-        <Navbar role={role}/>
+        <Navbar role={role} />
       </div>
       <div class="bg-cover mt-4 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
           <div className="w-full md:w-2/5 bg-white rounded px-10 py-8 self-center md:ml-32">
@@ -45,7 +45,7 @@ export function Init() {
                     href="#"
                     class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
                   >
-                    Woman standing under blue sky
+                    Importar Título aquí
                   </a>
                   <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quidem blanditiis unde asperiores?
@@ -56,6 +56,7 @@ export function Init() {
                 </div>
               </div>
             </div>
+
             <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
               <div class="bg-white rounded-lg overflow-hidden shadow">
                 <img

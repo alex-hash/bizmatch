@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
-import { ProjectList } from '../../components/ProjectList';
 import { Init } from '../Init';
 
 function projectsReducer(state, action) {
@@ -17,7 +16,7 @@ function projectsReducer(state, action) {
   }
 }
 
-export function GetProjects() {
+export function GetProjectsInit() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -31,5 +30,5 @@ export function GetProjects() {
   useEffect(() => {
     getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
   }, []);
-  return <ProjectList projects={state.projects} />;
+  return <Init projects={state.projects} />;
 }

@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../context/auth-context';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -40,23 +41,23 @@ export function CreateProject() {
       history.push('/projects');
     });
   };
-
+  const { role, setRole, setCurrentUser } = useAuth();
   return (
     <div>
       <div>
-        <Navbar />
+        <Navbar role={role} />
       </div>
-      <div className="mt-nav bg-white md:bg-green-400 flex flex-wrap justify-center h-full md:flex md:flex-wrap md:justify-center md:items-center md:h-screen lg:flex lg:flex-wrap lg:justify-center lg:items-center lg:h-screen">
+      <div className="mt-nav w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center  ">
         <form
-          className="mt-4 lg:w-5/6 bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
+          className="w-screen mt-2 h-full bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 mx-4"
           onSubmit={handleSubmit(handleCreateProject)}
           noValidate
         >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold" for="title">
+            <label className="block text-gray-900 text-md font-bold" for="title">
               Título del Proyecto
             </label>
-            <p className="text-sm text-gray-700 mb-2"></p>
+            <p className="text-md text-gray-700 mb-2"></p>
             <input
               ref={register({
                 required: '*El título es necesario',
@@ -74,10 +75,10 @@ export function CreateProject() {
             {errors.title && <span className="error-validate">{errors.title.message}</span>}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold" for="title">
+            <label className="block text-gray-800 text-md font-bold" for="title">
               Subtítulo del Proyecto
             </label>
-            <p className="text-sm text-gray-700 mb-2"></p>
+            <p className="text-md text-gray-700 mb-2"></p>
             <input
               ref={register({
                 required: '*El subtítulo es necesario',
@@ -156,7 +157,7 @@ export function CreateProject() {
               ref={register({
                 required: '*El contenido es necesario'
               })}
-              className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="h-64 relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
               id="text"
               rows="6"
               type="text"
@@ -168,7 +169,7 @@ export function CreateProject() {
 
           <div className="flex items-center justify-center">
             <button
-              className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+              className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={formState.isSubmitting}
             >

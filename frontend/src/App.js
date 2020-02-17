@@ -5,12 +5,13 @@ import { AuthProvider } from './context/auth-context';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { User } from './pages/User';
+import { ResetPassword } from './pages/ResetPassword';
 import { CreateProject } from './pages/project/CreateProject';
 import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
 import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
 import { EditeProject } from './pages/project/EditeProject';
-import { Init } from './pages/Init';
+import { GetProjectsInit } from './pages/project/GetProjectsInit';
 
 function App() {
   return (
@@ -18,13 +19,16 @@ function App() {
       <AuthProvider>
         <Switch>
           <Route exact path="/">
-            <Init />
+            <GetProjectsInit />
           </Route>
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/password">
+            <ResetPassword />
           </Route>
           <PrivateRoute exact path="/user" allowedRoles={['admin', 'E', 'M']}>
             <User />
