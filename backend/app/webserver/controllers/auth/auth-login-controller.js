@@ -51,6 +51,7 @@ async function login(req, res, next) {
     }
 
     const payloadJwt = {
+      avatar_url: user.avatar_url,
       userId: user.id,
       email: user.email,
       role: user.type

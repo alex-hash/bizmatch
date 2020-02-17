@@ -27,6 +27,7 @@ async function validate(data) {
     company_name: Joi.string().max(255),
     company_role: Joi.string().max(255),
     page_url: Joi.string().max(512),
+    description: Joi.string().max(2000),
     type: Joi.string()
       .max(1)
       .required(),
@@ -122,8 +123,6 @@ async function updateUser(req, res, next) {
         userData.last_name,
         userData.birthday,
         userData.description,
-        userData.country,
-        userData.city,
         userData.company_role,
         userData.company_name,
         userData.page_url,
