@@ -10,7 +10,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
     mode: 'onBlur'
   });
 
-  const { role } = useAuth();
+  const { role, setRole, setUser } = useAuth();
 
   const history = useHistory();
 
@@ -130,7 +130,12 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
   }
 
   const handleSend = (formData) => {
-    return addCommentProject(projectId, formData);
+    return addCommentProject(projectId, formData).catch((error) => {
+      if(error.response.status === 401){
+        setRole(null);
+        setUser(null);
+      }
+    });;
   };
 
   return (
