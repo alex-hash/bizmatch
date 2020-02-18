@@ -86,6 +86,7 @@ async function createAccount(req, res, next) {
       birthday: accountData.birthday,
       company_name: capitalize(accountData.company_name),
       company_role: capitalize(accountData.company_role),
+      avatar_url: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
       page_url: accountData.page_url,
       type: accountData.type,
       created_at: createdAtNow

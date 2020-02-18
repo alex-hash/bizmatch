@@ -73,7 +73,7 @@ class App extends React.Component {
       }else{
         return(
           <div className="relative">
-            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gol">
+            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-48 w-48 rounded-full overflow-hidden border-2 border-gol">
               <img
                 className="h-full w-full object-cover"
                 src={this.state.user.avatar_url}
@@ -89,7 +89,6 @@ class App extends React.Component {
           </div>
         );
       }
-      
     }
   }
 
