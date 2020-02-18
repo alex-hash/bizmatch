@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
 import { ProjectList } from '../../components/ProjectList';
-import { Init } from '../Init';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -12,6 +11,8 @@ function projectsReducer(state, action) {
       return { ...state, projects: action.initialProjects };
     case 'SELECT_PROJECT':
       return { ...state, selectedProject: action.index };
+    case 'SEARCH_TEXT_CHANGED':
+      return { ...state, searchText: action.text };
     default:
       return state;
   }
@@ -25,11 +26,18 @@ export function GetProjects() {
   const history = useHistory();
   const [state, dispatch] = useReducer(projectsReducer, {
     projects: [],
-    selectedProject: null
+    selectedProject: null,
+    searchText: ''
   });
 
   useEffect(() => {
     getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
   }, []);
-  return <ProjectList projects={state.projects} />;
+  return (
+    <ProjectList
+      projects={state.projects}
+      searchText={state.searchText}
+      onSearchTextChanged={(text) => dispatch({ type: 'SEARCH_TEXT_CHANGED', text })}
+    />
+  );
 }
