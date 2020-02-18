@@ -11,7 +11,7 @@ const deleteComment = require('../controllers/comment/delete-comment-controller'
 const router = express.Router();
 
 router.post('/project/comment/:projectId', checkAccountSession, createComment);
-router.get('/project/comment/:projectId', checkAccountSession, getComment);
+router.get('/project/comment/:projectId', getComment);
 router.put('/project/comment/:projectId', checkAccountSession, updateComment);
 router.delete('/comment/delete/:commentId', checkAccountSession, deleteComment);
 

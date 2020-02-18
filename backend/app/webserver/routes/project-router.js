@@ -15,9 +15,9 @@ const router = express.Router();
 
 router.post('/project', checkAccountSession, createProject);
 router.get('/project/filter/:category', checkAccountSession, getProjectsFilter);
-router.get('/project/:projectId', checkAccountSession, getProject);
+router.get('/project/:projectId', getProject);
 router.get('/project', checkAccountSession, getProjects);
-router.get('/projectsInit', checkAccountSession, getProjectsInit);
+router.get('/projectsInit', getProjectsInit);
 router.delete('/project/:projectId', checkAccountSession, deleteProject);
 router.put('/project/:projectId', checkAccountSession, updateProject);
 

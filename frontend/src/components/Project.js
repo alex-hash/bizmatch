@@ -19,19 +19,103 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
   }
 
   function renderButtons(comment, index) {
-    const actual_user = role.userId;
+    const actual_user = (role === null ? null : role.userId);
     if (comment.user === actual_user) {
       return (
         <div className="text-xs self-end mt-2">
           <button
             onClick={() => renderEditHtml(index)}
-            className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
           >
             Editar
           </button>
           <button
             onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
-            className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+          >
+            Borrar
+          </button>
+        </div>
+      );
+    }
+  }
+
+  function renderNewComment(){
+    if(role !== null){
+      return(
+        <div>
+          <hr className="style1 mb-2" />
+          <h1 className="font-bold p-2 lg:mx-4">Nuevo comentario</h1>
+          <div className="w-full">
+            <form
+              className="bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
+              onSubmit={handleSubmit(handleSend)}
+              noValidate
+            >
+              <textarea
+                ref={register({
+                  required: '*El contenido es necesario',
+                  maxLength: {
+                    message: '*El comentario no debe exceder los 200 caracteres',
+                    value: 200
+                  }
+                })}
+                className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="text"
+                rows="6"
+                type="text"
+                name="text"
+                placeholder=""
+              ></textarea>
+              <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
+                <div className="flex flex-wrap align-bottom">
+                  <img class="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
+                  <div className="text-xs lg:text-sm flex flex-wrap items-center">
+                    <p className="text-black leading-none">{role.email}</p>
+                  </div>
+                </div>
+                <div className="text-xs self-end mt-2">
+                  <button
+                    onClick={refreshPage}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded mr-2"
+                  >
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          </div>
+      );
+    }
+  }
+
+  function renderButtonsProject() {
+    const actual_user = (role === null ? null : role.userId);
+    if(project[0].user === actual_user){
+      return(
+        <div className="text-xs flex flex-wrap justify-end p-3">
+          <Link
+            to={{
+              pathname: '/edite-project',
+              query: {
+                id: project.id,
+                title: project.title,
+                subtitle: project.subtitle,
+                category: project.category,
+                ubication: project.ubication,
+                text: project.text
+              }
+            }}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
+          >
+            Editar
+          </Link>
+          <button
+            onClick={() => {
+              onDeleteProject(project.id);
+            }}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
           >
             Borrar
           </button>
@@ -61,7 +145,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
             <div className="p-2  text-center font-serif font-bold text-xl tracking-wide ">{project.subtitle}</div>
             <div className="flex flex-wrap mt-nav">
               <div className="lg:w-1/2">
-                <div class="bg-white rounded-lg overflow-hidden relative">
+                <div class="bg-white rounded-lg overflow-hidden">
                   <img
                     class=" p-2 lg:p-0 w-full object-cover object-center"
                     src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
@@ -78,32 +162,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
             </div>
             <p className="mx-2 lg:mt-12 text-gray-700 text-lg">{project.text}</p>
 
-            <div className="text-xs flex flex-wrap justify-end p-3">
-              <Link
-                to={{
-                  pathname: '/edite-project',
-                  query: {
-                    id: project.id,
-                    title: project.title,
-                    subtitle: project.subtitle,
-                    category: project.category,
-                    ubication: project.ubication,
-                    text: project.text
-                  }
-                }}
-                className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
-              >
-                Editar
-              </Link>
-              <button
-                onClick={() => {
-                  onDeleteProject(project.id);
-                }}
-                className="relative bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
-              >
-                Borrar
-              </button>
-            </div>
+            {renderButtonsProject()}
           </div>
         ))}
       </div>
@@ -119,7 +178,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               </p>
               <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                 <div className="flex flex-wrap align-bottom">
-                  <img className="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
+                  <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
                   <div className="text-xs lg:text-sm self-center">
                     <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
                     <p className="text-grey-dark">
@@ -134,47 +193,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
             </div>
           </React.Fragment>
         ))}
-        <hr className="style1 mb-2" />
-        <h1 className="font-bold p-2 lg:mx-4">Nuevo comentario</h1>
-        <div className="w-full">
-          <form
-            className="bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 lg:mx-4"
-            onSubmit={handleSubmit(handleSend)}
-            noValidate
-          >
-            <textarea
-              ref={register({
-                required: '*El contenido es necesario',
-                maxLength: {
-                  message: '*El comentario no debe exceder los 200 caracteres',
-                  value: 200
-                }
-              })}
-              className="relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="text"
-              rows="6"
-              type="text"
-              name="text"
-              placeholder=""
-            ></textarea>
-            <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
-              <div className="flex flex-wrap align-bottom">
-                <img class="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
-                <div className="text-xs lg:text-sm flex flex-wrap items-center">
-                  <p className="text-black leading-none">{role.email}</p>
-                </div>
-              </div>
-              <div className="text-xs self-end mt-2">
-                <button
-                  onClick={refreshPage}
-                  className="relative bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded mr-2"
-                >
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+        {renderNewComment()}
       </div>
     </div>
   );

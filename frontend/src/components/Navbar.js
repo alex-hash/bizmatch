@@ -99,14 +99,14 @@ class App extends React.Component {
         <div className="block xl:hidden lg:hidden md:hidden">
           <Link to="/" className="relative">
             <button>
-              <img className src="https://img.icons8.com/ios/40/000000/business-network.png"/>
+              <img src="https://img.icons8.com/ios/40/000000/business-network.png"/>
             </button>
           </Link>
         </div>
         <div className="block hidden xl:inline lg:inline md:inline">
           <Link to="/" className="relative">
             <button>
-              <img className src="https://img.icons8.com/ios/40/000000/business-network.png"/>
+              <img src="https://img.icons8.com/ios/40/000000/business-network.png"/>
             </button>
           </Link>
         </div>

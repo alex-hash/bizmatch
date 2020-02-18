@@ -6,7 +6,6 @@ import { useAuth } from '../context/auth-context';
 import jwt_decode from 'jwt-decode';
 
 export function Init({ projects }) {
-  console.log(projects);
   const [backendErrorMessage, setBackendErrorMessage] = useState('');
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
@@ -18,7 +17,7 @@ export function Init({ projects }) {
       <div>
         <Navbar role={role} />
       </div>
-      <div class="bg-cover mt-4 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
+      <div className="bg-cover mt-4 md:mt-0 min-h-screen backimageinit flex flex-wrap px-4 md:px-0">
         <div className="w-full md:w-2/5 bg-white rounded px-10 py-8 self-center md:ml-32">
           <h1 className="font-bold text-xl md:text-3xl pb-1">¿A quién se dirige Bizmatch?</h1>
           <p className="text-gray-700 pb-2 md:pb-4 md:text-xl">En Bizmatch tenemos dos tipos de perfiles:</p>
@@ -39,29 +38,29 @@ export function Init({ projects }) {
           </Link>
         </div>
       </div>
-      <div class="mt-6">
-        <div class="px-4 sm:mx-10">
-          <div class="block md:flex flex-wrap justify-left">
+      <div className="mt-6">
+        <div className="px-4 sm:mx-10">
+          <div className="block md:flex flex-wrap justify-left">
             {projects.map((project) => (
-              <div class="break-all w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
-                <div class="bg-white rounded-lg overflow-hidden shadow">
+              <div className="break-all w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
+                <div className="bg-white rounded-lg overflow-hidden shadow">
                   <img
-                    class="h-48 w-full object-cover object-center"
+                    className="h-48 w-full object-cover object-center"
                     src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
                     alt=""
                   />
-                  <div class="p-4 h-auto md:h-48 mt-2">
+                  <div className="p-4 h-auto md:h-48 mt-2">
                     <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                       {project.title}
                     </a>
-                    <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                    <div className="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                       {project.subtitle}
                     </div>
-                    <p class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
-                    <div class="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                    <p className="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
+                    <div className="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                       {project.text}
                     </div>
-                    <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+                    <div className="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                   </div>
                 </div>
               </div>

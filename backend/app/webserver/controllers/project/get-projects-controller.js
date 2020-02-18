@@ -29,7 +29,7 @@ async function getProjects(req, res, next) {
   try {
     const sqlQuery = `SELECT t.id, t.title, t.subtitle, t.created_at, t.updated_at, t.category, t.text, t.ubication, u.name, u.first_name, u.id AS user
       FROM project t JOIN user u ON t.user_id = u.id ORDER BY t.created_at DESC`;
-    const connection = await mysqlPool.getConnection();
+    connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
 
