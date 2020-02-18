@@ -144,8 +144,12 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
       <div className="">
         {project.map((project, index) => (
           <div key={project.id} className=" break-all rounded  md:mx-18 lg:mx-24  mt-nav">
-            <div className=" p-4 text-center font-serif font-bold text-4xl tracking-wide ">{project.title}</div>
-            <div className="p-2  text-center font-serif font-bold text-xl tracking-wide ">{project.subtitle}</div>
+            <div className=" p-4 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
+              {project.title}
+            </div>
+            <div className="p-2  text-center font-serif font-bold text:l lg:text-xl tracking-wide ">
+              {project.subtitle}
+            </div>
             <div className="flex flex-wrap mt-nav">
               <div className="lg:w-1/2">
                 <div class="bg-white rounded-lg overflow-hidden">
@@ -155,15 +159,15 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
                     alt=""
                   />
                 </div>
-                <div className="lg:mt-4 text-gray-500 text-base mb-3">Ubicación: {project.ubication}</div>
+                <div className="lg:mt-4 text-gray-500 text-base mb-3 ml-2">Ubicación: {project.ubication}</div>
 
-                <div className="text-gray-500 text-base mb-3">Categoría: {project.category}</div>
+                <div className="text-gray-500 text-base mb-3 ml-2">Categoría: {project.category}</div>
               </div>
               <div className="lg:w-1/2">
                 <div className="flex justify-center p-32">cosas varias</div>
               </div>
             </div>
-            <p className="mx-2 lg:mt-12 text-gray-700 text-lg">{project.text}</p>
+            <p className="mx-4 lg:mx-0 lg:mt-12 text-gray-700 text-lg">{project.text}</p>
 
             {renderButtonsProject()}
           </div>
@@ -181,8 +185,8 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               </p>
               <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                 <div className="flex flex-wrap align-bottom">
-                  <Link to={"/user/"+comment.user}>
-                  <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
+                  <Link to={'/user/' + comment.user}>
+                    <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
                   </Link>
                   <div className="text-xs lg:text-sm self-center">
                     <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
