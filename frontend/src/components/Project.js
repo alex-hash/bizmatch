@@ -19,7 +19,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
   }
 
   function renderButtons(comment, index) {
-    const actual_user = (role === null ? null : role.userId);
+    const actual_user = role === null ? null : role.userId;
     if (comment.user === actual_user) {
       return (
         <div className="text-xs self-end mt-2">
@@ -40,9 +40,9 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
     }
   }
 
-  function renderNewComment(){
-    if(role !== null){
-      return(
+  function renderNewComment() {
+    if (role !== null) {
+      return (
         <div>
           <hr className="style1 mb-2" />
           <h1 className="font-bold p-2 lg:mx-4">Nuevo comentario</h1>
@@ -52,21 +52,24 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               onSubmit={handleSubmit(handleSend)}
               noValidate
             >
-              <textarea
-                ref={register({
-                  required: '*El contenido es necesario',
-                  maxLength: {
-                    message: '*El comentario no debe exceder los 200 caracteres',
-                    value: 200
-                  }
-                })}
-                className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="text"
-                rows="6"
-                type="text"
-                name="text"
-                placeholder=""
-              ></textarea>
+              <div>
+                <textarea
+                  ref={register({
+                    required: '*El contenido es necesario',
+                    maxLength: {
+                      message: '*El comentario no debe exceder los 200 caracteres',
+                      value: 200
+                    }
+                  })}
+                  className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="text"
+                  rows="6"
+                  type="text"
+                  name="text"
+                  placeholder=""
+                ></textarea>
+                {errors.text && <span className="error-validate">{errors.text.message}</span>}
+              </div>
               <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                 <div className="flex flex-wrap align-bottom">
                   <img class="w-10 h-10 rounded-full mr-4" src={role.avatar_url} alt="Avatar" />
@@ -85,15 +88,15 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               </div>
             </form>
           </div>
-          </div>
+        </div>
       );
     }
   }
 
   function renderButtonsProject() {
-    const actual_user = (role === null ? null : role.userId);
-    if(project[0].user === actual_user){
-      return(
+    const actual_user = role === null ? null : role.userId;
+    if (project[0].user === actual_user) {
+      return (
         <div className="text-xs flex flex-wrap justify-end p-3">
           <Link
             to={{
