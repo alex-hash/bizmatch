@@ -36,9 +36,9 @@ function App() {
           <PrivateRoute exact path="/create-project" allowedRoles={['admin', 'E']}>
             <CreateProject />
           </PrivateRoute>
-          <Route exact path="/projects">
+          <PrivateRoute exact path="/projects">
             <GetProjects />
-          </Route>
+          </PrivateRoute>
           <Route path="/project/:projectId" component={GetProject}></Route>
           <Route path="/projects/:category" component={GetProjectsFilter}></Route>
           <Route exact path="/edite-project">
