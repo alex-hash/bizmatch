@@ -1,33 +1,26 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getProjectsInit } from '../../http/projectService';
 import { Init } from '../Init';
 
-function projectsReducer(state, action) {
-  switch (action.type) {
-    case 'GET_PROJECTS_SUCCESS':
-      return { ...state, projects: action.initialProjects };
-    case 'SELECT_PROJECT':
-      return { ...state, selectedProject: action.index };
-    default:
-      return state;
-  }
-}
 
 export function GetProjectsInit() {
-  const { handleSubmit, register, errors, formState } = useForm({
-    mode: 'onBlur'
-  });
-  const history = useHistory();
-  const [state, dispatch] = useReducer(projectsReducer, {
-    projects: [],
-    selectedProject: null
-  });
+  const [projects, setProjects] = useState(null);
 
   useEffect(() => {
-    getProjectsInit().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
+    getProjectsInit().then((response) => setProjects(response.data));
   }, []);
   
-  return <Init projects={state.projects} />;
+  if(projects === null){
+    return(
+			<div className="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+				<span className="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0 top-50">
+					<i className="fas fa-circle-notch fa-spin fa-5x"></i>
+				</span>
+			</div>
+		);
+  }
+  
+  return <Init projects={projects} />;
 }

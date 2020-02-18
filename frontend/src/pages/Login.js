@@ -51,7 +51,7 @@ export function Login() {
                     message: '*El email no es válido'
                   }
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="text"
                 name="email"
@@ -65,7 +65,7 @@ export function Login() {
                   Contraseña
                 </label>
                 <Link
-                  className="relative inline-block align-baseline font-bold text-xs underline text-black text-right"
+                  className="inline-block align-baseline font-bold text-xs underline text-black text-right"
                   to="/password"
                 >
                   Olvidaste tú contraseña?
@@ -79,7 +79,7 @@ export function Login() {
                     message: '*Su contraseña tiene más de 6 caracteres'
                   }
                 })}
-                className="relative shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 name="password"
@@ -89,7 +89,7 @@ export function Login() {
             </div>
             <div className="flex items-center justify-center">
               <button
-                className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+                className="bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 disabled={formState.isSubmitting}
               >
@@ -98,7 +98,7 @@ export function Login() {
             </div>
             <div className="flex flex-wrap justify-center mt-2">
               <Link
-                className="relative inline-block align-baseline font-bold text-xs text-black text-center"
+                className="inline-block align-baseline font-bold text-xs text-black text-center"
                 to="/register"
               >
                 Todavía no estás registrado?

@@ -9,7 +9,7 @@ import jwt_decode from 'jwt-decode';
 
 export function User({ match }){
     const history = useHistory();
-	const { role, setRole} = useAuth();
+	const { role, setRole, setCurrentUser} = useAuth();
 	const [user, setUser] = useState(null);
 	const inputRef = useRef();
 
@@ -21,6 +21,8 @@ export function User({ match }){
 				if(error.response.status === 401){
 					setRole(null);
 					setUser(null);
+					setCurrentUser(null);
+					window.localStorage.clear();
 				}
 			});
 		}else{
@@ -30,6 +32,8 @@ export function User({ match }){
 				if(error.response.status === 401){
 					setRole(null);
 					setUser(null);
+					setCurrentUser(null);
+					window.localStorage.clear();
 				}
 			});;
 		}
@@ -45,12 +49,6 @@ export function User({ match }){
 		);
 	}
 	
-	function logout(){
-		window.localStorage.clear();
-		setRole(null);
-		setUser(null);
-	}
-
 	return(
 		<UserRender user={user} edit={0} role={role} inputRef={inputRef}/>
 	);
