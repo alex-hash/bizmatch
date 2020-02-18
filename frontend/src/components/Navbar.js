@@ -109,6 +109,7 @@ class App extends React.Component {
             </button>
           </Link>
         </div>
+        <h1>Proyectos</h1>
         {this.renderButtons()}
       </nav>
     );

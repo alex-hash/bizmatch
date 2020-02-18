@@ -4,14 +4,13 @@ import Navbar from '../components/Navbar';
 import { useAuth } from '../context/auth-context';
 import { useForm } from 'react-hook-form';
 import { getProfile, getProfileOther } from '../http/userService';
-import UserRender from '../components/User' 
+import { UserRender } from '../components/User' 
 import jwt_decode from 'jwt-decode';
 
 export function User({ match }){
     const history = useHistory();
 	const { role, setRole, setCurrentUser} = useAuth();
 	const [user, setUser] = useState(null);
-	const inputRef = useRef();
 
     useEffect(() => {
 		if(match === undefined){
@@ -48,9 +47,9 @@ export function User({ match }){
 			</div>
 		);
 	}
-	
+
 	return(
-		<UserRender user={user} edit={0} role={role} inputRef={inputRef}/>
+		<UserRender user={user} edit={0} role={role}/>
 	);
 }
 
