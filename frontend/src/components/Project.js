@@ -178,7 +178,9 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
               </p>
               <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
                 <div className="flex flex-wrap align-bottom">
+                  <Link to={"/user/"+comment.user}>
                   <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
+                  </Link>
                   <div className="text-xs lg:text-sm self-center">
                     <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
                     <p className="text-grey-dark">
