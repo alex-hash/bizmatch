@@ -76,6 +76,10 @@ hr.style1 {
   background-image: url('../image/536.jpg');
 }
 
+.top-50{
+	top: 50%;			
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
 	.top-perfil{
 		position: absolute;

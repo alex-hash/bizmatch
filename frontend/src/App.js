@@ -33,9 +33,9 @@ function App() {
           <PrivateRoute exact path="/user" allowedRoles={['admin', 'E', 'M']}>
             <User />
           </PrivateRoute>
-          <Route path="/create-project">
+          <PrivateRoute exact path="/create-project" allowedRoles={['admin', 'E']}>
             <CreateProject />
-          </Route>
+          </PrivateRoute>
           <Route exact path="/projects">
             <GetProjects />
           </Route>

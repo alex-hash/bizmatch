@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 
 export function ProjectList({ projects }) {
-  console.log(projects);
   const { role, setRole, setCurrentUser } = useAuth();
   return (
     <div>
@@ -45,10 +44,10 @@ export function ProjectList({ projects }) {
                     <p class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
                     <div className="flex items-center">
                       <Link
-                        to="/user"
+                        to={"/user/"+project.user}
                         className="mt-6 block h-12 w-12 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
                       >
-                        <img className="h-full w-full object-cover" src={role.avatar_url} alt="Your avatar" />
+                        <img className="h-full w-full object-cover" src={project.avatar_url} alt="Your avatar" />
                       </Link>
                       <div className="text-sm ml-4 pt-6">
                         <p className="text-gray-900 leading-none">{project.name + ' ' + project.first_name}</p>

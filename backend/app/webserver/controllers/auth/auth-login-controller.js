@@ -49,7 +49,7 @@ async function login(req, res, next) {
     } catch (e) {
       return res.status(500).send();
     }
-
+    
     const payloadJwt = {
       avatar_url: user.avatar_url,
       userId: user.id,
