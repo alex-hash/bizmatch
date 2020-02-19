@@ -5,7 +5,6 @@ import { useAuth } from '../context/auth-context';
 
 export function Init({ projects }) {
   const { role } = useAuth();
-  console.log(role);
   return (
     <div>
       <div>

@@ -71,7 +71,6 @@ export function updateCommentProject(project) {
 }
 
 export function deleteCommentProject(commentId) {
-  console.log(commentId);
   return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/comment/delete/${commentId}`);
 }
 export function addCommentProject(project_id, data) {

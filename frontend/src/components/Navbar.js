@@ -3,10 +3,6 @@ import Sidebar from 'react-sidebar';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 import jwt_decode from 'jwt-decode';
-
-function logout(){
-  window.localStorage.clear();
-}
  
 class App extends React.Component {
   
@@ -16,6 +12,11 @@ class App extends React.Component {
       user: (this.props.role === undefined ? null : this.props.role),
       navOpen: false,
     };
+  }
+
+  logout(){
+    window.localStorage.clear();
+    window.location.href='/login';
   }
 
   enableScrolling() {
@@ -52,8 +53,13 @@ class App extends React.Component {
         </div>
       );
     }else{
-      if(this.state.user.role = "E"){
-        return(
+      return(
+        <div className="flex flex-wrap items-center">
+          <div className="flex flex-wrap font-semibold text-gray-700">
+            <h1 className="mr-6">Proyectos</h1>
+            <h1 className="mr-6">Crea tú proyecto</h1>
+            <h1 className="mr-6">HELLO</h1>
+          </div>
           <div className="relative">
             <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden">
               <img
@@ -66,31 +72,13 @@ class App extends React.Component {
             <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
               <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
               <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
+              <a className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onClick={() => this.logout()}>Cerrar Sesión</a>
             </div>
           </div>
-        );
-      }else{
-        return(
-          <div className="relative">
-            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-48 w-48 rounded-full overflow-hidden border-2 border-gol">
-              <img
-                className="h-full w-full object-cover"
-                src={this.state.user.avatar_url}
-                alt="Your avatar"
-              />
-            </button>
-            {this.renderButtonDrop()}
-            <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
-              <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Cerrar Sesión</a>
-            </div>
-          </div>
-        );
-      }
+        </div>
+      );
     }
-  }
+}
 
   render() {
     return (
@@ -109,7 +97,6 @@ class App extends React.Component {
             </button>
           </Link>
         </div>
-        <h1>Proyectos</h1>
         {this.renderButtons()}
       </nav>
     );

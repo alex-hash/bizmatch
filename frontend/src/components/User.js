@@ -6,21 +6,9 @@ import { updateProfile, updateAvatar } from '../http/userService';
 import jwt_decode from 'jwt-decode';
 
 
-export function UserRender({ user, role, edit }) {
-
-	const { setRole } = useAuth();
-
-	function userReducer(state, action) {
-		switch (action.type) {
-		  case 'EDIT':
-			return { ...state, edit: action.edit};
-		  default:
-			return state;
-		}
-	}
-	const [state, dispatch] = useReducer(userReducer, {
-		edit: 0
-	});
+export function UserRender({ user, edit, dispatch }) {
+	
+	const { role } = useAuth();
 
 	const [estado, setState] = useState({
 		company_name: user.company_name, 
@@ -169,12 +157,10 @@ export function UserRender({ user, role, edit }) {
 		let city = "sadsad";
 		let promise1 = updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type, description});
 		if(typeof data.get('avatar') === "string"){
-			promise1.then(() => window.location.href = '/user');
+			promise1.then(() => dispatch({ type: 'EDIT', edit: 0}));
 		}else{
-			Promise.all([promise1, updateAvatar(data)]).then(() => {setRole(estado.avatar); window.location.href = '/user'});
+			Promise.all([promise1, updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))]).then(() => { dispatch({ type: 'EDIT', edit: 0}); });
 		}
-		
-		
 	}
 
 	function something(edit){
@@ -307,7 +293,7 @@ export function UserRender({ user, role, edit }) {
 								name="company_role"
 								type="text"
 								className="shadow appearance-none border rounded py-2 px-3 mb-2 ml-2 mt-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-								placeholder="Cargo que ocupas en tú empresa"
+								placeholder="Cargo en tú empresa"
 								onChange={onChange}
 								></input>
 							</div>
@@ -378,7 +364,7 @@ export function UserRender({ user, role, edit }) {
 
 	return(
 		<div>
-			{something(state.edit)}
+			{something(edit)}
 		</div>
 	);
 }   
