@@ -45,7 +45,8 @@ export function CreateProject() {
   const { role, setRole, setCurrentUser } = useAuth();
 
   const onSubmit = (e) => {
-    const data = e.image_url;
+    e.preventDefault();
+    const data = new FormData();
     data.append(this.state.picture);
     let promise1;
     Promise.all([promise1, addPictureProject(data)]).then(() => (window.location.href = '/create-project'));
