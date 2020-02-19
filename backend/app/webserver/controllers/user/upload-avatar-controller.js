@@ -3,6 +3,7 @@
 const Joi = require('@hapi/joi');
 const cloudinary = require('cloudinary').v2;
 const mysqlPool = require('../../../database/mysql-pool');
+const jwt = require('jsonwebtoken');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -61,14 +62,45 @@ async function uploadAvatar(req, res, next) {
         let connection;
         try {
           const sqlQuery = `UPDATE user
-      SET avatar_url = ?
-      WHERE id = ?`;
+          SET avatar_url = ?
+          WHERE id = ?`;
+          const sqlQuery2 = `SELECT id, email, password, avatar_url, type
+          FROM user
+          WHERE id = ?`;
           connection = await mysqlPool.getConnection();
           connection.execute(sqlQuery, [secureUrl, userId]);
           connection.release();
+          
+          connection = await mysqlPool.getConnection();
+          const [rows] = await connection.execute(sqlQuery2, [userId]);
+          connection.release();
+
+          if (rows.length !== 1) {
+            res.status(401).send();
+          }
+
+          const user = rows[0];
+
+          const payloadJwt = {
+            avatar_url: secureUrl,
+            userId: userId,
+            email: user.email,
+            role: user.type
+          };
+
+          const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);
+          const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, {
+            expiresIn: jwtExpiresIn
+          });
 
           res.header('Location', secureUrl);
-          return res.status(201).send();
+
+          return res.send({
+            accessToken: token,
+            avatarUrl: secureUrl,
+            expiresIn: jwtExpiresIn
+          });
+
         } catch (e) {
           if (connection) {
             connection.release();

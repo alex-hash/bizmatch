@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/auth-context';
@@ -8,9 +8,20 @@ import { UserRender } from '../components/User'
 import jwt_decode from 'jwt-decode';
 
 export function User({ match }){
-    const history = useHistory();
-	const { role, setRole, setCurrentUser} = useAuth();
+	const { setRole, setCurrentUser} = useAuth();
 	const [user, setUser] = useState(null);
+
+	function userReducer(state, action) {
+		switch (action.type) {
+		  case 'EDIT':
+			return { ...state, edit: action.edit};
+		  default:
+			return state;
+		}
+	}
+	const [state, dispatch] = useReducer(userReducer, {
+		edit: 0
+	});
 
     useEffect(() => {
 		if(match === undefined){
@@ -36,7 +47,7 @@ export function User({ match }){
 				}
 			});;
 		}
-	}, [role]);
+	}, [user]);
 
 	if(user === null){
 		return(
@@ -46,10 +57,12 @@ export function User({ match }){
 				</span>
 			</div>
 		);
+	}else{
+		return(
+			<UserRender user={user} edit={state.edit} dispatch={dispatch}/>
+		);
 	}
 
-	return(
-		<UserRender user={user} edit={0} role={role}/>
-	);
+	
 }
 

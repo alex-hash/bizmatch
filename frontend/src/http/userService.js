@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const storedUser = JSON.parse(localStorage.getItem('currentUser'));
 let token = (storedUser && storedUser.accessToken) || null;
-const CancelToken = axios.CancelToken;
 
 axios.interceptors.request.use(
   function(config) {
