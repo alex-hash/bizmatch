@@ -22,7 +22,8 @@ export function GetProject({ match }) {
 
   const [state, dispatch] = useReducer(projectReducer, {
     project: [],
-    comments: []
+    comments: [],
+    edit: 0
   });
 
   let promiseProject = getProject(match.params.projectId);
@@ -33,12 +34,6 @@ export function GetProject({ match }) {
       dispatch({ type: 'GET_PROJECT_SUCCESS', project: response[0].data.data, comments: response[1].data.data });
     });
   }, []);
-
-  const handleSaveNote = (project) => {
-    updateProject(project).then((response) => {
-      dispatch({ type: 'UPDATE_PROJECT', project: response.data });
-    });
-  };
 
   const handleDeleteProject = (project) => {
     deleteProject(project).then(() => {
@@ -52,7 +47,8 @@ export function GetProject({ match }) {
       project={state.project}
       comments={state.comments}
       projectId={match.params.projectId}
-      onUpdateProject={(project) => handleSaveNote(project)}
+      onUpdateProject={state.edit}
+      dispatch={dispatch}
       onDeleteProject={(project) => handleDeleteProject(project)}
     />
   );

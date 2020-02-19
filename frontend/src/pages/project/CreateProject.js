@@ -47,7 +47,7 @@ export function CreateProject() {
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append(this.state.picture);
+    data.append(state.picture);
     let promise1;
     Promise.all([promise1, addPictureProject(data)]).then(() => (window.location.href = '/create-project'));
   };
@@ -59,7 +59,7 @@ export function CreateProject() {
       <div className="w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center">
         <form
           className="w-screen mt-2 h-full bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 mx-4"
-          onSubmit={handleSubmit(handleCreateProject, onSubmit)}
+          onSubmit={handleSubmit(handleCreateProject)}
           noValidate
         >
           <div className="mb-4">
