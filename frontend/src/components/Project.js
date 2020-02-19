@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/auth-context';
 import { addCommentProject, deleteCommentProject } from '../http/projectService';
 
-export function Project({ project, comments, projectId, onDeleteProject }) {
+export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject }) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -98,22 +98,14 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
     if (project[0].user === actual_user) {
       return (
         <div className="text-xs flex flex-wrap justify-end p-3">
-          <Link
-            to={{
-              pathname: '/edite-project',
-              query: {
-                id: project.id,
-                title: project.title,
-                subtitle: project.subtitle,
-                category: project.category,
-                ubication: project.ubication,
-                text: project.text
-              }
+          <button
+            onClick={() => {
+              onUpdateProject(project);
             }}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
           >
             Editar
-          </Link>
+          </button>
           <button
             onClick={() => {
               onDeleteProject(project.id);
@@ -134,11 +126,11 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
 
   const handleSend = (formData) => {
     return addCommentProject(projectId, formData).catch((error) => {
-      if(error.response.status === 401){
+      if (error.response.status === 401) {
         setRole(null);
         setUser(null);
       }
-    });;
+    });
   };
 
   return (
