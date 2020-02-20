@@ -6,10 +6,10 @@ import { useAuth } from '../context/auth-context';
 import { addCommentProject, deleteCommentProject, updateProject, addPictureProject } from '../http/projectService';
 
 export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject, dispatch }) {
+  console.log(project);
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
-
   const { role, setRole, setUser } = useAuth();
   /*
   const [state, setState] = useState({
@@ -162,7 +162,44 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
-  function something(onUpdateProject) {
+  function showComments() {
+    if (comments !== null) {
+      return (
+        <div className="border-gray-200 border-2 mx-2 bg-white rounded mb-4 md:mt-20 lg:mx-24 ">
+          <h1 className="font-bold p-2">Comentarios más recientes</h1>
+          {comments.map((comment, index) => (
+            <React.Fragment key={comment.id}>
+              <hr className="style1 mb-2" />
+              <div className="break-all w-full" id={index}>
+                <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
+                  {comment.text}
+                </p>
+                <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
+                  <div className="flex flex-wrap align-bottom">
+                    <Link to={'/user/' + comment.user}>
+                      <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
+                    </Link>
+                    <div className="text-xs lg:text-sm self-center">
+                      <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
+                      <p className="text-grey-dark">
+                        {comment.updated_at === null
+                          ? comment.created_at.replace('T', ' ').substring(0, 16)
+                          : comment.updated_at.replace('T', ' ').substring(0, 16)}
+                      </p>
+                    </div>
+                  </div>
+                  {renderButtons(comment, index)}
+                </div>
+              </div>
+            </React.Fragment>
+          ))}
+          {renderNewComment()}
+        </div>
+      );
+    }
+  }
+
+  function something(onUpdateProject, projectC) {
     if (onUpdateProject === 0) {
       return (
         <div>
@@ -202,36 +239,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
             ))}
           </div>
           <hr className="style1 mb-4 md:mb-0  mx-12 md:hidden" />
-          <div className="border-gray-200 border-2 mx-2 bg-white rounded mb-4 md:mt-20 lg:mx-24 ">
-            <h1 className="font-bold p-2">Comentarios más recientes</h1>
-            {comments.map((comment, index) => (
-              <React.Fragment key={comment.id}>
-                <hr className="style1 mb-2" />
-                <div className="break-all w-full" id={index}>
-                  <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
-                    {comment.text}
-                  </p>
-                  <div className="flex flex-wrap bg-gray-100 px-2 py-4 justify-between w-full">
-                    <div className="flex flex-wrap align-bottom">
-                      <Link to={'/user/' + comment.user}>
-                        <img className="w-10 h-10 rounded-full mr-4" src={comment.avatar_url} alt="Avatar" />
-                      </Link>
-                      <div className="text-xs lg:text-sm self-center">
-                        <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
-                        <p className="text-grey-dark">
-                          {comment.updated_at === null
-                            ? comment.created_at.replace('T', ' ').substring(0, 16)
-                            : comment.updated_at.replace('T', ' ').substring(0, 16)}
-                        </p>
-                      </div>
-                    </div>
-                    {renderButtons(comment, index)}
-                  </div>
-                </div>
-              </React.Fragment>
-            ))}
-            {renderNewComment()}
-          </div>
+          {showComments()}
         </div>
       );
     } else {
@@ -252,7 +260,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                 </label>
                 <p className="text-md text-gray-700 mb-2"></p>
                 <input
-                  defaultValue={project.title}
+                  defaultValue={projectC.title}
                   ref={register({
                     required: '*El título es necesario',
                     maxLength: {
@@ -274,7 +282,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                 </label>
                 <p className="text-md text-gray-700 mb-2"></p>
                 <input
-                  defaultValue={project.subtitle}
+                  defaultValue={projectC.subtitle}
                   ref={register({
                     required: '*El subtítulo es necesario',
                     maxLength: {
@@ -295,7 +303,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                   Categoría del proyecto
                 </label>
                 <select
-                  defaultValue={project.category}
+                  defaultValue={projectC.category}
                   ref={register({
                     required: '*La categoría es necesaria'
                   })}
@@ -329,7 +337,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                 </label>
                 <p className="text-sm text-gray-700 mb-2"></p>
                 <input
-                  defaultValue={project.ubication}
+                  defaultValue={projectC.ubication}
                   ref={register({
                     required: '*La ubicación es necesaria',
                     maxLength: {
@@ -351,7 +359,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                 </label>
                 <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
                 <textarea
-                  defaultValue={project.text}
+                  defaultValue={projectC.text}
                   ref={register({
                     required: '*El contenido es necesario'
                   })}
@@ -396,5 +404,5 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
-  return <div>{something(onUpdateProject)}</div>;
+  return <div>{something(onUpdateProject, project[0])}</div>;
 }
