@@ -132,6 +132,12 @@ export function UserRender({ user, edit, dispatch }) {
 		}
 	}
 
+	function buttonEdit(){
+		if(role.email === user.email){
+			return (<span>- <button className="text-blue-500" onClick={() => dispatch({ type: 'EDIT', edit: 1})}>Editar Perfil</button></span>);
+		}
+	}
+
 	function onChange(e) {
 		setState({...estado, [e.target.name]: e.target.value });
 	}
@@ -193,7 +199,7 @@ export function UserRender({ user, edit, dispatch }) {
 						</div>
 						<div className="px-6 md:p-0 md:w-2/3 xl:w-2/5 lg:w-2/5 xl:pl-20 lg:pl-20 w-full">
 							<h1 class="font-bold text-5xl sm:px-2 break-all mr-0 mr-48-t md:mr-48 lg:mr-0">{user.name+" "+user.first_name}</h1>
-							<p className="text-gray-700 sm:px-2">Se registró en {user.created_at !== undefined ?  user.created_at.substring(0, 4): ""} - <button className="text-blue-500" onClick={() => dispatch({ type: 'EDIT', edit: 1})}>Editar Perfil</button></p>
+							<p className="text-gray-700 sm:px-2">Se registró en {user.created_at !== undefined ?  user.created_at.substring(0, 4): ""} {buttonEdit()}</p>
 							{descriptionNote(user.description)}
 							<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <a className="text-blue-500 text-base font-normal">Ver todos los proyectos</a></h1> 
 							<div className="flex flex-wrap self-end">

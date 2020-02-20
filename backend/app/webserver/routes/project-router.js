@@ -2,7 +2,10 @@
 
 const express = require('express');
 const checkAccountSession = require('../controllers/account/check-account-session');
+const multer = require('multer');
+const upload = multer();
 
+const addPictureProject = require('../controllers/project/add-picture-project-controller');
 const createProject = require('../controllers/project/create-project-controller');
 const getProject = require('../controllers/project/get-project-controller');
 const getProjects = require('../controllers/project/get-projects-controller');
@@ -12,6 +15,7 @@ const getProjectsFilter = require('../controllers/project/get-projects-category-
 const getProjectsInit = require('../controllers/project/get-projects-init-controller.js');
 
 const router = express.Router();
+router.post('/project/picture', checkAccountSession, upload.single('picture'), addPictureProject);
 
 router.post('/project', checkAccountSession, createProject);
 router.get('/project/filter/:category', checkAccountSession, getProjectsFilter);

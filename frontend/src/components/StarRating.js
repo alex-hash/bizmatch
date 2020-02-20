@@ -13,7 +13,7 @@ class StarRating extends React.Component {
  
   onStarClick(nextValue, prevValue, name) {
     this.setState({rating: nextValue});
-    createAssesment(this.props.project, {type:nextValue}).then((response) => console.log(response));
+    createAssesment(this.props.project, {type:nextValue}).then();
    
   }
  

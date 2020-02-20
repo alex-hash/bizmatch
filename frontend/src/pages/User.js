@@ -8,7 +8,7 @@ import { UserRender } from '../components/User'
 import jwt_decode from 'jwt-decode';
 
 export function User({ match }){
-	const { setRole, setCurrentUser} = useAuth();
+	const { role, setRole, setCurrentUser} = useAuth();
 	const [user, setUser] = useState(null);
 
 	function userReducer(state, action) {
@@ -47,7 +47,7 @@ export function User({ match }){
 				}
 			});;
 		}
-	}, [user]);
+	}, []);
 
 	if(user === null){
 		return(
@@ -59,7 +59,7 @@ export function User({ match }){
 		);
 	}else{
 		return(
-			<UserRender user={user} edit={state.edit} dispatch={dispatch}/>
+			<UserRender user={user} edit={state.edit} dispatch={dispatch} role={role}/>
 		);
 	}
 
