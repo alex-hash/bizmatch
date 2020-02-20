@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/auth-context';
 import { addCommentProject, deleteCommentProject } from '../http/projectService';
+import StarRating from '../components/StarRating';
 
 export function Project({ project, comments, projectId, onDeleteProject }) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
@@ -42,6 +43,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
 
   function renderNewComment() {
     if (role !== null) {
+      if(role.role === "M"){
       return (
         <div>
           <hr className="style1 mb-2" />
@@ -90,6 +92,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
           </div>
         </div>
       );
+    }
     }
   }
 
@@ -149,6 +152,7 @@ export function Project({ project, comments, projectId, onDeleteProject }) {
       <div className="">
         {project.map((project, index) => (
           <div key={project.id} className=" break-all rounded  md:mx-18 lg:mx-24  mt-nav">
+            <StarRating project={project.id}></StarRating>
             <div className=" p-4 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
               {project.title}
             </div>

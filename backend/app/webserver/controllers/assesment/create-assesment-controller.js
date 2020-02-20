@@ -49,15 +49,24 @@ async function createAssesment(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    await connection.query('INSERT INTO assesment SET ?', {
-      id: assesmentId,
-      type: assesmentData.type,
-      created_at: createdAtNow,
-      user_id: userId,
-      project_id: projectId
-    });
-    connection.release();
-    res.status(201).send();
+    const sqlQuery = `SELECT * FROM assesment WHERE user_id = ? AND project_id = ?`
+    const [rows] = await connection.execute(sqlQuery, [userId, projectId]);
+    if(rows.length === 1){
+      const sqlQuery2 = `UPDATE assesment SET type=?, updated_at=? WHERE user_id = ? AND project_id = ?`;
+      await connection.execute(sqlQuery2, [assesmentData.type, createdAtNow, userId, projectId]);
+      connection.release();
+      res.status(204).send();
+    }else{
+      await connection.query('INSERT INTO assesment SET ?', {
+        id: assesmentId,
+        type: assesmentData.type,
+        created_at: createdAtNow,
+        user_id: userId,
+        project_id: projectId
+      });
+      connection.release();
+      res.status(201).send();
+    }
   } catch (e) {
     if (connection) {
       connection.release();

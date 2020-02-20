@@ -75,3 +75,7 @@ export function addCommentProject(project_id, data) {
 export function getCommentsProject(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/comment/${project}`);
 }
+
+export function createAssesment(project, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data)
+}
