@@ -8435,6 +8435,10 @@ hr.style1 {
 }
 
 @media (min-width: 550px) and (max-width: 767px) {
+  .mr-48-t{
+    margin-right: 12rem;
+  }
+
   .top-perfil{
     position: absolute;
     top: 120px;
