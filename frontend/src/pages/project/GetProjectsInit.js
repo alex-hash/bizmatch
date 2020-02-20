@@ -3,10 +3,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getProjectsInit } from '../../http/projectService';
 import { Init } from '../Init';
+import { useAuth } from '../../context/auth-context';
 
 
 export function GetProjectsInit() {
   const [projects, setProjects] = useState(null);
+
+  const { role } = useAuth();
 
   useEffect(() => {
     getProjectsInit().then((response) => setProjects(response.data));
@@ -22,5 +25,5 @@ export function GetProjectsInit() {
 		);
   }
   
-  return <Init projects={projects} />;
+  return <Init projects={projects} role={role} />;
 }

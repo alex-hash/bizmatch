@@ -5,6 +5,20 @@ import { useAuth } from '../context/auth-context';
 
 export function ProjectList({ projects, searchText, onSearchTextChanged }) {
   const { role, setRole, setCurrentUser } = useAuth();
+
+  function displayButtonCreate(role){
+    if(role === "E"){
+      return(
+        <a
+          href="/create-project"
+          className="mt-4 md:mt-0 bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Crear proyecto
+        </a>
+      )
+    }
+  }
+
   return (
     <div>
       <div>
@@ -18,12 +32,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
           placeholder="Busca por nombre,categoría..."
           onChange={(e) => onSearchTextChanged(e.target.value)}
         />
-        <a
-          href="/create-project"
-          className="mt-4 md:mt-0 bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Crear proyecto
-        </a>
+        {displayButtonCreate(role.role)}
       </div>
       <div class="mt-6">
         <div class="px-4 sm:mx-10">

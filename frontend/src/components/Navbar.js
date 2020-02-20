@@ -52,13 +52,12 @@ class App extends React.Component {
           <Link to="/register" className="relative text-black font-bold py-2 px-4 border-b-0 rounded link">Registro</Link>
         </div>
       );
-    }else{
+    }else if(this.state.user.role === "E"){
       return(
         <div className="flex flex-wrap items-center">
-          <div className="flex flex-wrap font-semibold text-gray-700">
-            <h1 className="mr-6">Proyectos</h1>
-            <h1 className="mr-6">Crea tú proyecto</h1>
-            <h1 className="mr-6">HELLO</h1>
+          <div className="flex flex-wrap">
+            <Link to="/projects" className="hidden sm:inline relative mr-4 text-black font-bold py-2 px-4 border-b-0 rounded">Proyectos</Link>
+            <Link to="/create-project" className="hidden sm:inline relative mr-4 text-black font-bold py-2 px-4 border-b-0 rounded">Crea tú proyecto</Link>
           </div>
           <div className="relative">
             <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden">
@@ -71,8 +70,34 @@ class App extends React.Component {
             {this.renderButtonDrop()}
             <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
               <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
+              <a href="/projects" className="block sm:hidden px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Proyectos</a>
+              <a href="/create-project" className="block sm:hidden px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Crea tú proyecto</a>
               <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
-              <a className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onClick={() => this.logout()}>Cerrar Sesión</a>
+              <a href="#"className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onClick={() => this.logout()}>Cerrar Sesión</a>
+            </div>
+          </div>
+        </div>
+      );
+    }else if(this.state.user.role === "M"){
+      return(
+        <div className="flex flex-wrap items-center">
+          <div className="flex flex-wrap">
+            <Link to="/projects" className="hidden sm:inline relative mr-4 text-black font-bold py-2 px-4 border-b-0 rounded">Proyectos</Link>
+          </div>
+          <div className="relative">
+            <button onClick={() => this.enableDrop(true)} className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gold">
+              <img
+                className="h-full w-full object-cover"
+                src={this.state.user.avatar_url}
+                alt="Your avatar"
+              />
+            </button>
+            {this.renderButtonDrop()}
+            <div id="dropdown" className="z-20 hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg py-2 shadow-xl">
+              <a href="/user" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Perfil</a>
+              <a href="/projects" className="block sm:hidden px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Proyectos</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Configuración</a>
+              <a href="#"className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" onClick={() => this.logout()}>Cerrar Sesión</a>
             </div>
           </div>
         </div>
