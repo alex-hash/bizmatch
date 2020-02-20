@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
+import { addPictureProject } from '../../http/projectService';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -42,6 +43,14 @@ export function CreateProject() {
     });
   };
   const { role, setRole, setCurrentUser } = useAuth();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append(state.picture);
+    let promise1;
+    Promise.all([promise1, addPictureProject(data)]).then(() => (window.location.href = '/create-project'));
+  };
   return (
     <div>
       <div>
@@ -158,7 +167,7 @@ export function CreateProject() {
               ref={register({
                 required: '*El contenido es necesario'
               })}
-              className="h-64 relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+              className="md:text-lg h-64 relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
               id="text"
               rows="6"
               type="text"
@@ -167,8 +176,18 @@ export function CreateProject() {
             ></textarea>
             {errors.text && <span className="error-validate">{errors.text.message}</span>}
           </div>
-
-          <div className="flex items-center justify-center">
+          <div>
+            <label className="block text-gray-700 text-sm font-bold" for="content">
+              Imagen del proyecto
+            </label>
+            <input
+              type="file"
+              id="image_url"
+              name="image_url"
+              className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mt-8 flex items-center justify-center">
             <button
               className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
               type="submit"

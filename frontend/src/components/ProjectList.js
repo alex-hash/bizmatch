@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 
-export function ProjectList({ projects }) {
+export function ProjectList({ projects, searchText, onSearchTextChanged }) {
   const { role, setRole, setCurrentUser } = useAuth();
 
   function displayButtonCreate(role){
@@ -27,8 +27,10 @@ export function ProjectList({ projects }) {
       <div className="mt-4 flex flex-wrap justify-around md:justify-between px-4 sm:mx-12">
         <input
           type="search"
+          value={searchText}
           class="w-full md:w-1/2 shadow appearance-none border rounded p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Busca por nombre,categoría..."
+          onChange={(e) => onSearchTextChanged(e.target.value)}
         />
         {displayButtonCreate(role.role)}
       </div>
@@ -53,7 +55,7 @@ export function ProjectList({ projects }) {
                     <p class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
                     <div className="flex items-center">
                       <Link
-                        to={"/user/"+project.user}
+                        to={'/user/' + project.user}
                         className="mt-6 block h-12 w-12 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
                       >
                         <img className="h-full w-full object-cover" src={project.avatar_url} alt="Your avatar" />
