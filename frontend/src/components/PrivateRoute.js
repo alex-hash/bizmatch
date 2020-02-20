@@ -5,11 +5,27 @@ import Swal from 'sweetalert2'
 
 export function PrivateRoute({ children, allowedRoles, ...others }) {
   const { role } = useAuth();
+  function loginOrNot(){
+    if(role===null){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Tú token de sesión ha expirado'
+      });
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Tú rol no te permite acceder a este contenido'
+      });
+    }
+  }
   return (
     <React.Fragment>
       {(role !== null ? allowedRoles.includes(role.role) : false) ? (<Route {...others}>{children}</Route>
       ) : (
-        <Redirect to="/login" />
+        loginOrNot(),
+        <Redirect to="/"/>
       )}
     </React.Fragment>
 );

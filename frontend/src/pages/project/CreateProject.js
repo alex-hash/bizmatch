@@ -47,9 +47,10 @@ export function CreateProject() {
       <div>
         <Navbar role={role} />
       </div>
-      <div className="w-full md:p-6 bg-white flex flex-wrap justify-center md:justify-center md:items-center">
+      <div className="flex flex-wrap justify-center">
+      <div className="w-full lg:w-1/2 p-6 bg-white ">
         <form
-          className="w-screen mt-2 h-full bg-white md:shadow-md md:rounded px-8 pt-6 pb-8 mb-4 mx-4"
+          className="w-full mt-2 h-full bg-white md:shadow-md md:rounded px-6 pb-8 mb-4"
           onSubmit={handleSubmit(handleCreateProject)}
           noValidate
         >
@@ -177,6 +178,7 @@ export function CreateProject() {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

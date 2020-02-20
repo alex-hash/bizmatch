@@ -3,8 +3,7 @@ import Navbar from '../components/Navbar';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 
-export function Init({ projects }) {
-  const { role } = useAuth();
+export function Init({ projects, role }) {
   return (
     <div>
       <div>

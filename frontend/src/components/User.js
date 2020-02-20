@@ -192,7 +192,7 @@ export function UserRender({ user, edit, dispatch }) {
 							</div>
 						</div>
 						<div className="px-6 md:p-0 md:w-2/3 xl:w-2/5 lg:w-2/5 xl:pl-20 lg:pl-20 w-full">
-							<h1 class="font-bold text-5xl sm:px-2 break-all">{user.name+" "+user.first_name}</h1>
+							<h1 class="font-bold text-5xl sm:px-2 break-all mr-0 mr-48-t md:mr-48 lg:mr-0">{user.name+" "+user.first_name}</h1>
 							<p className="text-gray-700 sm:px-2">Se registró en {user.created_at !== undefined ?  user.created_at.substring(0, 4): ""} - <button className="text-blue-500" onClick={() => dispatch({ type: 'EDIT', edit: 1})}>Editar Perfil</button></p>
 							{descriptionNote(user.description)}
 							<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <a className="text-blue-500 text-base font-normal">Ver todos los proyectos</a></h1> 
@@ -330,7 +330,7 @@ export function UserRender({ user, edit, dispatch }) {
 							</div>
 						</div>
 						<div className="px-6 md:p-0 md:w-2/3 xl:w-2/5 lg:w-2/5 xl:pl-20 lg:pl-20 w-full">
-							<h1 class="font-bold text-5xl break-all">{user.name+" "+user.first_name}</h1>
+							<h1 class="font-bold text-5xl break-all mr-0 mr-48-t md:mr-48 lg:mr-0">{user.name+" "+user.first_name}</h1>
 							<p className="text-gray-700">Se registró en {user.created_at !== undefined ? user.created_at.substring(0, 4): ""}</p>
 							<img className="mt-4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAABcklEQVRIie2VsUvDQBSHv9cUHUqhi4i4+B8IzSvUrSC4dLAuOrs5OIpjoThawf/A0UnQwamDLkKh14Bzwc3ByR7oIjTnYITSVE2qxUG/JeTHu/fl7rgc/JMCGRcGQbAahmEDWEjb0Dm3UyqVWsNZdrSo3W7Ph2F4AVjgJopLwCJwPlRaA+6BTvQ+B1REJDfaMybxPM8HcsCWql4CGGNOgJqqbr7XGWMegWtV3QbodDoVEamMm11mNBCRmWjaz+MGTEJMMg1iy/UZvV5vtt/v7xUKhaa1dioSz1p7JiJVa+0K4E1DkgeqQCt6JibtntRVdU1E9qclqavqAYDv+4dpRImWK5PJHBeLxdvhzPf9wyAIlhONT1I0Kvgqn0jyXX73MIrIkTHGpeiVTy0BlkQkSGpw7uPviUmccy8ignNuV1VPk0qiv/BVIslgMOhms9knEWkaYzaSSni7T8YSk5TL5Ydut7vunGsAfgoJwN1PXhF/lFdP03Cy/K3aIgAAAABJRU5ErkJggg=="/>
 							<h1 className="font-semibold mb-2">Acerca de</h1>
