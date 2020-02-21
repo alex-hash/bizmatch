@@ -6,16 +6,16 @@ import { useAuth } from '../context/auth-context';
 export function ProjectList({ projects, searchText, onSearchTextChanged }) {
   const { role, setRole, setCurrentUser } = useAuth();
 
-  function displayButtonCreate(role){
-    if(role === "E"){
-      return(
+  function displayButtonCreate(role) {
+    if (role === 'E') {
+      return (
         <a
           href="/create-project"
           className="mt-4 md:mt-0 bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
         >
           Crear proyecto
         </a>
-      )
+      );
     }
   }
 
@@ -40,11 +40,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
             {projects.map((project) => (
               <div class="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                 <div class="bg-white rounded-lg overflow-hidden shadow">
-                  <img
-                    class="h-48 w-full object-cover object-center"
-                    src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
-                    alt=""
-                  />
+                  <img class="h-48 w-full object-cover object-center" src={project.image_url} alt="Foto de Proyecto" />
                   <div class="p-4 h-auto md:h-48 mt-2">
                     <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                       {project.title}

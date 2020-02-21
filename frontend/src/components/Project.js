@@ -47,53 +47,53 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
 
   function renderNewComment() {
     if (role !== null) {
-      if(role.role === "M"){
-      return (
-        <div className="w-full p-2">
-          <h1 className="font-bold mt-2">Nuevo comentario</h1>
-          <div className="w-full ">
-            <form
-              className="bg-white md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 border-gray-200 border-2"
-              onSubmit={handleSubmit(handleSend)}
-              noValidate
-            >
-              <div>
-                <textarea
-                  ref={register({
-                    required: '*El contenido es necesario',
-                    maxLength: {
-                      message: '*El comentario no debe exceder los 200 caracteres',
-                      value: 200
-                    }
-                  })}
-                  className="resize-none shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="text"
-                  rows="6"
-                  type="text"
-                  name="text"
-                  placeholder=""
-                ></textarea>
-                {errors.text && <span className="error-validate">{errors.text.message}</span>}
-              </div>
-              <div className="flex flex-wrap px-2 py-4 justify-between w-full">
-                <div className="flex flex-wrap align-bottom">
-                  <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
-                  <p className="text-black text-sm leading-none self-center">{role.email}</p>
+      if (role.role === 'M') {
+        return (
+          <div className="w-full p-2">
+            <h1 className="font-bold mt-2">Nuevo comentario</h1>
+            <div className="w-full ">
+              <form
+                className="bg-white md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 border-gray-200 border-2"
+                onSubmit={handleSubmit(handleSend)}
+                noValidate
+              >
+                <div>
+                  <textarea
+                    ref={register({
+                      required: '*El contenido es necesario',
+                      maxLength: {
+                        message: '*El comentario no debe exceder los 200 caracteres',
+                        value: 200
+                      }
+                    })}
+                    className="resize-none shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="text"
+                    rows="6"
+                    type="text"
+                    name="text"
+                    placeholder=""
+                  ></textarea>
+                  {errors.text && <span className="error-validate">{errors.text.message}</span>}
                 </div>
-                <div className="text-xs self-end mt-2">
-                  <button
-                    onClick={refreshPage}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded"
-                  >
-                    Enviar
-                  </button>
+                <div className="flex flex-wrap px-2 py-4 justify-between w-full">
+                  <div className="flex flex-wrap align-bottom">
+                    <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
+                    <p className="text-black text-sm leading-none self-center">{role.email}</p>
+                  </div>
+                  <div className="text-xs self-end mt-2">
+                    <button
+                      onClick={refreshPage}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded"
+                    >
+                      Enviar
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      );
-    }
+        );
+      }
     }
   }
 
@@ -137,8 +137,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     });
   };
 
-  function onSubmit(e) {
-    e.preventDefault();
+  function onSubmit() {
     const data = new FormData();
     /*  data.append('picture', state.picture);*/
     const { title, subtitle, ubication, category, text, image_url } = project;
@@ -169,7 +168,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
           <h1 className="font-bold p-2">Comentarios más recientes</h1>
           {comments.map((comment, index) => (
             <React.Fragment key={comment.id}>
-              <hr className="style1 mb-2"/>
+              <hr className="style1 mb-2" />
               <div className="break-all w-full bg-white border-gray-200 border-2 mx-2" id={index}>
                 <div className="flex flex-wrap py-4 justify-between w-full">
                   <div className="flex flex-wrap align-bottom">
@@ -188,7 +187,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                   {renderButtons(comment, index)}
                 </div>
                 <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
-                    {comment.text}
+                  {comment.text}
                 </p>
               </div>
             </React.Fragment>
@@ -207,58 +206,63 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
             <Navbar role={role} />
           </div>
           <div className="flex flex-wrap">
-          <div className="md:w-1/5"></div>
-          <div className="md:w-3/5">
-            {project.map((project, index) => (
-              <div key={project.id} className="break-all rounded mx-4 md:mx-0">
-                <div className="p-2 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
-                  {project.title}
-                </div>
-                <div className="text-center font-serif text:l lg:text-xl tracking-wide ">
-                  {project.subtitle}
-                </div>
-                <div className="flex flex-wrap mt-4 md:mt-10">
-                  <div className="lg:w-1/2 -mx-4 md:mx-0">
-                    <div class="bg-white md:rounded-lg overflow-hidden">
-                      <img
-                        class="lg:p-0 w-full "
-                        src="https://images.unsplash.com/photo-1457282367193-e3b79e38f207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1654&q=80"
-                        alt=""
-                      />
-                    </div>
+            <div className="md:w-1/5"></div>
+            <div className="w-full md:w-3/5">
+              {project.map((project, index) => (
+                <div key={project.id} className="break-all rounded mx-4 md:mx-0">
+                  <div className="p-2 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
+                    {project.title}
                   </div>
-                  <div className="order-2 lg:order-3">
-                    <h1 className="font-bold w-full mt-6">Decripción del Proyecto</h1>
-                    <div className="px-1 w-full">
-                      <div className="text-gray-600 font-semibold text-sm mt-2 w-full">Ubicación: {project.ubication}</div>
-                      <div className="text-gray-600 font-semibold text-sm mb-2 w-full">Categoría: {project.category}</div>
+                  <div className="text-center font-serif text:l lg:text-xl tracking-wide ">{project.subtitle}</div>
+                  <div className="flex flex-wrap mt-4 md:mt-10">
+                    <div className="lg:w-1/2 -mx-4 md:mx-0">
+                      <div class="bg-white md:rounded-lg overflow-hidden">
+                        <img class="lg:p-0 w-full " src={project.image_url} alt="Foto de mi Proyecto" />
+                      </div>
                     </div>
-                    <p className="text-gray-700 text-lg">{project.text}</p>
-                  </div>
-                  <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">
-                    <div className="border-grey-400">
-                      <h1 className="text-black font-semibold text-2xl text-center">Perfil del creador</h1>
-                      <div className="flex flex-wrap justify-center mt-4">
-                        <Link
+                    <div className="order-2 lg:order-3">
+                      <h1 className="font-bold w-full mt-6">Decripción del Proyecto</h1>
+                      <div className="px-1 w-full">
+                        <div className="text-gray-600 font-semibold text-sm mt-2 w-full">
+                          Ubicación: {project.ubication}
+                        </div>
+                        <div className="text-gray-600 font-semibold text-sm mb-2 w-full">
+                          Categoría: {project.category}
+                        </div>
+                      </div>
+                      <p className="text-gray-700 text-lg">{project.text}</p>
+                    </div>
+                    <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">
+                      <div className="border-grey-400">
+                        <h1 className="text-black font-semibold text-2xl text-center">Perfil del creador</h1>
+                        <div className="flex flex-wrap justify-center mt-4">
+                          <Link
                             to={'/user/' + project.user}
                             className="block h-20 w-20 rounded-full overflow-hidden focus:outline-none focus:border-white "
                           >
                             <img className="h-full w-full object-cover" src={project.avatar_url} alt="Your avatar" />
-                        </Link>
-                        <div className="text-black font-semibold text-center break-all p-4 w-full">{project.name+" "+project.first_name}</div>
-                        <div className="text-black font-semibold text-center truncate text-sm w-full">{project.description}</div>
-                        <a href={"/user/"+project.user} className=" text-blue-500 font-semibold text-center text-sm w-full">Continua conociendome</a>
+                          </Link>
+                          <div className="text-black font-semibold text-center break-all p-4 w-full">
+                            {project.name + ' ' + project.first_name}
+                          </div>
+                          <div className="text-black font-semibold text-center truncate text-sm w-full">
+                            {project.description}
+                          </div>
+                          <a
+                            href={'/user/' + project.user}
+                            className=" text-blue-500 font-semibold text-center text-sm w-full"
+                          >
+                            Continua conociendome
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  {renderButtonsProject()}
+                  {showComments()}
                 </div>
-                {renderButtonsProject()}
-                {showComments()}
-              </div>
-            ))}
-            
-          </div>
-          
+              ))}
+            </div>
           </div>
         </div>
       );

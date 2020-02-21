@@ -36,7 +36,7 @@ axios.interceptors.response.use(
 );
 
 export function addPictureProject(data) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/picture`, data);
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/image_url`, data);
 }
 
 export function addProject(project) {
@@ -81,5 +81,5 @@ export function getCommentsProject(project) {
 }
 
 export function createAssesment(project, data) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data)
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data);
 }
