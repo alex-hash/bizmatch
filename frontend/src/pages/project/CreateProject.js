@@ -3,20 +3,24 @@ import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
+import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export function CreateProject() {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
-
+  const history = useHistory();
   const { role } = useAuth();
 
   const onSubmit = (projectData, e) => {
     e.preventDefault();
     projectData.text = projectData.text.replace(/\n/g, '<br />');
     addProject({ projectData })
-      .then(() => (window.location.href = '/projects'))
+      .then(() => {
+        Swal.fire('Genial!', 'Has creado un proyecto, si quieres añadir una foto o editarlo pincha sobre el');
+        history.push('/projects');
+      })
       .catch((error) => {
         if (error.response.status === 401) {
           window.localStorage.clear();
