@@ -15,17 +15,10 @@ export function CreateProject() {
 
   const { role, setRole, setCurrentUser } = useAuth();
 
-  const [estado, setState] = useState(null);
-
-  function onChangeHandler(e) {
-    setState({ ...estado, [e.target.name]: e.target.files[0] });
-  }
-
   const onSubmit = (projectData, e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('image_url', estado.image_url);
-    addProject({ projectData, data })
+
+    addProject({ projectData })
       .then(() => (window.location.href = '/projects'))
       .catch((error) => {
         if (error.response.status === 401) {
@@ -164,18 +157,7 @@ export function CreateProject() {
               ></textarea>
               {errors.text && <span className="error-validate">{errors.text.message}</span>}
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold" for="image_url">
-                Imagen del proyecto
-              </label>
-              <input
-                type="file"
-                id="file"
-                name="image_url"
-                className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
-                onChange={onChangeHandler}
-              />
-            </div>
+
             <div className="mt-8 flex items-center justify-center">
               <button
                 className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"

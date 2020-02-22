@@ -6,8 +6,7 @@ import { updateProfile, updateAvatar } from '../http/userService';
 import jwt_decode from 'jwt-decode';
 
 export function UserRender({ user, edit, dispatch, projects, comments }) {
-	
-	const { role } = useAuth();
+  const { role } = useAuth();
 
   const [estado, setState] = useState({
     company_name: user.company_name,
@@ -160,9 +159,9 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
       );
     }
   }
-  
+
   function getTops() {
-    if (role.role === 'E') {
+    if (user.type === 'E') {
       if (projects.length === 0) {
         return (
           <h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">
@@ -240,101 +239,48 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
     setState({ ...estado, [e.target.name]: e.target.value });
   }
 
-	function getTops(){
-		if(user.type === "E"){
-			if(projects.length === 0){
-				return(
-					<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <span className="text-base font-normal">No hay proyectos</span></h1>
-				);
-			}else{
-				return(
-					<div>
-						<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <a className="text-blue-500 text-base font-normal">Ver todos los proyectos</a></h1> 
-						<div className="flex flex-wrap self-end">
-							{projects.map((project, index) => (
-								<div key={project.id} class="mb-4 w-full sm:w-1/2 sm:px-2 lg:w-full xl:w-1/2">
-									<div class="bg-white h-full rounded-lg overflow-hidden shadow">
-										<img
-										class="h-32 w-full object-cover object-center"
-										src="https://images.unsplash.com/photo-1467238307002-480ffdd260f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-										alt=""
-										/>
-										<div class="p-4 h-full">
-										<a
-											href={"/project/"+project.id}
-											class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
-										>
-											{project.title}
-										</a>
-										<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
-											{project.text}
-										</div>
-										<div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
-										</div>
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				);
-			}
-		}else{
-			if(comments.length === 0){
-				return(
-					<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Comentarios destacados - <span className=" text-base font-normal">No hay comentarios</span></h1>
-				);
-			}else{
-				return(
-					<div>
-						<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Comentarios destacados</h1> 
-						<div className="flex flex-wrap self-end">
-							{comments.map((comment, index) => (
-								<div key={comment.id} class="mb-4 w-full sm:w-1/2 sm:px-2 lg:w-full xl:w-1/2">
-									<div class="bg-white h-full rounded-lg overflow-hidden shadow">
-										<div class="p-4 h-full flex flex-col justify-between">
-											<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
-												{comment.text}
-											</div>
-											<div className="mt-2 text-sm leading-relaxed block md:text-xs lg:text-sm break-all self-start">
-												<a href={"/project/" + comment.project}>En el proyecto: <span className="text-blue-500">{comment.title}</span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				);
-			}
-		}
-	}
+  function onChangeHandler(e) {
+    setState({ ...estado, [e.target.name]: e.target.files[0] });
+  }
 
-	function onChangeHandler(e) {
-		setState({...estado, [e.target.name]: e.target.files[0] })
-	}
-	
-	function onSubmit(e) {
-		e.preventDefault();
-		const data = new FormData();
-		data.append('avatar', estado.avatar);
-		let { company_role, company_name, page_url, description } = estado;
-		company_role = company_role===""?null:company_role;
-		company_name = company_name===""?null:company_name;
-		page_url = page_url===""?null:page_url;
-		description = description===""?null:description;
-		
-		const { email, name, first_name, last_name, type} = user;
-		let {birthday} = user;
-		birthday = birthday.substring(0,10);
-		let country = "Tupu";
-		let city = "sadsad";
-		let promise1 = updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type, description});
-		if(typeof data.get('avatar') === "string"){
-			promise1.then(() => window.location.href="/user");
-		}else{
-			Promise.all([promise1, updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))]).then(() => window.location.href="/user");
-		}
-	}
+  function onSubmit(e) {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('avatar', estado.avatar);
+    let { company_role, company_name, page_url, description } = estado;
+    company_role = company_role === '' ? null : company_role;
+    company_name = company_name === '' ? null : company_name;
+    page_url = page_url === '' ? null : page_url;
+    description = description === '' ? null : description;
+
+    const { email, name, first_name, last_name, type } = user;
+    let { birthday } = user;
+    birthday = birthday.substring(0, 10);
+    let country = 'Tupu';
+    let city = 'sadsad';
+    let promise1 = updateProfile({
+      email,
+      name,
+      first_name,
+      last_name,
+      birthday,
+      country,
+      city,
+      company_name,
+      company_role,
+      page_url,
+      type,
+      description
+    });
+    if (typeof data.get('avatar') === 'string') {
+      promise1.then(() => (window.location.href = '/user'));
+    } else {
+      Promise.all([
+        promise1,
+        updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
+      ]).then(() => (window.location.href = '/user'));
+    }
+  }
 
   function something(edit) {
     if (edit === 0) {
