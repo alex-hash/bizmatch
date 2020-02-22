@@ -172,7 +172,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
         return (
           <div>
             <h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">
-              Proyectos destacados - <a href={"/projects/"+user.id} className="text-blue-500 text-base font-normal">Ver todos los proyectos</a>
+              Proyectos destacados - <a href={"/projects/"+user.identify} className="text-blue-500 text-base font-normal">Ver todos los proyectos</a>
             </h1>
             <div className="flex flex-wrap self-end">
               {projects.map((project, index) => (

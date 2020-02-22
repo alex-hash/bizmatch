@@ -17,7 +17,7 @@ export function CreateProject() {
   
   const onSubmit = (projectData, e) => {
     e.preventDefault();
-    addProject(projectData)
+    addProject({projectData})
       .then(() => (window.location.href = '/projects'))
       .catch((error) => {
         if (error.response.status === 401) {

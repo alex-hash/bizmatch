@@ -32,7 +32,7 @@ export function GetProjects({match}) {
   });
 
   useEffect(() => {
-    if(match){
+    if(match === undefined){
       getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })).catch((error) => {
         if(error.response.status === 401){
           window.localStorage.clear();

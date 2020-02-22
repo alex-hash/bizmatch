@@ -47,8 +47,13 @@ export function getProject(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/${project}`);
 }
 
-export function getProjects() {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
+export function getProjects(data) {
+  if(data === undefined){
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
+  }else{
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projects/${data}`);
+  }
+  
 }
 export function getProjectsInit() {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projectsInit`);
