@@ -9,9 +9,8 @@ import { ResetPassword } from './pages/ResetPassword';
 import { CreateProject } from './pages/project/CreateProject';
 import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
-import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
 import { GetProjectsInit } from './pages/project/GetProjectsInit';
-import { notFound } from './components/Notfound'; 
+import { notFound } from './components/Notfound';
 
 function App() {
   return (
@@ -40,7 +39,11 @@ function App() {
             <GetProjects />
           </PrivateRoute>
           <Route path="/project/:projectId" component={GetProject}></Route>
-          <PrivateRoute path="/projects/:userId" component={GetProjects} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
+          <PrivateRoute
+            path="/projects/:userId"
+            component={GetProjects}
+            allowedRoles={['admin', 'E', 'M']}
+          ></PrivateRoute>
           <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
           <Route path="/404" component={notFound} />
           <Redirect to="/404" />

@@ -17,11 +17,6 @@ function projectsReducer(state, action) {
 }
 
 export function GetProjectsFilter({ match }) {
-  const { handleSubmit, register, errors, formState } = useForm({
-    mode: 'onBlur'
-  });
-  const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
-  const history = useHistory();
   const [state, dispatch] = useReducer(projectsReducer, {
     projects: [],
     selectedProject: null

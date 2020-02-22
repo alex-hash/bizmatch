@@ -1,10 +1,10 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 
 export function ProjectList({ projects, searchText, onSearchTextChanged }) {
-  const { role, setRole, setCurrentUser } = useAuth();
+  const { role } = useAuth();
 
   function displayButtonCreate(role) {
     if (role === 'E') {

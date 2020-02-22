@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { signIn } from '../http/authService';
 import { useAuth } from '../context/auth-context';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
 import jwt_decode from 'jwt-decode';
 
 export function Login() {
-  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
+  const { handleSubmit, register, errors, watch, formState, setError, setValue } = useForm({
     mode: 'onBlur'
   });
   let history = useHistory();
@@ -97,10 +97,7 @@ export function Login() {
               </button>
             </div>
             <div className="flex flex-wrap justify-center mt-2">
-              <Link
-                className="inline-block align-baseline font-bold text-xs text-black text-center"
-                to="/register"
-              >
+              <Link className="inline-block align-baseline font-bold text-xs text-black text-center" to="/register">
                 Todavía no estás registrado?
               </Link>
             </div>

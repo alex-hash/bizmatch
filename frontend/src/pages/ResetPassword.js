@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function ResetPassword() {
-  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
+  const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
 
