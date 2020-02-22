@@ -1,6 +1,12 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getProject, getCommentsProject, deleteProject, updateProject, getAssesmentUser, getAssesmentAvg } from '../../http/projectService';
+import {
+  getProject,
+  getCommentsProject,
+  deleteProject,
+  getAssesmentUser,
+  getAssesmentAvg
+} from '../../http/projectService';
 import { Project } from '../../components/Project';
 import { useAuth } from '../../context/auth-context';
 import Swal from 'sweetalert2';
@@ -10,6 +16,10 @@ export function GetProject({ match }) {
     switch (action.type) {
       case 'GET_PROJECT_SUCCESS':
         return { ...state, edit: action.edit };
+      case 'DELETE_PROJECT':
+        return { ...state, project: action.project };
+      case 'UPDATE_PROJECT':
+        return { ...state, edit: action.edit };
 
       default:
         return state;
@@ -17,6 +27,7 @@ export function GetProject({ match }) {
   }
 
   const { role } = useAuth();
+
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
   const [assesment, setAssesment] = useState(null);
@@ -79,8 +90,6 @@ export function GetProject({ match }) {
         }
       });
     }
-    
-
   }, []);
 
   const handleDeleteProject = (project) => {

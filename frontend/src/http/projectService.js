@@ -35,12 +35,12 @@ axios.interceptors.response.use(
   }
 );
 
-export function addPictureProject(data) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/picture`, data);
+export function addPictureProject(projectId, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`, data);
 }
 
-export function addProject(project) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, project);
+export function addProject(projectData, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, projectData, data);
 }
 
 export function getProject(project) {
@@ -84,10 +84,10 @@ export function createAssesment(project, data) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data);
 }
 
-export function getAssesmentUser(project){
+export function getAssesmentUser(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
 }
 
-export function getAssesmentAvg(project){
+export function getAssesmentAvg(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
 }

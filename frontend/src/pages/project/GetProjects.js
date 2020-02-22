@@ -44,6 +44,7 @@ export function GetProjects() {
       }
     });
   }, []);
+
   return (
     <ProjectList
       projects={state.projects}

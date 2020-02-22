@@ -36,35 +36,37 @@ axios.interceptors.response.use(
 );
 
 export function getProfile() {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`).then(res => { return res.data});
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account`).then((res) => {
+    return res.data;
+  });
 }
 
 export function getProfileOther(userId) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/${userId}`).then(res => { return res.data});
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/account/${userId}`).then((res) => {
+    return res.data;
+  });
 }
 
 export function updateProfile(data) {
   return axios.put(`${process.env.REACT_APP_BACKEND_URL}/account`, data);
 }
 
-export function updateAvatar(data){
+export function updateAvatar(data) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/avatar`, data);
 }
 
-export function getProjects(data){
-  if(data === undefined){
+export function getProjects(data) {
+  if (data === undefined) {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountprojects`);
-  }else{
+  } else {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountprojects/${data}`);
   }
-  
 }
 
-export function getComments(data){
-  if(data === undefined){
+export function getComments(data) {
+  if (data === undefined) {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountcomments`);
-  }else{
+  } else {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountcomments/${data}`);
   }
-  
 }

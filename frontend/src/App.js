@@ -10,7 +10,6 @@ import { CreateProject } from './pages/project/CreateProject';
 import { GetProjects } from './pages/project/GetProjects';
 import { GetProject } from './pages/project/GetProject';
 import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
-import { EditeProject } from './pages/project/EditeProject';
 import { GetProjectsInit } from './pages/project/GetProjectsInit';
 import { notFound } from './components/Notfound'; 
 
@@ -42,9 +41,6 @@ function App() {
           </PrivateRoute>
           <Route path="/project/:projectId" component={GetProject}></Route>
           <Route path="/projects/:category" component={GetProjectsFilter}></Route>
-          <Route exact path="/edite-project">
-            <EditeProject />
-          </Route>
           <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
           <Route path="/404" component={notFound} />
           <Redirect to="/404" />

@@ -12,7 +12,7 @@ cloudinary.config({
 
 async function validate(data) {
   const schema = Joi.object({
-    userId: Joi.string()
+    projectId: Joi.string()
       .guid({
         version: ['uuidv4']
       })
@@ -23,8 +23,8 @@ async function validate(data) {
 }
 
 async function addPictureProject(req, res, next) {
-  const { userId } = req.claims;
-  const data = { userId };
+  const { projectId } = req.params;
+  const data = { projectId };
 
   try {
     await validate(data);
@@ -32,6 +32,7 @@ async function addPictureProject(req, res, next) {
     console.error(e);
     return res.status(400).send(e);
   }
+
   const { file } = req;
 
   if (!file || !file.buffer) {
@@ -44,7 +45,7 @@ async function addPictureProject(req, res, next) {
     .upload_stream(
       {
         resource_type: 'image',
-        public_id: userId,
+        public_id: projectId,
         width: 200,
         height: 200,
         format: 'jpg',
@@ -64,7 +65,7 @@ async function addPictureProject(req, res, next) {
       SET image_url = ?
       WHERE id = ?`;
           connection = await mysqlPool.getConnection();
-          connection.execute(sqlQuery, [secureUrl, userId]);
+          connection.execute(sqlQuery, [secureUrl, projectId]);
           connection.release();
 
           res.header('Location', secureUrl);

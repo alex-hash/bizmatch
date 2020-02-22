@@ -17,7 +17,6 @@ async function validate(data) {
 
 async function deleteProject(req, res, next) {
   const { projectId } = req.params;
-
   try {
     await validate({ projectId });
   } catch (e) {
