@@ -30,15 +30,12 @@ export function Project({
     const actual_user = role === null ? null : role.userId;
     if (comment.user === actual_user) {
       return (
-        <div className="text-xs self-end mt-2">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">
-            Editar
-          </button>
+        <div className="text-xs mt-2">
           <button
             onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded mx-2"
           >
-            Borrar
+            <img src="https://img.icons8.com/android/15/000000/delete.png"/>
           </button>
         </div>
       );
@@ -46,6 +43,7 @@ export function Project({
   }
 
   const handleSend = (formData) => {
+    formData.text = formData.text.replace(/\n/g, "<br />");
     return addCommentProject(projectId, formData)
       .then(() => window.location.reload())
       .catch((error) => {
@@ -186,8 +184,7 @@ export function Project({
                   </div>
                   {renderButtons(comment, index)}
                 </div>
-                <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
-                  {comment.text}
+                <p dangerouslySetInnerHTML={{ __html: comment.text.replace(/<br\s*\\?>/g, "\r\n") }} className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
                 </p>
               </div>
             </React.Fragment>
@@ -198,8 +195,8 @@ export function Project({
     } else {
       return (
         <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
-          <h1 className="font-bold p-2">Comentarios más recientes</h1>
           <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
+          {renderNewComment()}
         </div>
       );
     }
@@ -267,8 +264,7 @@ export function Project({
                           <div className="text-black font-semibold text-center break-all p-4 w-full">
                             {project.name + ' ' + project.first_name}
                           </div>
-                          <div className="text-black font-semibold text-center truncate text-sm w-full">
-                            {project.description}
+                          <div dangerouslySetInnerHTML={{ __html:project.description === null ? "" : project.description.replace(/<br\s*\\?>/g, "\r\n") }} className="h-6 text-black font-semibold text-center truncate text-sm w-full">
                           </div>
                           <a
                             href={'/user/' + project.user}

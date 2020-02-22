@@ -39,7 +39,7 @@ export function Init({ projects, role }) {
                 <div className="break-all w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                   <div className="bg-white rounded-lg overflow-hidden shadow">
                     <img className="h-48 w-full object-cover object-center" src={project.image_url} alt="" />
-                    <div className="p-4 h-auto md:h-48 mt-2">
+                    <div className="p-4 h-32  mt-2">
                       <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                         {project.title}
                       </a>
@@ -49,8 +49,8 @@ export function Init({ projects, role }) {
                       <p className="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                         {project.category}
                       </p>
-                      <div className="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
-                        {project.text}
+                      <div dangerouslySetInnerHTML={{ __html:project.text.replace(/<br\s*\\?>/g, "\r\n") }} className="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+
                       </div>
                       <div className="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                     </div>
