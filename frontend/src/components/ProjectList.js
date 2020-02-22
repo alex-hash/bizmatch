@@ -40,7 +40,13 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
             {projects.map((project) => (
               <div class="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                 <div class="bg-white rounded-lg overflow-hidden shadow">
-                  <img class="h-48 w-full object-cover object-center" src={project.image_url} alt="Foto de Proyecto" />
+                  <a href={'/project/' + project.id}>
+                    <img
+                      class="h-48 w-full object-cover object-center"
+                      src={project.image_url}
+                      alt="Foto de Proyecto"
+                    />
+                  </a>
                   <div class="p-4 h-auto md:h-48 mt-2">
                     <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                       {project.title}
