@@ -140,6 +140,7 @@ export function Project({
 
   const onSubmit = (formData, e) => {
     e.preventDefault();
+    formData.text = formData.text.replace(/\n/g, "<br />");
     const data = new FormData();
     data.append('image_url', estado.image_url);
     let promise1 = updateProject(projectId, formData);
@@ -151,7 +152,7 @@ export function Project({
   };
 
   function showComments() {
-    if (comments !== null) {
+    if (comments.length !== 0) {
       return (
         <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
           <h1 className="font-bold p-2">Comentarios más recientes</h1>
@@ -186,7 +187,7 @@ export function Project({
       );
     }else{
       return(
-        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
+        <div className="w-full flex-column flex-wrap content-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
           <h1 className="font-bold p-2">Comentarios más recientes</h1>
           <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
         </div>
@@ -241,7 +242,7 @@ export function Project({
                         </div>
                       </div>
                       <h1 className="font-bold w-full mt-6">Decripción del Proyecto </h1>
-                      <p className="text-gray-700 text-lg">{project.text}</p>
+                      <p dangerouslySetInnerHTML={{__html:project.text}} className="text-gray-700 text-lg"></p>
                     </div>
                     <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">
                       <div className="border-grey-400">
@@ -395,7 +396,7 @@ export function Project({
                   </label>
                   <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
                   <textarea
-                    defaultValue={projectC.text}
+                    defaultValue={projectC.text.replace(/<br\s*\/?>/mg,"\n")}
                     ref={register({
                       required: '*El contenido es necesario'
                     })}

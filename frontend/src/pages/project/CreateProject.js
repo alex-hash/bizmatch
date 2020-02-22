@@ -17,6 +17,7 @@ export function CreateProject() {
   
   const onSubmit = (projectData, e) => {
     e.preventDefault();
+    projectData.text = projectData.text.replace(/\n/g, "<br />");
     addProject({projectData})
       .then(() => (window.location.href = '/projects'))
       .catch((error) => {

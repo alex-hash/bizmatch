@@ -141,7 +141,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
             className="mt-4 sm:px-1"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAABcklEQVRIie2VsUvDQBSHv9cUHUqhi4i4+B8IzSvUrSC4dLAuOrs5OIpjoThawf/A0UnQwamDLkKh14Bzwc3ByR7oIjTnYITSVE2qxUG/JeTHu/fl7rgc/JMCGRcGQbAahmEDWEjb0Dm3UyqVWsNZdrSo3W7Ph2F4AVjgJopLwCJwPlRaA+6BTvQ+B1REJDfaMybxPM8HcsCWql4CGGNOgJqqbr7XGWMegWtV3QbodDoVEamMm11mNBCRmWjaz+MGTEJMMg1iy/UZvV5vtt/v7xUKhaa1dioSz1p7JiJVa+0K4E1DkgeqQCt6JibtntRVdU1E9qclqavqAYDv+4dpRImWK5PJHBeLxdvhzPf9wyAIlhONT1I0Kvgqn0jyXX73MIrIkTHGpeiVTy0BlkQkSGpw7uPviUmccy8ignNuV1VPk0qiv/BVIslgMOhms9knEWkaYzaSSni7T8YSk5TL5Ydut7vunGsAfgoJwN1PXhF/lFdP03Cy/K3aIgAAAABJRU5ErkJggg=="
           />
-          <p className="break-all sm:px-2">{user.description}</p>
+          <p dangerouslySetInnerHTML={{__html:user.description}} className="break-all sm:px-2"></p>
         </div>
       );
     }
@@ -252,7 +252,9 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 		company_name = company_name===""?null:company_name;
 		page_url = page_url===""?null:page_url;
 		description = description===""?null:description;
-		
+    
+    description = description.replace(/\n/g, "<br />");
+
 		const { email, name, first_name, last_name, type} = user;
 		let {birthday} = user;
 		birthday = birthday.substring(0,10);
@@ -269,7 +271,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
   function something(edit) {
     if (edit === 0) {
       return (
-        <div>
+        <div className="min-h-screen">
           <div>
             <Navbar role={role} />
           </div>
@@ -305,7 +307,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
       );
     } else {
       return (
-        <div>
+        <div className="min-h-screen">
           <div>
             <Navbar role={role} />
           </div>
@@ -369,7 +371,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
                 />
                 <h1 className="font-semibold mb-2">Acerca de</h1>
                 <textarea
-                  defaultValue={user.description}
+                  defaultValue={user.description.replace(/<br\s*\/?>/mg,"\n")}
                   className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="text"
                   rows="6"
