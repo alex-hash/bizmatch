@@ -6,8 +6,7 @@ import { updateProfile, updateAvatar } from '../http/userService';
 import jwt_decode from 'jwt-decode';
 
 export function UserRender({ user, edit, dispatch, projects, comments }) {
-	
-	const { role } = useAuth();
+  const { role } = useAuth();
 
   const [estado, setState] = useState({
     company_name: user.company_name,
@@ -160,7 +159,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
       );
     }
   }
-  
+
   function getTops() {
     if (user.type === 'E') {
       if (projects.length === 0) {

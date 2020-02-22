@@ -16,7 +16,7 @@ const getProjectsInit = require('../controllers/project/get-projects-init-contro
 
 const router = express.Router();
 router.post('/project/:projectId', checkAccountSession, upload.single('image_url'), addPictureProject);
-router.post('/project', checkAccountSession, upload.single('image_url'), createProject);
+router.post('/project', checkAccountSession, createProject);
 router.get('/project/filter/:category', checkAccountSession, getProjectsFilter);
 router.get('/project/:projectId', getProject);
 router.get('/project', checkAccountSession, getProjects);
