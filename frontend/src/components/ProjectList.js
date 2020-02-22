@@ -20,7 +20,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div>
         <Navbar role={role} />
       </div>

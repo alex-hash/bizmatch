@@ -37,7 +37,9 @@ export function Init({ projects, role }) {
               {projects.map((project) => (
                 <div className="break-all w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                   <div className="bg-white rounded-lg overflow-hidden shadow">
-                    <img className="h-48 w-full object-cover object-center" src={project.image_url} alt="" />
+                    <a href={'/project/' + project.id}>
+                      <img className="h-48 w-full object-cover object-center" src={project.image_url} alt="" />
+                    </a>
                     <div className="p-4 h-32  mt-2">
                       <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                         {project.title}
@@ -90,7 +92,9 @@ export function Init({ projects, role }) {
             {projects.map((project) => (
               <div className="break-all w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                 <div className="bg-white rounded-lg overflow-hidden shadow">
-                  <img className="h-48 w-full object-cover object-center" src={project.image_url} alt="" />
+                  <a href={'/project/' + project.id}>
+                    <img className="h-48 w-full object-cover object-center" src={project.image_url} alt="" />
+                  </a>
                   <div className="p-4 h-auto md:h-48 mt-2">
                     <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                       {project.title}
