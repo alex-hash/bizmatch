@@ -12,6 +12,7 @@ export function User({ match }){
 	const [user, setUser] = useState(null);
 	const [projects, setProjects] = useState(null);
 	const [comments, setComments] = useState(null);
+	const [avg, setAvg] = useState(null);
 
 	function userReducer(state, action) {
 		switch (action.type) {

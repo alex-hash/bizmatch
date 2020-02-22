@@ -40,7 +40,7 @@ function App() {
             <GetProjects />
           </PrivateRoute>
           <Route path="/project/:projectId" component={GetProject}></Route>
-          <Route path="/projects/:category" component={GetProjectsFilter}></Route>
+          <PrivateRoute path="/projects/:userId" component={GetProjects} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
           <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
           <Route path="/404" component={notFound} />
           <Redirect to="/404" />

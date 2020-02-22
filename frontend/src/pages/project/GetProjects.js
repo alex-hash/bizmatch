@@ -19,7 +19,7 @@ function projectsReducer(state, action) {
   }
 }
 
-export function GetProjects() {
+export function GetProjects({match}) {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -32,17 +32,32 @@ export function GetProjects() {
   });
 
   useEffect(() => {
-    getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })).catch((error) => {
-      if(error.response.status === 401){
-        window.localStorage.clear();
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Tú token de sesión ha expirado'
-        });
-        window.location.href="/";
-      }
-    });
+    if(match){
+      getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })).catch((error) => {
+        if(error.response.status === 401){
+          window.localStorage.clear();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          });
+          window.location.href="/";
+        }
+      });
+    }else{
+      getProjects(match.params.userId).then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })).catch((error) => {
+        if(error.response.status === 401){
+          window.localStorage.clear();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          });
+          window.location.href="/";
+        }
+      });
+    }
+    
   }, []);
 
   return (
