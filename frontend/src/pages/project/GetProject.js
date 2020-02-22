@@ -1,6 +1,12 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getProject, getCommentsProject, deleteProject, updateProject, getAssesmentUser, getAssesmentAvg } from '../../http/projectService';
+import {
+  getProject,
+  getCommentsProject,
+  deleteProject,
+  getAssesmentUser,
+  getAssesmentAvg
+} from '../../http/projectService';
 import { Project } from '../../components/Project';
 import { useAuth } from '../../context/auth-context';
 import Swal from 'sweetalert2';
@@ -10,6 +16,10 @@ export function GetProject({ match }) {
     switch (action.type) {
       case 'GET_PROJECT_SUCCESS':
         return { ...state, edit: action.edit };
+      case 'DELETE_PROJECT':
+        return { ...state, project: action.project };
+      case 'UPDATE_PROJECT':
+        return { ...state, edit: action.edit };
 
       default:
         return state;
@@ -17,6 +27,7 @@ export function GetProject({ match }) {
   }
 
   const { role } = useAuth();
+
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
   const [assesment, setAssesment] = useState(null);
@@ -34,48 +45,50 @@ export function GetProject({ match }) {
   let promiseAssementAvg = getAssesmentAvg(match.params.projectId);
 
   useEffect(() => {
-    if(role){
-      Promise.all([promiseProject, promiseComments, promiseAssement, promiseAssementAvg]).then((response) => {
-        setProject(response[0].data.data);
-        setComments(response[1].data.data);
-        if(response[2].data.data !== undefined){
-          setAssesment(response[2].data.data.type);
-        }
-        if(response[3].data.data.avg !== null){
-          setAssesmentAvg(response[3].data.data);
-        }
-      }).catch((error) => {
-        if(error.response.status === 401){
-          window.localStorage.clear();
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Tú token de sesión ha expirado'
-          });
-          window.location.href="/";
-        }
-      });
-    }else{
-      Promise.all([promiseProject, promiseComments, promiseAssementAvg]).then((response) => {
-        setProject(response[0].data.data);
-        setComments(response[1].data.data);
-        if(response[2].data.data.avg !== null){
-          setAssesmentAvg(response[2].data.data);
-        }
-      }).catch((error) => {
-        if(error.response.status === 401){
-          window.localStorage.clear();
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Tú token de sesión ha expirado'
-          });
-          window.location.href="/";
-        }
-      });
+    if (role) {
+      Promise.all([promiseProject, promiseComments, promiseAssement, promiseAssementAvg])
+        .then((response) => {
+          setProject(response[0].data.data);
+          setComments(response[1].data.data);
+          if (response[2].data.data !== undefined) {
+            setAssesment(response[2].data.data.type);
+          }
+          if (response[3].data.data.avg !== null) {
+            setAssesmentAvg(response[3].data.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            });
+            window.location.href = '/';
+          }
+        });
+    } else {
+      Promise.all([promiseProject, promiseComments, promiseAssementAvg])
+        .then((response) => {
+          setProject(response[0].data.data);
+          setComments(response[1].data.data);
+          if (response[2].data.data.avg !== null) {
+            setAssesmentAvg(response[2].data.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            });
+            window.location.href = '/';
+          }
+        });
     }
-    
-
   }, []);
 
   const handleDeleteProject = (project) => {

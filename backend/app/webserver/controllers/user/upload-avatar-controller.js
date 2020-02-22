@@ -33,6 +33,7 @@ async function uploadAvatar(req, res, next) {
     console.error(e);
     return res.status(400).send(e);
   }
+
   const { file } = req;
 
   if (!file || !file.buffer) {
@@ -70,7 +71,7 @@ async function uploadAvatar(req, res, next) {
           connection = await mysqlPool.getConnection();
           connection.execute(sqlQuery, [secureUrl, userId]);
           connection.release();
-          
+
           connection = await mysqlPool.getConnection();
           const [rows] = await connection.execute(sqlQuery2, [userId]);
           connection.release();
@@ -100,7 +101,6 @@ async function uploadAvatar(req, res, next) {
             avatarUrl: secureUrl,
             expiresIn: jwtExpiresIn
           });
-
         } catch (e) {
           if (connection) {
             connection.release();
