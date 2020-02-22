@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
+import Swal from 'sweetalert2';
 
 export function CreateProject() {
   const { handleSubmit, register, errors, formState, setValue } = useForm({
@@ -24,7 +25,19 @@ export function CreateProject() {
     e.preventDefault();
     const data = new FormData();
     data.append('image_url', estado.image_url);
-    addProject({ projectData, data }).then(() => (window.location.href = '/projects'));
+    addProject({ projectData, data })
+      .then(() => (window.location.href = '/projects'))
+      .catch((error) => {
+        if (error.response.status === 401) {
+          window.localStorage.clear();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          });
+          window.location.href = '/';
+        }
+      });
   };
   return (
     <div>

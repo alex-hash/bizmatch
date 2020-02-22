@@ -6,7 +6,16 @@ import { useAuth } from '../context/auth-context';
 import StarRating from '../components/StarRating';
 import { addCommentProject, deleteCommentProject, updateProject, addPictureProject } from '../http/projectService';
 
-export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject, dispatch }) {
+export function Project({
+  project,
+  comments,
+  projectId,
+  onDeleteProject,
+  onUpdateProject,
+  dispatch,
+  assesment,
+  assesmentAvg
+}) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
@@ -22,10 +31,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     if (comment.user === actual_user) {
       return (
         <div className="text-xs self-end mt-2">
-          <button
-            onClick={() => renderEditHtml(index)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
-          >
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2">
             Editar
           </button>
           <button
@@ -38,6 +44,17 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
       );
     }
   }
+
+  const handleSend = (formData) => {
+    return addCommentProject(projectId, formData)
+      .then(() => window.location.reload())
+      .catch((error) => {
+        if (error.response.status === 401) {
+          setRole(null);
+          setUser(null);
+        }
+      });
+  };
 
   function renderNewComment() {
     if (role !== null) {
@@ -75,12 +92,11 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                     <p className="text-black text-sm leading-none self-center">{role.email}</p>
                   </div>
                   <div className="text-xs self-end mt-2">
-                    <button
-                      onClick={refreshPage}
+                    <input
+                      type="submit"
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded"
-                    >
-                      Enviar
-                    </button>
+                      disabled={formState.isSubmitting}
+                    />
                   </div>
                 </div>
               </form>
@@ -90,7 +106,6 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
       }
     }
   }
-
   function renderButtonsProject() {
     const actual_user = role === null ? null : role.userId;
     if (project[0].user === actual_user) {
@@ -116,20 +131,6 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
       );
     }
   }
-
-  function renderEditHtml(index) {
-    const div = document.getElementById(index);
-    const p = document.getElementById(index + 'p');
-  }
-
-  const handleSend = (formData) => {
-    return addCommentProject(projectId, formData).catch((error) => {
-      if (error.response.status === 401) {
-        setRole(null);
-        setUser(null);
-      }
-    });
-  };
 
   const [estado, setState] = useState(null);
 
@@ -186,6 +187,15 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
+  function showStarIfLogged() {
+    if (role) {
+      return (
+        <div className="mt-2">
+          <StarRating assesment={assesment} project={project.id}></StarRating>
+        </div>
+      );
+    }
+  }
   function something(onUpdateProject, projectC) {
     if (onUpdateProject === 0) {
       return (
@@ -205,19 +215,25 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                   <div className="flex flex-wrap mt-4 md:mt-10">
                     <div className="lg:w-1/2 -mx-4 md:mx-0">
                       <div class="bg-white md:rounded-lg overflow-hidden">
-                        <img class="lg:p-0 w-full " src={project.image_url} alt="Foto de mi Proyecto" />
+                        <img class="lg:p-0 w-full " src={project.image_url} alt="" />
                       </div>
                     </div>
                     <div className="order-2 lg:order-3">
-                      <h1 className="font-bold w-full mt-6">Decripción del Proyecto</h1>
-                      <div className="px-1 w-full">
-                        <div className="text-gray-600 font-semibold text-sm mt-2 w-full">
-                          Ubicación: {project.ubication}
+                      {showStarIfLogged()}
+                      <div className="w-full">
+                        <div className="text-black font-semibold text-sm w-full">
+                          Valoración media:{' '}
+                          {(assesmentAvg === null ? '' : assesmentAvg.avg.substring(0, 4)) +
+                            (assesmentAvg === null ? '0' : ' / ') +
+                            (assesmentAvg === null ? '' : assesmentAvg.counter) +
+                            ' votos'}
                         </div>
+                        <div className="text-gray-600 font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
                         <div className="text-gray-600 font-semibold text-sm mb-2 w-full">
                           Categoría: {project.category}
                         </div>
                       </div>
+                      <h1 className="font-bold w-full mt-6">Decripción del Proyecto </h1>
                       <p className="text-gray-700 text-lg">{project.text}</p>
                     </div>
                     <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">
@@ -390,12 +406,16 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                     Imagen del proyecto
                   </label>
                   <input
+                    ref={register({
+                      required: 'La imagen es necesaria'
+                    })}
                     type="file"
                     id="file"
                     name="image_url"
                     className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
                     onChange={onChangeHandler}
                   />
+                  {errors.text && <span className="error-validate mt-20">{errors.file.message}</span>}
                   <div className="mt-2">
                     <button
                       className="bg-blue-500 text-white font-bold py-2 mr-2 px-2 rounded focus:outline-none focus:shadow-outline"

@@ -40,7 +40,7 @@ function App() {
           </PrivateRoute>
           <Route path="/project/:projectId" component={GetProject}></Route>
           <Route path="/projects/:category" component={GetProjectsFilter}></Route>
-          <PrivateRoute path="/user/:userId" component={User}></PrivateRoute>
+          <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
         </Switch>
       </AuthProvider>
     </BrowserRouter>

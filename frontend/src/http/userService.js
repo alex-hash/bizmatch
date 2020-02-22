@@ -54,3 +54,19 @@ export function updateProfile(data) {
 export function updateAvatar(data) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/avatar`, data);
 }
+
+export function getProjects(data) {
+  if (data === undefined) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountprojects`);
+  } else {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountprojects/${data}`);
+  }
+}
+
+export function getComments(data) {
+  if (data === undefined) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountcomments`);
+  } else {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountcomments/${data}`);
+  }
+}

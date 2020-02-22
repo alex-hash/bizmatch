@@ -83,3 +83,11 @@ export function getCommentsProject(project) {
 export function createAssesment(project, data) {
   return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data);
 }
+
+export function getAssesmentUser(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
+}
+
+export function getAssesmentAvg(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
+}
