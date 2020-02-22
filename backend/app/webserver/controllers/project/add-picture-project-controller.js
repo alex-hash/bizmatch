@@ -46,8 +46,8 @@ async function addPictureProject(req, res, next) {
       {
         resource_type: 'image',
         public_id: projectId,
-        width: 200,
-        height: 200,
+        width: 2000,
+        height: 2000,
         format: 'jpg',
         crop: 'limit'
       },
