@@ -62,8 +62,8 @@ async function addPictureProject(req, res, next) {
         let connection;
         try {
           const sqlQuery = `UPDATE project
-      SET image_url = ?
-      WHERE id = ?`;
+          SET image_url = ?
+          WHERE id = ?`;
           connection = await mysqlPool.getConnection();
           connection.execute(sqlQuery, [secureUrl, projectId]);
           connection.release();

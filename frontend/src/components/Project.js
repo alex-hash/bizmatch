@@ -222,7 +222,7 @@ export function Project({
                   <div className="flex flex-wrap mt-4 md:mt-10">
                     <div className="lg:w-1/2 -mx-4 md:mx-0">
                       <div class="bg-white md:rounded-lg overflow-hidden">
-                        <img class="lg:p-0 w-full " src={project.image_url} alt="" />
+                        <img class="lg:p-0 w-full" src={project.image_url} alt={project.title} />
                       </div>
                     </div>
                     <div className="order-2 lg:order-3">

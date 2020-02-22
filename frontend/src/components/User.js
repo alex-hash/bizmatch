@@ -9,6 +9,107 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 	
 	const { role } = useAuth();
 
+  const [estado, setState] = useState({
+    company_name: user.company_name,
+    company_role: user.company_role,
+    page_url: user.page_url,
+    description: user.description,
+    avatar_url: user.avatar_url === null ? '' : user.avatar_url
+  });
+
+  function eOrM(type, edit) {
+    if (type === 'M' && edit === 0) {
+      return (
+        <div>
+          <div>
+            <img
+              className="h-24 w-24 rounded-full mx-auto border-4 border-gold top-perfil"
+              src={user.avatar_url}
+              alt={user.name + ' ' + user.first_name}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap">
+            <img className="self-center" src="https://img.icons8.com/ios/25/000000/crowdfunding.png" />
+            <p className="text-sm mb-2 ml-2 mt-2">Mentor</p>
+          </div>
+        </div>
+      );
+    } else if (type === 'E' && edit === 0) {
+      return (
+        <div>
+          <div>
+            <img
+              className="h-24 w-24 rounded-full mx-auto top-perfil"
+              src={user.avatar_url}
+              alt={user.name + ' ' + user.first_name}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap">
+            <img className="self-center" src="https://img.icons8.com/ios/25/000000/light-on.png" />
+            <p className="text-sm mb-2 ml-2 mt-2">Emprendedor</p>
+          </div>
+        </div>
+      );
+    } else if (type === 'E' && edit === 1) {
+      return (
+        <div>
+          <div>
+            <img
+              className="h-24 w-24 rounded-full mx-auto top-perfil"
+              src={user.avatar_url}
+              alt={user.name + ' ' + user.first_name}
+            />
+            <h1 className="mt-4 float-left font-semibold">Cambiar foto perfil</h1>
+            <input
+              type="file"
+              name="avatar"
+              className="shadow appearance-none border rounded py-2 px-3 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
+              onChange={onChangeHandler}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap">
+            <img className="self-center" src="https://img.icons8.com/ios/25/000000/light-on.png" />
+            <p className="text-sm mb-2 ml-2 mt-2">Emprendedor</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>
+            <img
+              className="h-24 w-24 rounded-full mx-auto border-4 border-gold top-perfil"
+              src={user.avatar_url}
+              alt={user.name + ' ' + user.first_name}
+            />
+            <h1 className="mt-4 float-left font-semibold">Cambiar foto perfil</h1>
+            <input
+              type="file"
+              name="avatar"
+              className="shadow appearance-none border rounded py-2 px-3 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
+              onChange={onChangeHandler}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap">
+            <img className="self-center" src="https://img.icons8.com/ios/25/000000/crowdfunding.png" />
+            <p className="text-sm mb-2 ml-2 mt-2">Mentor</p>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  function roleE(role) {
+    if (role !== null) {
+      return (
+        <div className="flex flex-wrap">
+          <img className="self-center" src="https://img.icons8.com/small/25/000000/reviewer-female.png" />
+          <p className="text-left text-sm mb-2 ml-2 mt-2">{user.company_role}</p>
+        </div>
+      );
+    }
+  }
+
   function companyWork(work) {
     if (work !== null) {
       return (

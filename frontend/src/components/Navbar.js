@@ -182,7 +182,6 @@ class App extends React.Component {
             </button>
           </Link>
         </div>
-        <div className="font-serif text-gray-700 md:text-xl lg:text-2xl xl:text-4xl">BIZMATCH</div>
         {this.renderButtons()}
       </nav>
     );
