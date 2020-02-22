@@ -142,13 +142,23 @@ export function Project({
     e.preventDefault();
     formData.text = formData.text.replace(/\n/g, "<br />");
     const data = new FormData();
-    data.append('image_url', estado.image_url);
-    let promise1 = updateProject(projectId, formData);
-    Promise.all([promise1, addPictureProject(projectId, data)])
-      .then(() => (window.location.href = '/project/' + projectId))
-      .then(() => {
-        dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
-      });
+    if (estado !== null) {
+      data.append('image_url', estado.image_url);
+
+      let promise1 = updateProject(projectId, formData);
+      Promise.all([promise1, addPictureProject(projectId, data)])
+        .then(() => (window.location.href = '/project/' + projectId))
+        .then(() => {
+          dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
+        });
+    } else {
+      let promise1 = updateProject(projectId, formData);
+      promise1
+        .then(() => (window.location.href = '/project/' + projectId))
+        .then(() => {
+          dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
+        });
+    }
   };
 
   function showComments() {
@@ -185,9 +195,9 @@ export function Project({
           {renderNewComment()}
         </div>
       );
-    }else{
-      return(
-        <div className="w-full flex-column flex-wrap content-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
+    } else {
+      return (
+        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
           <h1 className="font-bold p-2">Comentarios más recientes</h1>
           <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
         </div>
@@ -215,15 +225,15 @@ export function Project({
             <div className="md:w-1/5"></div>
             <div className="w-full md:w-3/5">
               {project.map((project, index) => (
-                <div key={project.id} className="break-all rounded mx-4 md:mx-0">
+                <div key={project.id} className="break-words rounded mx-4 md:mx-0">
                   <div className="p-2 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
                     {project.title}
                   </div>
                   <div className="text-center font-serif text:l lg:text-xl tracking-wide ">{project.subtitle}</div>
                   <div className="flex flex-wrap mt-4 md:mt-10">
                     <div className="lg:w-1/2 -mx-4 md:mx-0">
-                      <div class="bg-white md:rounded-lg overflow-hidden">
-                        <img class="lg:p-0 w-full" src={project.image_url} alt={project.title} />
+                      <div class="bg-white sm:rounded-lg overflow-hidden">
+                        <img class="img-project py-4 sm:w-auto" src={project.image_url} alt={project.title} />
                       </div>
                     </div>
                     <div className="order-2 lg:order-3">
@@ -244,7 +254,7 @@ export function Project({
                       <h1 className="font-bold w-full mt-6">Decripción del Proyecto </h1>
                       <p dangerouslySetInnerHTML={{__html:project.text}} className="text-gray-700 text-lg"></p>
                     </div>
-                    <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">
+                    <div className="w-full lg:w-1/2 md:p-16 mt-10 lg:mt-0 order-3 lg:order-2">
                       <div className="border-grey-400">
                         <h1 className="text-black font-semibold text-2xl text-center">Perfil del creador</h1>
                         <div className="flex flex-wrap justify-center mt-4">
@@ -262,7 +272,7 @@ export function Project({
                           </div>
                           <a
                             href={'/user/' + project.user}
-                            className=" text-blue-500 font-semibold text-center text-sm w-full"
+                            className=" mt-10 text-blue-500 font-semibold text-center text-sm w-full"
                           >
                             Continua conociendome
                           </a>
@@ -414,16 +424,12 @@ export function Project({
                     Imagen del proyecto
                   </label>
                   <input
-                    ref={register({
-                      required: 'La imagen es necesaria'
-                    })}
                     type="file"
                     id="file"
                     name="image_url"
                     className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
                     onChange={onChangeHandler}
                   />
-                  {errors.text && <span className="error-validate mt-20">{errors.file.message}</span>}
                   <div className="mt-2">
                     <button
                       className="bg-blue-500 text-white font-bold py-2 mr-2 px-2 rounded focus:outline-none focus:shadow-outline"

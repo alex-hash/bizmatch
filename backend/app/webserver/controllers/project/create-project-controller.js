@@ -81,7 +81,8 @@ async function createProject(req, res, next) {
       subtitle: capitalize(projectData.subtitle),
       category: projectData.category,
       ubication: projectData.ubication,
-      image_url: projectData.image_url,
+      image_url:
+        'https://intl-blog.imgix.net/wp-content/uploads/2019/05/administrador-de-tarea-vs-gestor-de-proyectos.jpg?auto=format%2Cenhance%2Ccompress',
       video_url: projectData.video_url,
       prize: projectData.prize,
       duration: projectData.duration,
