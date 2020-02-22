@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
-import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../context/auth-context';
+import { Link } from 'react-router-dom';
 
 export function Init({ projects, role }) {
   if (role === null)
@@ -49,9 +48,10 @@ export function Init({ projects, role }) {
                       <p className="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                         {project.category}
                       </p>
-                      <div dangerouslySetInnerHTML={{ __html:project.text.replace(/<br\s*\\?>/g, "\r\n") }} className="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
-
-                      </div>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: project.text.replace(/<br\s*\\?>/g, '\r\n') }}
+                        className="mt-4 truncate text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm"
+                      ></div>
                       <div className="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                     </div>
                   </div>

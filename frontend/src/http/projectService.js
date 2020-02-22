@@ -48,12 +48,11 @@ export function getProject(project) {
 }
 
 export function getProjects(data) {
-  if(data === undefined){
+  if (data === undefined) {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
-  }else{
+  } else {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projects/${data}`);
   }
-  
 }
 export function getProjectsInit() {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projectsInit`);
@@ -64,6 +63,7 @@ export function getProjectsFilter(category) {
 }
 
 export function deleteProject(projectId) {
+  console.log(projectId);
   return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`);
 }
 

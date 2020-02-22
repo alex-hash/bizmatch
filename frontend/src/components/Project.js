@@ -1,26 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/auth-context';
 import StarRating from '../components/StarRating';
-import { addCommentProject, deleteCommentProject, updateProject, addPictureProject } from '../http/projectService';
+import {
+  addCommentProject,
+  deleteCommentProject,
+  updateProject,
+  addPictureProject,
+  deleteProject
+} from '../http/projectService';
 
-export function Project({
-  project,
-  comments,
-  projectId,
-  onDeleteProject,
-  onUpdateProject,
-  dispatch,
-  assesment,
-  assesmentAvg
-}) {
-  const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
+export function Project({ project, comments, projectId, onUpdateProject, dispatch, assesment, assesmentAvg }) {
+  const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
   const { role, setRole, setUser } = useAuth();
-  const history = useHistory();
 
   function refreshPage() {
     window.location.reload(false);
@@ -35,7 +31,7 @@ export function Project({
             onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded mx-2"
           >
-            <img src="https://img.icons8.com/android/15/000000/delete.png"/>
+            <img src="https://img.icons8.com/android/15/000000/delete.png" />
           </button>
         </div>
       );
@@ -43,7 +39,7 @@ export function Project({
   }
 
   const handleSend = (formData) => {
-    formData.text = formData.text.replace(/\n/g, "<br />");
+    formData.text = formData.text.replace(/\n/g, '<br />');
     return addCommentProject(projectId, formData)
       .then(() => window.location.reload())
       .catch((error) => {
@@ -104,6 +100,7 @@ export function Project({
       }
     }
   }
+
   function renderButtonsProject() {
     const actual_user = role === null ? null : role.userId;
     if (project[0].user === actual_user) {
@@ -119,7 +116,14 @@ export function Project({
           </button>
           <button
             onClick={() => {
-              onDeleteProject(project.id);
+              deleteProject(projectId)
+                .then(() => (window.location.href = '/projects'))
+                .catch((error) => {
+                  if (error.response.status === 401) {
+                    setRole(null);
+                    setUser(null);
+                  }
+                });
             }}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded"
           >
@@ -138,7 +142,7 @@ export function Project({
 
   const onSubmit = (formData, e) => {
     e.preventDefault();
-    formData.text = formData.text.replace(/\n/g, "<br />");
+    formData.text = formData.text.replace(/\n/g, '<br />');
     const data = new FormData();
     if (estado !== null) {
       data.append('image_url', estado.image_url);
@@ -184,8 +188,11 @@ export function Project({
                   </div>
                   {renderButtons(comment, index)}
                 </div>
-                <p dangerouslySetInnerHTML={{ __html: comment.text.replace(/<br\s*\\?>/g, "\r\n") }} className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
-                </p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: comment.text.replace(/<br\s*\\?>/g, '\r\n') }}
+                  className="mb-2 text-xs lg:text-sm px-2"
+                  id={index + 'p'}
+                ></p>
               </div>
             </React.Fragment>
           ))}
@@ -248,8 +255,11 @@ export function Project({
                           Categoría: {project.category}
                         </div>
                       </div>
-                      <h1 className="font-bold w-full mt-6">Decripción del Proyecto </h1>
-                      <p dangerouslySetInnerHTML={{__html:project.text}} className="text-gray-700 text-lg"></p>
+                      <h1 className="font-bold w-full mt-6">Descripción del Proyecto </h1>
+                      <p
+                        dangerouslySetInnerHTML={{ __html: project.text }}
+                        className="break-all text-gray-700 text-lg"
+                      ></p>
                     </div>
                     <div className="w-full lg:w-1/2 md:p-16 mt-10 lg:mt-0 order-3 lg:order-2">
                       <div className="border-grey-400">
@@ -264,8 +274,13 @@ export function Project({
                           <div className="text-black font-semibold text-center break-all p-4 w-full">
                             {project.name + ' ' + project.first_name}
                           </div>
-                          <div dangerouslySetInnerHTML={{ __html:project.description === null ? "" : project.description.replace(/<br\s*\\?>/g, "\r\n") }} className="h-6 text-black font-semibold text-center truncate text-sm w-full">
-                          </div>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                project.description === null ? '' : project.description.replace(/<br\s*\\?>/g, '\r\n')
+                            }}
+                            className="h-6 text-black font-semibold text-center truncate text-sm w-full"
+                          ></div>
                           <a
                             href={'/user/' + project.user}
                             className=" mt-10 text-blue-500 font-semibold text-center text-sm w-full"
@@ -402,7 +417,7 @@ export function Project({
                   </label>
                   <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
                   <textarea
-                    defaultValue={projectC.text.replace(/<br\s*\/?>/mg,"\n")}
+                    defaultValue={projectC.text.replace(/<br\s*\/?>/gm, '\n')}
                     ref={register({
                       required: '*El contenido es necesario'
                     })}

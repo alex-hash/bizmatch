@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/auth-context';
 import { updateProfile, updateAvatar } from '../http/userService';
-import jwt_decode from 'jwt-decode';
 
 export function UserRender({ user, edit, dispatch, projects, comments }) {
   const { role } = useAuth();
@@ -141,7 +139,10 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
             className="mt-4 sm:px-1"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAABcklEQVRIie2VsUvDQBSHv9cUHUqhi4i4+B8IzSvUrSC4dLAuOrs5OIpjoThawf/A0UnQwamDLkKh14Bzwc3ByR7oIjTnYITSVE2qxUG/JeTHu/fl7rgc/JMCGRcGQbAahmEDWEjb0Dm3UyqVWsNZdrSo3W7Ph2F4AVjgJopLwCJwPlRaA+6BTvQ+B1REJDfaMybxPM8HcsCWql4CGGNOgJqqbr7XGWMegWtV3QbodDoVEamMm11mNBCRmWjaz+MGTEJMMg1iy/UZvV5vtt/v7xUKhaa1dioSz1p7JiJVa+0K4E1DkgeqQCt6JibtntRVdU1E9qclqavqAYDv+4dpRImWK5PJHBeLxdvhzPf9wyAIlhONT1I0Kvgqn0jyXX73MIrIkTHGpeiVTy0BlkQkSGpw7uPviUmccy8ignNuV1VPk0qiv/BVIslgMOhms9knEWkaYzaSSni7T8YSk5TL5Ydut7vunGsAfgoJwN1PXhF/lFdP03Cy/K3aIgAAAABJRU5ErkJggg=="
           />
-          <p dangerouslySetInnerHTML={{__html:text.replace(/<br\s*\\?>/g, "\r\n")}} className="break-all sm:px-2"></p>
+          <p
+            dangerouslySetInnerHTML={{ __html: text.replace(/<br\s*\\?>/g, '\r\n') }}
+            className="break-all sm:px-2"
+          ></p>
         </div>
       );
     }
@@ -172,7 +173,10 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
         return (
           <div>
             <h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">
-              Proyectos destacados - <a href={"/projects/"+user.identify} className="text-blue-500 text-base font-normal">Ver todos los proyectos</a>
+              Proyectos destacados -{' '}
+              <a href={'/projects/' + user.identify} className="text-blue-500 text-base font-normal">
+                Ver todos los proyectos
+              </a>
             </h1>
             <div className="flex flex-wrap self-end">
               {projects.map((project, index) => (
@@ -216,8 +220,10 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
                 <div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
                   <div class="bg-white h-full rounded-lg overflow-hidden shadow">
                     <div class="p-4 h-full flex flex-col justify-between">
-                      <div dangerouslySetInnerHTML={{__html: comment.text.replace(/<br\s*\\?>/g, "\r\n")}} class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
-                      </div>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: comment.text.replace(/<br\s*\\?>/g, '\r\n') }}
+                        class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all"
+                      ></div>
                       <div className="mt-2 text-sm leading-relaxed block md:text-xs lg:text-sm break-all self-start">
                         <a href={'/project/' + comment.project}>
                           En el proyecto: <span className="text-blue-500">{comment.title}</span>
@@ -238,32 +244,48 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
     setState({ ...estado, [e.target.name]: e.target.value });
   }
 
-	function onChangeHandler(e) {
-		setState({...estado, [e.target.name]: e.target.files[0] })
-	}
-	
-	function onSubmit(e) {
-		e.preventDefault();
-		const data = new FormData();
-		data.append('avatar', estado.avatar);
-		let { company_role, company_name, page_url, description } = estado;
-		company_role = company_role===""?null:company_role;
-		company_name = company_name===""?null:company_name;
-		page_url = page_url===""?null:page_url;
-		description = description===null?null:description.replace(/\n/g, "<br />");
+  function onChangeHandler(e) {
+    setState({ ...estado, [e.target.name]: e.target.files[0] });
+  }
 
-		const { email, name, first_name, last_name, type} = user;
-		let {birthday} = user;
-		birthday = birthday.substring(0,10);
-		let country = "Tupu";
-		let city = "sadsad";
-		let promise1 = updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type, description});
-		if(typeof data.get('avatar') === "string"){
-			promise1.then(() => window.location.href="/user");
-		}else{
-			Promise.all([promise1, updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))]).then(() => window.location.href="/user");
-		}
-	}
+  function onSubmit(e) {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('avatar', estado.avatar);
+    let { company_role, company_name, page_url, description } = estado;
+    company_role = company_role === '' ? null : company_role;
+    company_name = company_name === '' ? null : company_name;
+    page_url = page_url === '' ? null : page_url;
+    description = description === null ? null : description.replace(/\n/g, '<br />');
+
+    const { email, name, first_name, last_name, type } = user;
+    let { birthday } = user;
+    birthday = birthday.substring(0, 10);
+    let country = 'Tupu';
+    let city = 'sadsad';
+    let promise1 = updateProfile({
+      email,
+      name,
+      first_name,
+      last_name,
+      birthday,
+      country,
+      city,
+      company_name,
+      company_role,
+      page_url,
+      type,
+      description
+    });
+    if (typeof data.get('avatar') === 'string') {
+      promise1.then(() => (window.location.href = '/user'));
+    } else {
+      Promise.all([
+        promise1,
+        updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
+      ]).then(() => (window.location.href = '/user'));
+    }
+  }
 
   function something(edit) {
     if (edit === 0) {
@@ -368,7 +390,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
                 />
                 <h1 className="font-semibold mb-2">Acerca de</h1>
                 <textarea
-                  defaultValue={user.description === null ? "" : user.description.replace(/<br\s*\/?>/mg,"\n")}
+                  defaultValue={user.description === null ? '' : user.description.replace(/<br\s*\/?>/gm, '\n')}
                   className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="text"
                   rows="6"

@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
-import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
 import Swal from 'sweetalert2';
 
 export function CreateProject() {
-  const { handleSubmit, register, errors, formState, setValue } = useForm({
+  const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
 
-  let history = useHistory();
+  const { role } = useAuth();
 
-  const { role, setRole, setCurrentUser } = useAuth();
-  
   const onSubmit = (projectData, e) => {
     e.preventDefault();
-    projectData.text = projectData.text.replace(/\n/g, "<br />");
-    addProject({projectData})
+    projectData.text = projectData.text.replace(/\n/g, '<br />');
+    addProject({ projectData })
       .then(() => (window.location.href = '/projects'))
       .catch((error) => {
         if (error.response.status === 401) {

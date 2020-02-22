@@ -1,8 +1,5 @@
 import React from 'react';
-import Sidebar from 'react-sidebar';
-import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../context/auth-context';
-import jwt_decode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -102,9 +99,6 @@ class App extends React.Component {
               >
                 Crea tú proyecto
               </a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">
-                Configuración
-              </a>
               <a
                 href="#"
                 className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
@@ -147,9 +141,6 @@ class App extends React.Component {
                 className="block sm:hidden px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
               >
                 Proyectos
-              </a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">
-                Configuración
               </a>
               <a
                 href="#"
