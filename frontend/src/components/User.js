@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { useAuth } from '../context/auth-context';
 import { updateProfile, updateAvatar } from '../http/userService';
 
-export function UserRender({ user, edit, dispatch, projects, comments }) {
+export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
   const { role } = useAuth();
 
   const [estado, setState] = useState({
@@ -298,7 +298,11 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
             <div className="xl:w-1/5 lg:w-1/5"></div>
             <div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
               {eOrM(user.type, 0)}
-              <p className="text-left text-sm mb-2 ml-2 mt-2">Valoración media</p>
+              <p className="text-left text-sm mb-2 ml-2 mt-2">Valoración media: {' '}
+                            {(avg.avg === null ? '' : avg.avg.substring(0, 4)) +
+                            (avg.avg === null ? '0' : ' / ') +
+                            (avg.avg === null ? '' : avg.counter) +
+                            ' votos'}</p>
               {roleE(user.company_role)}
               <div className="border-t-2 mt-4 text-left">
                 <h1 className="font-bold text-lg pt-4 pb-2">Más información</h1>
@@ -335,7 +339,11 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
               <div className="xl:w-1/5 lg:w-1/5"></div>
               <div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
                 {eOrM(user.type, 1)}
-                <p className="text-left text-sm mb-2 ml-2 mt-2">Valoración media</p>
+                <p className="text-left text-sm mb-2 ml-2 mt-2">Valoración media: {' '}
+                            {(avg.avg === null ? '' : avg.avg.substring(0, 4)) +
+                            (avg.avg === null ? '0' : ' / ') +
+                            (avg.avg === null ? '' : avg.counter) +
+                            ' votos'}</p>
                 <div className="flex flex-wrap">
                   <img className="self-center" src="https://img.icons8.com/small/25/000000/reviewer-female.png" />
                   <input

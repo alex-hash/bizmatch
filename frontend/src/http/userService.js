@@ -47,6 +47,14 @@ export function getProfileOther(userId) {
   });
 }
 
+export function getAvg(data) {
+  if (data === undefined) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/avgaccount`);
+  } else {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/avgaccount/${data}`);
+  }
+}
+
 export function updateProfile(data) {
   return axios.put(`${process.env.REACT_APP_BACKEND_URL}/account`, data);
 }

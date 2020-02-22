@@ -9,6 +9,7 @@ const updateAccount = require("../controllers/account/update-account-controller"
 const deleteAccount = require("../controllers/account/delete-account-controller");
 const getTopProjects = require("../controllers/account/get-top-projects-controller");
 const getTopComments = require("../controllers/account/get-top-comments-controller");
+const getAvg = require("../controllers/account/get-avg-user-controller");
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.post("/account", createAccount);
 router.get("/account", checkAccountSession, getAccount);
 router.get("/account/:userId", checkAccountSession, getAnotherAccount);
 router.put("/account", checkAccountSession, updateAccount);
+router.get("/avgaccount", checkAccountSession, getAvg);
+router.get("/avgaccount/:userId", checkAccountSession, getAvg)
 router.delete("/account", checkAccountSession, deleteAccount);
 router.get("/accountprojects", checkAccountSession, getTopProjects);
 router.get("/accountcomments", checkAccountSession, getTopComments);
