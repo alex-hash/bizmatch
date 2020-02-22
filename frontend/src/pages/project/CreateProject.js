@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
 
 export function CreateProject() {
-  const { handleSubmit, register, errors, formState } = useForm({
+  const { handleSubmit, register, errors, formState, setValue } = useForm({
     mode: 'onBlur'
   });
 
@@ -14,20 +14,17 @@ export function CreateProject() {
 
   const { role, setRole, setCurrentUser } = useAuth();
 
-  const [estado, setState] = useState({
-    image_url: ''
-  });
+  const [estado, setState] = useState(null);
 
   function onChangeHandler(e) {
     setState({ ...estado, [e.target.name]: e.target.files[0] });
   }
 
-  const onSubmit = (dataProject) => {
+  const onSubmit = (projectData, e) => {
+    e.preventDefault();
     const data = new FormData();
     data.append('image_url', estado.image_url);
-    console.log(data);
-
-    addProject({ dataProject, data }).then(() => (window.location.href = '/projects'));
+    addProject({ projectData, data }).then(() => (window.location.href = '/projects'));
   };
   return (
     <div>
@@ -160,7 +157,7 @@ export function CreateProject() {
               </label>
               <input
                 type="file"
-                id="image_url"
+                id="file"
                 name="image_url"
                 className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
                 onChange={onChangeHandler}

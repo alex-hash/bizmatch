@@ -24,7 +24,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
       <div>
         <Navbar role={role} />
       </div>
-      <div className="mt-4 flex flex-wrap justify-around md:justify-between px-4 sm:mx-12">
+      <div className="mt-16 flex flex-wrap justify-around md:justify-between px-4 sm:mx-12">
         <input
           type="search"
           value={searchText}
@@ -34,7 +34,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
         />
         {displayButtonCreate(role.role)}
       </div>
-      <div class="mt-6">
+      <div class="mt-16">
         <div class="px-4 sm:mx-10">
           <div class="block md:flex flex-wrap justify-left">
             {projects.map((project) => (

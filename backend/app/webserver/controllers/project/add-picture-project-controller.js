@@ -23,8 +23,8 @@ async function validate(data) {
 }
 
 async function addPictureProject(req, res, next) {
-  const data = { projectId };
   const { projectId } = req.params;
+  const data = { projectId };
 
   try {
     await validate(data);
@@ -32,6 +32,7 @@ async function addPictureProject(req, res, next) {
     console.error(e);
     return res.status(400).send(e);
   }
+
   const { file } = req;
 
   if (!file || !file.buffer) {

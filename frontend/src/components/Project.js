@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -7,16 +7,10 @@ import StarRating from '../components/StarRating';
 import { addCommentProject, deleteCommentProject, updateProject, addPictureProject } from '../http/projectService';
 
 export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject, dispatch }) {
-  console.log(project);
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   const { role, setRole, setUser } = useAuth();
-  /*
-  const [state, setState] = useState({
-    image_url: project.image_url === null ? '' : project.image_url
-  });*/
-
   const history = useHistory();
 
   function refreshPage() {
@@ -137,29 +131,23 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     });
   };
 
-  function onSubmit() {
+  const [estado, setState] = useState(null);
+
+  function onChangeHandler(e) {
+    setState({ ...estado, [e.target.name]: e.target.files[0] });
+  }
+
+  const onSubmit = (formData, e) => {
+    e.preventDefault();
     const data = new FormData();
-    /*  data.append('picture', state.picture);*/
-    const { title, subtitle, ubication, category, text, image_url } = project;
-    let promise1 = updateProject({
-      title,
-      subtitle,
-      ubication,
-      category,
-      text,
-      image_url
-    });
-    if (typeof data.get('picture') === 'string') {
-      promise1.then(() => dispatch({ type: 'UPDATE_PROJECT', edit: 0 }));
-    } else {
-      Promise.all([
-        promise1,
-        addPictureProject(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
-      ]).then(() => {
+    data.append('image_url', estado.image_url);
+    let promise1 = updateProject(projectId, formData);
+    Promise.all([promise1, addPictureProject(projectId, data)])
+      .then(() => (window.location.href = '/project/' + projectId))
+      .then(() => {
         dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
       });
-    }
-  }
+  };
 
   function showComments() {
     if (comments !== null) {
@@ -403,9 +391,10 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                   </label>
                   <input
                     type="file"
-                    id="image_url"
+                    id="file"
                     name="image_url"
                     className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={onChangeHandler}
                   />
                   <div className="mt-2">
                     <button

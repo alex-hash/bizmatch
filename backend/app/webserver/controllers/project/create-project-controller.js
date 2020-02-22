@@ -27,7 +27,7 @@ async function validate(data) {
     ubication: Joi.string()
       .max(60)
       .required(),
-    image_url: Joi.string().max(512),
+    image_url: Joi.object(),
     video_url: Joi.string().max(512),
     prize: Joi.number(),
     duration: Joi.number(),
@@ -54,7 +54,7 @@ async function validate(data) {
 }
 
 async function createProject(req, res, next) {
-  const projectData = { ...req.body };
+  const { projectData } = req.body;
   const { userId } = req.claims;
 
   try {
@@ -67,6 +67,7 @@ async function createProject(req, res, next) {
     console.error(e);
     return res.status(400).send(e);
   }
+
   const { file } = req;
 
   if (!file || !file.buffer) {
@@ -117,7 +118,6 @@ async function createProject(req, res, next) {
             prize: projectData.prize,
             duration: projectData.duration,
             text: capitalize(projectData.text),
-            image_url: projectData.image_url,
             created_at: createdAt,
             user_id: userId
           });

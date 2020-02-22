@@ -198,11 +198,13 @@ export function UserRender({ user, edit, dispatch }) {
       description
     });
     if (typeof data.get('avatar') === 'string') {
-      promise1.then(() => dispatch({ type: 'EDIT', edit: 0 }));
+      promise1.then(() => (window.location.href = '/user/')).then(() => dispatch({ type: 'EDIT', edit: 0 }));
     } else {
       Promise.all([
         promise1,
-        updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
+        updateAvatar(data)
+          .then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
+          .then(() => (window.location.href = '/user/'))
       ]).then(() => {
         dispatch({ type: 'EDIT', edit: 0 });
       });

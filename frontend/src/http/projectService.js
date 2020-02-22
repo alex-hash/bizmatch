@@ -35,12 +35,12 @@ axios.interceptors.response.use(
   }
 );
 
-export function addPictureProject(data) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/image_url`, data);
+export function addPictureProject(projectId, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`, data);
 }
 
-export function addProject(project) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, project);
+export function addProject(projectData, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, projectData, data);
 }
 
 export function getProject(project) {

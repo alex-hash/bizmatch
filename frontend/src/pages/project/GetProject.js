@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getProject, getCommentsProject, deleteProject, updateProject } from '../../http/projectService';
+import { getProject, getCommentsProject, deleteProject } from '../../http/projectService';
 import { Project } from '../../components/Project';
 
 export function GetProject({ match }) {

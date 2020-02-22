@@ -33,6 +33,7 @@ export function GetProjects() {
   useEffect(() => {
     getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
   }, []);
+
   return (
     <ProjectList
       projects={state.projects}

@@ -15,7 +15,7 @@ const getProjectsFilter = require('../controllers/project/get-projects-category-
 const getProjectsInit = require('../controllers/project/get-projects-init-controller.js');
 
 const router = express.Router();
-router.post('/project/image_url', checkAccountSession, upload.single('image_url'), addPictureProject);
+router.post('/project/:projectId', checkAccountSession, upload.single('image_url'), addPictureProject);
 router.post('/project', checkAccountSession, upload.single('image_url'), createProject);
 router.get('/project/filter/:category', checkAccountSession, getProjectsFilter);
 router.get('/project/:projectId', getProject);
