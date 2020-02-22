@@ -6,16 +6,11 @@ import { useAuth } from '../context/auth-context';
 import StarRating from '../components/StarRating';
 import { addCommentProject, deleteCommentProject, updateProject, addPictureProject } from '../http/projectService';
 
-export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject, dispatch }) {
-  console.log(project);
+export function Project({ project, comments, projectId, onDeleteProject, onUpdateProject, dispatch, assesment, assesmentAvg }) {
   const { handleSubmit, register, errors, watch, formState, setError, setValue, reset } = useForm({
     mode: 'onBlur'
   });
   const { role, setRole, setUser } = useAuth();
-  /*
-  const [state, setState] = useState({
-    image_url: project.image_url === null ? '' : project.image_url
-  });*/
 
   const history = useHistory();
 
@@ -29,7 +24,6 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
       return (
         <div className="text-xs self-end mt-2">
           <button
-            onClick={() => renderEditHtml(index)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mr-2"
           >
             Editar
@@ -45,54 +39,63 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
+  const handleSend = (formData) => {
+    console.log(formData);
+    return addCommentProject(projectId, formData).then(() => window.location.reload()).catch((error) => {
+      if (error.response.status === 401) {
+        setRole(null);
+        setUser(null);
+      }
+    });
+  };
+
   function renderNewComment() {
     if (role !== null) {
       if(role.role === "M"){
-      return (
-        <div className="w-full p-2">
-          <h1 className="font-bold mt-2">Nuevo comentario</h1>
-          <div className="w-full ">
-            <form
-              className="bg-white md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 border-gray-200 border-2"
-              onSubmit={handleSubmit(handleSend)}
-              noValidate
-            >
-              <div>
-                <textarea
-                  ref={register({
-                    required: '*El contenido es necesario',
-                    maxLength: {
-                      message: '*El comentario no debe exceder los 200 caracteres',
-                      value: 200
-                    }
-                  })}
-                  className="resize-none shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="text"
-                  rows="6"
-                  type="text"
-                  name="text"
-                  placeholder=""
-                ></textarea>
-                {errors.text && <span className="error-validate">{errors.text.message}</span>}
-              </div>
-              <div className="flex flex-wrap px-2 py-4 justify-between w-full">
-                <div className="flex flex-wrap align-bottom">
-                  <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
-                  <p className="text-black text-sm leading-none self-center">{role.email}</p>
+        return (
+          <div className="w-full p-2">
+            <h1 className="font-bold mt-2">Nuevo comentario</h1>
+            <div className="w-full ">
+              <form
+                className="bg-white md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 border-gray-200 border-2"
+                onSubmit={handleSubmit(handleSend)}
+                noValidate
+              >
+                <div>
+                  <textarea
+                    ref={register({
+                      required: '*El contenido es necesario',
+                      maxLength: {
+                        message: '*El comentario no debe exceder los 200 caracteres',
+                        value: 200
+                      }
+                    })}
+                    className="resize-none shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="text"
+                    rows="6"
+                    type="text"
+                    name="text"
+                    placeholder=""
+                  ></textarea>
+                  {errors.text && <span className="error-validate">{errors.text.message}</span>}
                 </div>
-                <div className="text-xs self-end mt-2">
-                  <button
-                    onClick={refreshPage}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded"
-                  >
-                    Enviar
-                  </button>
+                <div className="flex flex-wrap px-2 py-4 justify-between w-full">
+                  <div className="flex flex-wrap align-bottom">
+                    <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
+                    <p className="text-black text-sm leading-none self-center">{role.email}</p>
+                  </div>
+                  <div className="text-xs self-end mt-2">
+                    <input
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 md:text-base border border-blue-700 rounded"
+                      disabled={formState.isSubmitting}
+                    />
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      );
+        );
     }
     }
   }
@@ -123,19 +126,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
-  function renderEditHtml(index) {
-    const div = document.getElementById(index);
-    const p = document.getElementById(index + 'p');
-  }
-
-  const handleSend = (formData) => {
-    return addCommentProject(projectId, formData).catch((error) => {
-      if (error.response.status === 401) {
-        setRole(null);
-        setUser(null);
-      }
-    });
-  };
+ 
 
   function onSubmit(e) {
     e.preventDefault();
@@ -185,7 +176,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                       </p>
                     </div>
                   </div>
-                  {renderButtons(comment, index)}
+                  {/*renderButtons(comment, index)*/}
                 </div>
                 <p className="mb-2 text-xs lg:text-sm px-2" id={index + 'p'}>
                     {comment.text}
@@ -199,7 +190,18 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     }
   }
 
+  function showStarIfLogged(){
+    if(role){
+      return(
+        <div className="mt-2">
+          <StarRating assesment={assesment} project={project.id}></StarRating>
+        </div>
+      );
+    }
+  }
+
   function something(onUpdateProject, projectC) {
+
     if (onUpdateProject === 0) {
       return (
         <div>
@@ -208,7 +210,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
           </div>
           <div className="flex flex-wrap">
           <div className="md:w-1/5"></div>
-          <div className="md:w-3/5">
+          <div className="w-full md:w-3/5">
             {project.map((project, index) => (
               <div key={project.id} className="break-all rounded mx-4 md:mx-0">
                 <div className="p-2 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
@@ -228,11 +230,13 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
                     </div>
                   </div>
                   <div className="order-2 lg:order-3">
-                    <h1 className="font-bold w-full mt-6">Decripción del Proyecto</h1>
-                    <div className="px-1 w-full">
-                      <div className="text-gray-600 font-semibold text-sm mt-2 w-full">Ubicación: {project.ubication}</div>
+                    {showStarIfLogged()}
+                    <div className="w-full">
+                      <div className="text-black font-semibold text-sm w-full">Valoración media: {(assesmentAvg === null ? "" : assesmentAvg.avg.substring(0,4)) + (assesmentAvg === null ? "0" : " / ") + (assesmentAvg === null ? "" : assesmentAvg.counter) + " votos"}</div>
+                      <div className="text-gray-600 font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
                       <div className="text-gray-600 font-semibold text-sm mb-2 w-full">Categoría: {project.category}</div>
                     </div>
+                    <h1 className="font-bold w-full mt-6">Decripción del Proyecto </h1>
                     <p className="text-gray-700 text-lg">{project.text}</p>
                   </div>
                   <div className="w-full lg:w-1/2 md:px-6 mt-10 lg:mt-0 order-3 lg:order-2">

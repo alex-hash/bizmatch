@@ -3,12 +3,21 @@ import { createAssesment } from '../http/projectService'
 import StarRatingComponent from 'react-star-rating-component';
  
 class StarRating extends React.Component {
-  constructor() {
-    super();
- 
-    this.state = {
-      rating: 1
-    };
+  state = {};
+
+  componentWillMount() {
+    this.setState({
+      rating: this.props.assesment,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Any time props.email changes, update state.
+    if (nextProps.assesment !== this.props.assesment) {
+      this.setState({
+        rating: nextProps.assesment
+      });
+    }
   }
  
   onStarClick(nextValue, prevValue, name) {

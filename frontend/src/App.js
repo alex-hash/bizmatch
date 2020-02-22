@@ -44,7 +44,7 @@ function App() {
           <Route exact path="/edite-project">
             <EditeProject />
           </Route>
-          <Route path="/user/:userId" component={User}></Route>
+          <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
         </Switch>
       </AuthProvider>
     </BrowserRouter>

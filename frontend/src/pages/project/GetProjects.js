@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
 import { ProjectList } from '../../components/ProjectList';
+import Swal from 'sweetalert2';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -31,7 +32,17 @@ export function GetProjects() {
   });
 
   useEffect(() => {
-    getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
+    getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })).catch((error) => {
+      if(error.response.status === 401){
+        window.localStorage.clear();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tú token de sesión ha expirado'
+        });
+        window.location.href="/";
+      }
+    });
   }, []);
   return (
     <ProjectList

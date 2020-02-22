@@ -5,6 +5,7 @@ import { addProject } from '../../http/projectService';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/auth-context';
 import { addPictureProject } from '../../http/projectService';
+import Swal from 'sweetalert2';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -49,7 +50,17 @@ export function CreateProject() {
     const data = new FormData();
     data.append(state.picture);
     let promise1;
-    Promise.all([promise1, addPictureProject(data)]).then(() => (window.location.href = '/create-project'));
+    Promise.all([promise1, addPictureProject(data)]).then(() => (window.location.href = '/create-project')).catch((error) => {
+      if(error.response.status === 401){
+        window.localStorage.clear();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tú token de sesión ha expirado'
+        });
+        window.location.href="/";
+      }
+    });;
   };
   return (
     <div>
