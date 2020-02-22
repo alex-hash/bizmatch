@@ -6,17 +6,11 @@ import Swal from 'sweetalert2'
 export function PrivateRoute({ children, allowedRoles, ...others }) {
   const { role } = useAuth();
   function loginOrNot(){
-    if(role !== null){
+    if(role === null){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Tú token de sesión ha expirado'
-      });
-    }else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Tú rol no te permite acceder a este contenido'
+        text: 'Tú token de sesión ha expirado o tú rol no te permite acceder a este contenido'
       });
     }
   }

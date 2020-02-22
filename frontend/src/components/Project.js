@@ -187,6 +187,13 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
           {renderNewComment()}
         </div>
       );
+    }else{
+      return(
+        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
+          <h1 className="font-bold p-2">Comentarios más recientes</h1>
+          <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
+        </div>
+      );
     }
   }
 
@@ -194,7 +201,7 @@ export function Project({ project, comments, projectId, onDeleteProject, onUpdat
     if(role){
       return(
         <div className="mt-2">
-          <StarRating assesment={assesment} project={project.id}></StarRating>
+          <StarRating assesment={assesment} project={projectId}></StarRating>
         </div>
       );
     }

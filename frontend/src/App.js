@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
 import { AuthProvider } from './context/auth-context';
 import { Login } from './pages/Login';
@@ -12,6 +12,7 @@ import { GetProject } from './pages/project/GetProject';
 import { GetProjectsFilter } from './pages/project/GetProjectsFilter';
 import { EditeProject } from './pages/project/EditeProject';
 import { GetProjectsInit } from './pages/project/GetProjectsInit';
+import { notFound } from './components/Notfound'; 
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
             <EditeProject />
           </Route>
           <PrivateRoute path="/user/:userId" component={User} allowedRoles={['admin', 'E', 'M']}></PrivateRoute>
+          <Route path="/404" component={notFound} />
+          <Redirect to="/404" />
         </Switch>
       </AuthProvider>
     </BrowserRouter>

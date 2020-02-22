@@ -45,6 +45,7 @@ export function GetProject({ match }) {
           setAssesmentAvg(response[3].data.data);
         }
       }).catch((error) => {
+        console.log(error)
         if(error.response.status === 401){
           window.localStorage.clear();
           Swal.fire({
@@ -53,6 +54,8 @@ export function GetProject({ match }) {
             text: 'Tú token de sesión ha expirado'
           });
           window.location.href="/";
+        }else if(error.response.status === 400){
+          window.location.href="/404"
         }
       });
     }else{
@@ -71,6 +74,8 @@ export function GetProject({ match }) {
             text: 'Tú token de sesión ha expirado'
           });
           window.location.href="/";
+        }else if(error.response.status === 400){
+          window.location.href="/404"
         }
       });
     }

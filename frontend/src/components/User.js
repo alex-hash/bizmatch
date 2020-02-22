@@ -9,7 +9,6 @@ import jwt_decode from 'jwt-decode';
 export function UserRender({ user, edit, dispatch, projects, comments }) {
 	
 	const { role } = useAuth();
-	console.log(projects);
 
 	const [estado, setState] = useState({
 		company_name: user.company_name, 
@@ -140,7 +139,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 	}
 
 	function getTops(){
-		if(role.role === "E"){
+		if(user.type === "E"){
 			if(projects.length === 0){
 				return(
 					<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <span className="text-base font-normal">No hay proyectos</span></h1>
@@ -151,7 +150,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 						<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Proyectos destacados - <a className="text-blue-500 text-base font-normal">Ver todos los proyectos</a></h1> 
 						<div className="flex flex-wrap self-end">
 							{projects.map((project, index) => (
-								<div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
+								<div key={project.id} class="mb-4 w-full sm:w-1/2 sm:px-2 lg:w-full xl:w-1/2">
 									<div class="bg-white h-full rounded-lg overflow-hidden shadow">
 										<img
 										class="h-32 w-full object-cover object-center"
@@ -160,7 +159,7 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 										/>
 										<div class="p-4 h-full">
 										<a
-											href="#"
+											href={"/project/"+project.id}
 											class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg"
 										>
 											{project.title}
@@ -185,10 +184,10 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 			}else{
 				return(
 					<div>
-						<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Comentarios destacados - <a className="text-blue-500 text-base font-normal">Ver todos los comentarios</a></h1> 
+						<h1 class="font-semibold text-xl mt-4 mb-2 sm:px-2">Comentarios destacados</h1> 
 						<div className="flex flex-wrap self-end">
 							{comments.map((comment, index) => (
-								<div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
+								<div key={comment.id} class="mb-4 w-full sm:w-1/2 sm:px-2 lg:w-full xl:w-1/2">
 									<div class="bg-white h-full rounded-lg overflow-hidden shadow">
 										<div class="p-4 h-full flex flex-col justify-between">
 											<div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
@@ -233,9 +232,9 @@ export function UserRender({ user, edit, dispatch, projects, comments }) {
 		let city = "sadsad";
 		let promise1 = updateProfile({email, name, first_name, last_name, birthday, country, city, company_name, company_role, page_url, type, description});
 		if(typeof data.get('avatar') === "string"){
-			promise1.then(() => dispatch({ type: 'EDIT', edit: 0}));
+			promise1.then(() => window.location.href="/user");
 		}else{
-			Promise.all([promise1, updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))]).then(() => { dispatch({ type: 'EDIT', edit: 0}); });
+			Promise.all([promise1, updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))]).then(() => window.location.href="/user");
 		}
 	}
 

@@ -20,5 +20,7 @@ router.delete("/account", checkAccountSession, deleteAccount);
 router.get("/accountprojects", checkAccountSession, getTopProjects);
 router.get("/accountcomments", checkAccountSession, getTopComments);
 router.get("/accountprojects/:userId", checkAccountSession, getTopProjects);
+router.get("/accountcomments/:userId", checkAccountSession, getTopComments);
+router.get("/accountprojects/:userId", checkAccountSession, getTopProjects);
 
 module.exports = router;
