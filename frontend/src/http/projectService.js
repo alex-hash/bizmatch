@@ -96,3 +96,15 @@ export function getAssesmentUser(project) {
 export function getAssesmentAvg(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
 }
+
+export function createCommentAssesment(comment, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/comment/assesment/${comment}`, data);
+}
+
+export function getCommentAssesmentUser(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
+}
+
+export function getCommentAssesmentAvg(comment) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
+}
