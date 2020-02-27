@@ -29,7 +29,7 @@ async function getAnotherUser(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    const sqlQuery = `SELECT email, name, first_name, last_name, birthday, avatar_url, company_name, company_role, page_url, type, created_at
+    const sqlQuery = `SELECT id AS identify, email, name, description, first_name, last_name, birthday, avatar_url, company_name, company_role, page_url, type, created_at
         FROM user WHERE id = ?`;
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();

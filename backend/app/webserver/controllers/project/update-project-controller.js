@@ -19,7 +19,7 @@ async function validate(data) {
     ubication: Joi.string()
       .max(60)
       .required(),
-    image_url: Joi.string().max(512),
+    image_url: Joi.object(),
     video_url: Joi.string().max(512),
     prize: Joi.number(),
     duration: Joi.number(),
@@ -73,7 +73,7 @@ async function updateProject(req, res, next) {
       .substring(0, 19)
       .replace('T', ' ');
     const sqlUpdateProject = `Update project
-    SET title = ?, subtitle = ?, category = ?, ubication = ?, image_url = ?, video_url = ?, prize = ?, duration = ?, text = ?, updated_at = ?
+    SET title = ?, subtitle = ?, category = ?, ubication = ?, video_url = ?, prize = ?, duration = ?, text = ?, updated_at = ?
     WHERE id = ?
     AND user_id = ?`;
     const [updatedStatus] = await connection.query(sqlUpdateProject, [
@@ -81,7 +81,6 @@ async function updateProject(req, res, next) {
       projectData.subtitle,
       projectData.category,
       projectData.ubication,
-      projectData.image_url,
       projectData.video_url,
       projectData.prize,
       projectData.duration,

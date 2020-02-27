@@ -42,9 +42,15 @@ async function validate(data) {
       .max(45)
       .required(),
     birthday: Joi.required(), //Echarle un vistazo, buscar una manera en el frontend de parsear el dato de la manera correcta para introducirla a la BD
-    company_name: Joi.string().max(255).allow(''),
-    company_role: Joi.string().max(255).allow(''),
-    page_url: Joi.string().max(512).allow(''),
+    company_name: Joi.string()
+      .max(255)
+      .allow(''),
+    company_role: Joi.string()
+      .max(255)
+      .allow(''),
+    page_url: Joi.string()
+      .max(512)
+      .allow(''),
     type: Joi.string().max(1)
   });
 
@@ -69,9 +75,9 @@ async function createAccount(req, res, next) {
   const userId = uuidV4();
   const cryptpassword = await bcrypt.hash(accountData.password, 10);
   const capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
 
   let connection;
   try {
@@ -86,19 +92,19 @@ async function createAccount(req, res, next) {
       birthday: accountData.birthday,
       company_name: capitalize(accountData.company_name),
       company_role: capitalize(accountData.company_role),
+      avatar_url: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
       page_url: accountData.page_url,
       type: accountData.type,
       created_at: createdAtNow
     });
     connection.release();
     res.status(201).send();
-    /*
-        try{
-            await sendWelcomeEmail(accountData.email);
-        } catch(e) {
-            console.error(e);
-        }
-*/
+
+    try {
+      await sendWelcomeEmail(accountData.email);
+    } catch (e) {
+      console.error(e);
+    }
   } catch (e) {
     if (connection) {
       connection.release();

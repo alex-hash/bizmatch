@@ -24,10 +24,10 @@ async function validate(data) {
       .max(20),
     city: Joi.string()
       .max(30),
-    company_name: Joi.string().max(255),
-    company_role: Joi.string().max(255),
-    page_url: Joi.string().max(512),
-    description: Joi.string().max(2000),
+    company_name: Joi.string().max(255).allow(null).optional(),
+    company_role: Joi.string().max(255).allow(null).optional(),
+    page_url: Joi.string().max(512).allow(null).optional(),
+    description: Joi.string().max(2000).allow(null).optional(),
     type: Joi.string()
       .max(1)
       .required(),

@@ -8360,19 +8360,23 @@ hr.style1 {
   border-top: 1px solid #8c8b8b;
 }
 
-.wrapper{
-  width:200px;
-  padding:20px;
+.wrapper {
+  width: 200px;
+  padding: 20px;
   height: 150px;
 }
 
-.mt-nav{
+.mt-nav {
   padding-top: 62px !important;
 }
 
 .link:hover,
 .link:active {
   border-bottom-width: 4px;
+}
+
+.border-gold {
+  border-color: #ffd700;
 }
 
 .bg-button {
@@ -8400,7 +8404,7 @@ hr.style1 {
   }
 }
 
-.top-edit{
+.top-edit {
   position: absolute;
   top: 225px;
   left: 33rem;
@@ -8412,14 +8416,18 @@ hr.style1 {
   background-image: url('../image/536.jpg');
 }
 
+.top-50 {
+  top: 50%;
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
-  .top-perfil{
+  .top-perfil {
     position: absolute;
     top: 120px;
     right: 10rem;
   }
 
-  .top-edit{
+  .top-edit {
     position: absolute;
     top: 120px;
     right: 10rem;
@@ -8427,7 +8435,11 @@ hr.style1 {
 }
 
 @media (min-width: 550px) and (max-width: 767px) {
-  .top-perfil{
+  .mr-48-t {
+    margin-right: 12rem;
+  }
+
+  .top-perfil {
     position: absolute;
     top: 120px;
     right: 2rem;
@@ -8435,16 +8447,21 @@ hr.style1 {
 }
 
 @media (max-width: 549px) {
-  .top-perfil{
+  .top-perfil {
     position: absolute;
     top: 90px;
     left: 0;
     right: 0;
   }
 
-  .mt-pefil{
+  .mt-pefil {
     margin-top: 9rem;
   }
+}
+
+.img-project {
+  width: 768px;
+  height: 400px;
 }
 
 @media (min-width: 640px) {

@@ -17,7 +17,6 @@ async function validate(data) {
 
 async function deleteProject(req, res, next) {
   const { projectId } = req.params;
-
   try {
     await validate({ projectId });
   } catch (e) {
@@ -27,9 +26,12 @@ async function deleteProject(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
+    const sqlQueryD = `DELETE FROM assesment WHERE project_id= ? `;
     const sqlQueryC = `DELETE FROM comment WHERE project_id = ?`;
 
+    const [deletedStatusD] = await connection.execute(sqlQueryD, [projectId]);
     const [deletedStatusC] = await connection.execute(sqlQueryC, [projectId]);
+
     connection = await mysqlPool.getConnection();
     const sqlQuery = `DELETE FROM project
       WHERE id = ?`;

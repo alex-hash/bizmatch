@@ -3,7 +3,6 @@
 const Joi = require('@hapi/joi');
 const cloudinary = require('cloudinary').v2;
 const mysqlPool = require('../../../database/mysql-pool');
-const jwt = require('jsonwebtoken');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -13,7 +12,7 @@ cloudinary.config({
 
 async function validate(data) {
   const schema = Joi.object({
-    userId: Joi.string()
+    projectId: Joi.string()
       .guid({
         version: ['uuidv4']
       })
@@ -23,9 +22,9 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function uploadAvatar(req, res, next) {
-  const { userId } = req.claims;
-  const data = { userId };
+async function addPictureProject(req, res, next) {
+  const { projectId } = req.params;
+  const data = { projectId };
 
   try {
     await validate(data);
@@ -46,9 +45,9 @@ async function uploadAvatar(req, res, next) {
     .upload_stream(
       {
         resource_type: 'image',
-        public_id: userId,
-        width: 200,
-        height: 200,
+        public_id: projectId,
+        width: 2000,
+        height: 2000,
         format: 'jpg',
         crop: 'limit'
       },
@@ -62,45 +61,15 @@ async function uploadAvatar(req, res, next) {
 
         let connection;
         try {
-          const sqlQuery = `UPDATE user
-          SET avatar_url = ?
-          WHERE id = ?`;
-          const sqlQuery2 = `SELECT id, email, password, avatar_url, type
-          FROM user
+          const sqlQuery = `UPDATE project
+          SET image_url = ?
           WHERE id = ?`;
           connection = await mysqlPool.getConnection();
-          connection.execute(sqlQuery, [secureUrl, userId]);
+          connection.execute(sqlQuery, [secureUrl, projectId]);
           connection.release();
-
-          connection = await mysqlPool.getConnection();
-          const [rows] = await connection.execute(sqlQuery2, [userId]);
-          connection.release();
-
-          if (rows.length !== 1) {
-            res.status(401).send();
-          }
-
-          const user = rows[0];
-
-          const payloadJwt = {
-            avatar_url: secureUrl,
-            userId: userId,
-            email: user.email,
-            role: user.type
-          };
-
-          const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);
-          const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, {
-            expiresIn: jwtExpiresIn
-          });
 
           res.header('Location', secureUrl);
-
-          return res.send({
-            accessToken: token,
-            avatarUrl: secureUrl,
-            expiresIn: jwtExpiresIn
-          });
+          return res.status(201).send();
         } catch (e) {
           if (connection) {
             connection.release();
@@ -113,4 +82,4 @@ async function uploadAvatar(req, res, next) {
     .end(file.buffer);
 }
 
-module.exports = uploadAvatar;
+module.exports = addPictureProject;

@@ -1,5 +1,4 @@
 'use strict';
-
 const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 
@@ -15,12 +14,19 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function getUser(req, res, next) {
-  const { userId } = req.claims;
-  const accountData = { userId };
+async function getAvg(req, res, next) {
+
+  const user = req.params.userId
+  let userId;
+  if(user === undefined){
+        userId = req.claims.userId
+  }else{
+        userId = req.params.userId
+  }
+  const commentData = { userId };
 
   try {
-    await validate(accountData);
+    await validate(commentData);
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -28,29 +34,21 @@ async function getUser(req, res, next) {
 
   let connection;
   try {
-    connection = await mysqlPool.getConnection();
-    const sqlQuery = `SELECT id AS identify , email, name, first_name, last_name, birthday, avatar_url, company_name, company_role, page_url, type, created_at, description
-        FROM user WHERE id = ?`;
+    const sqlQuery = `select AVG(type) AS avg, count(*) AS counter from assesment a JOIN project p ON a.project_id = p.id WHERE p.user_id = ?`;
+    const connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
 
-    if (rows.length !== 1) {
-      return res.status(404).send();
-    }
-
-    const [userData] = rows;
-
     return res.send({
-      data: userData
+      data: rows[0]
     });
   } catch (e) {
     if (connection) {
       connection.release();
     }
-
     console.error(e);
-    return res.status(500).send();
+    res.status(500).send(e);
   }
 }
 
-module.exports = getUser;
+module.exports = getAvg;

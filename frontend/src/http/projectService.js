@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    if (error.response.status === 401 && !error.config.url.includes('/login')) {
+    if (error.response.status === 401 && !error.config.url.includes('/login') && !error.config.url.includes('/')) {
       localStorage.removeItem('currentUser');
       window.location.href = '/login';
     }
@@ -35,22 +35,35 @@ axios.interceptors.response.use(
   }
 );
 
-export function addProject(project) {
-  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, project);
+export function addPictureProject(projectId, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`, data);
+}
+
+export function addProject(projectData, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project`, projectData, data);
 }
 
 export function getProject(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/${project}`);
 }
 
-export function getProjects() {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
+export function getProjects(data) {
+  if (data === undefined) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project`);
+  } else {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projects/${data}`);
+  }
 }
+export function getProjectsInit() {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/projectsInit`);
+}
+
 export function getProjectsFilter(category) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/filter/${category}`);
 }
 
 export function deleteProject(projectId) {
+  console.log(projectId);
   return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`);
 }
 
@@ -63,7 +76,6 @@ export function updateCommentProject(project) {
 }
 
 export function deleteCommentProject(commentId) {
-  console.log(commentId);
   return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/comment/delete/${commentId}`);
 }
 export function addCommentProject(project_id, data) {
@@ -71,4 +83,28 @@ export function addCommentProject(project_id, data) {
 }
 export function getCommentsProject(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/comment/${project}`);
+}
+
+export function createAssesment(project, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`, data);
+}
+
+export function getAssesmentUser(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
+}
+
+export function getAssesmentAvg(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
+}
+
+export function createCommentAssesment(comment, data) {
+  return axios.post(`${process.env.REACT_APP_BACKEND_URL}/comment/assesment/${comment}`, data);
+}
+
+export function getCommentAssesmentUser(project) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
+}
+
+export function getCommentAssesmentAvg(comment) {
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${comment}`);
 }

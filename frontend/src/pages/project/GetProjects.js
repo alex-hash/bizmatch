@@ -1,10 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { getProjects } from '../../http/projectService';
-import { useAuth } from '../../context/auth-context';
 import { ProjectList } from '../../components/ProjectList';
-import { Init } from '../Init';
+import Swal from 'sweetalert2';
 
 function projectsReducer(state, action) {
   switch (action.type) {
@@ -17,19 +14,43 @@ function projectsReducer(state, action) {
   }
 }
 
-export function GetProjects() {
-  const { handleSubmit, register, errors, formState } = useForm({
-    mode: 'onBlur'
-  });
-  const { currentUser, setCurrentUser, setIsAuthenticated } = useAuth();
-  const history = useHistory();
+export function GetProjects({ match }) {
   const [state, dispatch] = useReducer(projectsReducer, {
     projects: [],
     selectedProject: null
   });
 
   useEffect(() => {
-    getProjects().then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }));
+    if (match === undefined) {
+      getProjects()
+        .then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }))
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            });
+            window.location.href = '/';
+          }
+        });
+    } else {
+      getProjects(match.params.userId)
+        .then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }))
+        .catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            });
+            window.location.href = '/';
+          }
+        });
+    }
   }, []);
+
   return <ProjectList projects={state.projects} />;
 }

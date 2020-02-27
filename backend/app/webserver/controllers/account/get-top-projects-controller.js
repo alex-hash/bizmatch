@@ -1,5 +1,4 @@
 'use strict';
-
 const Joi = require('@hapi/joi');
 const mysqlPool = require('../../../database/mysql-pool');
 
@@ -15,12 +14,18 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function getUser(req, res, next) {
-  const { userId } = req.claims;
-  const accountData = { userId };
+async function getProjects(req, res, next) {
+  const user = req.params.userId
+  let userId;
+  if(user === undefined){
+        userId = req.claims.userId
+  }else{
+        userId = req.params.userId
+  }
+  const projectData = { userId };
 
   try {
-    await validate(accountData);
+    await validate(projectData);
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -28,29 +33,22 @@ async function getUser(req, res, next) {
 
   let connection;
   try {
+    const sqlQuery = `SELECT id, title, subtitle, created_at, updated_at, category, text, ubication, image_url FROM project WHERE user_id = ? LIMIT 2`;
     connection = await mysqlPool.getConnection();
-    const sqlQuery = `SELECT id AS identify , email, name, first_name, last_name, birthday, avatar_url, company_name, company_role, page_url, type, created_at, description
-        FROM user WHERE id = ?`;
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
 
-    if (rows.length !== 1) {
-      return res.status(404).send();
-    }
-
-    const [userData] = rows;
-
-    return res.send({
-      data: userData
+    const projects = rows.map((project) => {
+      return {
+        ...project
+      };
     });
-  } catch (e) {
-    if (connection) {
-      connection.release();
-    }
 
+    return res.status(200).send(projects);
+  } catch (e) {
     console.error(e);
     return res.status(500).send();
   }
 }
 
-module.exports = getUser;
+module.exports = getProjects;

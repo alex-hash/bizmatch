@@ -4,7 +4,7 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validate(data) {
   const schema = Joi.object({
-    themeId: Joi.string()
+    userId: Joi.string()
       .guid({
         version: ['uuidv4']
       })
@@ -14,9 +14,16 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function getCommentTheme(req, res, next) {
-  const { themeId } = req.params;
-  const commentData = { themeId };
+async function getComment(req, res, next) {
+
+  const user = req.params.userId
+  let userId;
+  if(user === undefined){
+        userId = req.claims.userId
+  }else{
+        userId = req.params.userId
+  }
+  const commentData = { userId };
 
   try {
     await validate(commentData);
@@ -27,11 +34,9 @@ async function getCommentTheme(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `Select c.id, c.text, c.created_at, c.updated_at, c.deleted_at, c.theme_id, u.id AS user, u.name, u.first_name, u.last_name, u.avatar_url
-from comment_theme c JOIN user u ON c.user_id = u.id
-      AND c.theme_id = ? AND c.deleted_at IS NULL`;
+    const sqlQuery = `select c.text, p.id as project, p.title from comment c JOIN project p ON c.project_id = p.id where c.user_id = ? LIMIT 2`;
     const connection = await mysqlPool.getConnection();
-    const [rows] = await connection.execute(sqlQuery, [themeId]);
+    const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
     const comments = rows.map((comment) => {
       return {
@@ -51,4 +56,4 @@ from comment_theme c JOIN user u ON c.user_id = u.id
   }
 }
 
-module.exports = getCommentTheme;
+module.exports = getComment;

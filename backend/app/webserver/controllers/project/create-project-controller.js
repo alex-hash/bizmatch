@@ -1,6 +1,7 @@
 'use strict';
 
 const Joi = require('@hapi/joi');
+const cloudinary = require('cloudinary').v2;
 const mysqlPool = require('../../../database/mysql-pool');
 const uuidV4 = require('uuid/v4');
 
@@ -20,7 +21,7 @@ async function validate(data) {
     ubication: Joi.string()
       .max(60)
       .required(),
-    image_url: Joi.string().max(512),
+    image_url: Joi.object(),
     video_url: Joi.string().max(512),
     prize: Joi.number(),
     duration: Joi.number(),
@@ -46,36 +47,8 @@ async function validate(data) {
   Joi.assert(data, schema);
 }
 
-async function insertReward(project_id, { prize, title, month, year, subtitle }) {
-  const reward_id = uuidV4();
-  const capitalize = (s) => {
-    if (typeof s !== 'string') return '';
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  };
-  let connection;
-  try {
-    connection = await mysqlPool.getConnection();
-    await connection.query('INSERT INTO reward SET ?', {
-      id: reward_id,
-      project_id: project_id,
-      prize: prize,
-      title: capitalize(title),
-      month: month,
-      year: year,
-      subtitle: capitalize(subtitle)
-    });
-    connection.release();
-  } catch (e) {
-    if (connection) {
-      connection.release();
-    }
-    console.error(e);
-    res.status(500).send(e);
-  }
-}
-
 async function createProject(req, res, next) {
-  const projectData = { ...req.body };
+  const { projectData } = req.body;
   const { userId } = req.claims;
 
   try {
@@ -94,7 +67,6 @@ async function createProject(req, res, next) {
     .substring(0, 19)
     .replace('T', ' ');
   const projectId = uuidV4();
-  const rewards = projectData.rewards;
   const capitalize = (s) => {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -109,7 +81,8 @@ async function createProject(req, res, next) {
       subtitle: capitalize(projectData.subtitle),
       category: projectData.category,
       ubication: projectData.ubication,
-      image_url: projectData.image_url,
+      image_url:
+        'https://intl-blog.imgix.net/wp-content/uploads/2019/05/administrador-de-tarea-vs-gestor-de-proyectos.jpg?auto=format%2Cenhance%2Ccompress',
       video_url: projectData.video_url,
       prize: projectData.prize,
       duration: projectData.duration,
@@ -117,17 +90,14 @@ async function createProject(req, res, next) {
       created_at: createdAt,
       user_id: userId
     });
-    connection.release();
-    /*rewards.map((reward) => {
-      insertReward(projectId, { ...reward });
-    });*/
-    res.status(201).send();
+
+    return res.status(201).send();
   } catch (e) {
     if (connection) {
       connection.release();
     }
     console.error(e);
-    res.status(500).send(e);
+    return res.status(500).send(e.message);
   }
 }
 

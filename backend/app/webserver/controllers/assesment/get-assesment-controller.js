@@ -16,6 +16,7 @@ async function validate(data) {
 
 async function getAssesment(req, res, next) {
   const { projectId } = req.params;
+  const { userId } = req.claims;
   const assesmentData = { projectId };
 
   try {
@@ -27,12 +28,12 @@ async function getAssesment(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `SELECT AVG(type) AS media
+    const sqlQuery = `SELECT type 
       FROM assesment
-      WHERE project_id= ?`;
+      WHERE project_id= ? AND user_id = ?`;
 
     const connection = await mysqlPool.getConnection();
-    const [rows] = await connection.execute(sqlQuery, [projectId]);
+    const [rows] = await connection.execute(sqlQuery, [projectId, userId]);
     connection.release();
 
     return res.send({
