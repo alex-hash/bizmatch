@@ -106,5 +106,5 @@ export function getCommentAssesmentUser(project) {
 }
 
 export function getCommentAssesmentAvg(comment) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${project}`);
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${comment}`);
 }
