@@ -28,30 +28,29 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
         <input
           type="search"
           value={searchText}
-          class="w-full md:w-1/2 shadow appearance-none border rounded p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="w-full md:w-1/2 shadow appearance-none border rounded p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Busca por nombre,categoría..."
-          onChange={(e) => onSearchTextChanged(e.target.value)}
         />
         {displayButtonCreate(role.role)}
       </div>
-      <div class="mt-16">
-        <div class="px-4 sm:mx-10">
-          <div class="block md:flex flex-wrap justify-left">
+      <div className="mt-16">
+        <div className="px-4 sm:mx-10">
+          <div className="block md:flex flex-wrap justify-left">
             {projects.map((project) => (
-              <div class="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
-                <div class="bg-white rounded-lg overflow-hidden shadow">
+              <div className="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
+                <div className="bg-white rounded-lg overflow-hidden shadow">
                   <a href={'/project/' + project.id}>
                     <img
-                      class="h-48 w-full object-cover object-center"
+                      className="h-48 w-full object-cover object-center"
                       src={project.image_url}
                       alt="Foto de Proyecto"
                     />
                   </a>
-                  <div class="p-4 h-auto md:h-48 mt-2">
+                  <div className="p-4 h-auto md:h-48 mt-2">
                     <a href={'/project/' + project.id} className="text-gray-800 font-bold text-xl mb-2">
                       {project.title}
                     </a>
-                    <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                    <div className="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                       {project.subtitle}
                     </div>
                     <p class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
@@ -71,7 +70,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
                             : project.updated_at.replace('T', ' ').substring(0, 16)}
                         </p>
                       </div>
-                      <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
+                      <div className="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                     </div>
                   </div>
                 </div>

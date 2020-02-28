@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar';
 import { useForm } from 'react-hook-form';
 import { addProject } from '../../http/projectService';
 import { useAuth } from '../../context/auth-context';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export function CreateProject() {

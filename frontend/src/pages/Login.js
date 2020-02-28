@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar';
 import jwt_decode from 'jwt-decode';
 
 export function Login() {
-  const { handleSubmit, register, errors, watch, formState, setError, setValue } = useForm({
+  const { handleSubmit, register, errors, formState, setError, setValue } = useForm({
     mode: 'onBlur'
   });
   let history = useHistory();
