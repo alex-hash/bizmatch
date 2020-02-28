@@ -55,6 +55,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
                       {project.subtitle}
                     </div>
                     <p class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">{project.category}</p>
+                    <p class="text-sm leading-relaxed font-semibold block md:text-xs lg:text-sm">Valoración media: {project.avg === null ? "Sin valoración todavía" : Math.round(project.avg * 100) / 100 + " / " + project.counter + " opiniones"}</p>
                     <div className="flex items-center">
                       <Link
                         to={'/user/' + project.user}

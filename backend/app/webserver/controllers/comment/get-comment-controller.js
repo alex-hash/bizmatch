@@ -28,7 +28,7 @@ async function getComment(req, res, next) {
   let connection;
   try {
     const sqlQuery = `select c.id, c.text, c.created_at, c.updated_at, c.deleted_at, c.project_id, u.id AS user, u.name, u.first_name, u.last_name, u.avatar_url
-from comment c JOIN user u ON c.user_id = u.id
+from comment c JOIN user u ON c.user_id = u.id LEFT JOIN comment_assesment ca ON ca.
       AND c.project_id = ? AND c.deleted_at IS NULL ORDER BY c.created_at DESC`;
     const connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [projectId]);

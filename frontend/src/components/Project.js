@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/auth-context';
 import StarRating from '../components/StarRating';
+import StarRatingComment from '../components/StarRatingComment';
+import Swal from 'sweetalert2';
 import {
   addCommentProject,
   deleteCommentProject,
@@ -12,7 +14,7 @@ import {
   deleteProject
 } from '../http/projectService';
 
-export function Project({ project, comments, projectId, onUpdateProject, dispatch, assesment, assesmentAvg }) {
+export function Project({ project, comments, projectId, onUpdateProject, dispatch, assesment }) {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -35,6 +37,14 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           </button>
         </div>
       );
+    } else {
+      if(role){
+        return (
+          <div className="pr-2">
+            <StarRatingComment comment={comment.id} ></StarRatingComment>  
+          </div>
+        )
+      }
     }
   }
 
@@ -152,6 +162,19 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
         .then(() => (window.location.href = '/project/' + projectId))
         .then(() => {
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
+        }).catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
+            });
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
+          }
         });
     } else {
       let promise1 = updateProject(projectId, formData);
@@ -159,6 +182,19 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
         .then(() => (window.location.href = '/project/' + projectId))
         .then(() => {
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
+        }).catch((error) => {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
+            });
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
+          }
         });
     }
   };
@@ -172,10 +208,10 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
             <React.Fragment key={comment.id}>
               <hr className="style1 mb-2" />
               <div className="break-all w-full bg-white border-gray-200 border-2 mx-2" id={index}>
-                <div className="flex flex-wrap py-4 justify-between w-full">
+                <div className="flex flex-wrap py-4 justify-between w-full pl-2">
                   <div className="flex flex-wrap align-bottom">
                     <Link to={'/user/' + comment.user}>
-                      <img className="w-10 h-10 rounded-full ml-2 mr-2" src={comment.avatar_url} alt="Avatar" />
+                      <img className="w-10 h-10 rounded-full mr-2" src={comment.avatar_url} alt="Avatar" />
                     </Link>
                     <div className="text-xs lg:text-sm self-center">
                       <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
@@ -244,11 +280,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                       {showStarIfLogged()}
                       <div className="w-full">
                         <div className="text-black font-semibold text-sm w-full">
-                          Valoración media:{' '}
-                          {(assesmentAvg === null ? '' : assesmentAvg.avg.substring(0, 4)) +
-                            (assesmentAvg === null ? '0' : ' / ') +
-                            (assesmentAvg === null ? '' : assesmentAvg.counter) +
-                            ' votos'}
+                          Valoración media: {project.avg === null ? "Sin valoración todavía" : Math.round(project.avg * 100) / 100 + " / " + project.counter + " opiniones"}
                         </div>
                         <div className="text-gray-600 font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
                         <div className="text-gray-600 font-semibold text-sm mb-2 w-full">

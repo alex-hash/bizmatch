@@ -31,8 +31,11 @@ export function GetProjects({ match }) {
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
           }
         });
     } else {
@@ -45,8 +48,11 @@ export function GetProjects({ match }) {
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
           }
         });
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useAuth } from '../context/auth-context';
 import { getProfile, getProfileOther, getProjects, getComments, getAvg } from '../http/userService';
 import { UserRender } from '../components/User';
+import Swal from 'sweetalert2';
 
 export function User({ match }) {
   const { role, setRole, setCurrentUser } = useAuth();
@@ -31,10 +32,16 @@ export function User({ match }) {
         getAvg().then((response) => setAvg(response.data.data))
       ]).catch((error) => {
         if (error.response.status === 401) {
-          setRole(null);
-          setUser(null);
-          setCurrentUser(null);
           window.localStorage.clear();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          }).then(() => {
+            window.location.href = '/';
+          });
+        } else if (error.response.status === 400) {
+          window.location.href = '/404';
         }
       });
     } else {
@@ -45,10 +52,16 @@ export function User({ match }) {
         getAvg(match.params.userId).then((response) => setAvg(response.data.data))
       ]).catch((error) => {
         if (error.response.status === 401) {
-          setRole(null);
-          setUser(null);
-          setCurrentUser(null);
           window.localStorage.clear();
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          }).then(() => {
+            window.location.href = '/';
+          });
+        } else if (error.response.status === 400) {
+          window.location.href = '/404';
         }
       });
     }

@@ -23,7 +23,6 @@ export function GetProject({ match }) {
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
   const [assesment, setAssesment] = useState(null);
-  const [assesmentAvg, setAssesmentAvg] = useState(null);
 
   const history = useHistory();
 
@@ -34,19 +33,15 @@ export function GetProject({ match }) {
   let promiseProject = getProject(match.params.projectId);
   let promiseComments = getCommentsProject(match.params.projectId);
   let promiseAssement = getAssesmentUser(match.params.projectId);
-  let promiseAssementAvg = getAssesmentAvg(match.params.projectId);
 
   useEffect(() => {
     if (role) {
-      Promise.all([promiseProject, promiseComments, promiseAssement, promiseAssementAvg])
+      Promise.all([promiseProject, promiseComments, promiseAssement])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);
           if (response[2].data.data !== undefined) {
             setAssesment(response[2].data.data.type);
-          }
-          if (response[3].data.data.avg !== null) {
-            setAssesmentAvg(response[3].data.data);
           }
         })
         .catch((error) => {
@@ -57,20 +52,18 @@ export function GetProject({ match }) {
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
           } else if (error.response.status === 400) {
             window.location.href = '/404';
           }
         });
     } else {
-      Promise.all([promiseProject, promiseComments, promiseAssementAvg])
+      Promise.all([promiseProject, promiseComments])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);
-          if (response[2].data.data.avg !== null) {
-            setAssesmentAvg(response[2].data.data);
-          }
         })
         .catch((error) => {
           if (error.response.status === 401) {
@@ -79,8 +72,9 @@ export function GetProject({ match }) {
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
           } else if (error.response.status === 400) {
             window.location.href = '/404';
           }
@@ -105,7 +99,6 @@ export function GetProject({ match }) {
         onUpdateProject={state.edit}
         dispatch={dispatch}
         assesment={assesment}
-        assesmentAvg={assesmentAvg}
       />
     );
   }

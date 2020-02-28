@@ -123,7 +123,7 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
       return (
         <div className="flex flex-no-wrap">
           <img className="self-center" src="https://img.icons8.com/ios-filled/25/000000/link.png" />
-          <a href={user.page_url} className="text-left text-sm mb-2 ml-2 mt-2">
+          <a href={"https://"+user.page_url} className="text-left text-sm mb-2 ml-2 mt-2">
             {user.page_url}
           </a>
         </div>
@@ -217,7 +217,7 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             </h1>
             <div className="flex flex-wrap self-end">
               {comments.map((comment, index) => (
-                <div class="mb-4 w-full sm:w-1/3 sm:px-2 lg:w-full xl:w-1/2">
+                <div class="mb-4 w-full sm:w-1/2 sm:px-2 lg:w-full xl:w-1/2">
                   <div class="bg-white h-full rounded-lg overflow-hidden shadow">
                     <div class="p-4 h-full flex flex-col justify-between">
                       <div
@@ -299,10 +299,9 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             <div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
               {eOrM(user.type, 0)}
               <p className="text-left text-sm mb-2 ml-2 mt-2">Valoración media: {' '}
-                            {(avg.avg === null ? '' : avg.avg.substring(0, 4)) +
-                            (avg.avg === null ? '0' : ' / ') +
-                            (avg.avg === null ? '' : avg.counter) +
-                            ' votos'}</p>
+                            {(avg.avg === null ? '' : Math.round(avg.avg * 100) / 100) +
+                            (avg.avg === null ? 'Sin valoración todavía' : ' / ') +
+                            (avg.avg === null ? '' : avg.counter + ' opiniones')}</p>
               {roleE(user.company_role)}
               <div className="border-t-2 mt-4 text-left">
                 <h1 className="font-bold text-lg pt-4 pb-2">Más información</h1>
@@ -319,7 +318,7 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
                 {user.name + ' ' + user.first_name}
               </h1>
               <p className="text-gray-700 sm:px-2">
-                Se registró en {user.created_at !== undefined ? user.created_at.substring(0, 4) : ''} {buttonEdit()}
+                Se registró el {user.created_at !== undefined ? user.created_at.substring(8, 10) + "-" + user.created_at.substring(5, 8) + user.created_at.substring(0, 4) : ''} {buttonEdit()}
               </p>
               {descriptionNote(user.description)}
               {getTops()}
