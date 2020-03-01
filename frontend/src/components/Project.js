@@ -14,7 +14,7 @@ import {
   deleteProject
 } from '../http/projectService';
 
-export function Project({ project, comments, projectId, onUpdateProject, dispatch, assesment }) {
+export function Project({ project, comments, projectId, onUpdateProject, dispatch, assesment, assesmentC }) {
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
@@ -38,10 +38,16 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
         </div>
       );
     } else {
-      if(role){
+      if(role.role === "E"){
+        let assesmentForStarRating = 0;
+        for(const element of assesmentC){
+          if(element.id === comment.id){
+            assesmentForStarRating = element.type;
+          }
+        }
         return (
           <div className="pr-2">
-            <StarRatingComment comment={comment.id} ></StarRatingComment>  
+            <StarRatingComment comment={comment.id} assesment={assesmentForStarRating}></StarRatingComment>  
           </div>
         )
       }
@@ -229,6 +235,10 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                   className="mb-2 text-xs lg:text-sm px-2"
                   id={index + 'p'}
                 ></p>
+                <hr/>
+                <h1 className="mb-2 italic text-xs lg:text-sm px-2 mt-2">{(comment.avg === null ? '' : "Valorado "+Math.round(comment.avg * 100) / 100) +
+                            (comment.avg === null ? 'Sin valoración todavía' : ' / ') +
+                            (comment.avg === null ? '' : comment.counter + ' votos')}</h1>
               </div>
             </React.Fragment>
           ))}

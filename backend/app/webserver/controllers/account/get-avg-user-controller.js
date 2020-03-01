@@ -34,9 +34,17 @@ async function getAvg(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `select AVG(type) AS avg, count(*) AS counter from assesment a JOIN project p ON a.project_id = p.id WHERE p.user_id = ?`;
+    const sqlQueryU = `SELECT type FROM user WHERE id = ?`; 
+    const sqlQueryE = `select AVG(type) AS avg, count(*) AS counter from assesment a JOIN project p ON a.project_id = p.id WHERE p.user_id = ?`;
+    const sqlQueryM = `select AVG(type) AS avg, count(*) AS counter from comment_assesment a JOIN comment c ON a.comment_id = c.id WHERE c.user_id = ?`
     const connection = await mysqlPool.getConnection();
-    const [rows] = await connection.execute(sqlQuery, [userId]);
+    const [role] = await connection.execute(sqlQueryU, [userId]);
+    let rows;
+    if(role[0].type === "M"){
+      [rows] = await connection.execute(sqlQueryM, [userId]);
+    }else{
+      [rows] = await connection.execute(sqlQueryE, [userId]);
+    }
     connection.release();
 
     return res.send({

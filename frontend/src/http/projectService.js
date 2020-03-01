@@ -63,7 +63,6 @@ export function getProjectsFilter(category) {
 }
 
 export function deleteProject(projectId) {
-  console.log(projectId);
   return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/project/${projectId}`);
 }
 
@@ -102,9 +101,6 @@ export function createCommentAssesment(comment, data) {
 }
 
 export function getCommentAssesmentUser(project) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesment/${project}`);
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/comment/assesment/${project}`);
 }
 
-export function getCommentAssesmentAvg(comment) {
-  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/project/assesmentavg/${comment}`);
-}

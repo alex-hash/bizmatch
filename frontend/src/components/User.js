@@ -191,7 +191,7 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
                         {project.title}
                       </a>
                       <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm break-all">
-                        {project.text}
+                        {project.subtitle}
                       </div>
                       <div class="mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block"></div>
                     </div>

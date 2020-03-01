@@ -36,8 +36,8 @@ async function getProjectsFilter(req, res, next) {
 
   let connection;
   try {
-    const sqlQuery = `SELECT t.id, t.title, t.subtitle, t.created_at, t.updated_at, t.category, t.text, t.ubication, t.image_url, u.name, u.first_name, u.id AS user, u.avatar_url
-    FROM project t JOIN user u ON t.user_id = u.id WHERE u.id = ? ORDER BY t.created_at DESC`;
+    const sqlQuery = `SELECT t.id, t.title, t.subtitle, t.created_at, t.updated_at, t.category, t.text, t.ubication, t.image_url, u.name, u.first_name, u.id AS user, u.avatar_url, AVG(a.type) as avg, count(a.type) as counter
+    FROM project t LEFT JOIN assesment a ON t.id = a.project_id JOIN user u ON u.id=t.user_id WHERE u.id = ? GROUP BY t.id ORDER BY t.created_at DESC`;
     connection = await mysqlPool.getConnection();
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
