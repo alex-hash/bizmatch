@@ -31,14 +31,9 @@ export function GetProject({ match }) {
     edit: 0
   });
 
-  let promiseProject = getProject(match.params.projectId);
-  let promiseComments = getCommentsProject(match.params.projectId);
-  let promiseAssement = getAssesmentUser(match.params.projectId);
-  let promiseAssementC = getCommentAssesmentUser(match.params.projectId);
-
   useEffect(() => {
     if (role) {
-      Promise.all([promiseProject, promiseComments, promiseAssement, promiseAssementC])
+      Promise.all([getProject(match.params.projectId), getCommentsProject(match.params.projectId), getAssesmentUser(match.params.projectId), getCommentAssesmentUser(match.params.projectId)])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);
@@ -66,7 +61,7 @@ export function GetProject({ match }) {
           }
         });
     } else {
-      Promise.all([promiseProject, promiseComments])
+      Promise.all([getProject(match.params.projectId), getCommentsProject(match.params.projectId)])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);

@@ -3,15 +3,43 @@ import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
 import { useForm } from 'react-hook-form';
+import { getFilterProjects } from '../http/projectService';
+import Swal from 'sweetalert2';
 
-export function ProjectList({ projects, searchText, onSearchTextChanged }) {
+export function ProjectList({ projects, searchText, onSearchTextChanged, dispatch}) {
   const { role } = useAuth();
   const { handleSubmit, register, errors, formState } = useForm({
     mode: 'onBlur'
   });
 
-  function onSubmit(){
+  const onSubmit = (filterData) => {
+    console.log(filterData)
+    getFilterProjects(filterData)
+    .then((response) => dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data }))
+    .catch((error) => {
+      if (error.response.status === 401) {
+        window.localStorage.clear();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tú token de sesión ha expirado'
+        }).then(() => {
+          window.location.href = '/';
+        });
+      } else if (error.response.status === 400) {
+        window.location.href = '/404';
+      }
+    });
+  }
 
+  function projectsClean(){
+    if(projects.length === 0){
+      return(
+        <div>
+          <h1 className="font-semibold italic">Todavía no hay proyectos. Tú puedes ser el primero en crear uno</h1>
+        </div>
+      )
+    }
   }
 
   return (
@@ -19,11 +47,11 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
       <div>
         <Navbar role={role} />
       </div>
-      <form className="mt-16 flex flex-col items-center md:flex-wrap md:flex-row md:justify-center" handleSubmit={onSubmit} noValidate>
+      <form className="mt-16 flex flex-col items-center md:flex-wrap md:flex-row md:justify-center" onSubmit={handleSubmit(onSubmit)} noValidate>
         <h1 className="font-bold self-center px-4">Filtrar proyectos por</h1>
         <div className="px-4 mt-2 md:mt-0">
-          <select className="form-select p-4">
-            <option selected>Categoría</option>
+          <select ref={register} className="form-select p-4" id="category" type="text" name="category">
+            <option selected value="Nada">Categoría</option>
             <option value="Arte">Arte</option>
             <option value="Artesanías">Artesanías</option>
             <option value="Cine">Cine</option>
@@ -42,8 +70,8 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
           </select>
         </div>
         <div className="px-4 mt-2 md:mt-0">
-          <select className="form-select p-4">
-            <option selected>Localización</option>
+          <select ref={register} className="form-select p-4" name="location" id="location">
+            <option selected value="Nada">Localización</option>
             <option value='Álava'>Álava</option>
             <option value='Albacete'>Albacete</option>
             <option value='Alicante'>Alicante</option>
@@ -98,7 +126,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
             <option value='Zaragoza'>Zaragoza</option>
           </select>
         </div>
-        <div className="self-center px-4 mt-6 md:mt-0">
+        <div className="self-center px-4 mt-4 md:mt-0">
           <button
             type="submit"
             className="bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
@@ -110,7 +138,8 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
       </form>
       <div className="mt-16">
         <div className="px-4 sm:mx-10">
-          <div className="block md:flex flex-wrap justify-left">
+          <div className="block flex flex-wrap justify-center">
+            {projectsClean()}
             {projects.map((project) => (
               <div className="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                 <div className="bg-white rounded-lg overflow-hidden shadow">

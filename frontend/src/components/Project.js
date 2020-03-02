@@ -26,30 +26,32 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
 
   function renderButtons(comment, index) {
     const actual_user = role === null ? null : role.userId;
-    if (comment.user === actual_user) {
-      return (
-        <div className="text-xs mt-2">
-          <button
-            onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded mx-2"
-          >
-            <img src="https://img.icons8.com/android/15/000000/delete.png" />
-          </button>
-        </div>
-      );
-    } else {
-      if(role.role === "E"){
-        let assesmentForStarRating = 0;
-        for(const element of assesmentC){
-          if(element.id === comment.id){
-            assesmentForStarRating = element.type;
-          }
-        }
+    if(role !== null){
+      if (comment.user === actual_user) {
         return (
-          <div className="pr-2">
-            <StarRatingComment comment={comment.id} assesment={assesmentForStarRating}></StarRatingComment>  
+          <div className="text-xs mt-2">
+            <button
+              onClick={() => deleteCommentProject(comment.id).then(refreshPage)}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 border border-red-700 rounded mx-2"
+            >
+              <img src="https://img.icons8.com/android/15/000000/delete.png" />
+            </button>
           </div>
-        )
+        );
+      } else {
+        if(role.role === "E"){
+          let assesmentForStarRating = 0;
+          for(const element of assesmentC){
+            if(element.id === comment.id){
+              assesmentForStarRating = element.type;
+            }
+          }
+          return (
+            <div className="pr-2">
+              <StarRatingComment comment={comment.id} assesment={assesmentForStarRating}></StarRatingComment>  
+            </div>
+          )
+        }
       }
     }
   }
