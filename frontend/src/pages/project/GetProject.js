@@ -52,7 +52,6 @@ export function GetProject({ match }) {
           }
         })
         .catch((error) => {
-          console.log(error);
           if (error.response.status === 401) {
             window.localStorage.clear();
             Swal.fire({

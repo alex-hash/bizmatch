@@ -2,21 +2,16 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
+import { useForm } from 'react-hook-form';
 
 export function ProjectList({ projects, searchText, onSearchTextChanged }) {
   const { role } = useAuth();
+  const { handleSubmit, register, errors, formState } = useForm({
+    mode: 'onBlur'
+  });
 
-  function displayButtonCreate(role) {
-    if (role === 'E') {
-      return (
-        <a
-          href="/create-project"
-          className="mt-4 md:mt-0 bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Crear proyecto
-        </a>
-      );
-    }
+  function onSubmit(){
+
   }
 
   return (
@@ -24,15 +19,95 @@ export function ProjectList({ projects, searchText, onSearchTextChanged }) {
       <div>
         <Navbar role={role} />
       </div>
-      <div className="mt-16 flex flex-wrap justify-around md:justify-between px-4 sm:mx-12">
-        <input
-          type="search"
-          value={searchText}
-          className="w-full md:w-1/2 shadow appearance-none border rounded p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="Busca por nombre,categoría..."
-        />
-        {displayButtonCreate(role.role)}
-      </div>
+      <form className="mt-16 flex flex-col items-center md:flex-wrap md:flex-row md:justify-center" handleSubmit={onSubmit} noValidate>
+        <h1 className="font-bold self-center px-4">Filtrar proyectos por</h1>
+        <div className="px-4 mt-2 md:mt-0">
+          <select className="form-select p-4">
+            <option selected>Categoría</option>
+            <option value="Arte">Arte</option>
+            <option value="Artesanías">Artesanías</option>
+            <option value="Cine">Cine</option>
+            <option value="Comida">Comida</option>
+            <option value="Cómics">Cómics</option>
+            <option value="Danza">Danza</option>
+            <option value="Diseño">Diseño</option>
+            <option value="Fotografía">Fotografía</option>
+            <option value="Juegos">Juegos</option>
+            <option value="Moda">Moda</option>
+            <option value="Música">Música</option>
+            <option value="Periodismo">Periodismo</option>
+            <option value="Publicaciones">Publicaciones</option>
+            <option value="Teatro">Teatro</option>
+            <option value="Tecnología">Tecnología</option>
+          </select>
+        </div>
+        <div className="px-4 mt-2 md:mt-0">
+          <select className="form-select p-4">
+            <option selected>Localización</option>
+            <option value='Álava'>Álava</option>
+            <option value='Albacete'>Albacete</option>
+            <option value='Alicante'>Alicante</option>
+            <option value='Almería'>Almería</option>
+            <option value='Asturias'>Asturias</option>
+            <option value='Ávila'>Ávila</option>
+            <option value='Badajoz'>Badajoz</option>
+            <option value='Barcelona'>Barcelona</option>
+            <option value='Burgos'>Burgos</option>
+            <option value='Cáceres'>Cáceres</option>
+            <option value='Cádiz'>Cádiz</option>
+            <option value='Cantabria'>Cantabria</option>
+            <option value='Castellón'>Castellón</option>
+            <option value='Ceuta'>Ceuta</option>
+            <option value='Ciudad Real'>Ciudad Real</option>
+            <option value='Córdoba'>Córdoba</option>
+            <option value='Cuenca'>Cuenca</option>
+            <option value='Girona'>Girona</option>
+            <option value='Las Palmas'>Las Palmas</option>
+            <option value='Granada'>Granada</option>
+            <option value='Guadalajara'>Guadalajara</option>
+            <option value='Guipúzcoa'>Guipúzcoa</option>
+            <option value='Huelva'>Huelva</option>
+            <option value='Huesca'>Huesca</option>
+            <option value='Illes Balears'>Illes Balears</option>
+            <option value='Jaén'>Jaén</option>
+            <option value='A Coruña'>A Coruña</option>
+            <option value='La Rioja'>La Rioja</option>
+            <option value='León'>León</option>
+            <option value='Lleida'>Lleida</option>
+            <option value='Lugo'>Lugo</option>
+            <option value='Madrid'>Madrid</option>
+            <option value='Málaga'>Málaga</option>
+            <option value='Melilla'>Melilla</option>
+            <option value='Murcia'>Murcia</option>
+            <option value='Navarra'>Navarra</option>
+            <option value='Ourense'>Ourense</option>
+            <option value='Palencia'>Palencia</option>
+            <option value='Pontevedra'>Pontevedra</option>
+            <option value='Salamanca'>Salamanca</option>
+            <option value='Segovia'>Segovia</option>
+            <option value='Sevilla'>Sevilla</option>
+            <option value='Soria'>Soria</option>
+            <option value='Tarragona'>Tarragona</option>
+            <option value='Santa Cruz de Tenerife'>Santa Cruz de Tenerife</option>
+            <option value='Teruel'>Teruel</option>
+            <option value='Toledo'>Toledo</option>
+            <option value='Valencia'>Valencia</option>
+            <option value='Valladolid'>Valladolid</option>
+            <option value='Vizcaya'>Vizcaya</option>
+            <option value='Zamora'>Zamora</option>
+            <option value='Zaragoza'>Zaragoza</option>
+          </select>
+        </div>
+        <div className="self-center px-4 mt-6 md:mt-0">
+          <button
+            type="submit"
+            className="bg-button text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline"
+            disabled={formState.isSubmitting}
+          >
+            Filtrar
+          </button>
+        </div>
+      </form>
       <div className="mt-16">
         <div className="px-4 sm:mx-10">
           <div className="block md:flex flex-wrap justify-left">

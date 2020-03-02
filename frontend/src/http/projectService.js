@@ -104,3 +104,6 @@ export function getCommentAssesmentUser(project) {
   return axios.get(`${process.env.REACT_APP_BACKEND_URL}/comment/assesment/${project}`);
 }
 
+export function getProvincias(){
+  return axios.get(`https://datos.gob.es/apidata/nti/territory/Province?_sort=label&_pageSize=200&_page=0`)
+}

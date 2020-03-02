@@ -4,6 +4,7 @@
 
 @tailwind utilities;
 
+
 .error-validate {
   color: red;
   font-weight: bold;
