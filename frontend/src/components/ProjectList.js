@@ -36,7 +36,7 @@ export function ProjectList({ projects, searchText, onSearchTextChanged, dispatc
     if(projects.length === 0){
       return(
         <div>
-          <h1 className="font-semibold italic">Todavía no hay proyectos. Tú puedes ser el primero en crear uno</h1>
+          <h1 className="font-semibold italic text-center">Todavía no hay proyectos. Tú puedes ser el primero en crear uno</h1>
         </div>
       )
     }
@@ -138,8 +138,8 @@ export function ProjectList({ projects, searchText, onSearchTextChanged, dispatc
       </form>
       <div className="mt-16">
         <div className="px-4 sm:mx-10">
-          <div className="block flex flex-wrap justify-center">
-            {projectsClean()}
+          {projectsClean()}
+          <div className="block flex flex-wrap justify-left">
             {projects.map((project) => (
               <div className="w-full md:w-1/2 md:px-2 lg:w-1/3 mb-4" key={project.id}>
                 <div className="bg-white rounded-lg overflow-hidden shadow">

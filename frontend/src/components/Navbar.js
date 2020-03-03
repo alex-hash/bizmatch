@@ -178,14 +178,14 @@ class App extends React.Component {
                 type="text"
                 id="inputsearch"
                 onKeyUp={() => this.handleKeyPress()}
-                className="z-10 block overflow-hidden w-128 border-gray-400 border-2 rounded form-input"
+                className="z-10 block w-full border-gray-400 border-2 rounded form-input"
                 placeholder="Buscar"
               >
               </input>
               {this.renderButtonDropSearch()}
               <div
                 id="dropdown2"
-                className="z-20 hidden absolute mt-2 py-2 w-128 bg-white rounded-lg shadow-xl"
+                className="z-20 hidden absolute mt-2 py-2 w-64 bg-white rounded-lg shadow-xl"
               >
               {this.handleProjects()}
               {this.handleUsers()}
@@ -309,21 +309,31 @@ class App extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <nav className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex flex-wrap justify-between items-center p-4 h-16 md:h-20">
-        <div className="block xl:hidden lg:hidden md:hidden">
-          <Link to="/" className="relative">
+  renderLink(){
+    if(this.state.user === null){
+      return(
+        <div className="inline sm:inline xl:hidden lg:hidden md:hidden ">
+        <Link to="/" className="relative flex flex-wrap">
             <button>
               <img src="https://img.icons8.com/ios/40/000000/business-network.png" />
             </button>
+            <h1 className="hidden md:inline font-semibold self-center pl-2">Bizmatch</h1>
           </Link>
         </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <nav className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex flex-wrap justify-between items-center p-4 h-16 md:h-20 lg:mx-16">
+        {this.renderLink()}
         <div className="block hidden xl:inline lg:inline md:inline">
-          <Link to="/" className="relative">
+          <Link to="/" className="relative flex flex-wrap">
             <button>
               <img src="https://img.icons8.com/ios/40/000000/business-network.png" />
             </button>
+            <h1 className="hidden md:inline font-semibold self-center pl-2">Bizmatch</h1>
           </Link>
         </div>
         {this.renderSearch()}

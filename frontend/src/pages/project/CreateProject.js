@@ -61,7 +61,7 @@ export function CreateProject() {
                     value: 60
                   }
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="title"
                 type="text"
                 name="title"
@@ -82,7 +82,7 @@ export function CreateProject() {
                     value: 135
                   }
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="subtitle"
                 type="text"
                 name="subtitle"
@@ -98,7 +98,7 @@ export function CreateProject() {
                 ref={register({
                   required: '*La categoría es necesaria'
                 })}
-                className="form-select relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="category"
                 type="text"
                 name="category"
@@ -129,7 +129,7 @@ export function CreateProject() {
               <p className="text-sm text-gray-700 mb-2"></p>
               <select
                 ref={register}
-                className="relative form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="ubication"
                 type="text"
                 name="ubication"
@@ -199,7 +199,7 @@ export function CreateProject() {
                 ref={register({
                   required: '*El contenido es necesario'
                 })}
-                className="md:text-lg h-64 relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                className="md:text-lg h-64  resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                 id="text"
                 rows="6"
                 type="text"
@@ -210,7 +210,7 @@ export function CreateProject() {
             </div>
             <div className="mt-8 flex items-center justify-center">
               <button
-                className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+                className=" bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 disabled={formState.isSubmitting}
               >

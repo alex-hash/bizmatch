@@ -221,18 +221,13 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
+        'Jost',
+        'Helvetica',
+        'Helvetica Neue',
+        'Segoe UI',
+        'Helvetica',
         'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
+        'serif'
       ],
       serif: [
         'Georgia',

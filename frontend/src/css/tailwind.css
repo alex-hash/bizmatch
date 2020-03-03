@@ -75,10 +75,6 @@ hr.style1 {
 
 /*init page*/
 
-.backimageinit {
-  background-image: url('../image/536.jpg');
-}
-
 .top-50 {
   top: 50%;
 }
@@ -116,11 +112,38 @@ hr.style1 {
     right: 0;
   }
 
+  .change-content:after{
+    content: 'Mentores';
+    animation: changetext 5s infinite linear;
+    color: transparent;
+    font-size: 1rem;
+   }
+
   .mt-pefil {
     margin-top: 9rem;
   }
 }
+
 .img-project {
   width: 768px;
   height: 400px;
 }
+
+/*Animaciones Init*/
+
+.change-content:after{
+  content: 'Mentores';
+  animation: changetext 5s infinite linear;
+  color: transparent;
+  font-size: 3rem;
+ }
+
+@keyframes changetext{
+  38%{ content: 'Mentores'; color: black;}
+  48%{ content: 'Mentores'; color: black;}
+  49%{ content: 'Mentores'; color: transparent;}
+  50% { content: 'Emprendedores'; color: transparent;}
+  90% { content: 'Emprendedores'; color: black;}
+  100% { content: 'Emprendedores'; color: black;}
+}
+
