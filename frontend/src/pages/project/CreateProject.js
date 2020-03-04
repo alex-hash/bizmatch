@@ -23,7 +23,7 @@ export function CreateProject() {
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          window.localStorage.clear();
+          localStorage.removeItem('currentUser');
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -42,14 +42,14 @@ export function CreateProject() {
         <Navbar role={role} />
       </div>
       <div className="flex flex-wrap justify-center">
-        <div className="w-full lg:w-1/2 p-6 bg-white ">
+        <div className="w-full lg:w-1/2 p-6 ">
           <form
-            className="w-full mt-2 h-full bg-white md:shadow-md md:rounded px-6 pb-8 mb-4"
+            className="w-full mt-2 h-full bg-background-primary border-background-borderf border-2 md:shadow-md md:rounded px-6 pb-8 mb-4"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
             <div className="mb-4">
-              <label className="block text-gray-900 text-md font-bold" for="title">
+              <label className="block text-copy-primary text-md font-bold mt-2" for="title">
                 Título del Proyecto
               </label>
               <p className="text-md text-gray-700 mb-2"></p>
@@ -61,16 +61,16 @@ export function CreateProject() {
                     value: 60
                   }
                 })}
-                className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="title"
                 type="text"
                 name="title"
-                placeholder=""
+                placeholder="Título"
               />
               {errors.title && <span className="error-validate">{errors.title.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-800 text-md font-bold" for="subtitle">
+              <label className="block text-copy-primary text-md font-bold" for="subtitle">
                 Subtítulo del Proyecto
               </label>
               <p className="text-md text-gray-700 mb-2"></p>
@@ -82,23 +82,23 @@ export function CreateProject() {
                     value: 135
                   }
                 })}
-                className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="subtitle"
                 type="text"
                 name="subtitle"
-                placeholder=""
+                placeholder="Subtítulo"
               />
               {errors.subtitle && <span className="error-validate">{errors.subtitle.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" for="category">
+              <label className="block text-copy-primary text-sm font-bold mb-2" for="category">
                 Categoría del proyecto
               </label>
               <select
                 ref={register({
                   required: '*La categoría es necesaria'
                 })}
-                className="form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-select shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="category"
                 type="text"
                 name="category"
@@ -123,13 +123,12 @@ export function CreateProject() {
               {errors.category && <span className="error-validate">{errors.category.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold" for="ubication">
+              <label className="block text-copy-primary text-sm font-bold" for="ubication">
                 Ubicación
               </label>
-              <p className="text-sm text-gray-700 mb-2"></p>
               <select
                 ref={register}
-                className=" form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" form-select shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="ubication"
                 type="text"
                 name="ubication"
@@ -191,15 +190,15 @@ export function CreateProject() {
               {errors.ubication && <span className="error-validate">{errors.ubication.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold" for="content">
+              <label className="block text-copy-primary text-sm font-bold" for="content">
                 Contenido del Proyecto
               </label>
-              <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
+              <p className="text-sm text-copy-primary mb-2">Incluye todo la información necesaria</p>
               <textarea
                 ref={register({
                   required: '*El contenido es necesario'
                 })}
-                className="md:text-lg h-64  resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                className="md:text-lg h-64  resize-none shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="text"
                 rows="6"
                 type="text"

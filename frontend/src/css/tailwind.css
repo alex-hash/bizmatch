@@ -4,6 +4,33 @@
 
 @tailwind utilities;
 
+/*Temas*/
+
+.theme-light {
+  --bg-background-primary: white;
+  --bg-background-secondary: white;
+  --bg-background-terciary: #102c44;
+  --bg-background-footer: #f7fafc;
+  --bg-background-border: #a0aec0;
+  --bg-background-borderf: #edf2f7;
+  --bg-background-comment: white;
+  --text-copy-primary: rgba(0, 0, 0, 0.8);
+}
+
+.theme-dark {
+  --bg-background-primary: #102c44;
+  --bg-background-secondary: #1a202c;
+  --bg-background-terciary: #102c44;
+  --bg-background-footer: #1a202c;
+  --bg-background-border: #1a202c;
+  --bg-background-borderf: #1a202c;
+  --bg-background-comment: #1e3951;
+  --text-copy-primary: rgb(235, 244, 241);
+}
+
+
+
+/*Estilos*/
 
 .error-validate {
   color: red;

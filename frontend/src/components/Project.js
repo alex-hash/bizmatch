@@ -62,8 +62,16 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
       .then(() => window.location.reload())
       .catch((error) => {
         if (error.response.status === 401) {
-          setRole(null);
-          setUser(null);
+          localStorage.removeItem('currentUser');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tú token de sesión ha expirado'
+          }).then(() => {
+            window.location.href = '/';
+          });
+        } else if (error.response.status === 400) {
+          window.location.href = '/404';
         }
       });
   };
@@ -73,10 +81,10 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
       if (role.role === 'M') {
         return (
           <div className="w-full p-2">
-            <h1 className="font-bold mt-2">Nuevo comentario</h1>
+            <h1 className="font-bold text-copy-primary mt-2">Nuevo comentario</h1>
             <div className="w-full ">
               <form
-                className="bg-white md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 border-gray-200 border-2"
+                className="bg-background-comment border border-background-comment md:shadow-md md:rounded pt-6 pb-8 mb-4 px-4 "
                 onSubmit={handleSubmit(handleSend)}
                 noValidate
               >
@@ -89,7 +97,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                         value: 200
                       }
                     })}
-                    className="resize-none shadow appearance-none border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="resize-none shadow appearance-none bg-background-secondary border border-background-comment rounded w-full py-2 text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                     id="text"
                     rows="6"
                     type="text"
@@ -101,7 +109,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                 <div className="flex flex-wrap px-2 py-4 justify-between w-full">
                   <div className="flex flex-wrap align-bottom">
                     <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
-                    <p className="text-black text-sm leading-none self-center">{role.email}</p>
+                    <p className="text-sm text-copy-primary leading-none self-center">{role.email}</p>
                   </div>
                   <div className="text-xs self-end mt-2">
                     <input
@@ -172,7 +180,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
         }).catch((error) => {
           if (error.response.status === 401) {
-            window.localStorage.clear();
+            localStorage.removeItem('currentUser');
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -192,7 +200,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
         }).catch((error) => {
           if (error.response.status === 401) {
-            window.localStorage.clear();
+            localStorage.removeItem('currentUser');
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -210,20 +218,20 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
   function showComments() {
     if (comments.length !== 0) {
       return (
-        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
-          <h1 className="font-bold p-2">Comentarios más recientes</h1>
+        <div className="w-full flex flex-wrap justify-center border-background-borderf bg-background-borderf border-2 px-2 rounded mb-4 mt-10">
+          <h1 className="font-bold text-copy-primary p-2">Comentarios más recientes</h1>
           {comments.map((comment, index) => (
             <React.Fragment key={comment.id}>
               <hr className="style1 mb-2" />
-              <div className="break-all w-full bg-white border-gray-200 border-2 mx-2" id={index}>
+              <div className="break-all w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2" id={index}>
                 <div className="flex flex-wrap py-4 justify-between w-full pl-2">
                   <div className="flex flex-wrap align-bottom">
                     <Link to={'/user/' + comment.user}>
                       <img className="w-10 h-10 rounded-full mr-2" src={comment.avatar_url} alt="Avatar" />
                     </Link>
                     <div className="text-xs lg:text-sm self-center">
-                      <p className="text-black leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
-                      <p className="text-gray-500">
+                      <p className="text-copy-primary leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
+                      <p className="text-copy-primary">
                         {comment.updated_at === null
                           ? comment.created_at.replace('T', ' ').substring(0, 16)
                           : comment.updated_at.replace('T', ' ').substring(0, 16)}
@@ -234,11 +242,11 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                 </div>
                 <p
                   dangerouslySetInnerHTML={{ __html: comment.text.replace(/<br\s*\\?>/g, '\r\n') }}
-                  className="mb-2 text-xs lg:text-sm px-2"
+                  className="mb-2 text-xs text-copy-primary lg:text-sm px-2"
                   id={index + 'p'}
                 ></p>
                 <hr/>
-                <h1 className="mb-2 italic text-xs lg:text-sm px-2 mt-2">{(comment.avg === null ? '' : "Valorado "+Math.round(comment.avg * 100) / 100) +
+                <h1 className="mb-2 text-copy-primary italic text-xs lg:text-sm px-2 mt-2">{(comment.avg === null ? '' : "Valorado "+Math.round(comment.avg * 100) / 100) +
                             (comment.avg === null ? 'Sin valoración todavía' : ' / ') +
                             (comment.avg === null ? '' : comment.counter + ' votos')}</h1>
               </div>
@@ -278,10 +286,10 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
             <div className="w-full md:w-3/5">
               {project.map((project, index) => (
                 <div key={project.id} className="break-words rounded mx-4 md:mx-0">
-                  <div className="p-2 text-center font-serif font-bold text-xl lg:text-4xl tracking-wide ">
+                  <div className="p-2 text-center font-serif text-copy-primary font-bold text-xl lg:text-4xl tracking-wide ">
                     {project.title}
                   </div>
-                  <div className="text-center font-serif text:l lg:text-xl tracking-wide ">{project.subtitle}</div>
+                  <div className="text-center font-serif text:l text-copy-primary lg:text-xl tracking-wide ">{project.subtitle}</div>
                   <div className="flex flex-wrap mt-4 md:mt-10">
                     <div className="lg:w-1/2 -mx-4 md:mx-0">
                       <div class="bg-white sm:rounded-lg overflow-hidden">
@@ -290,24 +298,24 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                     </div>
                     <div className="order-2 lg:order-3">
                       {showStarIfLogged()}
-                      <div className="w-full">
-                        <div className="text-black font-semibold text-sm w-full">
+                      <div className="w-full mt-2">
+                        <div className="text-copy-primary font-semibold text-sm w-full">
                           Valoración media: {project.avg === null ? "Sin valoración todavía" : Math.round(project.avg * 100) / 100 + " / " + project.counter + " opiniones"}
                         </div>
-                        <div className="text-gray-600 font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
-                        <div className="text-gray-600 font-semibold text-sm mb-2 w-full">
+                        <div className="text-copy-primary font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
+                        <div className="text-copy-primary font-semibold text-sm mb-2 w-full">
                           Categoría: {project.category}
                         </div>
                       </div>
-                      <h1 className="font-bold w-full mt-6">Descripción del Proyecto </h1>
+                      <h1 className="font-bold text-copy-primary text-lg w-full mt-6">Descripción del Proyecto </h1>
                       <p
                         dangerouslySetInnerHTML={{ __html: project.text }}
-                        className="break-all text-gray-700 text-lg"
+                        className="break-all text-gray-600 text-lg"
                       ></p>
                     </div>
                     <div className="w-full lg:w-1/2 md:p-16 mt-10 lg:mt-0 order-3 lg:order-2">
                       <div className="border-grey-400">
-                        <h1 className="text-black font-semibold text-2xl text-center">Perfil del creador</h1>
+                        <h1 className="font-semibold text-copy-primary text-2xl text-center">Perfil del creador</h1>
                         <div className="flex flex-wrap justify-center mt-4">
                           <Link
                             to={'/user/' + project.user}
@@ -315,7 +323,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                           >
                             <img className="h-full w-full object-cover" src={project.avatar_url} alt="Your avatar" />
                           </Link>
-                          <div className="text-black font-semibold text-center break-all p-4 w-full">
+                          <div className="text-copy-primary font-semibold text-center break-all p-4 w-full">
                             {project.name + ' ' + project.first_name}
                           </div>
                           <div
@@ -323,7 +331,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                               __html:
                                 project.description === null ? '' : project.description.replace(/<br\s*\\?>/g, '\r\n')
                             }}
-                            className="h-6 text-black font-semibold text-center truncate text-sm w-full"
+                            className="h-6 text-copy-primary font-semibold text-center truncate text-sm w-full"
                           ></div>
                           <a
                             href={'/user/' + project.user}
