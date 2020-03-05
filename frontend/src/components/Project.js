@@ -38,7 +38,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
 
   function renderButtons(comment, index) {
     const actual_user = role === null ? null : role.userId;
-    if(role !== null){
+    if (role !== null) {
       if (comment.user === actual_user) {
         return (
           <div className="text-xs mt-2">
@@ -51,18 +51,18 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           </div>
         );
       } else {
-        if(role.role === "E"){
+        if (role.role === 'E') {
           let assesmentForStarRating = 0;
-          for(const element of assesmentC){
-            if(element.id === comment.id){
+          for (const element of assesmentC) {
+            if (element.id === comment.id) {
               assesmentForStarRating = element.type;
             }
           }
           return (
             <div className="pr-2">
-              <StarRatingComment comment={comment.id} assesment={assesmentForStarRating}></StarRatingComment>  
+              <StarRatingComment comment={comment.id} assesment={assesmentForStarRating}></StarRatingComment>
             </div>
-          )
+          );
         }
       }
     }
@@ -203,7 +203,8 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
         .then(() => (window.location.href = '/project/' + projectId))
         .then(() => {
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
-        }).catch((error) => {
+        })
+        .catch((error) => {
           if (error.response.status === 401) {
             localStorage.removeItem('currentUser');
             Swal.fire({
@@ -223,7 +224,8 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
         .then(() => (window.location.href = '/project/' + projectId))
         .then(() => {
           dispatch({ type: 'UPDATE_PROJECT', edit: 0 });
-        }).catch((error) => {
+        })
+        .catch((error) => {
           if (error.response.status === 401) {
             localStorage.removeItem('currentUser');
             Swal.fire({
@@ -248,7 +250,10 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           {comments.map((comment, index) => (
             <React.Fragment key={comment.id}>
               <hr className="style1 mb-2" />
-              <div className="break-all w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2" id={index}>
+              <div
+                className="break-words w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2"
+                id={index}
+              >
                 <div className="flex flex-wrap py-4 justify-between w-full pl-2">
                   <div className="flex flex-wrap align-bottom">
                     <Link to={'/user/' + comment.user}>
@@ -270,10 +275,12 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                   className="mb-2 text-xs text-copy-primary lg:text-sm px-2"
                   id={index + 'p'}
                 ></p>
-                <hr/>
-                <h1 className="mb-2 text-copy-primary italic text-xs lg:text-sm px-2 mt-2">{(comment.avg === null ? '' : "Valorado "+Math.round(comment.avg * 100) / 100) +
-                            (comment.avg === null ? 'Sin valoración todavía' : ' / ') +
-                            (comment.avg === null ? '' : comment.counter + ' votos')}</h1>
+                <hr />
+                <h1 className="mb-2 text-copy-primary italic text-xs lg:text-sm px-2 mt-2">
+                  {(comment.avg === null ? '' : 'Valorado ' + Math.round(comment.avg * 100) / 100) +
+                    (comment.avg === null ? 'Sin valoración todavía' : ' / ') +
+                    (comment.avg === null ? '' : comment.counter + ' votos')}
+                </h1>
               </div>
             </React.Fragment>
           ))}
@@ -282,7 +289,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
       );
     } else {
       return (
-        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
+        <div className="w-full flex flex-wrap justify-center text-copy-primary border-background-borderf bg-background-secondary border px-2 rounded mb-4 mt-10">
           <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
           {renderNewComment()}
         </div>
@@ -314,7 +321,9 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                   <div className="p-2 text-center font-serif text-copy-primary font-bold text-xl lg:text-4xl tracking-wide ">
                     {project.title}
                   </div>
-                  <div className="text-center font-serif text:l text-copy-primary lg:text-xl tracking-wide ">{project.subtitle}</div>
+                  <div className="text-center font-serif text:l text-copy-primary lg:text-xl tracking-wide ">
+                    {project.subtitle}
+                  </div>
                   <div className="flex flex-wrap mt-4 md:mt-10">
                     <div className="lg:w-1/2 -mx-4 md:mx-0">
                       <div class="bg-white sm:rounded-lg overflow-hidden">
@@ -325,9 +334,14 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                       {showStarIfLogged()}
                       <div className="w-full mt-2">
                         <div className="text-copy-primary font-semibold text-sm w-full">
-                          Valoración media: {project.avg === null ? "Sin valoración todavía" : Math.round(project.avg * 100) / 100 + " / " + project.counter + " opiniones"}
+                          Valoración media:{' '}
+                          {project.avg === null
+                            ? 'Sin valoración todavía'
+                            : Math.round(project.avg * 100) / 100 + ' / ' + project.counter + ' opiniones'}
                         </div>
-                        <div className="text-copy-primary font-semibold text-sm w-full">Ubicación: {project.ubication}</div>
+                        <div className="text-copy-primary font-semibold text-sm w-full">
+                          Ubicación: {project.ubication}
+                        </div>
                         <div className="text-copy-primary font-semibold text-sm mb-2 w-full">
                           Categoría: {project.category}
                         </div>
@@ -335,7 +349,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                       <h1 className="font-bold text-copy-primary text-lg w-full mt-6">Descripción del Proyecto </h1>
                       <p
                         dangerouslySetInnerHTML={{ __html: project.text }}
-                        className="break-all text-gray-600 text-lg"
+                        className="break-words text-gray-600 text-lg"
                       ></p>
                     </div>
                     <div className="w-full lg:w-1/2 md:p-16 mt-10 lg:mt-0 order-3 lg:order-2">

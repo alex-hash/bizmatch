@@ -68,7 +68,7 @@ export function Register() {
                 })}
                 name="first_name"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primaryleading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Primer apellido"
               ></input>
               {errors.first_name && <span className="error-validate">{errors.first_name.message}</span>}

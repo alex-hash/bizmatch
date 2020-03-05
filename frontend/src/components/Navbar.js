@@ -229,7 +229,7 @@ class App extends React.Component {
               to="/create-project"
               className="hidden sm:inline relative mr-4 text-copy-primary font-bold py-2 px-4 border-b-0 rounded"
             >
-              Crea tú proyecto
+              Crea tu proyecto
             </Link>
           </div>
           <div className="relative">
@@ -257,7 +257,7 @@ class App extends React.Component {
                 href="/create-project"
                 className="block sm:hidden px-4 py-2 text-copy-primary text hover:bg-indigo-500 hover:text-white"
               >
-                Crea tú proyecto
+                Crea tu proyecto
               </a>
               <a
                 className="block px-4 py-2 sm:hidden hover:bg-indigo-500 hover:text-white flex flex-wrap justify-between"
