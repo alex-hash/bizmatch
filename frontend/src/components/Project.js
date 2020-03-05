@@ -120,7 +120,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                 </div>
                 <div className="flex flex-wrap px-2 py-4 justify-between w-full">
                   <div className="flex flex-wrap align-bottom">
-                    <img class="w-10 h-10 rounded-full mr-4 self-center" src={role.avatar_url} alt="Avatar" />
+                    <img class="w-10 h-10 rounded-full mr-4 object-cover self-center" src={role.avatar_url} alt="Avatar" />
                     <p className="text-sm text-copy-primary leading-none self-center">{role.email}</p>
                   </div>
                   <div className="text-xs self-end mt-2">
@@ -247,12 +247,11 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
           <h1 className="font-bold text-copy-primary p-2">Comentarios más recientes</h1>
           {comments.map((comment, index) => (
             <React.Fragment key={comment.id}>
-              <hr className="style1 mb-2" />
-              <div className="break-all w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2" id={index}>
+              <div className="break-all w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2 mb-2" id={index}>
                 <div className="flex flex-wrap py-4 justify-between w-full pl-2">
                   <div className="flex flex-wrap align-bottom">
                     <Link to={'/user/' + comment.user}>
-                      <img className="w-10 h-10 rounded-full mr-2" src={comment.avatar_url} alt="Avatar" />
+                      <img className="w-10 h-10 rounded-full mr-2 object-cover" src={comment.avatar_url} alt="Avatar" />
                     </Link>
                     <div className="text-xs lg:text-sm self-center">
                       <p className="text-copy-primary leading-none w-full">{comment.name + ' ' + comment.first_name}</p>
@@ -282,7 +281,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
       );
     } else {
       return (
-        <div className="w-full flex flex-wrap justify-center border-gray-200 bg-gray-100 border-2 px-2 bg-white rounded mb-4 mt-10">
+        <div className="w-full flex flex-wrap justify-center text-copy-primary border-background-borderf bg-background-borderf border-2 px-2 rounded mb-4 mt-10">
           <h1 className="font-bold p-2">No hay comentarios en este proyecto</h1>
           {renderNewComment()}
         </div>
@@ -291,12 +290,15 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
   }
 
   function showStarIfLogged() {
+    const actual_user = role === null ? null : role.userId;
     if (role) {
-      return (
-        <div className="mt-2">
-          <StarRating assesment={assesment} project={projectId}></StarRating>
-        </div>
-      );
+      if(actual_user === project.user){
+        return (
+          <div className="mt-2">
+            <StarRating assesment={assesment} project={projectId}></StarRating>
+          </div>
+        );
+      }
     }
   }
   function something(onUpdateProject, projectC) {

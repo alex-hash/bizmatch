@@ -143,7 +143,7 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
           />
           <p
             dangerouslySetInnerHTML={{ __html: text.replace(/<br\s*\\?>/g, '\r\n') }}
-            className="break-all sm:px-2 text-copy-primary"
+            className="break-words sm:px-2 text-copy-primary"
           ></p>
         </div>
       );
