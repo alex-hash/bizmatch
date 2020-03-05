@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getProject, getCommentsProject, getAssesmentUser, getAssesmentAvg } from '../../http/projectService';
+import { getProject, getCommentsProject, getAssesmentUser, getCommentAssesmentUser } from '../../http/projectService';
 import { Project } from '../../components/Project';
 import { useAuth } from '../../context/auth-context';
 import Swal from 'sweetalert2';
@@ -23,7 +23,7 @@ export function GetProject({ match }) {
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
   const [assesment, setAssesment] = useState(null);
-  const [assesmentAvg, setAssesmentAvg] = useState(null);
+  const [assesmentC, setAssesmentC] = useState(null);
 
   const history = useHistory();
 
@@ -31,56 +31,52 @@ export function GetProject({ match }) {
     edit: 0
   });
 
-  let promiseProject = getProject(match.params.projectId);
-  let promiseComments = getCommentsProject(match.params.projectId);
-  let promiseAssement = getAssesmentUser(match.params.projectId);
-  let promiseAssementAvg = getAssesmentAvg(match.params.projectId);
-
   useEffect(() => {
     if (role) {
-      Promise.all([promiseProject, promiseComments, promiseAssement, promiseAssementAvg])
+      Promise.all([getProject(match.params.projectId), getCommentsProject(match.params.projectId), getAssesmentUser(match.params.projectId), getCommentAssesmentUser(match.params.projectId)])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);
           if (response[2].data.data !== undefined) {
             setAssesment(response[2].data.data.type);
           }
-          if (response[3].data.data.avg !== null) {
-            setAssesmentAvg(response[3].data.data);
+          if (response[3].data.data !== undefined) {
+            setAssesmentC(response[3].data.data)
+          }else{
+            setAssesmentC(0);
           }
         })
         .catch((error) => {
-          console.log(error);
           if (error.response.status === 401) {
-            window.localStorage.clear();
+            localStorage.removeItem('currentUser');
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
           } else if (error.response.status === 400) {
             window.location.href = '/404';
           }
         });
     } else {
-      Promise.all([promiseProject, promiseComments, promiseAssementAvg])
+      Promise.all([getProject(match.params.projectId), getCommentsProject(match.params.projectId)])
         .then((response) => {
           setProject(response[0].data.data);
           setComments(response[1].data.data);
-          if (response[2].data.data.avg !== null) {
-            setAssesmentAvg(response[2].data.data);
-          }
+          setAssesmentC(0);
         })
         .catch((error) => {
           if (error.response.status === 401) {
-            window.localStorage.clear();
+            localStorage.removeItem('currentUser');
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
             });
-            window.location.href = '/';
           } else if (error.response.status === 400) {
             window.location.href = '/404';
           }
@@ -88,9 +84,9 @@ export function GetProject({ match }) {
     }
   }, []);
 
-  if (project === null || comments === null) {
+  if (project === null || comments === null || assesmentC === null) {
     return (
-      <div className="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+      <div className="w-full h-full fixed block top-0 left-0 bg-background-primary opacity-75 z-50">
         <span className="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0 top-50">
           <i className="fas fa-circle-notch fa-spin fa-5x"></i>
         </span>
@@ -105,7 +101,7 @@ export function GetProject({ match }) {
         onUpdateProject={state.edit}
         dispatch={dispatch}
         assesment={assesment}
-        assesmentAvg={assesmentAvg}
+        assesmentC={assesmentC}
       />
     );
   }

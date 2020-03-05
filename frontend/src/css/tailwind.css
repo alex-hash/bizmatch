@@ -4,6 +4,34 @@
 
 @tailwind utilities;
 
+/*Temas*/
+
+.theme-light {
+  --bg-background-primary: white;
+  --bg-background-secondary: white;
+  --bg-background-terciary: #102c44;
+  --bg-background-footer: #f7fafc;
+  --bg-background-border: #a0aec0;
+  --bg-background-borderf: #edf2f7;
+  --bg-background-comment: white;
+  --text-copy-primary: rgba(0, 0, 0, 0.8);
+}
+
+.theme-dark {
+  --bg-background-primary: #102c44;
+  --bg-background-secondary: #1a202c;
+  --bg-background-terciary: #102c44;
+  --bg-background-footer: #1a202c;
+  --bg-background-border: #1a202c;
+  --bg-background-borderf: #1a202c;
+  --bg-background-comment: #1e3951;
+  --text-copy-primary: rgb(235, 244, 241);
+}
+
+
+
+/*Estilos*/
+
 .error-validate {
   color: red;
   font-weight: bold;
@@ -16,6 +44,10 @@
 
 hr.style1 {
   border-top: 1px solid #8c8b8b;
+}
+
+.w-128 {
+  width: 20rem;
 }
 
 .wrapper {
@@ -70,10 +102,6 @@ hr.style1 {
 
 /*init page*/
 
-.backimageinit {
-  background-image: url('../image/536.jpg');
-}
-
 .top-50 {
   top: 50%;
 }
@@ -111,11 +139,38 @@ hr.style1 {
     right: 0;
   }
 
+  .change-content:after{
+    content: 'Mentores';
+    animation: changetext 5s infinite linear;
+    color: transparent;
+    font-size: 1rem;
+   }
+
   .mt-pefil {
     margin-top: 9rem;
   }
 }
+
 .img-project {
   width: 768px;
   height: 400px;
 }
+
+/*Animaciones Init*/
+
+.change-content:after{
+  content: 'Mentores';
+  animation: changetext 5s infinite linear;
+  color: transparent;
+  font-size: 3rem;
+ }
+
+@keyframes changetext{
+  38%{ content: 'Mentores'; color: black;}
+  48%{ content: 'Mentores'; color: black;}
+  49%{ content: 'Mentores'; color: transparent;}
+  50% { content: 'Emprendedores'; color: transparent;}
+  90% { content: 'Emprendedores'; color: black;}
+  100% { content: 'Emprendedores'; color: black;}
+}
+

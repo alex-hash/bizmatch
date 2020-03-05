@@ -25,7 +25,20 @@ export function GetProjectsFilter({ match }) {
   useEffect(() => {
     getProjectsFilter(match.params.category).then((response) =>
       dispatch({ type: 'GET_PROJECTS_SUCCESS', initialProjects: response.data })
-    );
+    ).catch((error) => {
+      if (error.response.status === 401) {
+        localStorage.removeItem('currentUser');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tú token de sesión ha expirado'
+        }).then(() => {
+          window.location.href = '/';
+        });
+      } else if (error.response.status === 400) {
+        window.location.href = '/404';
+      }
+    });
   }, []);
 
   return <ProjectList projects={state.projects} />;

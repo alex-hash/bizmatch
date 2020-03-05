@@ -26,13 +26,16 @@ export function CreateProject() {
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          window.localStorage.clear();
+          localStorage.removeItem('currentUser');
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Tú token de sesión ha expirado'
+          }).then(() => {
+            window.location.href = '/';
           });
-          window.location.href = '/';
+        } else if (error.response.status === 400) {
+          window.location.href = '/404';
         }
       });
   };
@@ -42,14 +45,14 @@ export function CreateProject() {
         <Navbar role={role} />
       </div>
       <div className="flex flex-wrap justify-center">
-        <div className="w-full lg:w-1/2 p-6 bg-white ">
+        <div className="w-full lg:w-1/2 p-6 ">
           <form
-            className="w-full mt-2 h-full bg-white md:shadow-md md:rounded px-6 pb-8 mb-4"
+            className="w-full mt-2 h-full bg-background-primary border-background-borderf border-2 md:shadow-md md:rounded px-6 pb-8 mb-4"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
             <div className="mb-4">
-              <label className="block text-gray-900 text-md font-bold" for="title">
+              <label className="block text-copy-primary text-md font-bold mt-2" for="title">
                 Título del Proyecto
               </label>
               <p className="text-md text-gray-700 mb-2"></p>
@@ -61,16 +64,16 @@ export function CreateProject() {
                     value: 60
                   }
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="title"
                 type="text"
                 name="title"
-                placeholder=""
+                placeholder="Título"
               />
               {errors.title && <span className="error-validate">{errors.title.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-800 text-md font-bold" for="subtitle">
+              <label className="block text-copy-primary text-md font-bold" for="subtitle">
                 Subtítulo del Proyecto
               </label>
               <p className="text-md text-gray-700 mb-2"></p>
@@ -82,23 +85,23 @@ export function CreateProject() {
                     value: 135
                   }
                 })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="subtitle"
                 type="text"
                 name="subtitle"
-                placeholder=""
+                placeholder="Subtítulo"
               />
               {errors.subtitle && <span className="error-validate">{errors.subtitle.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" for="category">
+              <label className="block text-copy-primary text-sm font-bold mb-2" for="category">
                 Categoría del proyecto
               </label>
               <select
                 ref={register({
                   required: '*La categoría es necesaria'
                 })}
-                className=" relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="form-select shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="category"
                 type="text"
                 name="category"
@@ -123,36 +126,82 @@ export function CreateProject() {
               {errors.category && <span className="error-validate">{errors.category.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold" for="ubication">
+              <label className="block text-copy-primary text-sm font-bold" for="ubication">
                 Ubicación
               </label>
-              <p className="text-sm text-gray-700 mb-2"></p>
-              <input
-                ref={register({
-                  required: '*La ubicación es necesaria',
-                  maxLength: {
-                    message: '*La ubicación no debe exceder los 60 caracteres',
-                    value: 60
-                  }
-                })}
-                className="relative shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              <select
+                ref={register}
+                className=" form-select shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="ubication"
                 type="text"
                 name="ubication"
                 placeholder=""
-              />
+              >
+                <option value='Álava'>Álava</option>
+                <option value='Albacete'>Albacete</option>
+                <option value='Alicante'>Alicante</option>
+                <option value='Almería'>Almería</option>
+                <option value='Asturias'>Asturias</option>
+                <option value='Ávila'>Ávila</option>
+                <option value='Badajoz'>Badajoz</option>
+                <option value='Barcelona'>Barcelona</option>
+                <option value='Burgos'>Burgos</option>
+                <option value='Cáceres'>Cáceres</option>
+                <option value='Cádiz'>Cádiz</option>
+                <option value='Cantabria'>Cantabria</option>
+                <option value='Castellón'>Castellón</option>
+                <option value='Ceuta'>Ceuta</option>
+                <option value='Ciudad Real'>Ciudad Real</option>
+                <option value='Córdoba'>Córdoba</option>
+                <option value='Cuenca'>Cuenca</option>
+                <option value='Girona'>Girona</option>
+                <option value='Las Palmas'>Las Palmas</option>
+                <option value='Granada'>Granada</option>
+                <option value='Guadalajara'>Guadalajara</option>
+                <option value='Guipúzcoa'>Guipúzcoa</option>
+                <option value='Huelva'>Huelva</option>
+                <option value='Huesca'>Huesca</option>
+                <option value='Illes Balears'>Illes Balears</option>
+                <option value='Jaén'>Jaén</option>
+                <option value='A Coruña'>A Coruña</option>
+                <option value='La Rioja'>La Rioja</option>
+                <option value='León'>León</option>
+                <option value='Lleida'>Lleida</option>
+                <option value='Lugo'>Lugo</option>
+                <option value='Madrid'>Madrid</option>
+                <option value='Málaga'>Málaga</option>
+                <option value='Melilla'>Melilla</option>
+                <option value='Murcia'>Murcia</option>
+                <option value='Navarra'>Navarra</option>
+                <option value='Ourense'>Ourense</option>
+                <option value='Palencia'>Palencia</option>
+                <option value='Pontevedra'>Pontevedra</option>
+                <option value='Salamanca'>Salamanca</option>
+                <option value='Segovia'>Segovia</option>
+                <option value='Sevilla'>Sevilla</option>
+                <option value='Soria'>Soria</option>
+                <option value='Tarragona'>Tarragona</option>
+                <option value='Santa Cruz de Tenerife'>Santa Cruz de Tenerife</option>
+                <option value='Teruel'>Teruel</option>
+                <option value='Toledo'>Toledo</option>
+                <option value='Valencia'>Valencia</option>
+                <option value='Valladolid'>Valladolid</option>
+                <option value='Vizcaya'>Vizcaya</option>
+                <option value='Zamora'>Zamora</option>
+                <option value='Zaragoza'>Zaragoza</option>
+              </select>
               {errors.ubication && <span className="error-validate">{errors.ubication.message}</span>}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold" for="content">
+              <label className="block text-copy-primary text-sm font-bold" for="content">
                 Contenido del Proyecto
               </label>
-              <p className="text-sm text-gray-700 mb-2">Incluye todo la información necesaria</p>
+              <p className="text-sm text-copy-primary mb-2">Incluye todo la información necesaria</p>
               <textarea
                 ref={register({
                   required: '*El contenido es necesario'
                 })}
-                className="md:text-lg h-64 relative resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                className="md:text-lg h-64  resize-none shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="text"
                 rows="6"
                 type="text"
@@ -163,7 +212,7 @@ export function CreateProject() {
             </div>
             <div className="mt-8 flex items-center justify-center">
               <button
-                className="relative bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+                className=" bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 disabled={formState.isSubmitting}
               >
