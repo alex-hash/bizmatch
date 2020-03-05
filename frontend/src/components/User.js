@@ -20,7 +20,6 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
       return (
         <div>
           <div>
-            
             <img
               className="h-24 w-24 rounded-full mx-auto border-4 object-cover border-gold top-perfil"
               src={user.avatar_url}
@@ -28,7 +27,10 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             />
           </div>
           <div className="mt-2 flex flex-wrap">
-          <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADW0lEQVRIic2WQWhcVRSGv3PvG7KICzdWY6UKDSgUdNOkDRW0CIKCIm7cVFLzJneG4BSNIEV3IjZQsLWpZXInsUrsKqLEqhG1NKK11qaCSAXFuFCa0lUELTOTeXOPi8yUscy8CSLi2Z1z/nf++9977rkP/gOTtGQulyuo6n4AEZmYmpqa/FdJnHP3AjPAw43QgjHmqWKxeKYDfouqTovIkKqeFZGs9/5XAJOygB3ASe/9svd+WVVPhhAGU/AzxphT5XL5FuC0qk43E2kk54BH4zjuj+O4X0QeAb5KwQ9Za1+fnZ29Wq/Xj4rIzq4k3vsvgSPW2s+ttRdVdcl7fy6F5LtarVYYGxu7IYqigqp+3UykHnzTstns3caYReBnYFsjfBF4u6enZ6pWqw2FEOaAn4B7gDPAaPNMupKMjIzcGkXRu8BlVT1cqVSWAHp7ewdCCM8CW4GbjDFPFIvFxXY1ojSCQqHQU6lU3gPe8d4fBMjlctsBGgUXnXP7gT2ZTOZspzppB0+1Wt0rIitNgnw+f0cI4RVVPZDP5zcDeO8ngF+q1eroPyIBhlX1cNMJIRwTkXlgPoRwpAV3CNjTqUjqdgF3ZTKZCy3+n6p6p6rOWWt/bAaTJFmKomhbm++B7kq01QkhTALLxpiXVfXJ67CVTkUi+NtI2AUsGWOGa7WaAr+HELYDiwDGmONRFO1OkuQE8O21lRozAPzQTUlzJGxS1Y9DCN9ba8+LyKVGm67LUh1PkuQU8AXwXAvJuKoe70ayo3UkANHq6mqfqj4A3NZoU0ql0vsikmX9os01duFF4CERudCWgcZlHB0d/QQ4nclkJpMk2aeq95dKpQcBstnszdbaD1V1BTgURdF5gLW1tUFjzDiwSVVPiMgLIjJcr9evWmsHVPWbxmhaV9JY3e4kSS4D9zV8AKanp6/09fXtFJGPgGNJkvyRJMmKiLwkIh8Au0ql0msi8piqvmWMmQkhbAbecM493UldR8vlcgedc893yjvnrjjntgLEcdzvnLt0TUk3i+P4dufcZ6r6DPC4c25LB2jSLrghEmvtjIh8Wi6Xb1TVeeDNdjgRmQAWnHOvWmsXgAMbJgEGr+u+gXagxj/ACPCbMWav9/4obPA9Seu+jdiGlKR13//G/gLauY4L/Z6uKAAAAABJRU5ErkJggg=="/>
+            <img
+              className="self-center"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADW0lEQVRIic2WQWhcVRSGv3PvG7KICzdWY6UKDSgUdNOkDRW0CIKCIm7cVFLzJneG4BSNIEV3IjZQsLWpZXInsUrsKqLEqhG1NKK11qaCSAXFuFCa0lUELTOTeXOPi8yUscy8CSLi2Z1z/nf++9977rkP/gOTtGQulyuo6n4AEZmYmpqa/FdJnHP3AjPAw43QgjHmqWKxeKYDfouqTovIkKqeFZGs9/5XAJOygB3ASe/9svd+WVVPhhAGU/AzxphT5XL5FuC0qk43E2kk54BH4zjuj+O4X0QeAb5KwQ9Za1+fnZ29Wq/Xj4rIzq4k3vsvgSPW2s+ttRdVdcl7fy6F5LtarVYYGxu7IYqigqp+3UykHnzTstns3caYReBnYFsjfBF4u6enZ6pWqw2FEOaAn4B7gDPAaPNMupKMjIzcGkXRu8BlVT1cqVSWAHp7ewdCCM8CW4GbjDFPFIvFxXY1ojSCQqHQU6lU3gPe8d4fBMjlctsBGgUXnXP7gT2ZTOZspzppB0+1Wt0rIitNgnw+f0cI4RVVPZDP5zcDeO8ngF+q1eroPyIBhlX1cNMJIRwTkXlgPoRwpAV3CNjTqUjqdgF3ZTKZCy3+n6p6p6rOWWt/bAaTJFmKomhbm++B7kq01QkhTALLxpiXVfXJ67CVTkUi+NtI2AUsGWOGa7WaAr+HELYDiwDGmONRFO1OkuQE8O21lRozAPzQTUlzJGxS1Y9DCN9ba8+LyKVGm67LUh1PkuQU8AXwXAvJuKoe70ayo3UkANHq6mqfqj4A3NZoU0ql0vsikmX9os01duFF4CERudCWgcZlHB0d/QQ4nclkJpMk2aeq95dKpQcBstnszdbaD1V1BTgURdF5gLW1tUFjzDiwSVVPiMgLIjJcr9evWmsHVPWbxmhaV9JY3e4kSS4D9zV8AKanp6/09fXtFJGPgGNJkvyRJMmKiLwkIh8Au0ql0msi8piqvmWMmQkhbAbecM493UldR8vlcgedc893yjvnrjjntgLEcdzvnLt0TUk3i+P4dufcZ6r6DPC4c25LB2jSLrghEmvtjIh8Wi6Xb1TVeeDNdjgRmQAWnHOvWmsXgAMbJgEGr+u+gXagxj/ACPCbMWav9/4obPA9Seu+jdiGlKR13//G/gLauY4L/Z6uKAAAAABJRU5ErkJggg=="
+            />
             <p className="text-sm text-copy-primary mb-2 ml-2 mt-2">Mentor</p>
           </div>
         </div>
@@ -44,7 +46,10 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             />
           </div>
           <div className="mt-2 flex flex-wrap">
-            <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACpklEQVRIib1TzUtUURT/nZsLmTbiQJsWETFJhS1mNPoYG+g/KHUhYS1699wZSGyX7aaVLsegmPcemtAicoKKoDaRuAhBcigIlNRFqyCqUVw56D0tUphm3psPCH+7d87v49zz7gVaBDPfbFWjWhUAmDmIkJZRE5JOp48yczxMICJDYT3HcRKO4xxvGLKzsxMF8FZrnaoyOGuMYaXUMWMMM3N3ZV9rnVJKvQHQWe1JQRNprVNE5Hqed4qZLxFRTkQ6iOi9tfa3UqpTRK4AKInIqO/7C8y8LCLG9/35pkL2YYy5ISITRHTbdd0XAKRSa4zpF5EHInLX9/0nYT6hIcycBPBsd3c3NTU1tVZnkJiIzBNRv+u6C0Gc0NtFRDkiGqkXAACu664CGLXW5urxasDM3cy8igbrrJyJmde11meCmoEnIaILRDSHf/9BPYiIzAG4GNRsAwCt9SgR5fYCBq21UaXUzyYD/k6r1A8RiVZ7ua77vA0AfN+fBDC5L2BmB0DNo6oHa+0RAGu+709XegHh6/okIoFHDwMRnReRz61owMzLxpjLzXAdx+lj5pWwfr0rPCYij4aHhw83GCailHoIYKzlENd1XwH40N7ePpPNZgN5e/VpEVn0PO9lmNehoKLWOtXT0/O6VCpdjUQiemtr6/TS0tK7al4sFhsnopMbGxtDyWTyYzweXykWi98ankRr3UtEsyIyUigUytvb2/0ABjKZTFclL5PJdBHRYLlcvlYoFMoicoeIZrXWvdWeNS+amU8opaL5fH6xojaO4J1PeJ53b/8jnU6fs9b+8jxvPYBbH8ycZeZso1oY2lrIGmDm7wDyFbX7/y1ERFaJyBJRB/bWJiLXAXxtRh94u6pRLBa/JBKJTQB9AG4B2ATw2PO8p83oDwR/AGGZFHSh0S2UAAAAAElFTkSuQmCC"/>
+            <img
+              className="self-center"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACpklEQVRIib1TzUtUURT/nZsLmTbiQJsWETFJhS1mNPoYG+g/KHUhYS1699wZSGyX7aaVLsegmPcemtAicoKKoDaRuAhBcigIlNRFqyCqUVw56D0tUphm3psPCH+7d87v49zz7gVaBDPfbFWjWhUAmDmIkJZRE5JOp48yczxMICJDYT3HcRKO4xxvGLKzsxMF8FZrnaoyOGuMYaXUMWMMM3N3ZV9rnVJKvQHQWe1JQRNprVNE5Hqed4qZLxFRTkQ6iOi9tfa3UqpTRK4AKInIqO/7C8y8LCLG9/35pkL2YYy5ISITRHTbdd0XAKRSa4zpF5EHInLX9/0nYT6hIcycBPBsd3c3NTU1tVZnkJiIzBNRv+u6C0Gc0NtFRDkiGqkXAACu664CGLXW5urxasDM3cy8igbrrJyJmde11meCmoEnIaILRDSHf/9BPYiIzAG4GNRsAwCt9SgR5fYCBq21UaXUzyYD/k6r1A8RiVZ7ua77vA0AfN+fBDC5L2BmB0DNo6oHa+0RAGu+709XegHh6/okIoFHDwMRnReRz61owMzLxpjLzXAdx+lj5pWwfr0rPCYij4aHhw83GCailHoIYKzlENd1XwH40N7ePpPNZgN5e/VpEVn0PO9lmNehoKLWOtXT0/O6VCpdjUQiemtr6/TS0tK7al4sFhsnopMbGxtDyWTyYzweXykWi98ankRr3UtEsyIyUigUytvb2/0ABjKZTFclL5PJdBHRYLlcvlYoFMoicoeIZrXWvdWeNS+amU8opaL5fH6xojaO4J1PeJ53b/8jnU6fs9b+8jxvPYBbH8ycZeZso1oY2lrIGmDm7wDyFbX7/y1ERFaJyBJRB/bWJiLXAXxtRh94u6pRLBa/JBKJTQB9AG4B2ATw2PO8p83oDwR/AGGZFHSh0S2UAAAAAElFTkSuQmCC"
+            />
             <p className="text-sm text-copy-primary mb-2 ml-2 mt-2">Emprendedor</p>
           </div>
         </div>
@@ -67,7 +72,10 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             />
           </div>
           <div className="mt-2 flex flex-wrap">
-            <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACpklEQVRIib1TzUtUURT/nZsLmTbiQJsWETFJhS1mNPoYG+g/KHUhYS1699wZSGyX7aaVLsegmPcemtAicoKKoDaRuAhBcigIlNRFqyCqUVw56D0tUphm3psPCH+7d87v49zz7gVaBDPfbFWjWhUAmDmIkJZRE5JOp48yczxMICJDYT3HcRKO4xxvGLKzsxMF8FZrnaoyOGuMYaXUMWMMM3N3ZV9rnVJKvQHQWe1JQRNprVNE5Hqed4qZLxFRTkQ6iOi9tfa3UqpTRK4AKInIqO/7C8y8LCLG9/35pkL2YYy5ISITRHTbdd0XAKRSa4zpF5EHInLX9/0nYT6hIcycBPBsd3c3NTU1tVZnkJiIzBNRv+u6C0Gc0NtFRDkiGqkXAACu664CGLXW5urxasDM3cy8igbrrJyJmde11meCmoEnIaILRDSHf/9BPYiIzAG4GNRsAwCt9SgR5fYCBq21UaXUzyYD/k6r1A8RiVZ7ua77vA0AfN+fBDC5L2BmB0DNo6oHa+0RAGu+709XegHh6/okIoFHDwMRnReRz61owMzLxpjLzXAdx+lj5pWwfr0rPCYij4aHhw83GCailHoIYKzlENd1XwH40N7ePpPNZgN5e/VpEVn0PO9lmNehoKLWOtXT0/O6VCpdjUQiemtr6/TS0tK7al4sFhsnopMbGxtDyWTyYzweXykWi98ankRr3UtEsyIyUigUytvb2/0ABjKZTFclL5PJdBHRYLlcvlYoFMoicoeIZrXWvdWeNS+amU8opaL5fH6xojaO4J1PeJ53b/8jnU6fs9b+8jxvPYBbH8ycZeZso1oY2lrIGmDm7wDyFbX7/y1ERFaJyBJRB/bWJiLXAXxtRh94u6pRLBa/JBKJTQB9AG4B2ATw2PO8p83oDwR/AGGZFHSh0S2UAAAAAElFTkSuQmCC"/>
+            <img
+              className="self-center"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACpklEQVRIib1TzUtUURT/nZsLmTbiQJsWETFJhS1mNPoYG+g/KHUhYS1699wZSGyX7aaVLsegmPcemtAicoKKoDaRuAhBcigIlNRFqyCqUVw56D0tUphm3psPCH+7d87v49zz7gVaBDPfbFWjWhUAmDmIkJZRE5JOp48yczxMICJDYT3HcRKO4xxvGLKzsxMF8FZrnaoyOGuMYaXUMWMMM3N3ZV9rnVJKvQHQWe1JQRNprVNE5Hqed4qZLxFRTkQ6iOi9tfa3UqpTRK4AKInIqO/7C8y8LCLG9/35pkL2YYy5ISITRHTbdd0XAKRSa4zpF5EHInLX9/0nYT6hIcycBPBsd3c3NTU1tVZnkJiIzBNRv+u6C0Gc0NtFRDkiGqkXAACu664CGLXW5urxasDM3cy8igbrrJyJmde11meCmoEnIaILRDSHf/9BPYiIzAG4GNRsAwCt9SgR5fYCBq21UaXUzyYD/k6r1A8RiVZ7ua77vA0AfN+fBDC5L2BmB0DNo6oHa+0RAGu+709XegHh6/okIoFHDwMRnReRz61owMzLxpjLzXAdx+lj5pWwfr0rPCYij4aHhw83GCailHoIYKzlENd1XwH40N7ePpPNZgN5e/VpEVn0PO9lmNehoKLWOtXT0/O6VCpdjUQiemtr6/TS0tK7al4sFhsnopMbGxtDyWTyYzweXykWi98ankRr3UtEsyIyUigUytvb2/0ABjKZTFclL5PJdBHRYLlcvlYoFMoicoeIZrXWvdWeNS+amU8opaL5fH6xojaO4J1PeJ53b/8jnU6fs9b+8jxvPYBbH8ycZeZso1oY2lrIGmDm7wDyFbX7/y1ERFaJyBJRB/bWJiLXAXxtRh94u6pRLBa/JBKJTQB9AG4B2ATw2PO8p83oDwR/AGGZFHSh0S2UAAAAAElFTkSuQmCC"
+            />
             <p className="text-sm mb-2 text-copy-primary ml-2 mt-2">Emprendedor</p>
           </div>
         </div>
@@ -90,7 +98,10 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             />
           </div>
           <div className="mt-2 flex flex-wrap">
-            <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADW0lEQVRIic2WQWhcVRSGv3PvG7KICzdWY6UKDSgUdNOkDRW0CIKCIm7cVFLzJneG4BSNIEV3IjZQsLWpZXInsUrsKqLEqhG1NKK11qaCSAXFuFCa0lUELTOTeXOPi8yUscy8CSLi2Z1z/nf++9977rkP/gOTtGQulyuo6n4AEZmYmpqa/FdJnHP3AjPAw43QgjHmqWKxeKYDfouqTovIkKqeFZGs9/5XAJOygB3ASe/9svd+WVVPhhAGU/AzxphT5XL5FuC0qk43E2kk54BH4zjuj+O4X0QeAb5KwQ9Za1+fnZ29Wq/Xj4rIzq4k3vsvgSPW2s+ttRdVdcl7fy6F5LtarVYYGxu7IYqigqp+3UykHnzTstns3caYReBnYFsjfBF4u6enZ6pWqw2FEOaAn4B7gDPAaPNMupKMjIzcGkXRu8BlVT1cqVSWAHp7ewdCCM8CW4GbjDFPFIvFxXY1ojSCQqHQU6lU3gPe8d4fBMjlctsBGgUXnXP7gT2ZTOZspzppB0+1Wt0rIitNgnw+f0cI4RVVPZDP5zcDeO8ngF+q1eroPyIBhlX1cNMJIRwTkXlgPoRwpAV3CNjTqUjqdgF3ZTKZCy3+n6p6p6rOWWt/bAaTJFmKomhbm++B7kq01QkhTALLxpiXVfXJ67CVTkUi+NtI2AUsGWOGa7WaAr+HELYDiwDGmONRFO1OkuQE8O21lRozAPzQTUlzJGxS1Y9DCN9ba8+LyKVGm67LUh1PkuQU8AXwXAvJuKoe70ayo3UkANHq6mqfqj4A3NZoU0ql0vsikmX9os01duFF4CERudCWgcZlHB0d/QQ4nclkJpMk2aeq95dKpQcBstnszdbaD1V1BTgURdF5gLW1tUFjzDiwSVVPiMgLIjJcr9evWmsHVPWbxmhaV9JY3e4kSS4D9zV8AKanp6/09fXtFJGPgGNJkvyRJMmKiLwkIh8Au0ql0msi8piqvmWMmQkhbAbecM493UldR8vlcgedc893yjvnrjjntgLEcdzvnLt0TUk3i+P4dufcZ6r6DPC4c25LB2jSLrghEmvtjIh8Wi6Xb1TVeeDNdjgRmQAWnHOvWmsXgAMbJgEGr+u+gXagxj/ACPCbMWav9/4obPA9Seu+jdiGlKR13//G/gLauY4L/Z6uKAAAAABJRU5ErkJggg=="/>
+            <img
+              className="self-center"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADW0lEQVRIic2WQWhcVRSGv3PvG7KICzdWY6UKDSgUdNOkDRW0CIKCIm7cVFLzJneG4BSNIEV3IjZQsLWpZXInsUrsKqLEqhG1NKK11qaCSAXFuFCa0lUELTOTeXOPi8yUscy8CSLi2Z1z/nf++9977rkP/gOTtGQulyuo6n4AEZmYmpqa/FdJnHP3AjPAw43QgjHmqWKxeKYDfouqTovIkKqeFZGs9/5XAJOygB3ASe/9svd+WVVPhhAGU/AzxphT5XL5FuC0qk43E2kk54BH4zjuj+O4X0QeAb5KwQ9Za1+fnZ29Wq/Xj4rIzq4k3vsvgSPW2s+ttRdVdcl7fy6F5LtarVYYGxu7IYqigqp+3UykHnzTstns3caYReBnYFsjfBF4u6enZ6pWqw2FEOaAn4B7gDPAaPNMupKMjIzcGkXRu8BlVT1cqVSWAHp7ewdCCM8CW4GbjDFPFIvFxXY1ojSCQqHQU6lU3gPe8d4fBMjlctsBGgUXnXP7gT2ZTOZspzppB0+1Wt0rIitNgnw+f0cI4RVVPZDP5zcDeO8ngF+q1eroPyIBhlX1cNMJIRwTkXlgPoRwpAV3CNjTqUjqdgF3ZTKZCy3+n6p6p6rOWWt/bAaTJFmKomhbm++B7kq01QkhTALLxpiXVfXJ67CVTkUi+NtI2AUsGWOGa7WaAr+HELYDiwDGmONRFO1OkuQE8O21lRozAPzQTUlzJGxS1Y9DCN9ba8+LyKVGm67LUh1PkuQU8AXwXAvJuKoe70ayo3UkANHq6mqfqj4A3NZoU0ql0vsikmX9os01duFF4CERudCWgcZlHB0d/QQ4nclkJpMk2aeq95dKpQcBstnszdbaD1V1BTgURdF5gLW1tUFjzDiwSVVPiMgLIjJcr9evWmsHVPWbxmhaV9JY3e4kSS4D9zV8AKanp6/09fXtFJGPgGNJkvyRJMmKiLwkIh8Au0ql0msi8piqvmWMmQkhbAbecM493UldR8vlcgedc893yjvnrjjntgLEcdzvnLt0TUk3i+P4dufcZ6r6DPC4c25LB2jSLrghEmvtjIh8Wi6Xb1TVeeDNdjgRmQAWnHOvWmsXgAMbJgEGr+u+gXagxj/ACPCbMWav9/4obPA9Seu+jdiGlKR13//G/gLauY4L/Z6uKAAAAABJRU5ErkJggg=="
+            />
             <p className="text-sm mb-2 text-copy-primary ml-2 mt-2">Mentor</p>
           </div>
         </div>
@@ -102,7 +113,10 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
     if (role !== null) {
       return (
         <div className="flex flex-wrap">
-          <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACyUlEQVRIid3VS2gUWRSA4f9UlR0IBg2KqNGViIIPhBZFDC4cEQfBxyKoZNd23e6JK8GNyDglKIqoIA2dVHVCmBnEF4pbRfGxEF9BUTS4mRlGTMSRCaLOUHaqjptWmthlJ8GNnu0593x1bt26Bd9LSL0CY8wMYAuwGHinqvdF5FwQBK+/CmKM+Qk4AjQCb4EGYALwDjgGHAqC4L96iJWUcF03AxRFpN+yrOVBEDQNDQ1NFJFNqvoY+Bm4n81m0+OaxBgzCfgLeN7Q0JAuFAphdd7zPGtwcHCHqh4AJohIxvf9k2OdZD0wWUR2jQQqSOz7fsG27SXAn6p6wnXdvWNF5gKEYXgraSFAZ2fnH7ZtrwTuiMg+Y8wvo0ZE5A1AY2Nj05cQgDiOW4EFwGvLsi7XqnESkNuqyvDw8DbgcK0az/OcgYGBXaq6H/gb2NjV1fWoZr+kJzTG3AIWq+qaUql0szqXz+eXxXHsA0tU9ZqItAVB8CqpVyKSy+Xmqup1YJqqloDLlmVNVtXNwI/A/6q6p6WlpeB5XpzUBxK2CyAMw2epVOoUsFNE8kBeVatLjowGSJzEGDMHuAAsBO6p6nnLsp4ClqouBLYC84AbURRt7unp+XdMSCaTmek4zl2gSURc3/dPj6yp+hiPAv3Aii9dL58dYcdxeoEpqrquFlBBYt/3C0A7sKiCfYq2trZUIpLL5VYBa4GDI09UrQiC4Kyq/i4i2zs6OmYDuK7b3tzc/DCbzc6qiajqVmA4iqJCPaBqzVHgRRiGluu67SLyK/A+iqJP19HI7VoKPKj3Io0xO40xywG6u7sfAq22ba+sAE/K5fIPvb29/yRNckZEinWAqcBu4OJHCGgFfqsFwCj+jAnQIuAKkBKR46q6JwkYN1KB5gNXgelAv+M4q4vF4otatfZ4kb6+vlfpdPoSMKdcLm8olUovx9vr24kPssEzSfXSrkQAAAAASUVORK5CYII="/>
+          <img
+            className="self-center"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACyUlEQVRIid3VS2gUWRSA4f9UlR0IBg2KqNGViIIPhBZFDC4cEQfBxyKoZNd23e6JK8GNyDglKIqoIA2dVHVCmBnEF4pbRfGxEF9BUTS4mRlGTMSRCaLOUHaqjptWmthlJ8GNnu0593x1bt26Bd9LSL0CY8wMYAuwGHinqvdF5FwQBK+/CmKM+Qk4AjQCb4EGYALwDjgGHAqC4L96iJWUcF03AxRFpN+yrOVBEDQNDQ1NFJFNqvoY+Bm4n81m0+OaxBgzCfgLeN7Q0JAuFAphdd7zPGtwcHCHqh4AJohIxvf9k2OdZD0wWUR2jQQqSOz7fsG27SXAn6p6wnXdvWNF5gKEYXgraSFAZ2fnH7ZtrwTuiMg+Y8wvo0ZE5A1AY2Nj05cQgDiOW4EFwGvLsi7XqnESkNuqyvDw8DbgcK0az/OcgYGBXaq6H/gb2NjV1fWoZr+kJzTG3AIWq+qaUql0szqXz+eXxXHsA0tU9ZqItAVB8CqpVyKSy+Xmqup1YJqqloDLlmVNVtXNwI/A/6q6p6WlpeB5XpzUBxK2CyAMw2epVOoUsFNE8kBeVatLjowGSJzEGDMHuAAsBO6p6nnLsp4ClqouBLYC84AbURRt7unp+XdMSCaTmek4zl2gSURc3/dPj6yp+hiPAv3Aii9dL58dYcdxeoEpqrquFlBBYt/3C0A7sKiCfYq2trZUIpLL5VYBa4GDI09UrQiC4Kyq/i4i2zs6OmYDuK7b3tzc/DCbzc6qiajqVmA4iqJCPaBqzVHgRRiGluu67SLyK/A+iqJP19HI7VoKPKj3Io0xO40xywG6u7sfAq22ba+sAE/K5fIPvb29/yRNckZEinWAqcBu4OJHCGgFfqsFwCj+jAnQIuAKkBKR46q6JwkYN1KB5gNXgelAv+M4q4vF4otatfZ4kb6+vlfpdPoSMKdcLm8olUovx9vr24kPssEzSfXSrkQAAAAASUVORK5CYII="
+          />
           <p className="text-left text-copy-primary text-sm mb-2 ml-2 mt-2">{user.company_role}</p>
         </div>
       );
@@ -124,8 +138,11 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
     if (url !== null) {
       return (
         <div className="flex flex-no-wrap">
-          <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAB8UlEQVRIie1Tv4sTQRh9b91NbAXFO+HAHykUA9Yi6BWCxeFpYaMIZovZBNZUWoiihbZeFbfJNKkOCwsNWBxanMWBf0ACwhUKJ+QK0ydsdj6bnXVuUU/Lg7xm5+3Mfu/N2+8D5pjjQIMuaTQah4MguEPyMskFETlk90Sko7XuW66UWiXZLgqRmYjskvxUqVTWO53O1O75dtFqterGmHcATudF97oh35b4EoCrjgn7vDedTp8opW5orYeFSBiGx4wxGwBOABiR7AH45hY1xmy5XEQ2Pc9rlpI5KSIhgDMkN+I4vpAkydgHgCAIHuYC20EQXEySZIx9kLsclt/HcbyWpulnALXZbPYAwGMb1/U8gqeugFKqAeDsfoIAvmitewCQJMm42Ww+E5F1EVl1RRZykT3OSN4CsPIPIu8B9CwRkUG+XAR+/fhdAEeyLKsDGDiH37j8bzcpmavnjTAqRESkT/IcyRdxHH+wkdkI/gdRFB0Vkee5WL8QIfkSwF0AtTRNB1EU9Uh+dT82xmzZlgQApdR5z/MuuWdE5BSAEMBxAN99318rRLrd7g+l1LV8FmoAHv1mTu7D6SaSyyLy6g8X2iZ50yZSDKPWethut+uTyeS253lXACyWJn6n5HqH5EdHNAMwEpHNarX62p34OeY44PgJZoPTRvmbtm8AAAAASUVORK5CYII="></img>
-          <a href={"https://"+user.page_url} className="text-left text-copy-primary text-sm mb-2 ml-2 mt-2">
+          <img
+            className="self-center"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAB8UlEQVRIie1Tv4sTQRh9b91NbAXFO+HAHykUA9Yi6BWCxeFpYaMIZovZBNZUWoiihbZeFbfJNKkOCwsNWBxanMWBf0ACwhUKJ+QK0ydsdj6bnXVuUU/Lg7xm5+3Mfu/N2+8D5pjjQIMuaTQah4MguEPyMskFETlk90Sko7XuW66UWiXZLgqRmYjskvxUqVTWO53O1O75dtFqterGmHcATudF97oh35b4EoCrjgn7vDedTp8opW5orYeFSBiGx4wxGwBOABiR7AH45hY1xmy5XEQ2Pc9rlpI5KSIhgDMkN+I4vpAkydgHgCAIHuYC20EQXEySZIx9kLsclt/HcbyWpulnALXZbPYAwGMb1/U8gqeugFKqAeDsfoIAvmitewCQJMm42Ww+E5F1EVl1RRZykT3OSN4CsPIPIu8B9CwRkUG+XAR+/fhdAEeyLKsDGDiH37j8bzcpmavnjTAqRESkT/IcyRdxHH+wkdkI/gdRFB0Vkee5WL8QIfkSwF0AtTRNB1EU9Uh+dT82xmzZlgQApdR5z/MuuWdE5BSAEMBxAN99318rRLrd7g+l1LV8FmoAHv1mTu7D6SaSyyLy6g8X2iZ50yZSDKPWethut+uTyeS253lXACyWJn6n5HqH5EdHNAMwEpHNarX62p34OeY44PgJZoPTRvmbtm8AAAAASUVORK5CYII="
+          ></img>
+          <a href={'https://' + user.page_url} className="text-left text-copy-primary text-sm mb-2 ml-2 mt-2">
             {user.page_url}
           </a>
         </div>
@@ -280,38 +297,42 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
       description
     });
     if (typeof data.get('avatar') === 'string') {
-      promise1.then(() => (window.location.href = '/user')).catch((error) => {
-        if (error.response.status === 401) {
-          localStorage.removeItem('currentUser');
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Tú token de sesión ha expirado'
-          }).then(() => {
-            window.location.href = '/';
-          });
-        } else if (error.response.status === 400) {
-          window.location.href = '/404';
-        }
-      });;
+      promise1
+        .then(() => (window.location.href = '/user'))
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.removeItem('currentUser');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
+            });
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
+          }
+        });
     } else {
       Promise.all([
         promise1,
         updateAvatar(data).then((response) => localStorage.setItem('currentUser', JSON.stringify(response.data)))
-      ]).then(() => (window.location.href = '/user')).catch((error) => {
-        if (error.response.status === 401) {
-          localStorage.removeItem('currentUser');
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Tú token de sesión ha expirado'
-          }).then(() => {
-            window.location.href = '/';
-          });
-        } else if (error.response.status === 400) {
-          window.location.href = '/404';
-        }
-      });
+      ])
+        .then(() => (window.location.href = '/user'))
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.removeItem('currentUser');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Tú token de sesión ha expirado'
+            }).then(() => {
+              window.location.href = '/';
+            });
+          } else if (error.response.status === 400) {
+            window.location.href = '/404';
+          }
+        });
     }
   }
 
@@ -327,18 +348,26 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
             <div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
               {eOrM(user.type, 0)}
               <div className="flex flex-wrap">
-                <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADDUlEQVRIibWUTWhjVRTHf+e+l34kLXYhKK2gdqeIixkXfmARou7cuPALq6F9uS8piCiKA8KQpd0IUij43muJFqRYF+6GwSmOM4zObBS7FBR0IYJDM2M/SElyjwujhJhk3gM9u3fu/39/95x3z4WMYa19NavHZBFXKpXHgHq5XH70f4M455aAH0RkOYtP0gpXVlam2u32L865J4wxF8fHx+9ZW1v7I403dSWtVutF4MskSfZE5OLJyclzab2pISKyLCIbAKq6kaVlqSCVSuUBYG5/f/88wOzs7DlVnQuC4MH/DOKcW1bV+s7OTgegVqs54GNjTCmN3x+ULJVKM77vT+VyuYJzblpVX/J9/5Fejed5m51O55swDD8xxhy0Wq2jdrt9WK/Xb/TvJ9ba88A8MAUUgGngBnAEHIrIoapeiqLozX6ztfZ9EVlQ1ake/wxw0OP/Ucrl8gsiEqnqmU6ns7W5uXmQpgWjYmlpadrzvEUReU9VrYnjeFtVF0Tkbc/z3q3VapkGdEBILpdbEZEzqlqM43j7n2G01t4OfKaqvzebzdLW1tZR1t0XFxcLExMTdRGZ833/2fX19d+g53ZFUXS90Wg8DdycnJz8OgiCe7MAgiC4K5/Pf2WMOSkUCsW/ATDkWSmXy6+LyDvOueeTJLl8K0AYhguquq2qq3Ecf9C/PrD/XeFZY8xqykJWgbODADBkTgBE5E7gShqCql4B7hi2PvQmOeeKwG5KyC5QzASx1uZF5PTx8fHl/nwYhi9ba/O9+WazeQl4qD8/EqKqjwPf9l7jMAyLwJ6qvgHsdb8B6Oq+6/rSQYwxT4rIBfjrHbPWfqiqHwFvRVF0WlVfU9UNa+2n3flCVXdFZGDLhlVSBHbDMHxmbGxsD6Ddbt8XRdHnAHEcnwPuV9WfgO/DMHwFuMCQ//KvOeme7FdV/UJE7nbOBUmSXB1kBgiC4GFjTKKqP4vIU8BsFEXXR1YiIguAA641Go1TowAASZJcbTQap4BrgOv6R0epVJqpVqvztxQOiGq1Om+tva0//ydodk8SKJ9tPwAAAABJRU5ErkJggg=="/>
-                <p className="text-left flex-1 w-full break-normal text-copy-primary text-sm mb-2 ml-2 mt-2">Valoración media: {' '}
-                              {(avg.avg === null ? '' : Math.round(avg.avg * 100) / 100) +
-                              (avg.avg === null ? 'Sin valoración todavía' : ' / ') +
-                              (avg.avg === null ? '' : avg.counter + ' opiniones')}</p>
+                <img
+                  className="self-center"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADDUlEQVRIibWUTWhjVRTHf+e+l34kLXYhKK2gdqeIixkXfmARou7cuPALq6F9uS8piCiKA8KQpd0IUij43muJFqRYF+6GwSmOM4zObBS7FBR0IYJDM2M/SElyjwujhJhk3gM9u3fu/39/95x3z4WMYa19NavHZBFXKpXHgHq5XH70f4M455aAH0RkOYtP0gpXVlam2u32L865J4wxF8fHx+9ZW1v7I403dSWtVutF4MskSfZE5OLJyclzab2pISKyLCIbAKq6kaVlqSCVSuUBYG5/f/88wOzs7DlVnQuC4MH/DOKcW1bV+s7OTgegVqs54GNjTCmN3x+ULJVKM77vT+VyuYJzblpVX/J9/5Fejed5m51O55swDD8xxhy0Wq2jdrt9WK/Xb/TvJ9ba88A8MAUUgGngBnAEHIrIoapeiqLozX6ztfZ9EVlQ1ake/wxw0OP/Ucrl8gsiEqnqmU6ns7W5uXmQpgWjYmlpadrzvEUReU9VrYnjeFtVF0Tkbc/z3q3VapkGdEBILpdbEZEzqlqM43j7n2G01t4OfKaqvzebzdLW1tZR1t0XFxcLExMTdRGZ833/2fX19d+g53ZFUXS90Wg8DdycnJz8OgiCe7MAgiC4K5/Pf2WMOSkUCsW/ATDkWSmXy6+LyDvOueeTJLl8K0AYhguquq2qq3Ecf9C/PrD/XeFZY8xqykJWgbODADBkTgBE5E7gShqCql4B7hi2PvQmOeeKwG5KyC5QzASx1uZF5PTx8fHl/nwYhi9ba/O9+WazeQl4qD8/EqKqjwPf9l7jMAyLwJ6qvgHsdb8B6Oq+6/rSQYwxT4rIBfjrHbPWfqiqHwFvRVF0WlVfU9UNa+2n3flCVXdFZGDLhlVSBHbDMHxmbGxsD6Ddbt8XRdHnAHEcnwPuV9WfgO/DMHwFuMCQ//KvOeme7FdV/UJE7nbOBUmSXB1kBgiC4GFjTKKqP4vIU8BsFEXXR1YiIguAA641Go1TowAASZJcbTQap4BrgOv6R0epVJqpVqvztxQOiGq1Om+tva0//ydodk8SKJ9tPwAAAABJRU5ErkJggg=="
+                />
+                <p className="text-left flex-1 w-full break-normal text-copy-primary text-sm mb-2 ml-2 mt-2">
+                  Valoración media:{' '}
+                  {(avg.avg === null ? '' : Math.round(avg.avg * 100) / 100) +
+                    (avg.avg === null ? 'Sin valoración todavía' : ' / ') +
+                    (avg.avg === null ? '' : avg.counter + ' opiniones')}
+                </p>
               </div>
               {roleE(user.company_role)}
               <div className="border-t-2 mt-4 text-left">
                 <h1 className="font-bold text-copy-primary text-lg pt-4 pb-2">Más información</h1>
                 {companyWork(user.company_name)}
                 <div className="flex flex-wrap">
-                <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADfElEQVRIid2VQWhcRRjHf/Oem2aTSMmampBNVMQeRCRKoJqUKhaUXryIAaUEY9x9mzQE2UuNqHXRi+m5TXcnGwwKRSl4EqkiJahVaxMptlVC60FsNy2tKaVJDElmPg+Zl75ko7bkpN/l/eeb75vfN+99bwb+L6ZuJaizs7M6Ho9vV0o1A3UisiAiV4Efh4eHz24IkkqlHvd9/w0ReRrY9DdhUyKSt9YeGBkZmb5lSFdXV2VFRcVBoDvivgJMuGc1cA/wKOC7+UvW2t3FYvHYv0Ky2Wx8dnb2S6Ddub4SkX3JZPLrXC5no7G9vb21xpg9wABQAywppZ4tFApH/xGSTqcPK6VedMN3tdZvA7LejiM5DymlvgAagRue5z2Yz+cvhvN3RINTqdTOCOCg1npfWEwQBNuUUs0iMqm1Pp3NZuPz8/OVAPX19ZOlUuk54Dhwp7X2HeCVcF1v1baUesvJy8BeB64PguA74HsROQL8lMlk3p+bmxswxkwbY6anpqae1FqfAD52+S9ks9l4GaSvr+8updQONzyktZ4D8H3/MPBYtBgR6RKRl9e+NqXUR05WzczMPFEGWVxc3MHNTjkKkE6nHxGRnZFFBjzPe1hEPgCa10KMMT9EYu8rg4hIY6gXFhYmnQw7DOB0oVAYzOfzZ2KxWB/w51pIU1PTFcC69RJlEKVUrZN2dHT0OoDneYnI/PlQDw0NzQAr3RNaqVSqDNdUSt1YbyfXQl93d3eN09fDeWvt3aHu6OjwgS1rIUqprRH9SxkEmApFLBa7H8AYczKS1BYEwVMAiUTiVWBzpIAtrtCXnOtaVVXVtyu5oQiCoI7l1vWA17TW+wGVyWROikhrpJhZlo+Vy0C9810CTgHPuPzXtdbvle1Ea31VKXXcDfv6+/s3AeJ53m7g9wikGihZa9uAn52vAdjlij7U2Ni4PxK/0rIAtLa2XgQ6gc3GmJqJiYnPx8fH/2hvbx8xxvwGnAc+sdbuKRaLF1paWj70ff9X4BzwGbBXa10cGxtbdQytd3YdUUo9DyAig8lk8s1cLre0Nu52rAwSBEEVcIybf/kpERmMxWKfutbdOARWjvsDrL5PloAzLHfhnFKqVkQesNZuLxaLF24bElpPT882ERkQkV1AfL0Ya23zhiChuZuyTUTuBeo8z/OttdO+759raGj4ZqPf7L9jfwEdwGEWvKgsCQAAAABJRU5ErkJggg=="/>
+                  <img
+                    className="self-center"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADfElEQVRIid2VQWhcRRjHf/Oem2aTSMmampBNVMQeRCRKoJqUKhaUXryIAaUEY9x9mzQE2UuNqHXRi+m5TXcnGwwKRSl4EqkiJahVaxMptlVC60FsNy2tKaVJDElmPg+Zl75ko7bkpN/l/eeb75vfN+99bwb+L6ZuJaizs7M6Ho9vV0o1A3UisiAiV4Efh4eHz24IkkqlHvd9/w0ReRrY9DdhUyKSt9YeGBkZmb5lSFdXV2VFRcVBoDvivgJMuGc1cA/wKOC7+UvW2t3FYvHYv0Ky2Wx8dnb2S6Ddub4SkX3JZPLrXC5no7G9vb21xpg9wABQAywppZ4tFApH/xGSTqcPK6VedMN3tdZvA7LejiM5DymlvgAagRue5z2Yz+cvhvN3RINTqdTOCOCg1npfWEwQBNuUUs0iMqm1Pp3NZuPz8/OVAPX19ZOlUuk54Dhwp7X2HeCVcF1v1baUesvJy8BeB64PguA74HsROQL8lMlk3p+bmxswxkwbY6anpqae1FqfAD52+S9ks9l4GaSvr+8updQONzyktZ4D8H3/MPBYtBgR6RKRl9e+NqXUR05WzczMPFEGWVxc3MHNTjkKkE6nHxGRnZFFBjzPe1hEPgCa10KMMT9EYu8rg4hIY6gXFhYmnQw7DOB0oVAYzOfzZ2KxWB/w51pIU1PTFcC69RJlEKVUrZN2dHT0OoDneYnI/PlQDw0NzQAr3RNaqVSqDNdUSt1YbyfXQl93d3eN09fDeWvt3aHu6OjwgS1rIUqprRH9SxkEmApFLBa7H8AYczKS1BYEwVMAiUTiVWBzpIAtrtCXnOtaVVXVtyu5oQiCoI7l1vWA17TW+wGVyWROikhrpJhZlo+Vy0C9810CTgHPuPzXtdbvle1Ea31VKXXcDfv6+/s3AeJ53m7g9wikGihZa9uAn52vAdjlij7U2Ni4PxK/0rIAtLa2XgQ6gc3GmJqJiYnPx8fH/2hvbx8xxvwGnAc+sdbuKRaLF1paWj70ff9X4BzwGbBXa10cGxtbdQytd3YdUUo9DyAig8lk8s1cLre0Nu52rAwSBEEVcIybf/kpERmMxWKfutbdOARWjvsDrL5PloAzLHfhnFKqVkQesNZuLxaLF24bElpPT882ERkQkV1AfL0Ya23zhiChuZuyTUTuBeo8z/OttdO+759raGj4ZqPf7L9jfwEdwGEWvKgsCQAAAABJRU5ErkJggg=="
+                  />
                   <p className="text-left text-copy-primary text-sm mb-2 ml-2 mt-2">{user.email}</p>
                 </div>
                 {urlDefinided(user.page_url)}
@@ -349,7 +378,14 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
                 {user.name + ' ' + user.first_name}
               </h1>
               <p className="text-gray-700 sm:px-2">
-                Se registró el {user.created_at !== undefined ? user.created_at.substring(8, 10) + "-" + user.created_at.substring(5, 8) + user.created_at.substring(0, 4) : ''} {buttonEdit()}
+                Se registró el{' '}
+                {user.created_at !== undefined
+                  ? user.created_at.substring(8, 10) +
+                    '-' +
+                    user.created_at.substring(5, 8) +
+                    user.created_at.substring(0, 4)
+                  : ''}{' '}
+                {buttonEdit()}
               </p>
               {descriptionNote(user.description)}
               {getTops()}
@@ -370,14 +406,22 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
               <div className="text-center w-full p-6 md:p-0 lg:p-6 break-all md:w-2/3 xl:border lg:border xl:w-1/5 lg:w-1/5">
                 {eOrM(user.type, 1)}
                 <div className="flex flex-wrap">
-                  <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADDUlEQVRIibWUTWhjVRTHf+e+l34kLXYhKK2gdqeIixkXfmARou7cuPALq6F9uS8piCiKA8KQpd0IUij43muJFqRYF+6GwSmOM4zObBS7FBR0IYJDM2M/SElyjwujhJhk3gM9u3fu/39/95x3z4WMYa19NavHZBFXKpXHgHq5XH70f4M455aAH0RkOYtP0gpXVlam2u32L865J4wxF8fHx+9ZW1v7I403dSWtVutF4MskSfZE5OLJyclzab2pISKyLCIbAKq6kaVlqSCVSuUBYG5/f/88wOzs7DlVnQuC4MH/DOKcW1bV+s7OTgegVqs54GNjTCmN3x+ULJVKM77vT+VyuYJzblpVX/J9/5Fejed5m51O55swDD8xxhy0Wq2jdrt9WK/Xb/TvJ9ba88A8MAUUgGngBnAEHIrIoapeiqLozX6ztfZ9EVlQ1ake/wxw0OP/Ucrl8gsiEqnqmU6ns7W5uXmQpgWjYmlpadrzvEUReU9VrYnjeFtVF0Tkbc/z3q3VapkGdEBILpdbEZEzqlqM43j7n2G01t4OfKaqvzebzdLW1tZR1t0XFxcLExMTdRGZ833/2fX19d+g53ZFUXS90Wg8DdycnJz8OgiCe7MAgiC4K5/Pf2WMOSkUCsW/ATDkWSmXy6+LyDvOueeTJLl8K0AYhguquq2qq3Ecf9C/PrD/XeFZY8xqykJWgbODADBkTgBE5E7gShqCql4B7hi2PvQmOeeKwG5KyC5QzASx1uZF5PTx8fHl/nwYhi9ba/O9+WazeQl4qD8/EqKqjwPf9l7jMAyLwJ6qvgHsdb8B6Oq+6/rSQYwxT4rIBfjrHbPWfqiqHwFvRVF0WlVfU9UNa+2n3flCVXdFZGDLhlVSBHbDMHxmbGxsD6Ddbt8XRdHnAHEcnwPuV9WfgO/DMHwFuMCQ//KvOeme7FdV/UJE7nbOBUmSXB1kBgiC4GFjTKKqP4vIU8BsFEXXR1YiIguAA641Go1TowAASZJcbTQap4BrgOv6R0epVJqpVqvztxQOiGq1Om+tva0//ydodk8SKJ9tPwAAAABJRU5ErkJggg=="/>
-                  <p className="text-left flex-1 w-full break-normal text-copy-primary text-sm mb-2 ml-2 mt-2">Valoración media: {' '}
-                                {(avg.avg === null ? '' : Math.round(avg.avg * 100) / 100) +
-                                (avg.avg === null ? 'Sin valoración todavía' : ' / ') +
-                                (avg.avg === null ? '' : avg.counter + ' opiniones')}</p>
+                  <img
+                    className="self-center"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADDUlEQVRIibWUTWhjVRTHf+e+l34kLXYhKK2gdqeIixkXfmARou7cuPALq6F9uS8piCiKA8KQpd0IUij43muJFqRYF+6GwSmOM4zObBS7FBR0IYJDM2M/SElyjwujhJhk3gM9u3fu/39/95x3z4WMYa19NavHZBFXKpXHgHq5XH70f4M455aAH0RkOYtP0gpXVlam2u32L865J4wxF8fHx+9ZW1v7I403dSWtVutF4MskSfZE5OLJyclzab2pISKyLCIbAKq6kaVlqSCVSuUBYG5/f/88wOzs7DlVnQuC4MH/DOKcW1bV+s7OTgegVqs54GNjTCmN3x+ULJVKM77vT+VyuYJzblpVX/J9/5Fejed5m51O55swDD8xxhy0Wq2jdrt9WK/Xb/TvJ9ba88A8MAUUgGngBnAEHIrIoapeiqLozX6ztfZ9EVlQ1ake/wxw0OP/Ucrl8gsiEqnqmU6ns7W5uXmQpgWjYmlpadrzvEUReU9VrYnjeFtVF0Tkbc/z3q3VapkGdEBILpdbEZEzqlqM43j7n2G01t4OfKaqvzebzdLW1tZR1t0XFxcLExMTdRGZ833/2fX19d+g53ZFUXS90Wg8DdycnJz8OgiCe7MAgiC4K5/Pf2WMOSkUCsW/ATDkWSmXy6+LyDvOueeTJLl8K0AYhguquq2qq3Ecf9C/PrD/XeFZY8xqykJWgbODADBkTgBE5E7gShqCql4B7hi2PvQmOeeKwG5KyC5QzASx1uZF5PTx8fHl/nwYhi9ba/O9+WazeQl4qD8/EqKqjwPf9l7jMAyLwJ6qvgHsdb8B6Oq+6/rSQYwxT4rIBfjrHbPWfqiqHwFvRVF0WlVfU9UNa+2n3flCVXdFZGDLhlVSBHbDMHxmbGxsD6Ddbt8XRdHnAHEcnwPuV9WfgO/DMHwFuMCQ//KvOeme7FdV/UJE7nbOBUmSXB1kBgiC4GFjTKKqP4vIU8BsFEXXR1YiIguAA641Go1TowAASZJcbTQap4BrgOv6R0epVJqpVqvztxQOiGq1Om+tva0//ydodk8SKJ9tPwAAAABJRU5ErkJggg=="
+                  />
+                  <p className="text-left flex-1 w-full break-normal text-copy-primary text-sm mb-2 ml-2 mt-2">
+                    Valoración media:{' '}
+                    {(avg.avg === null ? '' : Math.round(avg.avg * 100) / 100) +
+                      (avg.avg === null ? 'Sin valoración todavía' : ' / ') +
+                      (avg.avg === null ? '' : avg.counter + ' opiniones')}
+                  </p>
                 </div>
                 <div className="flex flex-wrap">
-                  <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACyUlEQVRIid3VS2gUWRSA4f9UlR0IBg2KqNGViIIPhBZFDC4cEQfBxyKoZNd23e6JK8GNyDglKIqoIA2dVHVCmBnEF4pbRfGxEF9BUTS4mRlGTMSRCaLOUHaqjptWmthlJ8GNnu0593x1bt26Bd9LSL0CY8wMYAuwGHinqvdF5FwQBK+/CmKM+Qk4AjQCb4EGYALwDjgGHAqC4L96iJWUcF03AxRFpN+yrOVBEDQNDQ1NFJFNqvoY+Bm4n81m0+OaxBgzCfgLeN7Q0JAuFAphdd7zPGtwcHCHqh4AJohIxvf9k2OdZD0wWUR2jQQqSOz7fsG27SXAn6p6wnXdvWNF5gKEYXgraSFAZ2fnH7ZtrwTuiMg+Y8wvo0ZE5A1AY2Nj05cQgDiOW4EFwGvLsi7XqnESkNuqyvDw8DbgcK0az/OcgYGBXaq6H/gb2NjV1fWoZr+kJzTG3AIWq+qaUql0szqXz+eXxXHsA0tU9ZqItAVB8CqpVyKSy+Xmqup1YJqqloDLlmVNVtXNwI/A/6q6p6WlpeB5XpzUBxK2CyAMw2epVOoUsFNE8kBeVatLjowGSJzEGDMHuAAsBO6p6nnLsp4ClqouBLYC84AbURRt7unp+XdMSCaTmek4zl2gSURc3/dPj6yp+hiPAv3Aii9dL58dYcdxeoEpqrquFlBBYt/3C0A7sKiCfYq2trZUIpLL5VYBa4GDI09UrQiC4Kyq/i4i2zs6OmYDuK7b3tzc/DCbzc6qiajqVmA4iqJCPaBqzVHgRRiGluu67SLyK/A+iqJP19HI7VoKPKj3Io0xO40xywG6u7sfAq22ba+sAE/K5fIPvb29/yRNckZEinWAqcBu4OJHCGgFfqsFwCj+jAnQIuAKkBKR46q6JwkYN1KB5gNXgelAv+M4q4vF4otatfZ4kb6+vlfpdPoSMKdcLm8olUovx9vr24kPssEzSfXSrkQAAAAASUVORK5CYII="/>
+                  <img
+                    className="self-center"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAACyUlEQVRIid3VS2gUWRSA4f9UlR0IBg2KqNGViIIPhBZFDC4cEQfBxyKoZNd23e6JK8GNyDglKIqoIA2dVHVCmBnEF4pbRfGxEF9BUTS4mRlGTMSRCaLOUHaqjptWmthlJ8GNnu0593x1bt26Bd9LSL0CY8wMYAuwGHinqvdF5FwQBK+/CmKM+Qk4AjQCb4EGYALwDjgGHAqC4L96iJWUcF03AxRFpN+yrOVBEDQNDQ1NFJFNqvoY+Bm4n81m0+OaxBgzCfgLeN7Q0JAuFAphdd7zPGtwcHCHqh4AJohIxvf9k2OdZD0wWUR2jQQqSOz7fsG27SXAn6p6wnXdvWNF5gKEYXgraSFAZ2fnH7ZtrwTuiMg+Y8wvo0ZE5A1AY2Nj05cQgDiOW4EFwGvLsi7XqnESkNuqyvDw8DbgcK0az/OcgYGBXaq6H/gb2NjV1fWoZr+kJzTG3AIWq+qaUql0szqXz+eXxXHsA0tU9ZqItAVB8CqpVyKSy+Xmqup1YJqqloDLlmVNVtXNwI/A/6q6p6WlpeB5XpzUBxK2CyAMw2epVOoUsFNE8kBeVatLjowGSJzEGDMHuAAsBO6p6nnLsp4ClqouBLYC84AbURRt7unp+XdMSCaTmek4zl2gSURc3/dPj6yp+hiPAv3Aii9dL58dYcdxeoEpqrquFlBBYt/3C0A7sKiCfYq2trZUIpLL5VYBa4GDI09UrQiC4Kyq/i4i2zs6OmYDuK7b3tzc/DCbzc6qiajqVmA4iqJCPaBqzVHgRRiGluu67SLyK/A+iqJP19HI7VoKPKj3Io0xO40xywG6u7sfAq22ba+sAE/K5fIPvb29/yRNckZEinWAqcBu4OJHCGgFfqsFwCj+jAnQIuAKkBKR46q6JwkYN1KB5gNXgelAv+M4q4vF4otatfZ4kb6+vlfpdPoSMKdcLm8olUovx9vr24kPssEzSfXSrkQAAAAASUVORK5CYII="
+                  />
                   <input
                     defaultValue={user.company_role}
                     name="company_role"
@@ -401,11 +445,17 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
                     ></input>
                   </div>
                   <div className="flex flex-wrap">
-                    <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADfElEQVRIid2VQWhcRRjHf/Oem2aTSMmampBNVMQeRCRKoJqUKhaUXryIAaUEY9x9mzQE2UuNqHXRi+m5TXcnGwwKRSl4EqkiJahVaxMptlVC60FsNy2tKaVJDElmPg+Zl75ko7bkpN/l/eeb75vfN+99bwb+L6ZuJaizs7M6Ho9vV0o1A3UisiAiV4Efh4eHz24IkkqlHvd9/w0ReRrY9DdhUyKSt9YeGBkZmb5lSFdXV2VFRcVBoDvivgJMuGc1cA/wKOC7+UvW2t3FYvHYv0Ky2Wx8dnb2S6Ddub4SkX3JZPLrXC5no7G9vb21xpg9wABQAywppZ4tFApH/xGSTqcPK6VedMN3tdZvA7LejiM5DymlvgAagRue5z2Yz+cvhvN3RINTqdTOCOCg1npfWEwQBNuUUs0iMqm1Pp3NZuPz8/OVAPX19ZOlUuk54Dhwp7X2HeCVcF1v1baUesvJy8BeB64PguA74HsROQL8lMlk3p+bmxswxkwbY6anpqae1FqfAD52+S9ks9l4GaSvr+8updQONzyktZ4D8H3/MPBYtBgR6RKRl9e+NqXUR05WzczMPFEGWVxc3MHNTjkKkE6nHxGRnZFFBjzPe1hEPgCa10KMMT9EYu8rg4hIY6gXFhYmnQw7DOB0oVAYzOfzZ2KxWB/w51pIU1PTFcC69RJlEKVUrZN2dHT0OoDneYnI/PlQDw0NzQAr3RNaqVSqDNdUSt1YbyfXQl93d3eN09fDeWvt3aHu6OjwgS1rIUqprRH9SxkEmApFLBa7H8AYczKS1BYEwVMAiUTiVWBzpIAtrtCXnOtaVVXVtyu5oQiCoI7l1vWA17TW+wGVyWROikhrpJhZlo+Vy0C9810CTgHPuPzXtdbvle1Ea31VKXXcDfv6+/s3AeJ53m7g9wikGihZa9uAn52vAdjlij7U2Ni4PxK/0rIAtLa2XgQ6gc3GmJqJiYnPx8fH/2hvbx8xxvwGnAc+sdbuKRaLF1paWj70ff9X4BzwGbBXa10cGxtbdQytd3YdUUo9DyAig8lk8s1cLre0Nu52rAwSBEEVcIybf/kpERmMxWKfutbdOARWjvsDrL5PloAzLHfhnFKqVkQesNZuLxaLF24bElpPT882ERkQkV1AfL0Ya23zhiChuZuyTUTuBeo8z/OttdO+759raGj4ZqPf7L9jfwEdwGEWvKgsCQAAAABJRU5ErkJggg=="/>
+                    <img
+                      className="self-center"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADfElEQVRIid2VQWhcRRjHf/Oem2aTSMmampBNVMQeRCRKoJqUKhaUXryIAaUEY9x9mzQE2UuNqHXRi+m5TXcnGwwKRSl4EqkiJahVaxMptlVC60FsNy2tKaVJDElmPg+Zl75ko7bkpN/l/eeb75vfN+99bwb+L6ZuJaizs7M6Ho9vV0o1A3UisiAiV4Efh4eHz24IkkqlHvd9/w0ReRrY9DdhUyKSt9YeGBkZmb5lSFdXV2VFRcVBoDvivgJMuGc1cA/wKOC7+UvW2t3FYvHYv0Ky2Wx8dnb2S6Ddub4SkX3JZPLrXC5no7G9vb21xpg9wABQAywppZ4tFApH/xGSTqcPK6VedMN3tdZvA7LejiM5DymlvgAagRue5z2Yz+cvhvN3RINTqdTOCOCg1npfWEwQBNuUUs0iMqm1Pp3NZuPz8/OVAPX19ZOlUuk54Dhwp7X2HeCVcF1v1baUesvJy8BeB64PguA74HsROQL8lMlk3p+bmxswxkwbY6anpqae1FqfAD52+S9ks9l4GaSvr+8updQONzyktZ4D8H3/MPBYtBgR6RKRl9e+NqXUR05WzczMPFEGWVxc3MHNTjkKkE6nHxGRnZFFBjzPe1hEPgCa10KMMT9EYu8rg4hIY6gXFhYmnQw7DOB0oVAYzOfzZ2KxWB/w51pIU1PTFcC69RJlEKVUrZN2dHT0OoDneYnI/PlQDw0NzQAr3RNaqVSqDNdUSt1YbyfXQl93d3eN09fDeWvt3aHu6OjwgS1rIUqprRH9SxkEmApFLBa7H8AYczKS1BYEwVMAiUTiVWBzpIAtrtCXnOtaVVXVtyu5oQiCoI7l1vWA17TW+wGVyWROikhrpJhZlo+Vy0C9810CTgHPuPzXtdbvle1Ea31VKXXcDfv6+/s3AeJ53m7g9wikGihZa9uAn52vAdjlij7U2Ni4PxK/0rIAtLa2XgQ6gc3GmJqJiYnPx8fH/2hvbx8xxvwGnAc+sdbuKRaLF1paWj70ff9X4BzwGbBXa10cGxtbdQytd3YdUUo9DyAig8lk8s1cLre0Nu52rAwSBEEVcIybf/kpERmMxWKfutbdOARWjvsDrL5PloAzLHfhnFKqVkQesNZuLxaLF24bElpPT882ERkQkV1AfL0Ya23zhiChuZuyTUTuBeo8z/OttdO+759raGj4ZqPf7L9jfwEdwGEWvKgsCQAAAABJRU5ErkJggg=="
+                    />
                     <p className="text-left text-copy-primary text-sm mb-2 ml-2 mt-2">{user.email}</p>
                   </div>
                   <div className="flex flex-no-wrap">
-                  <img className="self-center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAB8UlEQVRIie1Tv4sTQRh9b91NbAXFO+HAHykUA9Yi6BWCxeFpYaMIZovZBNZUWoiihbZeFbfJNKkOCwsNWBxanMWBf0ACwhUKJ+QK0ydsdj6bnXVuUU/Lg7xm5+3Mfu/N2+8D5pjjQIMuaTQah4MguEPyMskFETlk90Sko7XuW66UWiXZLgqRmYjskvxUqVTWO53O1O75dtFqterGmHcATudF97oh35b4EoCrjgn7vDedTp8opW5orYeFSBiGx4wxGwBOABiR7AH45hY1xmy5XEQ2Pc9rlpI5KSIhgDMkN+I4vpAkydgHgCAIHuYC20EQXEySZIx9kLsclt/HcbyWpulnALXZbPYAwGMb1/U8gqeugFKqAeDsfoIAvmitewCQJMm42Ww+E5F1EVl1RRZykT3OSN4CsPIPIu8B9CwRkUG+XAR+/fhdAEeyLKsDGDiH37j8bzcpmavnjTAqRESkT/IcyRdxHH+wkdkI/gdRFB0Vkee5WL8QIfkSwF0AtTRNB1EU9Uh+dT82xmzZlgQApdR5z/MuuWdE5BSAEMBxAN99318rRLrd7g+l1LV8FmoAHv1mTu7D6SaSyyLy6g8X2iZ50yZSDKPWethut+uTyeS253lXACyWJn6n5HqH5EdHNAMwEpHNarX62p34OeY44PgJZoPTRvmbtm8AAAAASUVORK5CYII="/>
+                    <img
+                      className="self-center"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAB8UlEQVRIie1Tv4sTQRh9b91NbAXFO+HAHykUA9Yi6BWCxeFpYaMIZovZBNZUWoiihbZeFbfJNKkOCwsNWBxanMWBf0ACwhUKJ+QK0ydsdj6bnXVuUU/Lg7xm5+3Mfu/N2+8D5pjjQIMuaTQah4MguEPyMskFETlk90Sko7XuW66UWiXZLgqRmYjskvxUqVTWO53O1O75dtFqterGmHcATudF97oh35b4EoCrjgn7vDedTp8opW5orYeFSBiGx4wxGwBOABiR7AH45hY1xmy5XEQ2Pc9rlpI5KSIhgDMkN+I4vpAkydgHgCAIHuYC20EQXEySZIx9kLsclt/HcbyWpulnALXZbPYAwGMb1/U8gqeugFKqAeDsfoIAvmitewCQJMm42Ww+E5F1EVl1RRZykT3OSN4CsPIPIu8B9CwRkUG+XAR+/fhdAEeyLKsDGDiH37j8bzcpmavnjTAqRESkT/IcyRdxHH+wkdkI/gdRFB0Vkee5WL8QIfkSwF0AtTRNB1EU9Uh+dT82xmzZlgQApdR5z/MuuWdE5BSAEMBxAN99318rRLrd7g+l1LV8FmoAHv1mTu7D6SaSyyLy6g8X2iZ50yZSDKPWethut+uTyeS253lXACyWJn6n5HqH5EdHNAMwEpHNarX62p34OeY44PgJZoPTRvmbtm8AAAAASUVORK5CYII="
+                    />
                     <input
                       defaultValue={user.page_url}
                       name="page_url"
@@ -422,7 +472,13 @@ export function UserRender({ user, edit, dispatch, projects, comments, avg }) {
                   {user.name + ' ' + user.first_name}
                 </h1>
                 <p className="text-gray-700">
-                  Se registró en {user.created_at !== undefined ? user.created_at.substring(8, 10) + "-" + user.created_at.substring(5, 8) + user.created_at.substring(0, 4) : ''}
+                  Se registró en{' '}
+                  {user.created_at !== undefined
+                    ? user.created_at.substring(8, 10) +
+                      '-' +
+                      user.created_at.substring(5, 8) +
+                      user.created_at.substring(0, 4)
+                    : ''}
                 </p>
                 <img
                   className="mt-4"
