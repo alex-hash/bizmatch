@@ -10,6 +10,7 @@ const deleteAccount = require("../controllers/account/delete-account-controller"
 const getTopProjects = require("../controllers/account/get-top-projects-controller");
 const getTopComments = require("../controllers/account/get-top-comments-controller");
 const getAvg = require("../controllers/account/get-avg-user-controller");
+const getUsersSearch = require('../controllers/account/get-user-search-controller');
 
 const router = express.Router();
 
@@ -25,5 +26,6 @@ router.get("/accountcomments", checkAccountSession, getTopComments);
 router.get("/accountprojects/:userId", checkAccountSession, getTopProjects);
 router.get("/accountcomments/:userId", checkAccountSession, getTopComments);
 router.get("/accountprojects/:userId", checkAccountSession, getTopProjects);
+router.get('/search-users/:patron', checkAccountSession, getUsersSearch);
 
 module.exports = router;

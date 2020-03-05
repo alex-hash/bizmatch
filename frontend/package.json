@@ -17,7 +17,9 @@
     "react-scripts": "3.3.1",
     "react-sidebar": "^3.0.2",
     "react-star-rating-component": "^1.4.1",
-    "sweetalert2": "^9.7.2"
+    "react-youtube": "^7.9.0",
+    "sweetalert2": "^9.7.2",
+    "tailwindcss-aspect-ratio": "^3.0.0"
   },
   "scripts": {
     "build": "postcss src/css/tailwind.css -o public/css/tailwind.css",
@@ -41,8 +43,10 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "^9.7.4",
     "postcss-cli": "^7.1.0",
-    "tailwindcss": "^1.1.4"
+    "tailwindcss": "^1.1.4",
+    "tailwindcss-responsive-embed": "^1.0.0"
   }
 }

@@ -18,6 +18,9 @@ export function Login() {
       .then((response) => {
         setRole(jwt_decode(response.data.accessToken));
         setCurrentUser(response.data);
+        if(localStorage.getItem('theme') === null){
+          localStorage.setItem('theme', 'theme-light');
+        }
         history.push('/');
       })
       .catch((error) => {
@@ -34,13 +37,13 @@ export function Login() {
       <div className="-mt-20 flex flex-wrap items-center justify-center min-h-screen">
         <div className="w-full max-w-md">
           <form
-            className="bg-white border-gray-200 border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4"
+            className="bg-background-primary border-background-borderf border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4"
             onSubmit={handleSubmit(handleLogin)}
             noValidate
           >
-            <h1 className="text-center font-bold text-gray-700 text-lg mb-2">Iniciar sesión</h1>
+            <h1 className="text-center font-bold text-copy-primary text-lg mb-2">Iniciar sesión</h1>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
+              <label className="block text-copy-primary text-sm font-bold mb-2" for="username">
                 Email
               </label>
               <input
@@ -51,7 +54,7 @@ export function Login() {
                     message: '*El email no es válido'
                   }
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-background-secondary border-background-borderf text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="text"
                 name="email"
@@ -61,11 +64,11 @@ export function Login() {
             </div>
             <div className="mb-6">
               <div className="flex justify-between">
-                <label className="block text-gray-700 text-sm font-bold mb-2 mr-4" for="password">
+                <label className="block text-copy-primary text-sm font-bold mb-2 mr-4" for="password">
                   Contraseña
                 </label>
                 <Link
-                  className="inline-block align-baseline font-bold text-xs underline text-black text-right"
+                  className="inline-block align-baseline font-bold text-xs underline text-copy-primary text-right"
                   to="/password"
                 >
                   Olvidaste tú contraseña?
@@ -79,7 +82,7 @@ export function Login() {
                     message: '*Su contraseña tiene más de 6 caracteres'
                   }
                 })}
-                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none rounded w-full py-2 px-3 border border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 name="password"
@@ -97,12 +100,12 @@ export function Login() {
               </button>
             </div>
             <div className="flex flex-wrap justify-center mt-2">
-              <Link className="inline-block align-baseline font-bold text-xs text-black text-center" to="/register">
+              <Link className="inline-block align-baseline font-bold text-xs text-copy-primary text-center" to="/register">
                 Todavía no estás registrado?
               </Link>
             </div>
           </form>
-          <p className="text-center text-gray-700 text-xs">&copy;2020 Bizmatch. Todos los derechos reservados.</p>
+          <p className="text-center text-copy-primary text-xs">&copy;2020 Bizmatch. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>

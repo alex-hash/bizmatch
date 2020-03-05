@@ -78,3 +78,7 @@ export function getComments(data) {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/accountcomments/${data}`);
   }
 }
+
+export function getSearchUsers(data){
+  return axios.get(`${process.env.REACT_APP_BACKEND_URL}/search-users/${data}`);
+}

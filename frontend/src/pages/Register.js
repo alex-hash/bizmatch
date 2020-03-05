@@ -35,11 +35,11 @@ export function Register() {
       <div className="flex items-center justify-center min-h-screen bg-no-repeat bg-left backimage">
         <div className="w-full max-w-md mt-2">
           <form
-            className="bg-white border-gray-200 border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4"
+            className="bg-background-primary border-background-borderf border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-4"
             onSubmit={handleSubmit(handleRegister)}
             noValidate
           >
-            <h3 className="font-bold">Datos personales</h3>
+            <h3 className="font-bold text-copy-primary">Datos personales</h3>
             <hr className="style1 mb-4" />
             <div className="mb-4">
               <input
@@ -52,7 +52,7 @@ export function Register() {
                 })}
                 name="name"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Nombre"
               ></input>
               {errors.name && <span className="error-validate">{errors.name.message}</span>}
@@ -68,7 +68,7 @@ export function Register() {
                 })}
                 name="first_name"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Primer apellido"
               ></input>
               {errors.first_name && <span className="error-validate">{errors.first_name.message}</span>}
@@ -84,7 +84,7 @@ export function Register() {
                 })}
                 name="last_name"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Segundo Apellido"
               ></input>
               {errors.last_name && <span className="error-validate">{errors.last_name.message}</span>}
@@ -104,7 +104,7 @@ export function Register() {
                 })}
                 name="email"
                 type="email"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Email"
               ></input>
               {errors.email && <span className="error-validate">{errors.email.message}</span>}
@@ -124,7 +124,7 @@ export function Register() {
                 })}
                 name="password"
                 type="password"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Contraseña"
               ></input>
               {errors.password && <span className="error-validate">{errors.password.message}</span>}
@@ -140,19 +140,19 @@ export function Register() {
                 })}
                 name="birthday"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Fecha de nacimiento"
               ></input>
               {errors.birthday && <span className="error-validate">{errors.birthday.message}</span>}
             </div>
-            <h3 className="font-bold">Datos empresa</h3>
+            <h3 className="font-bold text-copy-primary">Datos empresa (Opcional)</h3>
             <hr className="style1 mb-4" />
             <div className="mb-4">
               <input
                 ref={register}
                 name="company_name"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="La empresa en la que trabajas"
               ></input>
               {errors.company_name && <span className="error-validate">{errors.company_name.message}</span>}
@@ -162,7 +162,7 @@ export function Register() {
                 ref={register}
                 name="company_role"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Cargo que ocupas en tú empresa"
               ></input>
               {errors.company_role && <span className="error-validate">{errors.company_role.message}</span>}
@@ -172,16 +172,18 @@ export function Register() {
                 ref={register}
                 name="page_url"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Web url de la empresa"
               ></input>
               {errors.page_url && <span className="error-validate">{errors.page_url.message}</span>}
             </div>
+            <h3 className="font-bold text-copy-primary">Tipo de usuario</h3>
+            <hr className="style1 mb-4" />
             <div className="mb-6">
               <select
                 ref={register({ required: true })}
                 name="type"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 border-background-borderf bg-background-secondary text-copy-primary leading-tight focus:outline-none focus:shadow-outline"
               >
                 <option value="E">Emprendedor</option>
                 <option value="M">Mentor</option>
@@ -198,7 +200,7 @@ export function Register() {
               </button>
             </div>
           </form>
-          <p className="text-center text-white text-xs">&copy;2020 Bizmatch. Todos los derechos reservados.</p>
+          <p className="text-center text-copy-primary text-xs">&copy;2020 Bizmatch. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>
