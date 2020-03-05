@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -19,6 +19,18 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
     mode: 'onBlur'
   });
   const { role, setRole, setUser } = useAuth();
+
+  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
+
+  useEffect(() => {
+    async function getPreviews() {
+      const promises = files.map(getPreview);
+      setPreviews(await Promise.all(promises));
+    }
+
+    getPreviews();
+  }, [files]);
 
   function refreshPage() {
     window.location.reload(false);
@@ -164,6 +176,19 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
 
   function onChangeHandler(e) {
     setState({ ...estado, [e.target.name]: e.target.files[0] });
+    setFiles([...Array.from(e.target.files), ...files]);
+
+    const handleUpload = () => {
+      if (!files) {
+        return;
+      }
+
+      const data = new FormData();
+
+      files.forEach((file) => {
+        data.append('files', file);
+      });
+    };
   }
 
   const onSubmit = (formData, e) => {
@@ -493,6 +518,17 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
                     className="shadow appearance-none border rounded py-2 px-1 mb-2 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
                     onChange={onChangeHandler}
                   />
+                  <ul>
+                    {files.map((file, i) => (
+                      <li key={file.name}>
+                        <img src={previews[i]} alt={file.name} />
+                        <span>{file.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <label className="block text-gray-700 text-sm font-bold">Documentación del proyecto</label>
+
                   <div className="mt-2">
                     <button
                       className="bg-blue-500 text-white font-bold py-2 mr-2 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -517,4 +553,19 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
   }
 
   return <div>{something(onUpdateProject, project[0])}</div>;
+}
+function getPreview(file) {
+  return new Promise((resolve) => {
+    if (file && file.type.includes('image')) {
+      let reader = new FileReader();
+
+      reader.onloadend = function() {
+        resolve(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      resolve('http://via.placeholder.com/50x50');
+    }
+  });
 }
