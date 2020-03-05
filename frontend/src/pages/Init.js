@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import { Video } from '../components/Youtube';
+import YouTube from 'react-youtube';
 
 export function Init({ projects, role }) {
   if (role === null)
@@ -18,7 +20,7 @@ export function Init({ projects, role }) {
             <p className="text-copy-primary text-sm sm:text-base md:text-xl lg:text-2xl pt-4 md:pt-8">Bizmatch lo hace fácil para conectar emprendedores con mentores</p>
             <p className=" pt-8 pb-20">
               <Link
-                to="/projects"
+                to="/register"
                 className="bg-button text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
               >
                 Comenzar
@@ -103,6 +105,7 @@ export function Init({ projects, role }) {
           </div>
         </div>
       </div>
+     
     </div>
     );
 

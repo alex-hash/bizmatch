@@ -145,7 +145,7 @@ export function Register() {
               ></input>
               {errors.birthday && <span className="error-validate">{errors.birthday.message}</span>}
             </div>
-            <h3 className="font-bold text-copy-primary">Datos empresa</h3>
+            <h3 className="font-bold text-copy-primary">Datos empresa (Opcional)</h3>
             <hr className="style1 mb-4" />
             <div className="mb-4">
               <input
@@ -177,6 +177,8 @@ export function Register() {
               ></input>
               {errors.page_url && <span className="error-validate">{errors.page_url.message}</span>}
             </div>
+            <h3 className="font-bold text-copy-primary">Tipo de usuario</h3>
+            <hr className="style1 mb-4" />
             <div className="mb-6">
               <select
                 ref={register({ required: true })}
