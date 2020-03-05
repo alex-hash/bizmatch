@@ -161,16 +161,17 @@ class App extends React.Component {
       <nav className="bg-white md:bg-transparent lg:bg-transparent xl:bg-transparent flex flex-wrap justify-between items-center p-4 h-16 md:h-20">
         <div className="block xl:hidden lg:hidden md:hidden">
           <Link to="/" className="relative">
-            <button>
+            <button className="flex">
               <img src="https://img.icons8.com/ios/40/000000/business-network.png" />
             </button>
           </Link>
         </div>
-        <div className="block hidden xl:inline lg:inline md:inline">
-          <Link to="/" className="relative">
-            <button>
+        <div className="block hidden xl:inline lg:inline md:inline ">
+          <Link to="/" className="flex relative">
+            <button className="flex">
               <img src="https://img.icons8.com/ios/40/000000/business-network.png" />
             </button>
+            <p className="text-2xl pl-4 p-1">Bizmatch</p>
           </Link>
         </div>
         {this.renderButtons()}

@@ -18,7 +18,10 @@ export function CreateProject() {
     projectData.text = projectData.text.replace(/\n/g, '<br />');
     addProject({ projectData })
       .then(() => {
-        Swal.fire('Genial!', 'Has creado un proyecto, si quieres añadir una foto o editarlo pincha sobre el');
+        Swal.fire(
+          'Genial!',
+          'Has creado un proyecto, si quieres modificarlo, añadir una foto o un archivo pincha sobre el'
+        );
         history.push('/projects');
       })
       .catch((error) => {
