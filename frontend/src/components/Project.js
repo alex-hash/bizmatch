@@ -255,7 +255,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
             <React.Fragment key={comment.id}>
               <hr className="style1 mb-2" />
               <div
-                className="break-words w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2"
+                className="mb-2 break-words w-full bg-background-comment rounded-lg border-background-borderf border-2 mx-2"
                 id={index}
               >
                 <div className="flex flex-wrap py-4 justify-between w-full pl-2">
@@ -304,7 +304,7 @@ export function Project({ project, comments, projectId, onUpdateProject, dispatc
   function showStarIfLogged() {
     const actual_user = role === null ? null : role.userId;
     if (role) {
-      if (actual_user === project.user) {
+      if (actual_user !== project[0].user) {
         return (
           <div className="mt-2">
             <StarRating assesment={assesment} project={projectId}></StarRating>
